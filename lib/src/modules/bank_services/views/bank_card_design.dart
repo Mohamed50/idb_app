@@ -24,6 +24,7 @@ class BankCardBackground extends StatelessWidget {
             cardDesign == CardDesign.one ? AssetsManager.icCardDesignOnePath : AssetsManager.icCardDesignTwoPath,
             width: double.infinity,
             height: double.infinity,
+            fit: BoxFit.cover,
           ),
           child,
         ],

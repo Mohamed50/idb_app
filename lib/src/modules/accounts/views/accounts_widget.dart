@@ -11,7 +11,7 @@ class PrimaryAccountWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AccountViewModel>(
       builder: (controller) => controller.primaryAccount != null
-          ? ApiHandler(apiResponse: controller.accounts, onSuccess: AccountTile(accountModel: controller.primaryAccount!))
+          ? ApiHandler(apiResponse: controller.accounts, onSuccess: AccountItemCard(accountModel: controller.primaryAccount!))
           : Container(),
     );
   }

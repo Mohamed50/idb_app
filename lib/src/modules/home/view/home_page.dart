@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.zero,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                SizedBox(height: MediaQuery.of(context).padding.top),
+                SizedBox(height: MediaQuery.of(context).padding.top + 24),
                 AccountsSwiperWidget(),
                 SizedBox(height: 24.0),
                 Padding(

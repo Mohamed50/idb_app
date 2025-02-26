@@ -51,7 +51,7 @@ class _OnSuccess extends StatelessWidget {
           ),
         ),
         showIndicator: true,
-        height: ScreenUtils.getScreenHeight(context, 0.28),
+        aspectRatio: 1.6,
         enlargeCenterPage: true,
         floatingIndicator: false,
         onPageChanged: (index, reason){
@@ -64,7 +64,7 @@ class _OnSuccess extends StatelessWidget {
       items: accounts.map((account) {
         return Builder(
           builder: (BuildContext context) {
-            return AccountTile(
+            return AccountItemCard(
               accountModel: account,
               selected: account.accountNo == selectedAccount?.accountNo,
             );

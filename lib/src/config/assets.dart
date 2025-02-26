@@ -51,7 +51,7 @@ class AssetsManager {
   static const String icExchangeRatePath = '$_othersIconDirectoryPath/exchange.png';
 
 
-  static const String _cardsDesignsDirectoryPath = 'assets/icons/cards/';
+  static const String _cardsDesignsDirectoryPath = 'assets/icons/cards';
   static const String icCardDesignOnePath = '$_cardsDesignsDirectoryPath/card_design_1.svg';
   static const String icCardDesignTwoPath = '$_cardsDesignsDirectoryPath/card_design_2.svg';
 
