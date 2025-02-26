@@ -62,14 +62,4 @@ class TransferService extends ApiService {
     return response.body;
   }
 
-  Future<Map<String, dynamic>> transferUsingQrCode(
-    AccountModel fromAccount,
-    String toAccountQr,
-    String phone,
-    String comment,
-    double amount,
-  ) async {
-    AccountModel toAccount = accountModelFromJson(json.decode(toAccountQr)['Accounts_List']).first;
-    return await transferToAccountInsideTheBank(fromAccount, toAccount, phone, comment, amount);
-  }
 }

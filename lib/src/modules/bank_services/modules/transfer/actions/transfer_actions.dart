@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/essentials/config/action_presenter.dart';
+import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,11 +27,10 @@ class TransferActions extends ActionPresenter {
   void transferBetweenMyAccounts(BuildContext context) {
     actionHandler(context, () async {
       final controller = Get.find<TransferViewModel>();
-      if(!controller.isFromAndToSameAccount()) {
+      if (!controller.isFromAndToSameAccount()) {
         final response = await controller.transferToAccountInsideBank();
         _toResponsePage(response);
-      }
-      else{
+      } else {
         throw AppException(TranslationsKeys.tkOneAccountErrorMsg);
       }
     });
@@ -43,16 +45,11 @@ class TransferActions extends ActionPresenter {
 
   void transferUsingQrCode(BuildContext context) {
     actionHandler(context, () async {
-      String qrCode = await _getQrCode();
-      final response = await Get.find<TransferViewModel>().transferUsingQrCode(qrCode);
+      final response = await Get.find<TransferViewModel>().transferUsingQrCode();
       _toResponsePage(response);
     });
   }
 
-  Future _getQrCode() async{
-    await Future.delayed(Duration(milliseconds: 300));
-    return '';
-  }
 
 
   void _toResponsePage(Map<String, dynamic> response) {

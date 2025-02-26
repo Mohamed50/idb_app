@@ -73,7 +73,8 @@ class _QrCodeScannerPageState extends State<QrCodeScannerPage> {
   /// **Handles the QR code scanning process.**
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
+    controller.scannedDataStream.distinct().listen((scanData) {
+      print(scanData);
       qrResult = scanData.code;
       Get.back(result: qrResult);
     });

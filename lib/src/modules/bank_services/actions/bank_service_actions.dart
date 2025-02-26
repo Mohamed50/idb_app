@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:az_banking_app/src/app.dart';
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/data/model/category_model.dart';
@@ -21,7 +22,7 @@ class BankServicesActions extends ActionPresenter {
 
   void toServicePage(ServiceModel serviceModel) {
     if (serviceModel.route == RouteManager.transferWithQrCodeRoute) {
-      _handleTransferWithQrCode();
+      handleTransferWithQrCode();
     } else {
       Get.toNamed(serviceModel.route);
     }
@@ -31,13 +32,25 @@ class BankServicesActions extends ActionPresenter {
     Get.toNamed(RouteManager.responseRoute, arguments: response);
   }
 
-  Future _handleTransferWithQrCode() async {
+  Future handleTransferWithQrCode() async {
     actionHandlerWithoutLoading(() async {
-      String? scannedQr = await Get.to(() => QrCodeScannerPage());
-      AccountModel toAccount = accountModelFromJson(json.decode(scannedQr!)['Accounts_List']).first;
+      String? qrCode = await Get.to(() => QrCodeScannerPage());
+      AccountModel toAccount = parseQrCode(qrCode);
       Get.toNamed(RouteManager.transferWithQrCodeRoute, arguments: toAccount);
     });
   }
+
+  AccountModel parseQrCode(String? qrCode) {
+    try {
+      if(qrCode != null) {
+        return AccountModel.fromJson(json.decode(qrCode));
+      }
+      throw AppException('Scanning failed');
+    } catch (e) {
+      throw AppException('This QR code is not supported');
+    }
+  }
+
 
   Future screenshot(Uint8List? image) async {
     actionHandlerWithoutLoading(() async {

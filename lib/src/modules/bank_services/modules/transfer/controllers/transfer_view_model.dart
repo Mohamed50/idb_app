@@ -34,14 +34,8 @@ class TransferViewModel extends GetxController {
     );
   }
 
-  Future<Map<String, dynamic>> transferUsingQrCode(String qrCode) async {
-    return await _transferService.transferUsingQrCode(
-      _fromAccount!,
-      qrCode,
-      _phone!,
-      _comment!,
-      _amount!,
-    );
+  Future<Map<String, dynamic>> transferUsingQrCode() async {
+    return await transferToAccountInsideBank();
   }
 
   /// **Sets the selected 'From Account'**

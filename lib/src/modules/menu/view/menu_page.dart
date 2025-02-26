@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/controllers/account_view_model.dart';
+import 'package:az_banking_app/src/modules/bank_services/actions/bank_service_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/controllers/bank_services_view_model.dart';
 import 'package:az_banking_app/src/modules/exchange_rate/views/exchange_rates_page.dart';
 import 'package:az_banking_app/src/modules/home/home.dart';
@@ -27,7 +28,7 @@ class MenuPage extends GetView<MenuViewModel> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorManager.primaryColor,
         shape: CircleBorder(),
-        onPressed: () {},
+        onPressed: BankServicesActions.instance.handleTransferWithQrCode,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Image.asset(AssetsManager.icQRPath, color: Colors.white),
