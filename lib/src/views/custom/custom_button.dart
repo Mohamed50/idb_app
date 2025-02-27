@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
     this.onPressed,
     this.width = double.infinity,
     this.gradient = ColorManager.buttonGradient,
-    this.textColor = ColorManager.titleColor,
+    this.textColor = ColorManager.onButtonColor,
     this.fontSize = 16.0,
     this.enabled = true,
     this.padding,
@@ -33,7 +33,7 @@ class CustomButton extends StatelessWidget {
     this.onPressed,
     this.width = double.infinity,
     this.gradient = ColorManager.positiveButtonGradient,
-    this.textColor = ColorManager.titleColor,
+    this.textColor = ColorManager.onButtonColor,
     this.fontSize = 16.0,
     this.enabled = true,
     this.padding,
@@ -46,13 +46,25 @@ class CustomButton extends StatelessWidget {
     this.onPressed,
     this.width = double.infinity,
     this.gradient = ColorManager.negativeButtonGradient,
-    this.textColor = ColorManager.titleColor,
+    this.textColor = ColorManager.onButtonColor,
     this.fontSize = 16.0,
     this.enabled = true,
     this.padding,
     this.child,
   });
 
+  const CustomButton.muted({
+    super.key,
+    this.text,
+    this.onPressed,
+    this.width = double.infinity,
+    this.gradient = ColorManager.mutedButtonGradient,
+    this.textColor = ColorManager.onButtonColor,
+    this.fontSize = 16.0,
+    this.enabled = true,
+    this.padding,
+    this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +75,8 @@ class CustomButton extends StatelessWidget {
           padding: padding ?? EdgeInsets.all(ScreenUtils.getFontSize(context, 16)),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: enabled ? gradient.colors.last.withOpacity(0.15) : Colors.white.withOpacity(0.08),
+            gradient: gradient,
             borderRadius: BorderRadius.circular(8.0),
-            border: Border.all(color: enabled ? gradient.colors.last : Colors.grey)
           ),
           child: child ??
               CustomText(

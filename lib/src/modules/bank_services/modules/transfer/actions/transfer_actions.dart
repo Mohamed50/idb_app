@@ -54,6 +54,6 @@ class TransferActions extends ActionPresenter {
   }
 
   void _toResponsePage(Map<String, dynamic> response) {
-    Get.toNamed(RouteManager.responseRoute, arguments: response);
+    Get.toNamed(RouteManager.responseRoute, arguments: {'response': response, 'to_account': Get.find<TransferViewModel>().toAccount});
   }
 }

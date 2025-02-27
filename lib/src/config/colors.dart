@@ -28,25 +28,34 @@ class ColorManager {
   static const Color secondaryColor = Color(0xFF2C468F);
   static const Color darkerColor = Color(0xFF1A337F);
   static const Color transparentNavy = Color(0xFFECEFF8);
+  static const Color darkerTransparentNavy = Color(0xFFC6D4FC);
   static const Color appBarColor = Colors.white;
   static const Color iconsColor = Colors.white;
+  static const Color onButtonColor = Colors.white;
   static const Color titleColor = Colors.black;
   static const Color bodyColor = Colors.grey;
   static const Color buttonColor = Color(0xFF1A337F);
   static const Color lightButtonColor = Color(0xFF36477E);
   static const Color negativeColor = Color(0xFFBE1500);
-  static const Color lightNegativeColor = Color(0xFF641005);
+  static const Color darkNegativeColor = Color(0xFF641005);
   static const Color positiveColor = Color(0xFF0F8A32);
+  static const Color darkPositiveColor = Color(0xFF055D1C);
 
   // **Gradients**
+  static const LinearGradient mutedButtonGradient = LinearGradient(
+    colors: [darkerTransparentNavy, buttonColor],
+  );
   static const LinearGradient buttonGradient = LinearGradient(
     colors: [buttonColor, lightButtonColor],
   );
-  static const LinearGradient positiveButtonGradient = LinearGradient(
+  static const LinearGradient secondaryButtonGradient = LinearGradient(
     colors: [buttonColor, lightButtonColor],
   );
+  static const LinearGradient positiveButtonGradient = LinearGradient(
+    colors: [darkPositiveColor, positiveColor],
+  );
   static const LinearGradient negativeButtonGradient = LinearGradient(
-    colors: [lightNegativeColor, negativeColor],
+    colors: [darkNegativeColor, negativeColor],
   );
 
   static const LinearGradient bottomNavigationGradient = LinearGradient(
