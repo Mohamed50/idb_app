@@ -1,5 +1,4 @@
 import 'package:az_banking_app/src/config/config.dart';
-import 'package:az_banking_app/src/modules/accounts/views/account_type_drop_down.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';

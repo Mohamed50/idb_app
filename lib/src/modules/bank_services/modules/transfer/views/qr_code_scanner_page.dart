@@ -1,4 +1,5 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/utils/route_manager.dart';
 import 'package:az_banking_app/src/views/custom/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -74,9 +75,10 @@ class _QrCodeScannerPageState extends State<QrCodeScannerPage> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.distinct().listen((scanData) {
-      print(scanData);
-      qrResult = scanData.code;
-      Get.back(result: qrResult);
+      if (qrResult != scanData.code) {
+        qrResult = scanData.code;
+        Get.back(result: qrResult);
+      }
     });
   }
 

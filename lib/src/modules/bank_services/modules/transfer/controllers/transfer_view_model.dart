@@ -39,11 +39,11 @@ class TransferViewModel extends GetxController {
   }
 
   bool isInfoAvailable(){
-    return toAccount != null;
+    return toAccount?.name != null && toAccount!.name.isNotEmpty;
   }
 
   Future fetchReceiverInfo() async {
-    toAccount = await _transferService.fetchAccountInfo(_toAccountNumber!, _toAccountType!.toCode());
+    toAccount = await _transferService.fetchAccountInfo(_toAccountNumber ?? toAccount!.accountNo, _toAccountType?.toCode() ?? toAccount!.accountType.toCode());
     update();
   }
 

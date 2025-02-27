@@ -42,7 +42,8 @@ class CustomFormField extends StatelessWidget {
     this.textColor = ColorManager.titleColor,
     this.fontSize = 14,
     this.keyboardType,
-    this.textInputAction, this.enabled = true,
+    this.textInputAction,
+    this.enabled = true,
     this.onTap,
   });
 
