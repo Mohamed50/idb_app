@@ -23,13 +23,29 @@ class ExchangeRateItemTile extends StatelessWidget {
                 TranslationsKeys.tkCurrencyLabel,
                 fontSize: 12.0,
               ),
-              CustomText.title(
-                exchangeRateModel.currencyNameEn,
-                fontSize: 14.0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomTranslatedText(
+                    textEn: exchangeRateModel.currencyNameEn,
+                    textAr: exchangeRateModel.currencyNameAr,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  CustomTranslatedText(
+                    textEn: exchangeRateModel.currencySymbolEn,
+                    textAr: exchangeRateModel.currencySymbolAr,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ],
               ),
             ],
           ),
-          Divider(height: 24.0, thickness: 2,),
+          Divider(
+            height: 24.0,
+            thickness: 2,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

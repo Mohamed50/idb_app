@@ -1,7 +1,7 @@
 import '../keys.dart';
 
 const Map<String, String> englishTranslationsMap = {
-  TranslationsKeys.appName: 'App Name',
+  TranslationsKeys.appName: 'Infinityّ',
   TranslationsKeys.tkApiError: 'API Error',
   TranslationsKeys.tkNetworkError: 'Network Error',
   TranslationsKeys.tkFetchingError: 'Fetching Error',
@@ -128,6 +128,9 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkBillPaymentServicesLabel: 'Bill Payment',
   TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel: 'Telecommunication',
   TranslationsKeys.tkBillPaymentZainServicesLabel: 'Pay Zain Bill',
+  TranslationsKeys.tkTopUpLabel: 'Top Up',
+  TranslationsKeys.tkBillInquiryLabel: 'Bill Inquiry',
+  TranslationsKeys.tkBillPaymentLabel: 'Bill Payment',
   TranslationsKeys.tkBillPaymentSudaniServicesLabel: 'Pay Sudani Bill',
   TranslationsKeys.tkBillPaymentMtnServicesLabel: 'Pay MTN Bill',
   TranslationsKeys.tkBillPaymentElectricityServicesLabel: 'Electricity',
@@ -160,6 +163,10 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkOtherServiceLabel: 'Other',
   TranslationsKeys.tkProductsServiceLabel: 'Products',
   TranslationsKeys.tkViewExchangeRateServiceLabel: 'Exchange Rates',
+  TranslationsKeys.tkCurrencyLabel: 'Currency',
+  TranslationsKeys.tkBuyLabel: 'Buy',
+  TranslationsKeys.tkSellLabel: 'Sell',
+  TranslationsKeys.tkAverageLabel: 'Average',
   TranslationsKeys.tkSuccessLabel: 'Success',
   TranslationsKeys.tkSuccessfulTransactionMsg: 'Your transaction was successful',
   TranslationsKeys.tkShareLabel: 'Share',

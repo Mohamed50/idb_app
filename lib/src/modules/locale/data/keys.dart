@@ -149,6 +149,9 @@ class TranslationsKeys {
   static const String tkBillPaymentServicesLabel = 'tkBillPaymentServicesLabel';
   static const String tkBillPaymentTelecommunicationServicesLabel = 'tkBillPaymentTelecommunicationServicesLabel';
   static const String tkBillPaymentZainServicesLabel = 'tkBillPaymentZainServicesLabel';
+  static const String tkTopUpLabel = 'tkTopUpLabel';
+  static const String tkBillInquiryLabel = 'tkBillInquiryLabel';
+  static const String tkBillPaymentLabel = 'tkBillPaymentLabel';
   static const String tkBillPaymentSudaniServicesLabel = 'tkBillPaymentSudaniServicesLabel';
   static const String tkBillPaymentMtnServicesLabel = 'tkBillPaymentMtnServicesLabel';
   static const String tkBillPaymentElectricityServicesLabel = 'tkBillPaymentElectricityServicesLabel';

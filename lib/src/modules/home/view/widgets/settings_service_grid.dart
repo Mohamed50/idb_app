@@ -1,6 +1,5 @@
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/home/actions/settings_actions.dart';
-import 'package:az_banking_app/src/modules/home/home.dart';
 import 'package:az_banking_app/src/modules/locale/controllers/localization_view_model.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';

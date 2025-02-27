@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/actions/account_actions.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';

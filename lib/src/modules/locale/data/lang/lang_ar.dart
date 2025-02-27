@@ -1,50 +1,197 @@
 import '../keys.dart';
 
-const Map<String, String> arabicTranslationsMap =  {
-TranslationsKeys.appName: "اسم التطبيق",
-TranslationsKeys.tkApiError: "خطأ في API",
-TranslationsKeys.tkNetworkError: "خطأ في الشبكة",
-TranslationsKeys.tkFetchingError: "خطأ في جلب البيانات",
-TranslationsKeys.tkError: "خطأ",
-TranslationsKeys.tkSomethingWentWrongMsg: "حدث خطأ ما",
-TranslationsKeys.tkNoInternetMsg: "لا يوجد اتصال بالإنترنت",
-TranslationsKeys.tkNoInternetTryAgainMsg: "لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى",
-TranslationsKeys.tkCheckNetworkFailedMsg: "فشل في التحقق من حالة الشبكة",
-TranslationsKeys.tkHomePage: "الرئيسية",
-TranslationsKeys.tkLoginPage: "تسجيل الدخول",
-TranslationsKeys.tkRegisterPage: "التسجيل",
-TranslationsKeys.tkChooseLanguage: "اختر اللغة",
+const Map<String, String> arabicTranslationsMap = {
+  TranslationsKeys.appName: 'إنفينيتي',
+  TranslationsKeys.tkApiError: 'خطأ في واجهة برمجة التطبيقات',
+  TranslationsKeys.tkNetworkError: 'خطأ في الشبكة',
+  TranslationsKeys.tkFetchingError: 'خطأ في جلب البيانات',
+  TranslationsKeys.tkError: 'خطأ',
+  TranslationsKeys.tkSomethingWentWrongMsg: 'حدث خطأ ما',
+  TranslationsKeys.tkNoInternetMsg: 'لا يوجد اتصال بالإنترنت',
+  TranslationsKeys.tkNoInternetTryAgainMsg: 'لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى',
+  TranslationsKeys.tkCheckNetworkFailedMsg: 'فشل في التحقق من حالة الشبكة',
+  TranslationsKeys.tkHomePage: 'الرئيسية',
+  TranslationsKeys.tkLoginPage: 'تسجيل الدخول',
+  TranslationsKeys.tkRegisterPage: 'التسجيل',
+  TranslationsKeys.tkChooseLanguage: 'اختر اللغة',
 
-TranslationsKeys.tkLoginWelcomeMsg: "مرحبًا بك في بنك التنمية للصادرات",
-TranslationsKeys.tkUsernameLabel: "اسم المستخدم",
-TranslationsKeys.tkUsernameRequiredMsg: "اسم المستخدم مطلوب",
-TranslationsKeys.tkPasswordLabel: "كلمة المرور",
-TranslationsKeys.tkPasswordRequiredMsg: "كلمة المرور مطلوبة",
-TranslationsKeys.tkForgetPasswordLabel: "هل نسيت كلمة المرور؟",
-TranslationsKeys.tkSignInBtn: "تسجيل الدخول",
-TranslationsKeys.tkNoAccountLabel: "ليس لديك حساب؟",
-TranslationsKeys.tkRegisterNowLabel: "سجل الآن",
-TranslationsKeys.tkAboutUsLabel: "من نحن",
-TranslationsKeys.tkAboutUsContent: "بنك التنمية للصادرات هو أحد المؤسسات المالية الرائدة في السودان التي أدخلت ومارست الخدمات المصرفية الإسلامية. تأسس في سبتمبر 1981، ولعب دورًا كبيرًا في تشكيل المشهد المالي للبلاد من خلال توفير حلول مصرفية متوافقة مع الشريعة الإسلامية. على مر السنين، توسعت خدماته لتشمل قطاعات متعددة مثل التجارة والاستثمار وتمويل التنمية، مما يضمن الشمول المالي والنمو الاقتصادي. مع التزام قوي بالابتكار والخدمات الموجهة للعملاء، يواصل البنك دعم الأعمال والأفراد مع الالتزام بمبادئ التمويل الإسلامي.",
-TranslationsKeys.tkBranchesLabel: "الفروع",
-TranslationsKeys.tkContactUsLabel: "اتصل بنا",
-TranslationsKeys.tkWebsiteLabel: "الموقع الإلكتروني",
+  /// وحدة المصادقة - صفحة تسجيل الدخول
+  TranslationsKeys.tkLoginWelcomeMsg: 'مرحبًا بك في بنك تنمية الصادرات',
+  TranslationsKeys.tkUsernameLabel: 'اسم المستخدم',
+  TranslationsKeys.tkUsernameRequiredMsg: 'اسم المستخدم مطلوب',
+  TranslationsKeys.tkPasswordLabel: 'كلمة المرور',
+  TranslationsKeys.tkCurrentPasswordLabel: 'كلمة المرور الحالية',
+  TranslationsKeys.tkNewPasswordLabel: 'كلمة المرور الجديدة',
+  TranslationsKeys.tkConfirmNewPasswordLabel: 'تأكيد كلمة المرور',
+  TranslationsKeys.tkPasswordRequiredMsg: 'كلمة المرور مطلوبة',
+  TranslationsKeys.tkForgetPasswordLabel: 'نسيت كلمة المرور؟',
+  TranslationsKeys.tkSignInBtn: 'تسجيل الدخول',
+  TranslationsKeys.tkNoAccountLabel: 'ليس لديك حساب؟',
+  TranslationsKeys.tkRegisterNowLabel: 'سجل الآن',
+  TranslationsKeys.tkAboutUsLabel: 'من نحن',
+  TranslationsKeys.tkAboutUsContent:
+  'بنك تنمية الصادرات هو أحد المؤسسات المالية الرائدة في السودان التي قدمت ومارست الخدمات المصرفية الإسلامية. تم تأسيسه في سبتمبر 1981 ولعب دورًا مهمًا في تشكيل المشهد المالي للبلاد من خلال تقديم حلول مصرفية متوافقة مع الشريعة الإسلامية. على مدار السنوات، وسّع البنك خدماته لتشمل قطاعات التجارة والاستثمار والتمويل التنموي، مما يضمن الشمول المالي والنمو الاقتصادي. مع التزام قوي بالابتكار والخدمات التي تركز على العميل، يواصل البنك دعم الشركات والأفراد مع الالتزام بمبادئ التمويل الإسلامي.',
+  TranslationsKeys.tkBranchesLabel: 'الفروع',
+  TranslationsKeys.tkContactUsLabel: 'اتصل بنا',
+  TranslationsKeys.tkWebsiteLabel: 'الموقع الإلكتروني',
 
-TranslationsKeys.tkRegisterWelcomeMsg: "إنشاء حساب",
-TranslationsKeys.tkNationalNumberLabel: "الرقم الوطني",
-TranslationsKeys.tkNationalNumberRequiredMsg: "الرقم الوطني مطلوب",
-TranslationsKeys.tkRimLabel: "رقم RIM",
-TranslationsKeys.tkRimRequiredMsg: "رقم RIM مطلوب",
-TranslationsKeys.tkPhoneLabel: "رقم الهاتف",
-TranslationsKeys.tkPhoneRequiredMsg: "رقم الهاتف مطلوب",
-TranslationsKeys.tkPhoneNotValidMsg: "يجب أن يكون رقم الهاتف صحيحًا",
-TranslationsKeys.tkSignUpBtn: "إنشاء حساب",
-TranslationsKeys.tkHaveAccountLabel: "هل لديك حساب بالفعل؟",
-TranslationsKeys.tkLoginNowLabel: "تسجيل الدخول الآن",
+  /// وحدة المصادقة - صفحة التسجيل
+  TranslationsKeys.tkRegisterWelcomeMsg: 'سجل حساب جديد',
+  TranslationsKeys.tkRegisterSuccessMsg: 'تم إنشاء الحساب بنجاح، يرجى التحقق من رقم هاتفك',
+  TranslationsKeys.tkNationalNumberLabel: 'الرقم الوطني',
+  TranslationsKeys.tkNationalNumberRequiredMsg: 'الرقم الوطني مطلوب',
+  TranslationsKeys.tkRimLabel: 'رقم الحساب (RIM)',
+  TranslationsKeys.tkRimRequiredMsg: 'رقم الحساب مطلوب',
+  TranslationsKeys.tkPhoneLabel: 'رقم الهاتف',
+  TranslationsKeys.tkPhoneRequiredMsg: 'رقم الهاتف مطلوب',
+  TranslationsKeys.tkPhoneNotValidMsg: 'يجب أن يكون رقم الهاتف صحيحًا',
+  TranslationsKeys.tkSignUpBtn: 'تسجيل',
+  TranslationsKeys.tkHaveAccountLabel: 'هل لديك حساب بالفعل؟',
+  TranslationsKeys.tkLoginNowLabel: 'تسجيل الدخول الآن',
 
-TranslationsKeys.tkPasswordResetWelcomeMsg: "إعادة تعيين كلمة المرور القديمة",
-TranslationsKeys.tkPasswordResetBtn: "إعادة تعيين كلمة المرور",
-TranslationsKeys.tkOrLabel: "أو",
-TranslationsKeys.tkContactCustomerServiceBtn: "اتصل بخدمة العملاء",
-TranslationsKeys.tkBackToLogin: "العودة إلى تسجيل الدخول"
+  /// وحدة المصادقة - إعادة تعيين كلمة المرور
+  TranslationsKeys.tkPasswordResetWelcomeMsg: 'إعادة تعيين كلمة المرور القديمة',
+  TranslationsKeys.tkPasswordResetBtn: 'إعادة تعيين كلمة المرور',
+  TranslationsKeys.tkOrLabel: 'أو',
+  TranslationsKeys.tkContactCustomerServiceBtn: 'الاتصال بخدمة العملاء',
+  TranslationsKeys.tkBackToLogin: 'العودة إلى تسجيل الدخول',
+  TranslationsKeys.tkResetDeviceWelcomeMsg: 'يرجى إدخال الرمز الذي تلقيته على هاتفك لاستخدام حسابك على هذا الجهاز',
+  TranslationsKeys.tkResetDeviceBtn: 'إعادة ضبط الجهاز',
+  TranslationsKeys.tkOtpLabel: 'رمز التحقق',
+  TranslationsKeys.tkOtpRequiredMsg: 'الرمز مطلوب',
+  TranslationsKeys.tkResetDeviceSuccessMsg: 'تمت إعادة ضبط الجهاز بنجاح',
+  TranslationsKeys.tkSecurityQuestionsWelcomeMsg: 'يرجى الإجابة على هذه الأسئلة لإعادة تعيين كلمة المرور',
+  TranslationsKeys.tkAnswerLabel: 'الإجابة',
+  TranslationsKeys.tkAnswerRequiredLabel: 'الإجابة مطلوبة',
+  TranslationsKeys.tkResetPasswordWelcomeMsg: 'أدخل كلمة المرور الجديدة للوصول إلى حسابك',
+  TranslationsKeys.tkResetPasswordSuccessMsg: 'تمت إعادة تعيين كلمة المرور بنجاح',
+  TranslationsKeys.tkChangePasswordLabel: 'تغيير كلمة المرور',
+  TranslationsKeys.tkChangePasswordWelcomeMsg: 'أدخل كلمة المرور القديمة والجديدة لتغييرها',
+  TranslationsKeys.tkChangePasswordValidationErrorMsg: 'كلمة المرور الجديدة وتأكيد كلمة المرور غير متطابقين',
+  TranslationsKeys.tkChangePasswordSuccessMsg: 'تم تغيير كلمة المرور بنجاح',
+  TranslationsKeys.tkSecurityQuestionsLabel: 'أسئلة الأمان',
+  TranslationsKeys.tkChangeSecurityQuestionsLabel: 'تغيير أسئلة الأمان',
+  TranslationsKeys.tkChangeSecurityQuestionsWelcomeMsg: 'قم بتغيير إجاباتك وأرسلها لحفظ الإجابات الجديدة',
+  TranslationsKeys.tkChangeSecurityQuestionsValidationErrorMsg: 'بعض الإجابات مفقودة',
+  TranslationsKeys.tkChangeSecurityQuestionsSuccessMsg: 'تم تحديث أسئلة الأمان بنجاح',
+
+  TranslationsKeys.tkConfirmBtn: 'تأكيد',
+  TranslationsKeys.tkVerifyAccountWelcomeMsg: 'يرجى إدخال الرمز الذي تلقيته على هاتفك للتحقق من حسابك',
+  TranslationsKeys.tkVerifyAccountSuccessMsg: 'تم التحقق من الحساب بنجاح',
+  TranslationsKeys.tkVerifyBtn: 'تحقق',
+  TranslationsKeys.tkWelcomeLabel: 'مرحبًا',
+  TranslationsKeys.tkBalanceLabel: 'الرصيد',
+  TranslationsKeys.tkAccountNoLabel: 'رقم الحساب',
+  TranslationsKeys.tkIbanLabel: 'رقم الحساب الدولي (IBAN)',
+  TranslationsKeys.tkAccountCopiedSuccessMsg: 'تم نسخ تفاصيل الحساب',
+  TranslationsKeys.tkInfoLabel: 'معلومات',
+
+  /// خدمات البنك - التحويلات المالية
+  TranslationsKeys.tkServicesLabel: 'الخدمات',
+  TranslationsKeys.tkTransferServicesLabel: 'التحويلات',
+  TranslationsKeys.tkTransferOutsideBankServicesLabel: 'خارج البنك',
+  TranslationsKeys.tkTransferInsideBankLabel: 'داخل البنك',
+  TranslationsKeys.tkTransferBetweenMyAccountsLabel: 'بين حساباتي',
+  TranslationsKeys.tkTransferWithQRLabel: 'رمز الاستجابة السريعة',
+  TranslationsKeys.tkScanQrCodeLabel: 'مسح رمز الاستجابة السريعة',
+  TranslationsKeys.tkFromAccountLabel: 'من الحساب',
+  TranslationsKeys.tkToAccountLabel: 'إلى الحساب',
+  TranslationsKeys.tkToAccountBBANLabel: 'إلى الحساب (BBAN)',
+  TranslationsKeys.tkAmountLabel: 'المبلغ',
+
+
+  // 🏦 خدمات البنك - خدمات التحويل
+  TranslationsKeys.tkGeneralRequiredMsg: 'هذا الحقل مطلوب',
+  TranslationsKeys.tkToAccountTypeLabel: 'نوع الحساب المستلم',
+  TranslationsKeys.tkCommentsLabel: 'التعليقات',
+  TranslationsKeys.tkOneAccountErrorMsg: 'لديك حساب واحد فقط',
+  TranslationsKeys.tkLinkedAccounts: 'الحسابات المرتبطة',
+  TranslationsKeys.tkAccountTypeLabel: 'نوع الحساب',
+  TranslationsKeys.tkTransactionInfoLabel: 'معلومات المعاملة',
+  TranslationsKeys.tkReceiverNameLabel: 'اسم المستلم',
+  TranslationsKeys.tkSDGLabel: 'جنيه سوداني',
+
+  // 📑 خدمات البنك - كشف الحساب
+  TranslationsKeys.tkStatementServiceLabel: 'كشف الحساب',
+  TranslationsKeys.tkCancelLabel: 'إلغاء',
+  TranslationsKeys.tkSelectDateLabel: 'اختر التاريخ',
+  TranslationsKeys.tkDateLabel: 'التاريخ',
+  TranslationsKeys.tkFromLabel: 'من',
+  TranslationsKeys.tkToLabel: 'إلى',
+  TranslationsKeys.tkTransactionsLabel: 'المعاملات',
+  TranslationsKeys.tkLast5Label: 'آخر 5',
+  TranslationsKeys.tkWeekLabel: 'أسبوع',
+  TranslationsKeys.tkMonthLabel: 'شهر',
+  TranslationsKeys.tkCustomLabel: 'مخصص',
+  TranslationsKeys.tkViewMoreLabel: 'عرض المزيد',
+
+  // 💳 خدمات البنك - دفع الفواتير
+  TranslationsKeys.tkBillPaymentServicesLabel: 'دفع الفواتير',
+  TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel: 'الاتصالات',
+  TranslationsKeys.tkTopUpLabel: 'شحن رصيد',
+  TranslationsKeys.tkBillInquiryLabel: 'كشف فااتور',
+  TranslationsKeys.tkBillPaymentLabel: 'دفع فاتور',
+  TranslationsKeys.tkBillPaymentZainServicesLabel: 'دفع فاتورة زين',
+  TranslationsKeys.tkBillPaymentSudaniServicesLabel: 'دفع فاتورة سوداني',
+  TranslationsKeys.tkBillPaymentMtnServicesLabel: 'دفع فاتورة MTN',
+  TranslationsKeys.tkBillPaymentElectricityServicesLabel: 'الكهرباء',
+  TranslationsKeys.tkBillPaymentJamarikServicesLabel: 'الجمارك',
+  TranslationsKeys.tkBillPaymentE15ServicesLabel: 'الخدمات الحكومية',
+  TranslationsKeys.tkBillPaymentPortsServicesLabel: 'الموانئ',
+  TranslationsKeys.tkMeterNumberLabel: 'رقم العداد',
+  TranslationsKeys.tkE15ReceiptNumberLabel: 'رقم إيصال E15',
+  TranslationsKeys.tkDeclarantCodeLabel: 'رمز المصرح',
+  TranslationsKeys.tkBankCodeLabel: 'رمز البنك',
+
+  // 📦 خدمات البنك - خدمات الطلبات
+  TranslationsKeys.tkOrdersServiceLabel: 'الطلبات',
+  TranslationsKeys.tkTrackOrdersStatusServiceLabel: 'تتبع حالة الطلب',
+  TranslationsKeys.tkRequestChequeBookServiceLabel: 'طلب دفتر شيكات',
+  TranslationsKeys.tkTrackChequeStatusServiceLabel: 'حالة الشيك',
+  TranslationsKeys.tkChequeNumberLabel: 'رقم الشيك',
+  TranslationsKeys.tkChequeTypeLabel: 'نوع الشيك',
+  TranslationsKeys.tkPagesLabel: 'الصفحات',
+  TranslationsKeys.tk25PagesChequeBookLabel: 'دفتر شيكات 25 صفحة',
+  TranslationsKeys.tk50PagesChequeBookLabel: 'دفتر شيكات 50 صفحة',
+  TranslationsKeys.tkReceivingBranchLabel: 'الفرع المستلم',
+  TranslationsKeys.tkNameLabel: 'الاسم',
+  'pending': 'قيد الانتظار',
+  'rejected': 'مرفوض',
+  'approved': 'مقبول',
+  'cancelled': 'ملغى',
+
+  // 🛠️ خدمات البنك - خدمات أخرى
+  TranslationsKeys.tkOtherServiceLabel: 'أخرى',
+  TranslationsKeys.tkProductsServiceLabel: 'المنتجات',
+  TranslationsKeys.tkViewExchangeRateServiceLabel: 'أسعار الصرف',
+  TranslationsKeys.tkCurrencyLabel: 'العملة',
+  TranslationsKeys.tkBuyLabel: 'شراء',
+  TranslationsKeys.tkSellLabel: 'بيع',
+  TranslationsKeys.tkAverageLabel: 'المتوسط',
+  TranslationsKeys.tkSuccessLabel: 'نجاح',
+  TranslationsKeys.tkSuccessfulTransactionMsg: 'تمت المعاملة بنجاح',
+  TranslationsKeys.tkShareLabel: 'مشاركة',
+  TranslationsKeys.tkScreenshotLabel: 'لقطة شاشة',
+  TranslationsKeys.tkDoneLabel: 'تم',
+  TranslationsKeys.tkDownloadedMsg: 'تم تنزيل لقطة الشاشة بنجاح',
+
+
+
+  /// إعدادات
+  TranslationsKeys.tkSettingsLabel: 'الإعدادات',
+  TranslationsKeys.tkFaqsLabel: 'الأسئلة الشائعة',
+  TranslationsKeys.tkTransactionLimitLabel: 'الحدود والرسوم',
+  TranslationsKeys.tkLogoutLabel: 'تسجيل الخروج',
+
+  /// استجابة النظام
+  "Response_Code": "رمز الاستجابة",
+  "Comment": "الملاحظات",
+  "Reference_No": "رقم المرجع",
+  "Response_Message": "حالة الاستجابة",
+  "Tran_DateTime": "تاريخ ووقت العملية",
+  "Amount": "المبلغ",
+  "Successful": "تمت العملية بنجاح",
+  "Biller_ID": "معرف الفاتورة",
+  "Currency_Code": "رمز العملة",
 };
+

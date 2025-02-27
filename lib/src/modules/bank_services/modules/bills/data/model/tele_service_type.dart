@@ -1,3 +1,6 @@
+import 'package:az_banking_app/src/config/config.dart';
+import 'package:get/get.dart';
+
 /// **TeleServiceType Enum**
 ///
 /// Represents different types of telecom services with a `toLabel()` method.
@@ -14,11 +17,11 @@ extension TeleServiceTypeExtensions on TeleServiceType {
   String toLabel() {
     switch (this) {
       case TeleServiceType.topUp:
-        return 'Top-Up';
+        return TranslationsKeys.tkTopUpLabel.tr;
       case TeleServiceType.inquiry:
-        return 'Balance Inquiry';
+        return TranslationsKeys.tkBillInquiryLabel.tr;
       case TeleServiceType.payment:
-        return 'Bill Payment';
+        return TranslationsKeys.tkBillPaymentLabel.tr;
     }
   }
 }

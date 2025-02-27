@@ -1,16 +1,9 @@
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_list.dart';
-import 'package:az_banking_app/src/modules/accounts/views/number_of_accounts_widget.dart';
-import 'package:az_banking_app/src/modules/auth/auth.dart';
 import 'package:az_banking_app/src/modules/auth/views/widgets/user_info_widget.dart';
-import 'package:az_banking_app/src/modules/home/home.dart';
 import 'package:az_banking_app/src/modules/home/view/widgets/settings_service_grid.dart';
 import 'package:az_banking_app/src/views/custom/custom_appbar.dart';
-import 'package:az_banking_app/src/views/custom/custom_button.dart';
-import 'package:az_banking_app/src/views/custom/custom_container.dart';
-import 'package:az_banking_app/src/views/custom/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
