@@ -31,39 +31,25 @@ class _CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemWidth = (ScreenUtils.getScreenWidth(context) - 48 - (8* 4)) / 4;
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: InkWell(
         onTap: _toCategoryPage,
-        child: SizedBox(
-          width: itemWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CustomCard(
-                color: ColorManager.primaryColor.withValues(alpha: 0.08),
-                padding: EdgeInsets.all(8.0),
-                child: CustomCard(
-                  color: ColorManager.primaryColor.withValues(alpha: 0.08),
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    categoryModel.iconPath,
-                    width: 40,
-                    height: 40,
-                    color: ColorManager.primaryColor,
-                  ),
-                ),
+        child: Column(
+          children: [
+            CustomCard(
+              color: ColorManager.darkBackgroundColor,
+              child: CustomCard(
+                color: Colors.white,
+                child: Image.asset(categoryModel.iconPath, width: 40, height: 40),
               ),
-              SizedBox(height: 2.0),
-              CustomText.title(
-                categoryModel.name,
-                fontSize: 14,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: 4.0),
+            CustomText.title(
+              categoryModel.name,
+              fontSize: 12.0,
+            ),
+          ],
         ),
       ),
     );

@@ -9,6 +9,7 @@ import 'package:az_banking_app/src/modules/home/home.dart';
 import 'package:az_banking_app/src/modules/home/view/settings_page.dart';
 import 'package:az_banking_app/src/modules/statements/controllers/statement_view_model.dart';
 import 'package:az_banking_app/src/views/custom/custom_appbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -39,12 +40,13 @@ class MenuPage extends GetView<MenuViewModel> {
       bottomNavigationBar: Obx(
         () => AnimatedBottomNavigationBar(
           icons: [
-            FontAwesomeIcons.house,
-            FontAwesomeIcons.shapes,
-            FontAwesomeIcons.dollarSign,
-            FontAwesomeIcons.user,
+            CupertinoIcons.house,
+            CupertinoIcons.cube_box,
+            CupertinoIcons.money_dollar_circle,
+            CupertinoIcons.person,
           ],
           blurEffect: false,
+          iconSize: 28.0,
           activeIndex: controller.selectedIndex,
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.defaultEdge,

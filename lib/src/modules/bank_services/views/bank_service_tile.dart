@@ -13,36 +13,22 @@ class BankServiceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemWidth = (ScreenUtils.getScreenWidth(context) - 48 - (8 * 5)) / 5;
     return FittedBox(
-      child: SizedBox(
-        width: itemWidth,
+      child: InkWell(
+        onTap: _toServicePage,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            InkWell(
-              onTap: _toServicePage,
+            CustomCard(
+              color: ColorManager.darkBackgroundColor,
               child: CustomCard(
-                color: ColorManager.primaryColor.withValues(alpha: 0.08),
-                padding: EdgeInsets.all(8.0),
-                child: CustomCard(
-                  color: ColorManager.primaryColor.withValues(alpha: 0.08),
-                  padding: EdgeInsets.all(4.0),
-                  child: Image.asset(
-                    serviceModel.iconPath,
-                    width: 40,
-                    height: 40,
-                    color: ColorManager.primaryColor,
-                  ),
-                ),
+                color: Colors.white,
+                child: Image.asset(serviceModel.iconPath, width: 40, height: 40),
               ),
             ),
-            SizedBox(height: 2.0),
+            SizedBox(height: 4.0),
             CustomText.title(
               serviceModel.name,
-              fontSize: 14,
-              textAlign: TextAlign.center,
-              maxLines: 1,
+              fontSize: 12.0,
             ),
           ],
         ),
