@@ -123,8 +123,8 @@ class PasswordFormField extends StatefulWidget {
     this.keyboardType,
     this.textInputAction,
     this.fontSize = 14,
-    this.backgroundColor = ColorManager.lightBackgroundColor,
-    this.textColor = ColorManager.bodyColor,
+    this.backgroundColor = ColorManager.darkBackgroundColor,
+    this.textColor = ColorManager.titleColor,
   });
 
   @override
@@ -137,7 +137,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     TextStyle hintStyle = TextStyle(
-        color: ColorManager.bodyColor, fontWeight: FontWeight.w400, fontSize: ScreenUtils.getFontSize(context, widget.fontSize));
+        color: widget.textColor, fontWeight: FontWeight.w400, fontSize: ScreenUtils.getFontSize(context, widget.fontSize));
     TextStyle textStyle = TextStyle(
         color: widget.textColor, fontWeight: FontWeight.w700, fontSize: ScreenUtils.getFontSize(context, widget.fontSize));
     InputBorder inputBorder = OutlineInputBorder(
@@ -170,7 +170,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       decoration: widget.decoration ??
           InputDecoration(
             filled: true,
-            fillColor: ColorManager.lightBackgroundColor,
+            fillColor: widget.backgroundColor,
             hintText: widget.hint?.tr,
             labelText: widget.label?.tr,
             floatingLabelAlignment: FloatingLabelAlignment.start,

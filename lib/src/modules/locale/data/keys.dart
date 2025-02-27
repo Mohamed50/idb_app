@@ -116,6 +116,7 @@ class TranslationsKeys {
   static const String tkTransferInsideBankLabel = 'tkTransferWithinBankLabel';
   static const String tkTransferBetweenMyAccountsLabel = 'tkTransferBetweenMyAccountsLabel';
   static const String tkTransferWithQRLabel = 'tkTransferWithQRLabel';
+  static const String tkScanQrCodeLabel = 'tkScanQrCodeLabel';
   static const String tkGeneralRequiredMsg = 'tkGeneralRequiredMsg';
   static const String tkFromAccountLabel = 'tkFromAccountLabel';
   static const String tkToAccountLabel = 'tkToAccountLabel';
@@ -167,16 +168,23 @@ class TranslationsKeys {
   static const String tkTrackOrdersStatusServiceLabel = 'tkOrdersTrackStatusServiceLabel';
   static const String tkRequestChequeBookServiceLabel = 'tkOrdersRequestChequeBookServiceLabel';
   static const String tkTrackChequeStatusServiceLabel = 'tkOrdersViewChequeStatusServiceLabel';
-  static const String tkChequeTypeLabel = 'tkChequeNumberLabel';
+  static const String tkChequeNumberLabel = 'tkChequeNumberLabel';
+  static const String tkChequeTypeLabel = 'tkChequeTypeLabel';
   static const String tkPagesLabel = 'tkPagesLabel';
   static const String tk25PagesChequeBookLabel = 'tk25PagesChequeBookLabel';
   static const String tk50PagesChequeBookLabel = 'tk50PagesChequeBookLabel';
   static const String tkReceivingBranchLabel = 'tkReceivingBranchLabel';
+  static const String tkNameLabel = 'tkNameLabel';
 
   /// Bank Services Module - Other Services
   static const String tkOtherServiceLabel = 'tkOtherServiceLabel';
   static const String tkProductsServiceLabel = 'tkProductsServiceLabel';
   static const String tkViewExchangeRateServiceLabel = 'tkViewExchangeRateServiceLabel';
+  static const String tkCurrencyLabel = 'tkCurrencyLabel';
+  static const String tkAverageLabel = 'tkAverageLabel';
+  static const String tkBuyLabel = 'tkBuyLabel';
+  static const String tkSellLabel = 'tkSellLabel';
+  static const String tkSuccessLabel = 'tkSuccessLabel';
   static const String tkSuccessfulTransactionMsg = 'tkSuccessfulTransactionMsg';
   static const String tkShareLabel = 'tkShareLabel';
   static const String tkScreenshotLabel = 'tkScreenshotLabel';

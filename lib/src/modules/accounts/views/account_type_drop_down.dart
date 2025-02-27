@@ -13,7 +13,7 @@ class AccountTypeDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(color: ColorManager.bodyColor, fontWeight: FontWeight.w700, fontSize: 14.0);
+    TextStyle textStyle = TextStyle(color: ColorManager.titleColor, fontWeight: FontWeight.w700, fontSize: 14.0);
     InputBorder inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(8.0),
       borderSide: BorderSide(color: ColorManager.darkBackgroundColor),

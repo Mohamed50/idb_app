@@ -22,24 +22,22 @@ class BillServicePage extends GetView<BillsViewModel> {
       appBar: AppBar(
         title: CustomText(billServiceLabel),
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            GetBuilder<BillsViewModel>(
-              builder: (controller) => CustomVisible(
-                show: controller.billInfoModel != null,
-                placeHolder: Form(key: _formKey, child: _FormWidget(billerId)),
-                child: _BillInformationWidget(),
-              ),
+        children: [
+          GetBuilder<BillsViewModel>(
+            builder: (controller) => CustomVisible(
+              show: controller.billInfoModel != null,
+              placeHolder: Form(key: _formKey, child: _FormWidget(billerId)),
+              child: _BillInformationWidget(),
             ),
-            SizedBox(height: 64.0),
-            CustomButton(
-              text: TranslationsKeys.tkConfirmBtn,
-              onPressed: () => _confirm(context),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(height: 24.0),
+          CustomButton(
+            text: TranslationsKeys.tkConfirmBtn,
+            onPressed: () => _confirm(context),
+          ),
+        ],
       ),
     );
   }
@@ -64,38 +62,36 @@ class _FormWidget extends GetView<BillsViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
-    return Expanded(
-      child: Column(
-        children: [
-          SizedBox(height: verticalSpacing * 2),
-          AccountsDropDown(
-            onSaved: controller.onFromAccountChanged,
-            validator: (v) => InputsValidator.generalValidator(v?.toString()),
-          ),
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: ServicesConfiguration.getServiceMainFiledLabel(billerId),
-            onSaved: controller.onBillNumberChanged,
-            validator: InputsValidator.phoneValidator,
-          ),
-          SizedBox(height: verticalSpacing),
-          CustomVisible(
-            show: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId) != null,
-            child: CustomFormField(
-              label: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId),
-              onSaved: controller.onSecondaryNumberChanged,
-              validator: InputsValidator.generalValidator,
-            ),
-          ),
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: TranslationsKeys.tkAmountLabel,
-            onSaved: controller.onAmountChanged,
+    return Column(
+      children: [
+        SizedBox(height: verticalSpacing * 2),
+        AccountsDropDown(
+          onSaved: controller.onFromAccountChanged,
+          validator: (v) => InputsValidator.generalValidator(v?.toString()),
+        ),
+        SizedBox(height: verticalSpacing),
+        CustomFormField(
+          label: ServicesConfiguration.getServiceMainFiledLabel(billerId),
+          onSaved: controller.onBillNumberChanged,
+          validator: InputsValidator.phoneValidator,
+        ),
+        SizedBox(height: verticalSpacing),
+        CustomVisible(
+          show: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId) != null,
+          child: CustomFormField(
+            label: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId),
+            onSaved: controller.onSecondaryNumberChanged,
             validator: InputsValidator.generalValidator,
-            keyboardType: TextInputType.number,
           ),
-        ],
-      ),
+        ),
+        SizedBox(height: verticalSpacing),
+        CustomFormField(
+          label: TranslationsKeys.tkAmountLabel,
+          onSaved: controller.onAmountChanged,
+          validator: InputsValidator.generalValidator,
+          keyboardType: TextInputType.number,
+        ),
+      ],
     );
   }
 }
@@ -107,10 +103,16 @@ class _BillInformationWidget extends GetView<BillsViewModel> {
   Widget build(BuildContext context) {
     final children = ServicesConfiguration.getServiceResponseItems(controller.billInfoModel!);
     return CustomCard(
-      child: ListView(
+      child: ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.all(12.0),
-        children: children,
+        itemCount: children.length,
+        physics: NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) => children[index],
+        separatorBuilder: (context, index) => Divider(
+          thickness: 0.2,
+          color: ColorManager.titleColor,
+        ),
       ),
     );
   }

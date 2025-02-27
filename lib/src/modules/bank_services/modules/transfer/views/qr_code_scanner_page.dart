@@ -39,34 +39,17 @@ class _QrCodeScannerPageState extends State<QrCodeScannerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: TranslationsKeys.tkTransferWithQRLabel),
-      body: Column(
-        children: [
-          // QR Code Scanner View
-          Expanded(
-            flex: 4,
-            child: QRView(
-              key: qrKey,
-              onQRViewCreated: _onQRViewCreated,
-              overlay: QrScannerOverlayShape(
-                borderColor: Colors.blue,
-                borderRadius: 10,
-                borderLength: 30,
-                borderWidth: 10,
-                cutOutSize: MediaQuery.of(context).size.width * 0.7,
-              ),
-            ),
-          ),
-
-          // Display the scanned result
-          Expanded(
-            child: Center(
-              child: qrResult != null
-                  ? Text('QR Code Result: $qrResult', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
-                  : const Text('Scan a QR code', style: TextStyle(fontSize: 16)),
-            ),
-          ),
-        ],
+      appBar: CustomAppbar(title: TranslationsKeys.tkScanQrCodeLabel),
+      body: QRView(
+        key: qrKey,
+        onQRViewCreated: _onQRViewCreated,
+        overlay: QrScannerOverlayShape(
+          borderColor: ColorManager.primaryColor,
+          borderRadius: 10,
+          borderLength: 30,
+          borderWidth: 10,
+          cutOutSize: MediaQuery.of(context).size.width * 0.7,
+        ),
       ),
     );
   }

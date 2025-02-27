@@ -3,6 +3,7 @@ import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/controllers/account_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/actions/bank_service_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/controllers/bank_services_view_model.dart';
+import 'package:az_banking_app/src/modules/exchange_rate/controllers/exchange_rate_view_model.dart';
 import 'package:az_banking_app/src/modules/exchange_rate/views/exchange_rates_page.dart';
 import 'package:az_banking_app/src/modules/home/home.dart';
 import 'package:az_banking_app/src/modules/home/view/settings_page.dart';
@@ -22,6 +23,7 @@ class MenuPage extends GetView<MenuViewModel> {
     Get.find<AccountViewModel>();
     Get.find<BankServicesViewModel>();
     Get.find<StatementViewModel>();
+    Get.find<ExchangeRateViewModel>();
     return Scaffold(
       backgroundColor: ColorManager.lightBackgroundColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

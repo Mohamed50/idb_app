@@ -1,4 +1,5 @@
 import 'package:az_banking_app/src/config/colors.dart';
+import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/orders/data/models/order_model.dart';
 import 'package:az_banking_app/src/views/custom/custom_container.dart';
 import 'package:az_banking_app/src/views/custom/custom_date_text.dart';
@@ -13,36 +14,57 @@ class OrderItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      padding: EdgeInsets.all(12.0),
-      child: Row(
+      padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 24.0),
-            decoration: BoxDecoration(
-              color: _getStatusColor().withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(24.0),
-              // border: Border.all(color: _getStatusColor()),
-            ),
-            child: CustomText.title(
-              orderModel.requestStatus,
-              fontSize: 12.0,
-              color: _getStatusColor(),
-            ),
-          ),
-          SizedBox(width: 12.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText.title(
-                orderModel.name,
-                fontSize: 18.0,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.subtitle(
+                    TranslationsKeys.tkNameLabel,
+                    fontSize: 12.0,
+                  ),
+                  CustomText.title(
+                    orderModel.name,
+                    fontSize: 14.0,
+                  ),
+                ],
               ),
-              CustomText.subtitle(orderModel.comment),
-              SizedBox(height: 4.0),
+              CustomCard(
+                color: ColorManager.lightBackgroundColor,
+                padding: EdgeInsets.symmetric(horizontal:12.0, vertical: 8.0),
+                borderRadius: BorderRadius.circular(8),
+                child: CustomText.title(orderModel.requestStatus, fontSize: 14.0, color: _getStatusColor(),),
+              ),
+            ],
+          ),
+          SizedBox(height: 8.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.subtitle(
+                    orderModel.comment.split(':').first,
+                    fontSize: 12,
+                  ),
+                  CustomText.title(
+                    orderModel.comment.split(':').last.trim(),
+                    fontSize: 14.0,
+                  ),
+                ],
+              ),
               CustomDateText(
                 orderModel.tranDateTime,
-                dateFormat: 'dd-MMM-yyyy hh:mm',
+                dateFormat: 'dd MMM',
                 fontSize: 14.0,
+                fontWeight: FontWeight.w700,
+                color: ColorManager.titleColor,
               ),
             ],
           ),

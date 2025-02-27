@@ -19,7 +19,7 @@ class ResponsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> response = Get.arguments['response'];
+    final Map<String, dynamic> response = Get.arguments['response'] ?? Get.arguments;
     final AccountModel? toAccount = Get.arguments['to_account'];
     final children = ServicesConfiguration.getServiceResponseItems(response);
     return Scaffold(
@@ -30,8 +30,7 @@ class ResponsePage extends StatelessWidget {
           child: Container(
             color: ColorManager.lightBackgroundColor,
             padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: ListView(
               children: [
                 SizedBox(height: 52.0),
                 Stack(
@@ -45,14 +44,20 @@ class ResponsePage extends StatelessWidget {
                           child: Column(
                             children: [
                               SizedBox(height: 52 + 24),
-                              CustomText.subtitle(
-                                TranslationsKeys.tkTransactionInfoLabel,
-                                color: ColorManager.titleColor,
+                              CustomText.title(
+                                TranslationsKeys.tkSuccessLabel,
+                                color: ColorManager.positiveColor,
                               ),
+                              CustomText.title(
+                                TranslationsKeys.tkSuccessfulTransactionMsg,
+                                fontSize: 12,
+                              ),
+                              SizedBox(height: 24.0),
                               ListView.separated(
                                 padding: EdgeInsets.all(12.0),
                                 shrinkWrap: true,
                                 itemCount: children.length,
+                                physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) => children[index],
                                 separatorBuilder: (context, index) => Divider(
                                   color: ColorManager.titleColor,

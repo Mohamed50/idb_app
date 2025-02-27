@@ -58,7 +58,7 @@ class _FormWidget extends GetView<OrderViewModel> {
           ),
           SizedBox(height: verticalSpacing),
           CustomFormField(
-            label: TranslationsKeys.tkChequeTypeLabel,
+            label: TranslationsKeys.tkChequeNumberLabel,
             onSaved: controller.onChequeNumberChanged,
             validator: InputsValidator.phoneValidator,
           ),

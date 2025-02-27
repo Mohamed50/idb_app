@@ -1,4 +1,4 @@
-import 'package:az_banking_app/src/config/colors.dart';
+import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/exchange_rate/data/models/exchange_rate_model.dart';
 import 'package:az_banking_app/src/views/custom/custom_container.dart';
 import 'package:az_banking_app/src/views/custom/custom_text.dart';
@@ -12,52 +12,61 @@ class ExchangeRateItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      color: ColorManager.primaryColor.withValues(alpha: 0.08),
-      padding: EdgeInsets.all(24.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomCard(
-              color: ColorManager.lightBackgroundColor,
-              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
-              child: CustomTranslatedText(
-                textEn: exchangeRateModel.currencySymbolEn,
-                textAr: exchangeRateModel.currencySymbolAr,
-                fontSize: 20.0,
-                fontWeight: FontWeight.w700,
-                color: ColorManager.primaryColor,
-              )),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText.subtitle(
-                'Avg',
+                TranslationsKeys.tkCurrencyLabel,
+                fontSize: 12.0,
               ),
               CustomText.title(
-                exchangeRateModel.currencyPurchRate,
-                color: ColorManager.primaryColor,
+                exchangeRateModel.currencyNameEn,
+                fontSize: 14.0,
               ),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Divider(height: 24.0, thickness: 2,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText.subtitle(
-                'Buy',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.subtitle(
+                    TranslationsKeys.tkBuyLabel,
+                    fontSize: 12.0,
+                  ),
+                  CustomText.title(
+                    exchangeRateModel.currencyPurchRate,
+                    fontSize: 14.0,
+                  ),
+                  SizedBox(height: 12.0),
+                  CustomText.subtitle(
+                    TranslationsKeys.tkSellLabel,
+                    fontSize: 12.0,
+                  ),
+                  CustomText.title(
+                    exchangeRateModel.currencySellRate,
+                    fontSize: 14.0,
+                  ),
+                ],
               ),
-              CustomText.title(
-                exchangeRateModel.currencyPurchRate,
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText.subtitle(
-                'Sell',
-              ),
-              CustomText.title(
-                exchangeRateModel.currencySellRate,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.subtitle(
+                    TranslationsKeys.tkAverageLabel,
+                    fontSize: 12.0,
+                  ),
+                  CustomText.title(
+                    exchangeRateModel.currencyPurchRate,
+                    fontSize: 24,
+                  ),
+                ],
               ),
             ],
           ),

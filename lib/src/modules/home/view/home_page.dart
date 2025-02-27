@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: CustomAppbar(title: TranslationsKeys.tkHomePage),
+      backgroundColor: ColorManager.darkBackgroundColor,
       body: ListView(
         padding: EdgeInsets.only(bottom: 24.0),
         children: [

@@ -7,7 +7,7 @@ import '/src/config/config.dart';
 final ThemeData theme = ThemeData(
   brightness: Brightness.light,
   primaryColor: ColorManager.primaryColor,
-  scaffoldBackgroundColor: ColorManager.darkBackgroundColor,
+  scaffoldBackgroundColor: ColorManager.lightBackgroundColor,
   dividerColor: ColorManager.secondaryColor,
   textTheme: GoogleFonts.nunitoTextTheme(),
   buttonTheme: const ButtonThemeData(

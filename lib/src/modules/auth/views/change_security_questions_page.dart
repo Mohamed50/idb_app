@@ -73,12 +73,13 @@ class QuestionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.zero,
       title: CustomText.subtitle(
         questionModel.question,
         color: ColorManager.titleColor,
       ),
       subtitle: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: CustomFormField(
           label: TranslationsKeys.tkAnswerLabel,
           onSaved: (value) => questionModel.answer = value ?? '',

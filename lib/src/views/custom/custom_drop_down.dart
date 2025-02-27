@@ -14,15 +14,15 @@ class CustomDropDown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(color: ColorManager.bodyColor, fontWeight: FontWeight.w700, fontSize: 14.0);
+    TextStyle textStyle = TextStyle(color: ColorManager.titleColor, fontWeight: FontWeight.w700, fontSize: 14.0);
     InputBorder inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(8.0),
-      borderSide: BorderSide(color: ColorManager.lightBackgroundColor),
+      borderSide: BorderSide(color: ColorManager.darkBackgroundColor),
     );
 
     InputDecoration decoration = InputDecoration(
       filled: true,
-      fillColor: ColorManager.lightBackgroundColor,
+      fillColor: ColorManager.darkBackgroundColor,
       contentPadding: const EdgeInsets.all(12.0),
       labelText: label.tr,
       border: inputBorder,
