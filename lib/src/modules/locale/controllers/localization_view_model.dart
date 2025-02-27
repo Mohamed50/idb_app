@@ -26,7 +26,7 @@ class LocalizationViewModel extends GetxController {
     LocalizationService.init(); // Initialize the localization service.
     await Future.delayed(const Duration(milliseconds: 300)); // Simulate a small delay.
     final newLang = supportedLanguage.firstWhere(
-          (element) => element.code == LocalizationService.savedLanguageCode,
+      (element) => element.code == LocalizationService.savedLanguageCode,
     );
     selectLanguage(newLang); // Set the fetched language.
   }
@@ -53,7 +53,7 @@ class LocalizationViewModel extends GetxController {
   /// Dismisses the language selection and reverts to the default saved language.
   void dismiss() {
     _language.value = supportedLanguage.firstWhere(
-          (element) => Get.locale!.languageCode == element.code,
+      (element) => Get.locale!.languageCode == element.code,
     );
   }
 
