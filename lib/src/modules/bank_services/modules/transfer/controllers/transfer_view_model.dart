@@ -10,27 +10,27 @@ class TransferViewModel extends GetxController {
   TransferViewModel(this._transferService);
 
   // Existing variables
-  AccountModel? _fromAccount, toAccount;
-  String? _phone, _comment, _toAccountBBan, _toAccountNumber;
+  AccountModel? fromAccount, toAccount;
+  String? phone, comment, _toAccountBBan, _toAccountNumber;
   AccountType? _toAccountType;
-  double? _amount;
+  double? amount;
 
   Future<Map<String, dynamic>> transferToAccountInsideBank() async {
     return await _transferService.transferToAccountInsideTheBank(
-      _fromAccount!,
+      fromAccount!,
       toAccount!,
-      _phone ?? '',
-      _comment!,
-      _amount!,
+      phone ?? '',
+      comment!,
+      amount!,
     );
   }
 
   Future<Map<String, dynamic>> transferToAccountOutsideBank() async {
     return await _transferService.transferToDifferentBank(
-      _fromAccount!,
+      fromAccount!,
       _toAccountBBan!,
-      _comment!,
-      _amount!,
+      comment!,
+      amount!,
     );
   }
 
@@ -38,9 +38,18 @@ class TransferViewModel extends GetxController {
     return await transferToAccountInsideBank();
   }
 
+  bool isInfoAvailable(){
+    return toAccount != null;
+  }
+
+  Future fetchReceiverInfo() async {
+    toAccount = await _transferService.fetchAccountInfo(_toAccountNumber!, _toAccountType!.toCode());
+    update();
+  }
+
   /// **Sets the selected 'From Account'**
   void onFromAccountChanged(AccountModel? account) {
-    _fromAccount = account;
+    fromAccount = account;
     update();
   }
 
@@ -58,19 +67,19 @@ class TransferViewModel extends GetxController {
 
   /// **Updates the phone number**
   void onPhoneChanged(String? value) {
-    _phone = value;
+    phone = value;
     update();
   }
 
   /// **Updates the comment**
   void onCommentChanged(String? value) {
-    _comment = value;
+    comment = value;
     update();
   }
 
   /// **Updates the transfer amount**
   void onAmountChanged(String? value) {
-    _amount = double.parse(value ?? '0');
+    amount = double.parse(value ?? '0');
     update();
   }
 
@@ -84,11 +93,7 @@ class TransferViewModel extends GetxController {
     update();
   }
 
-  void setToAccount() {
-    toAccount = AccountModel(accountType: _toAccountType!, accountNo: _toAccountNumber!);
-  }
-
   bool isFromAndToSameAccount() {
-    return _fromAccount == toAccount;
+    return fromAccount == toAccount;
   }
 }

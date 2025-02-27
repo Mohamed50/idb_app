@@ -22,7 +22,7 @@ class AccountsDropDown extends StatelessWidget {
     this.validator,
     this.changePrimaryOnChange = false,
     this.withOneAccountError = false,
-    this.fillColor = ColorManager.lightBackgroundColor,
+    this.fillColor = ColorManager.darkBackgroundColor,
   });
 
   @override

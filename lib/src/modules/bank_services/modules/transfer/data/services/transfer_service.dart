@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:az_banking_app/src/essentials/config/api_config.dart';
 import 'package:az_banking_app/src/essentials/services/api_service.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
@@ -62,4 +60,22 @@ class TransferService extends ApiService {
     return response.body;
   }
 
+  Future<AccountModel> fetchAccountInfo(String accountNumber, String accountTypeCode) async {
+    final body = {
+      "Cust_Info_Type": 2,
+      "To_Account_Info": [
+        {
+          "Account_No": accountNumber,
+          "Account_Type_Code": accountTypeCode,
+          "Currency_Code": '',
+          "Branch_code": '',
+        }
+      ],
+      "RIM": "",
+      "Comment": '',
+      "Tran_DateTime": DateTime.now().millisecondsSinceEpoch.toString(),
+    };
+    final response = await post(APIConfiguration.fetchAccountInfoUrl, body);
+    return accountModelFromJson(response.body['Accounts_List'], name: response.body['Customer_Name'], phone: response.body['Phone_No']).first;
+  }
 }

@@ -126,6 +126,9 @@ class TranslationsKeys {
   static const String tkOneAccountErrorMsg = 'tkOneAccountErrorMsg';
   static const String tkLinkedAccounts = 'tkLinkedAccounts';
   static const String tkAccountTypeLabel = 'tkAccountTypeLabel';
+  static const String tkTransactionInfoLabel = 'tkTransactionInfoLabel';
+  static const String tkReceiverNameLabel = 'tkReceiverNameLabel';
+  static const String tkSDGLabel = 'tkSDGLabel';
 
   /// Bank Services Module - Statement Services
   static const String tkStatementServiceLabel = 'tkStatementServiceLabel';

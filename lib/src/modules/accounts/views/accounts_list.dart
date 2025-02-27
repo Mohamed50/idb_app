@@ -40,14 +40,19 @@ class AccountItemTile extends StatelessWidget {
   final AccountModel accountModel;
   final bool selected;
   final Color backgroundColor;
+  final bool withName;
 
-  const AccountItemTile({super.key, required this.accountModel, this.selected = true, this.backgroundColor = ColorManager.darkBackgroundColor});
+  const AccountItemTile(
+      {super.key,
+      required this.accountModel,
+      this.selected = true,
+      this.backgroundColor = ColorManager.darkBackgroundColor, this.withName = false});
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       color: backgroundColor,
-      padding: const EdgeInsets.symmetric(horizontal:16.0, vertical: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -92,9 +97,46 @@ class AccountItemTile extends StatelessWidget {
               ),
             ],
           ),
+          CustomVisible(
+            show: withName,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.subtitle(
+                    TranslationsKeys.tkReceiverNameLabel,
+                    fontSize: 10,
+                  ),
+                  CustomText.title(
+                    accountModel.name,
+                    fontSize: 14,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          CustomVisible(
+            show: withName,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.subtitle(
+                    TranslationsKeys.tkPhoneLabel,
+                    fontSize: 10,
+                  ),
+                  CustomText.title(
+                    accountModel.phone,
+                    fontSize: 14,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
-
 }

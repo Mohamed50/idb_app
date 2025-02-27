@@ -6,7 +6,7 @@ import 'dart:convert';
 
 import 'account_type_model.dart';
 
-List<AccountModel> accountModelFromJson(List json) => List<AccountModel>.from(json.map((x) => AccountModel.fromJson(x)));
+List<AccountModel> accountModelFromJson(List json, {String? name, String? phone}) => List<AccountModel>.from(json.map((x) => AccountModel.fromJson(x, name, phone)));
 
 String accountModelToJson(List<AccountModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -21,6 +21,8 @@ class AccountModel {
   final bool isAllowOthersTran;
   final String? branchCode;
   String balance;
+  String name;
+  String phone;
 
   AccountModel({
     this.isAllowToOwnTran = false,
@@ -33,19 +35,23 @@ class AccountModel {
     this.isAllowOthersTran = false,
     this.branchCode = '',
     this.balance = '0',
+    this.name = '',
+    this.phone = '',
   });
 
-  factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
-    isAllowToOwnTran: json["Is_Allow_To_Own_Tran"],
+  factory AccountModel.fromJson(Map<String, dynamic> json, [String? name, String? phone]) => AccountModel(
+    isAllowToOwnTran: json["Is_Allow_To_Own_Tran"] ?? false,
     iban: json["IBAN"],
     accountType: AccountTypeExtensions.fromCode(json["Account_Type_Code"])!,
-    isPrimary: json["Is_Primary"],
-    isAllowFromOwnTran: json["Is_Allow_From_Own_Tran"],
+    isPrimary: json["Is_Primary"] ?? false,
+    isAllowFromOwnTran: json["Is_Allow_From_Own_Tran"] ?? false,
     accountNo: json["Account_No"],
     currencyCode: json["Currency_Code"] ?? 'SDG',
-    isAllowOthersTran: json["Is_Allow_Others_Tran"],
+    isAllowOthersTran: json["Is_Allow_Others_Tran"] ?? false,
     branchCode: json["Branch_Code"],
     balance: json["Balance"] ?? '0',
+    name: name ?? '',
+    phone: phone ?? '',
   );
 
   Map<String, dynamic> toJson() => {

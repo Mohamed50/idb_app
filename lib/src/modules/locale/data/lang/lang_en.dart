@@ -105,6 +105,9 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkOneAccountErrorMsg: 'You have one account only',
   TranslationsKeys.tkLinkedAccounts: 'Linked Accounts',
   TranslationsKeys.tkAccountTypeLabel: 'Account Type',
+  TranslationsKeys.tkTransactionInfoLabel: 'Transaction Information',
+  TranslationsKeys.tkReceiverNameLabel: 'Receiver Name',
+  TranslationsKeys.tkSDGLabel: 'SDG',
 
   // 📑 Bank Services Module - Statement Services
   TranslationsKeys.tkStatementServiceLabel: 'Statement',
