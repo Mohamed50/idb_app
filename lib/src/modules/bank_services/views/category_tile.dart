@@ -21,6 +21,7 @@ class CategoryTile extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 4,
           childAspectRatio: 1.0,
+          crossAxisSpacing: 8.0,
           padding: EdgeInsets.zero,
           children: categoryModel.services.map((e) => BankServiceTile(serviceModel: e)).toList(),
         )
