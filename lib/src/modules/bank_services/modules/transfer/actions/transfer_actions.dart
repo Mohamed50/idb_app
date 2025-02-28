@@ -19,6 +19,13 @@ class TransferActions extends ActionPresenter {
     });
   }
 
+  void fetchReceiverInfoOutsideBank(BuildContext context) {
+    actionHandler(context, () async {
+      final controller = Get.find<TransferViewModel>();
+      await controller.fetchReceiverInfoOutsideBank();
+    });
+  }
+
   void transferInsideBank(BuildContext context) {
     actionHandler(context, () async {
       final controller = Get.find<TransferViewModel>();

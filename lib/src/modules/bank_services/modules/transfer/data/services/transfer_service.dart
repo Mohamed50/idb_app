@@ -1,7 +1,10 @@
 import 'package:az_banking_app/src/essentials/config/api_config.dart';
 import 'package:az_banking_app/src/essentials/services/api_service.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
+import 'package:az_banking_app/src/modules/accounts/data/models/account_type_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
+import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class TransferService extends ApiService {
   Future<Map<String, dynamic>> transferToDifferentBank(
@@ -12,7 +15,7 @@ class TransferService extends ApiService {
   ) async {
     final body = {
       'From_Account_Info': [fromAccount.toJson()],
-      'To_Account': toAccountBPAN,
+      'To_Card': toAccountBPAN,
       'Amount': amount,
       'comment': comment,
     };
@@ -60,7 +63,7 @@ class TransferService extends ApiService {
     return response.body;
   }
 
-  Future<AccountModel> fetchAccountInfo(String accountNumber, String accountTypeCode) async {
+  Future<AccountModel> fetchAccountInfoInsideBank(String accountNumber, String accountTypeCode) async {
     final body = {
       "Cust_Info_Type": 2,
       "To_Account_Info": [
@@ -75,7 +78,20 @@ class TransferService extends ApiService {
       "Comment": '',
       "Tran_DateTime": DateTime.now().millisecondsSinceEpoch.toString(),
     };
-    final response = await post(APIConfiguration.fetchAccountInfoUrl, body);
-    return accountModelFromJson(response.body['Accounts_List'], name: response.body['Customer_Name'], phone: response.body['Phone_No']).first;
+    final response = await post(APIConfiguration.fetchAccountInfoInsideBankUrl, body);
+    return accountModelFromJson(response.body['Accounts_List'],
+            name: response.body['Customer_Name'], phone: response.body['Phone_No'])
+        .first;
+  }
+
+  Future<AccountModel> fetchAccountInfoOutsideBank(String accountNumber) async {
+    final body = {
+      "PAN": accountNumber,
+      "uuid": const Uuid().v4(),
+      "tranDateTime": DateFormat('dd-MM-yy-hh-mm-ss', "en").format(DateTime.now()).replaceAll('-', ''),
+      "applicationId": 'com.edb.infinity',
+    };
+    final response = await post(APIConfiguration.fetchAccountInfoOutsideBankUrl, body);
+    return AccountModel(accountType: AccountType.ntd, accountNo: response.body['PAN'],name: response.body['customerName'], iban: response.body['BBAN']);
   }
 }

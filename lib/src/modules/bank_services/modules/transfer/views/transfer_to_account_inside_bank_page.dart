@@ -1,16 +1,13 @@
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/views/account_type_drop_down.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dart';
-import 'package:az_banking_app/src/modules/accounts/views/accounts_list.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/views/confirm_transfer_widget.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/custom_appbar.dart';
 import 'package:az_banking_app/src/views/custom/custom_button.dart';
-import 'package:az_banking_app/src/views/custom/custom_container.dart';
 import 'package:az_banking_app/src/views/custom/custom_form_field.dart';
-import 'package:az_banking_app/src/views/custom/custom_text.dart';
 import 'package:az_banking_app/src/views/custom/custom_visible.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

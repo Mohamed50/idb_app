@@ -11,7 +11,7 @@ class TransferViewModel extends GetxController {
 
   // Existing variables
   AccountModel? fromAccount, toAccount;
-  String? phone, comment, _toAccountBBan, _toAccountNumber;
+  String? phone, comment, toAccountBBan, _toAccountNumber;
   AccountType? _toAccountType;
   double? amount;
 
@@ -28,7 +28,7 @@ class TransferViewModel extends GetxController {
   Future<Map<String, dynamic>> transferToAccountOutsideBank() async {
     return await _transferService.transferToDifferentBank(
       fromAccount!,
-      _toAccountBBan!,
+      toAccountBBan!,
       comment!,
       amount!,
     );
@@ -43,7 +43,12 @@ class TransferViewModel extends GetxController {
   }
 
   Future fetchReceiverInfo() async {
-    toAccount = await _transferService.fetchAccountInfo(_toAccountNumber ?? toAccount!.accountNo, _toAccountType?.toCode() ?? toAccount!.accountType.toCode());
+    toAccount = await _transferService.fetchAccountInfoInsideBank(_toAccountNumber ?? toAccount!.accountNo, _toAccountType?.toCode() ?? toAccount!.accountType.toCode());
+    update();
+  }
+
+  Future fetchReceiverInfoOutsideBank() async {
+    toAccount = await _transferService.fetchAccountInfoOutsideBank(toAccountBBan!);
     update();
   }
 
@@ -61,7 +66,7 @@ class TransferViewModel extends GetxController {
 
   /// **Sets the selected 'To Account'**
   void onToAccountBBANChanged(String? toAccountBBAN) {
-    _toAccountBBan = toAccountBBAN;
+    toAccountBBan = toAccountBBAN;
     update();
   }
 
