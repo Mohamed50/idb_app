@@ -1,6 +1,7 @@
 import 'package:az_banking_app/src/essentials/config/api_config.dart';
 import 'package:az_banking_app/src/essentials/services/api_service.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/bill_info_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
 
 class TeleBillsService extends ApiService {
@@ -16,15 +17,15 @@ class TeleBillsService extends ApiService {
     return await _topUp(ServicesConfiguration.topUpSudaniServiceCode, fromAccount, phoneNumber, amount);
   }
 
-  Future<Map<String, dynamic>> billInquiryZain(AccountModel fromAccount, String phoneNumber) async {
+  Future<List<BillInfoModel>> billInquiryZain(AccountModel fromAccount, String phoneNumber) async {
     return await _billInquiry(ServicesConfiguration.billInquiryZainServiceCode, fromAccount, phoneNumber);
   }
 
-  Future<Map<String, dynamic>> billInquiryMtn(AccountModel fromAccount, String phoneNumber) async {
+  Future<List<BillInfoModel>> billInquiryMtn(AccountModel fromAccount, String phoneNumber) async {
     return await _billInquiry(ServicesConfiguration.billInquiryMtnServiceCode, fromAccount, phoneNumber);
   }
 
-  Future<Map<String, dynamic>> billInquirySudani(AccountModel fromAccount, String phoneNumber) async {
+  Future<List<BillInfoModel>> billInquirySudani(AccountModel fromAccount, String phoneNumber) async {
     return await _billInquiry(ServicesConfiguration.billInquirySudaniServiceCode, fromAccount, phoneNumber);
   }
 
@@ -51,7 +52,7 @@ class TeleBillsService extends ApiService {
     return response.body;
   }
 
-  Future<Map<String, dynamic>> _billInquiry(String billerId, AccountModel fromAccount, String phoneNumber) async {
+  Future<List<BillInfoModel>> _billInquiry(String billerId, AccountModel fromAccount, String phoneNumber) async {
     final body = {
       'Biller_ID': billerId,
       'Pay_Customer_Code': phoneNumber,
@@ -60,7 +61,7 @@ class TeleBillsService extends ApiService {
       'Account_Info': fromAccount.toJson()
     };
     final response = await post(APIConfiguration.teleBillInquiryUrl, body);
-    return response.body;
+    return billInfoModelFromJson(response.body['Bill_Info']);
   }
 
   Future<Map<String, dynamic>> _billPayment(String billerId, AccountModel fromAccount, String phoneNumber, double amount) async {

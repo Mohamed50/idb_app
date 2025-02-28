@@ -2,6 +2,7 @@ import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/actions/bill_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/tele_bills_view_model.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/bill_info_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_service_type.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/widgets/tele_provider_picker.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
@@ -59,9 +60,11 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
               ),
               SizedBox(height: verticalSpacing),
               GetX<TeleBillsViewModel>(
-                builder:(controller) =>  CustomVisible(
-                  show: controller.selectedServiceType == TeleServiceType.topUp || controller.billInfoModel != null,
+                builder: (controller) => CustomVisible(
+                  show: controller.selectedServiceType == TeleServiceType.topUp || controller.amount.value > 0,
                   child: CustomFormField(
+                    initialValue: controller.amount > 0 ? controller.amount.toString() : null,
+                    // enabled: controller.selectedServiceType == TeleServiceType.topUp,
                     label: TranslationsKeys.tkAmountLabel,
                     onSaved: controller.onAmountChanged,
                     validator: InputsValidator.generalValidator,
@@ -69,6 +72,8 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
                   ),
                 ),
               ),
+              SizedBox(height: verticalSpacing),
+              BillInformationWidget(),
               SizedBox(height: 64.0),
               CustomButton(
                 text: TranslationsKeys.tkConfirmBtn,
@@ -86,5 +91,52 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
       _formKey.currentState!.save();
       BillsActions.instance.confirm(context);
     }
+  }
+}
+
+class BillInformationWidget extends StatelessWidget {
+  const BillInformationWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetX<TeleBillsViewModel>(
+      builder: (controller) => CustomVisible(
+        show: controller.selectedServiceType == TeleServiceType.payment && controller.billInfoModel.isNotEmpty,
+        child: CustomCard(
+          padding: EdgeInsets.all(12.0),
+          child: ListView.separated(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: controller.billInfoModel.length,
+            itemBuilder: (context, index) => BillInfoItemTile(billInfoModel: controller.billInfoModel[index]),
+            separatorBuilder: (context, index) => SizedBox(height: 8.0),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BillInfoItemTile extends StatelessWidget {
+  final BillInfoModel billInfoModel;
+
+  const BillInfoItemTile({super.key, required this.billInfoModel});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText.subtitle(
+          billInfoModel.label,
+          fontSize: 10.0,
+        ),
+        CustomText.title(
+          billInfoModel.value.toString(),
+          fontSize: 12.0,
+        ),
+      ],
+    );
   }
 }

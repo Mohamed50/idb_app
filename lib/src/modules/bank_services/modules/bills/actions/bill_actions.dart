@@ -19,7 +19,9 @@ class BillsActions extends ActionPresenter {
     actionHandler(context, () async {
       final controller = Get.find<TeleBillsViewModel>();
       final response = await controller.billInquiry();
+      final amount = response.firstWhere((e) => e.label.toLowerCase().contains('amount') || e.label.contains('المبلغ الكلي')).value;
       controller.onBillInformationChanged(response);
+      controller.onAmountChanged(amount);
     });
   }
 
@@ -43,7 +45,7 @@ class BillsActions extends ActionPresenter {
     final controller = Get.find<TeleBillsViewModel>();
     if (controller.selectedServiceType == TeleServiceType.topUp) {
       topUp(context);
-    } else if (controller.billInfoModel != null) {
+    } else if (controller.billInfoModel.isNotEmpty) {
       teleBillPayment(context);
     } else {
       teleBillInquiry(context);

@@ -9,7 +9,7 @@ class TeleBillsViewModel extends GetxController {
   final TeleBillsService _teleBillsService;
 
   String? _phoneNumber;
-  double? amount;
+  RxDouble amount = 0.0.obs;
   AccountModel? _fromAccount;
 
   TeleBillsViewModel(this._teleBillsService);
@@ -22,22 +22,22 @@ class TeleBillsViewModel extends GetxController {
 
   TeleServiceType get selectedServiceType => _selectedServiceType.value;
 
-  Map<String, dynamic>? _billInfoModel;
+  final RxList<BillInfoModel> _billInfoModel = <BillInfoModel>[].obs;
 
-  Map<String, dynamic>? get billInfoModel => _billInfoModel;
+  RxList<BillInfoModel> get billInfoModel => _billInfoModel;
 
   Future<Map<String, dynamic>> topUp() async {
     switch (_selectedProvider.value) {
       case TeleProvider.zain:
-        return await _teleBillsService.topUpZain(_fromAccount!, _phoneNumber!, amount!);
+        return await _teleBillsService.topUpZain(_fromAccount!, _phoneNumber!, amount.value);
       case TeleProvider.mtn:
-        return await _teleBillsService.topUpMtn(_fromAccount!, _phoneNumber!, amount!);
+        return await _teleBillsService.topUpMtn(_fromAccount!, _phoneNumber!, amount.value);
       case TeleProvider.sudani:
-        return await _teleBillsService.topUpSudani(_fromAccount!, _phoneNumber!, amount!);
+        return await _teleBillsService.topUpSudani(_fromAccount!, _phoneNumber!, amount.value);
     }
   }
 
-  Future<Map<String, dynamic>> billInquiry() async {
+  Future<List<BillInfoModel>> billInquiry() async {
     switch (_selectedProvider.value) {
       case TeleProvider.zain:
         return await _teleBillsService.billInquiryZain(_fromAccount!, _phoneNumber!);
@@ -51,11 +51,11 @@ class TeleBillsViewModel extends GetxController {
   Future<Map<String, dynamic>> billPayment() async {
     switch (_selectedProvider.value) {
       case TeleProvider.zain:
-        return await _teleBillsService.billPaymentZain(_fromAccount!, _phoneNumber!, amount!);
+        return await _teleBillsService.billPaymentZain(_fromAccount!, _phoneNumber!, amount.value);
       case TeleProvider.mtn:
-        return await _teleBillsService.billPaymentMtn(_fromAccount!, _phoneNumber!, amount!);
+        return await _teleBillsService.billPaymentMtn(_fromAccount!, _phoneNumber!, amount.value);
       case TeleProvider.sudani:
-        return await _teleBillsService.billPaymentSudani(_fromAccount!, _phoneNumber!, amount!);
+        return await _teleBillsService.billPaymentSudani(_fromAccount!, _phoneNumber!, amount.value);
     }
   }
 
@@ -76,11 +76,12 @@ class TeleBillsViewModel extends GetxController {
   }
 
   void onAmountChanged(String? newValue) {
-    amount = double.parse(newValue ?? '0');
+    amount.value = double.parse(newValue ?? '0');
+    update();
   }
 
-  void onBillInformationChanged(Map<String,dynamic>? newValue) {
-    _billInfoModel = newValue;
+  void onBillInformationChanged(List<BillInfoModel> newValue) {
+    _billInfoModel.value = newValue;
     update();
   }
 }
