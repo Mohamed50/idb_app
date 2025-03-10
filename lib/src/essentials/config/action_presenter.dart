@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:az_banking_app/src/essentials/config/error_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +16,11 @@ class ActionPresenter {
   /// `onSuccess`: Optional callback to be executed on successful completion of the action.
   /// `onFailure`: Optional callback to be executed on failure.
   Future<void> actionHandler(
-      BuildContext context,
-      AsyncCallback action, {
-        VoidCallback? onSuccess,
-        VoidCallback? onFailure,
-      }) async {
+    BuildContext context,
+    AsyncCallback action, {
+    VoidCallback? onSuccess,
+    VoidCallback? onFailure,
+  }) async {
     // Show the loading overlay during the action execution.
     context.loaderOverlay.show();
     try {
@@ -32,11 +33,11 @@ class ActionPresenter {
       }
     } on AppException catch (e, stackTrace) {
       // Handle specific AppException with custom prefix and message.
-      _handleException(e, stackTrace, e.prefix, e.message);
+      _handleException(e, stackTrace, e.prefix, e.message, context);
       if (onFailure != null) onFailure(); // Call onFailure if provided.
     } catch (e, stackTrace) {
       // Handle generic exceptions with a default error message.
-      _handleException(e, stackTrace, TranslationsKeys.tkError, TranslationsKeys.tkSomethingWentWrongMsg);
+      _handleException(e, stackTrace, TranslationsKeys.tkError, TranslationsKeys.tkSomethingWentWrongMsg, context);
       if (onFailure != null) onFailure(); // Call onFailure if provided.
     } finally {
       // Hide the loading overlay after the action completes.
@@ -52,10 +53,10 @@ class ActionPresenter {
   /// `onSuccess`: Optional callback to be executed on successful completion of the action.
   /// `onFailure`: Optional callback to be executed on failure.
   Future<void> actionHandlerWithoutLoading(
-      AsyncCallback action, {
-        VoidCallback? onSuccess,
-        VoidCallback? onFailure,
-      }) async {
+    AsyncCallback action, {
+    VoidCallback? onSuccess,
+    VoidCallback? onFailure,
+  }) async {
     try {
       // Execute the provided action.
       await action();
@@ -81,19 +82,19 @@ class ActionPresenter {
   /// `stackTrace`: The associated stack trace.
   /// `title`: The title of the error.
   /// `message`: The message to display to the user.
-  void _handleException(
-      dynamic e,
-      StackTrace stackTrace,
-      String title,
-      String message,
-      ) async {
+  void _handleException(dynamic e, StackTrace stackTrace, String title, String message, [BuildContext? context]) async {
     if (kDebugMode) {
       print(stackTrace); // Print stack trace in debug mode.
       log(e.toString()); // Log the error message.
     }
 
-    // Display an error snackbar.
-    showErrorSnackBar(title, message);
+    if (context != null) {
+      // Display an error dialog.
+      showErrorDialog(context, title, message);
+    } else {
+      // Display an error snackbar.
+      showErrorSnackBar(title, message);
+    }
 
     // Capture the exception in Sentry for tracking.
     await Sentry.captureException(
@@ -102,7 +103,7 @@ class ActionPresenter {
     );
   }
 
-  void back(){
+  void back() {
     Get.back();
   }
 
@@ -155,9 +156,9 @@ class ActionPresenter {
   ///
   /// `message`: The confirmation message to display.
   Future<bool> showConfirmationDialog(
-      BuildContext context, [
-        String message = 'Are you sure',
-      ]) async {
+    BuildContext context, [
+    String message = 'Are you sure',
+  ]) async {
     return await Get.dialog(
       Dialog(
         backgroundColor: ColorManager.darkBackgroundColor,
@@ -192,6 +193,15 @@ class ActionPresenter {
           ),
         ),
       ),
+    );
+  }
+
+  /// Displays a error dialog using GetX.
+  ///
+  /// `message`: The confirmation message to display.
+  Future<bool> showErrorDialog(BuildContext context, String title, String message) async {
+    return await Get.dialog(
+      ErrorDialog(text: message,),
     );
   }
 }

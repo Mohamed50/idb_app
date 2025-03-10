@@ -15,9 +15,7 @@ class TrackChequeStatusPage extends GetView<OrderViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: CustomText(TranslationsKeys.tkTrackChequeStatusServiceLabel),
-      ),
+      appBar: CustomAppbar(title: TranslationsKeys.tkTrackChequeStatusServiceLabel),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

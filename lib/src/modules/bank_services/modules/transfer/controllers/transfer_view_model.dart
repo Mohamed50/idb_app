@@ -12,7 +12,7 @@ class TransferViewModel extends GetxController {
   // Existing variables
   AccountModel? fromAccount, toAccount;
   String? phone, comment, toAccountBBan, _toAccountNumber;
-  AccountType? _toAccountType;
+  AccountType? _toAccountType = AccountType.ntd;
   double? amount;
 
   Future<Map<String, dynamic>> transferToAccountInsideBank() async {
@@ -38,12 +38,13 @@ class TransferViewModel extends GetxController {
     return await transferToAccountInsideBank();
   }
 
-  bool isInfoAvailable(){
+  bool isInfoAvailable() {
     return toAccount?.name != null && toAccount!.name.isNotEmpty;
   }
 
   Future fetchReceiverInfo() async {
-    toAccount = await _transferService.fetchAccountInfoInsideBank(_toAccountNumber ?? toAccount!.accountNo, _toAccountType?.toCode() ?? toAccount!.accountType.toCode());
+    toAccount = await _transferService.fetchAccountInfoInsideBank(
+        _toAccountNumber ?? toAccount!.accountNo, _toAccountType?.toCode() ?? toAccount!.accountType.toCode());
     update();
   }
 

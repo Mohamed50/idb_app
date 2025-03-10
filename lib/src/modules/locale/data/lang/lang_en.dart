@@ -113,6 +113,7 @@ const Map<String, String> englishTranslationsMap = {
   // 📑 Bank Services Module - Statement Services
   TranslationsKeys.tkStatementServiceLabel: 'Statement',
   TranslationsKeys.tkCancelLabel: 'Cancel',
+  TranslationsKeys.tkCloseLabel: 'Close',
   TranslationsKeys.tkSelectDateLabel: 'Select date',
   TranslationsKeys.tkDateLabel: 'Date',
   TranslationsKeys.tkFromLabel: 'From',
@@ -192,4 +193,5 @@ const Map<String, String> englishTranslationsMap = {
   "Successful": "Transaction Successful",
   "Biller_ID": "Biller Id",
   "Currency_Code": "Currency Code",
+  "Customer_Name": "Receiver Name",
 };

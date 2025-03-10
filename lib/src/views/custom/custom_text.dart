@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/src/config/colors.dart';
-import '/src/utils/screen_utils.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -15,35 +14,76 @@ class CustomText extends StatelessWidget {
   final TextAlign? textAlign;
   final TextDecoration? decoration;
 
-  const CustomText(this.text, {super.key, this.color = ColorManager.titleColor, this.fontSize = 14, this.fontWeight, this.height, this.letterSpacing, this.fontFamily, this.textAlign, this.maxLines, this.decoration});
+  const CustomText(this.text,
+      {super.key,
+      this.color = ColorManager.titleColor,
+      this.fontSize = 14,
+      this.fontWeight,
+      this.height,
+      this.letterSpacing,
+      this.fontFamily,
+      this.textAlign,
+      this.maxLines,
+      this.decoration});
 
-  const CustomText.title(this.text, {super.key, this.color = ColorManager.titleColor, this.fontSize = 18.0, this.fontWeight = FontWeight.w700, this.height, this.letterSpacing, this.fontFamily, this.textAlign, this.maxLines, this.decoration});
+  const CustomText.title(this.text,
+      {super.key,
+      this.color = ColorManager.titleColor,
+      this.fontSize = 20.0,
+      this.fontWeight = FontWeight.w700,
+      this.height,
+      this.letterSpacing,
+      this.fontFamily,
+      this.textAlign,
+      this.maxLines,
+      this.decoration});
 
-  const CustomText.subtitle(this.text, {super.key, this.color = ColorManager.bodyColor, this.fontSize = 14.0, this.fontWeight, this.height, this.letterSpacing, this.fontFamily, this.textAlign, this.maxLines, this.decoration});
+  const CustomText.subtitle(this.text,
+      {super.key,
+      this.color = ColorManager.bodyColor,
+      this.fontSize = 14.0,
+      this.fontWeight,
+      this.height,
+      this.letterSpacing,
+      this.fontFamily,
+      this.textAlign,
+      this.maxLines,
+      this.decoration});
 
-  const CustomText.error(this.text, {super.key, this.color = ColorManager.negativeColor, this.fontSize = 12.0, this.fontWeight, this.height, this.letterSpacing, this.fontFamily, this.textAlign, this.maxLines, this.decoration});
-
+  const CustomText.error(this.text,
+      {super.key,
+      this.color = ColorManager.negativeColor,
+      this.fontSize = 12.0,
+      this.fontWeight,
+      this.height,
+      this.letterSpacing,
+      this.fontFamily,
+      this.textAlign,
+      this.maxLines,
+      this.decoration});
 
   const CustomText.underline(
-      this.text, {
-        super.key,
-        this.color = ColorManager.primaryColor,
-        this.fontSize = 14.0,
-        this.fontWeight = FontWeight.w400,
-        this.height,
-        this.letterSpacing,
-        this.fontFamily,
-        this.textAlign = TextAlign.center,
-        this.maxLines,
-        this.decoration = TextDecoration.underline,
-      });
+    this.text, {
+    super.key,
+    this.color = ColorManager.primaryColor,
+    this.fontSize = 14.0,
+    this.fontWeight = FontWeight.w400,
+    this.height,
+    this.letterSpacing,
+    this.fontFamily,
+    this.textAlign = TextAlign.center,
+    this.maxLines,
+    this.decoration = TextDecoration.underline,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return Text(text.tr,
+    return Text(
+      text.tr,
       style: TextStyle(
-          fontSize: ScreenUtils.getFontSize(context, fontSize),
-          color: color,
-          fontWeight: fontWeight,
+        fontSize: fontSize,
+        color: color,
+        fontWeight: fontWeight,
         letterSpacing: letterSpacing,
         height: height,
         fontFamily: fontFamily,
@@ -54,7 +94,6 @@ class CustomText extends StatelessWidget {
     );
   }
 }
-
 
 class CustomTranslatedText extends StatelessWidget {
   final String textEn;
@@ -68,15 +107,27 @@ class CustomTranslatedText extends StatelessWidget {
   final String? fontFamily;
   final TextAlign? textAlign;
 
-  const CustomTranslatedText({ required this.textEn, required this.textAr, super.key, this.color, this.fontSize, this.fontWeight, this.height, this.letterSpacing, this.fontFamily, this.textAlign, this.maxLines});
+  const CustomTranslatedText(
+      {required this.textEn,
+      required this.textAr,
+      super.key,
+      this.color,
+      this.fontSize,
+      this.fontWeight,
+      this.height,
+      this.letterSpacing,
+      this.fontFamily,
+      this.textAlign,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {
-    return Text(Get.locale!.languageCode == 'en' ? textEn : textAr,
+    return Text(
+      Get.locale!.languageCode == 'en' ? textEn : textAr,
       style: TextStyle(
-          fontSize: fontSize,
-          color: color,
-          fontWeight: fontWeight,
+        fontSize: fontSize,
+        color: color,
+        fontWeight: fontWeight,
         letterSpacing: letterSpacing,
         height: height,
         fontFamily: fontFamily,

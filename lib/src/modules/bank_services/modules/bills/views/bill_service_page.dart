@@ -19,8 +19,8 @@ class BillServicePage extends GetView<BillsViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: CustomText(billServiceLabel),
+      appBar: CustomAppbar(
+        title: billServiceLabel,
       ),
       body: ListView(
         padding: const EdgeInsets.all(24.0),
@@ -90,6 +90,7 @@ class _FormWidget extends GetView<BillsViewModel> {
           onSaved: controller.onAmountChanged,
           validator: InputsValidator.generalValidator,
           keyboardType: TextInputType.number,
+          inputFormatters: [AmountFormatter()],
         ),
       ],
     );

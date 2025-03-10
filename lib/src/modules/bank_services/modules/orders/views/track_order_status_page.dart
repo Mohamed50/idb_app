@@ -11,9 +11,7 @@ class TrackOrderStatusPage extends GetView<OrderViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: CustomText(TranslationsKeys.tkTrackOrdersStatusServiceLabel),
-      ),
+      appBar: CustomAppbar(title: TranslationsKeys.tkTrackOrdersStatusServiceLabel),
       body: Obx(
         () => ApiHandler(
           apiResponse: controller.orders,

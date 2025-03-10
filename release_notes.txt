@@ -1,5 +1,6 @@
 ## Infinity App ##
-## version: 0.0.1+1 ##
+## version: 0.0.1+3 ##
 
 
-first Beta release
+4ee24ab6(implement transfer outside the bank)
+0b460d8a(implement tele bill inquiry and payment)

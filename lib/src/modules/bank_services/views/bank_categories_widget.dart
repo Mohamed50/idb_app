@@ -7,6 +7,8 @@ import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'service_icon_widget.dart';
+
 class BankCategoriesWidget extends StatelessWidget {
   const BankCategoriesWidget({super.key});
 
@@ -37,17 +39,11 @@ class _CategoryTile extends StatelessWidget {
         onTap: _toCategoryPage,
         child: Column(
           children: [
-            CustomCard(
-              color: ColorManager.darkBackgroundColor,
-              child: CustomCard(
-                color: Colors.white,
-                child: Image.asset(categoryModel.iconPath, width: 40, height: 40),
-              ),
-            ),
+            ServiceIconWidget(iconPath: categoryModel.iconPath),
             SizedBox(height: 4.0),
             CustomText.title(
               categoryModel.name,
-              fontSize: 12.0,
+              fontSize: 18.0,
             ),
           ],
         ),

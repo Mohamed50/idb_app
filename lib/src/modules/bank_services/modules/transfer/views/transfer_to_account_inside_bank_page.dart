@@ -54,12 +54,12 @@ class _InsideBankForm extends GetView<TransferViewModel> {
             onSaved: controller.onToAccountNumberChanged,
             validator: InputsValidator.generalValidator,
           ),
-          SizedBox(height: verticalSpacing),
-          AccountTypeDropDown(
-            label: TranslationsKeys.tkToAccountTypeLabel,
-            onSaved: controller.onToAccountTypeChanged,
-            validator: (v) => InputsValidator.generalValidator(v?.toString()),
-          ),
+          // SizedBox(height: verticalSpacing),
+          // AccountTypeDropDown(
+          //   label: TranslationsKeys.tkToAccountTypeLabel,
+          //   onSaved: controller.onToAccountTypeChanged,
+          //   validator: (v) => InputsValidator.generalValidator(v?.toString()),
+          // ),
           SizedBox(height: verticalSpacing),
           CustomFormField(
             label: TranslationsKeys.tkPhoneLabel,
@@ -72,6 +72,7 @@ class _InsideBankForm extends GetView<TransferViewModel> {
             onSaved: controller.onAmountChanged,
             validator: InputsValidator.generalValidator,
             keyboardType: TextInputType.number,
+            inputFormatters: [AmountFormatter()],
           ),
           SizedBox(height: verticalSpacing),
           CustomFormField(

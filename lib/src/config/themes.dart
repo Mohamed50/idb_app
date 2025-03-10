@@ -16,6 +16,9 @@ final ThemeData theme = ThemeData(
   ),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.light,
+    iconTheme: IconThemeData(
+      color: Colors.white
+    )
   ),
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: ColorManager.primarySwatch,

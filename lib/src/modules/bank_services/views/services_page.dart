@@ -15,7 +15,7 @@ class BankServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.lightBackgroundColor,
-      appBar: CustomAppbar(title: TranslationsKeys.tkServicesLabel,),
+      appBar: CustomAppbar(title: TranslationsKeys.tkServicesLabel),
       body: GetX<BankServicesViewModel>(
         builder: (controller) => ListView.separated(
           shrinkWrap: true,

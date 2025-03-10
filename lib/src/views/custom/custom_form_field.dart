@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/src/config/config.dart';
 import '/src/utils/screen_utils.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
+
 
 class CustomFormField extends StatelessWidget {
   final VoidCallback? onTap;
@@ -23,6 +26,7 @@ class CustomFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final bool enabled;
+  final List<TextInputFormatter> inputFormatters;
 
   const CustomFormField({
     super.key,
@@ -45,6 +49,7 @@ class CustomFormField extends StatelessWidget {
     this.textInputAction,
     this.enabled = true,
     this.onTap,
+    this.inputFormatters = const [],
   });
 
   @override
@@ -62,13 +67,14 @@ class CustomFormField extends StatelessWidget {
       controller: controller,
       onTap: onTap,
       enabled: enabled,
-      onSaved: onSaved,
-      onChanged: onChanged,
+      onSaved: (v) => onSaved != null? onSaved!(v?.replaceAll(',', '')) : (){},
+      onChanged: (v) => onChanged != null? onChanged!(v.replaceAll(',', '')) : (){},
       validator: validator,
       maxLines: maxLines,
       style: textStyle,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
+      inputFormatters: inputFormatters,
       decoration: decoration ??
           InputDecoration(
             filled: true,
@@ -183,6 +189,28 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
             hintStyle: hintStyle,
             errorMaxLines: 2,
           ),
+    );
+  }
+}
+
+
+/// **Formatter to add comma separators for thousands**
+class AmountFormatter extends TextInputFormatter {
+  final NumberFormat _formatter = NumberFormat("#,###");
+
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    // Remove all commas before formatting
+    String cleanText = newValue.text.replaceAll(',', '');
+
+    // Convert to integer and format with commas
+    int? number = int.tryParse(cleanText);
+    String newText = number != null ? _formatter.format(number) : "";
+
+    // Maintain the cursor position
+    return TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(offset: newText.length),
     );
   }
 }

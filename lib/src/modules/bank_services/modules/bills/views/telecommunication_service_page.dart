@@ -22,14 +22,15 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: CustomText(TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel),
+          backgroundColor: ColorManager.primaryColor,
+          title: CustomText.title(TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel, color: ColorManager.onButtonColor,),
           bottom: TabBar(
             onTap: Get.find<TeleBillsViewModel>().onTypeChanged,
-            labelColor: ColorManager.titleColor,
-            labelStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 16.0),
-            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.0),
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: ColorManager.primaryColor,
+            labelColor: ColorManager.onButtonColor,
+            labelStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 20.0),
+            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.0, color: Colors.grey[200]),
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorColor: ColorManager.onButtonColor,
             // indicator: BoxDecoration(color: ColorManager.primaryColor.withValues(alpha: 0.7), borderRadius: BorderRadius.circular(12.0)),
             tabs: [
               Tab(
@@ -69,6 +70,7 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
                     onSaved: controller.onAmountChanged,
                     validator: InputsValidator.generalValidator,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [AmountFormatter()],
                   ),
                 ),
               ),

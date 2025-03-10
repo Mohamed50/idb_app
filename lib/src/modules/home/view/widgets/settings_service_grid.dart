@@ -1,4 +1,5 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/bank_services/views/service_icon_widget.dart';
 import 'package:az_banking_app/src/modules/home/actions/settings_actions.dart';
 import 'package:az_banking_app/src/modules/locale/controllers/localization_view_model.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
@@ -91,17 +92,11 @@ class SettingsItem extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          CustomCard(
-            color: ColorManager.darkBackgroundColor,
-            child: CustomCard(
-              color: Colors.white,
-              child: Image.asset(iconPath, width: 40, height: 40),
-            ),
-          ),
+          ServiceIconWidget(iconPath: iconPath),
           SizedBox(height: 4.0),
           CustomText.title(
             label,
-            fontSize: 12.0,
+            fontSize: 14.0,
           ),
         ],
       ),

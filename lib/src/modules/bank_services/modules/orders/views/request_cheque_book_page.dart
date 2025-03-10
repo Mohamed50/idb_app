@@ -18,9 +18,7 @@ class RequestChequeBookPage extends GetView<OrderViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: CustomText(TranslationsKeys.tkRequestChequeBookServiceLabel),
-      ),
+      appBar: CustomAppbar(title: TranslationsKeys.tkRequestChequeBookServiceLabel),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -80,5 +78,3 @@ class _FormWidget extends GetView<OrderViewModel> {
     );
   }
 }
-
-

@@ -2,7 +2,7 @@ import '../keys.dart';
 
 const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.appName: 'إنفينيتي',
-  TranslationsKeys.tkApiError: 'خطأ في واجهة برمجة التطبيقات',
+  TranslationsKeys.tkApiError: 'خطأ',
   TranslationsKeys.tkNetworkError: 'خطأ في الشبكة',
   TranslationsKeys.tkFetchingError: 'خطأ في جلب البيانات',
   TranslationsKeys.tkError: 'خطأ',
@@ -92,8 +92,8 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkTransferOutsideBankServicesLabel: 'خارج البنك',
   TranslationsKeys.tkTransferInsideBankLabel: 'داخل البنك',
   TranslationsKeys.tkTransferBetweenMyAccountsLabel: 'بين حساباتي',
-  TranslationsKeys.tkTransferWithQRLabel: 'رمز الاستجابة السريعة',
-  TranslationsKeys.tkScanQrCodeLabel: 'مسح رمز الاستجابة السريعة',
+  TranslationsKeys.tkTransferWithQRLabel: 'رمز QR',
+  TranslationsKeys.tkScanQrCodeLabel: 'مسح رمز QR',
   TranslationsKeys.tkFromAccountLabel: 'من الحساب',
   TranslationsKeys.tkToAccountLabel: 'إلى الحساب',
   TranslationsKeys.tkToAccountBBANLabel: 'إلى الحساب (BBAN)',
@@ -114,6 +114,7 @@ const Map<String, String> arabicTranslationsMap = {
   // 📑 خدمات البنك - كشف الحساب
   TranslationsKeys.tkStatementServiceLabel: 'كشف الحساب',
   TranslationsKeys.tkCancelLabel: 'إلغاء',
+  TranslationsKeys.tkCloseLabel: 'اغلاق',
   TranslationsKeys.tkSelectDateLabel: 'اختر التاريخ',
   TranslationsKeys.tkDateLabel: 'التاريخ',
   TranslationsKeys.tkFromLabel: 'من',
@@ -129,8 +130,8 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkBillPaymentServicesLabel: 'دفع الفواتير',
   TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel: 'الاتصالات',
   TranslationsKeys.tkTopUpLabel: 'شحن رصيد',
-  TranslationsKeys.tkBillInquiryLabel: 'كشف فااتور',
-  TranslationsKeys.tkBillPaymentLabel: 'دفع فاتور',
+  TranslationsKeys.tkBillInquiryLabel: 'كشف فااتورة',
+  TranslationsKeys.tkBillPaymentLabel: 'دفع فاتورة',
   TranslationsKeys.tkBillPaymentZainServicesLabel: 'دفع فاتورة زين',
   TranslationsKeys.tkBillPaymentSudaniServicesLabel: 'دفع فاتورة سوداني',
   TranslationsKeys.tkBillPaymentMtnServicesLabel: 'دفع فاتورة MTN',
@@ -193,5 +194,6 @@ const Map<String, String> arabicTranslationsMap = {
   "Successful": "تمت العملية بنجاح",
   "Biller_ID": "معرف الفاتورة",
   "Currency_Code": "رمز العملة",
+  "Customer_Name": "اسم المستلم",
 };
 

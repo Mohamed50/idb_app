@@ -41,6 +41,7 @@ class TransferBetweenMyOwnAccountsPage extends GetView<TransferViewModel> {
               onSaved: controller.onAmountChanged,
               validator: InputsValidator.generalValidator,
               keyboardType: TextInputType.number,
+              inputFormatters: [AmountFormatter()],
             ),
             SizedBox(height: verticalSpacing),
             CustomFormField(

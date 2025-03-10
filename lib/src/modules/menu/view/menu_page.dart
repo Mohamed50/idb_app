@@ -53,9 +53,9 @@ class MenuPage extends GetView<MenuViewModel> {
           rightCornerRadius: 12.0,
           leftCornerRadius: 12.0,
           gapWidth: 24,
-          backgroundColor: ColorManager.lightBackgroundColor,
-          activeColor: ColorManager.primaryColor,
-          inactiveColor: ColorManager.secondaryColor.withValues(alpha: 0.3),
+          backgroundColor: ColorManager.primaryColor,
+          activeColor: ColorManager.onButtonColor,
+          inactiveColor: ColorManager.onButtonColor.withValues(alpha: 0.5),
           onTap: controller.onIndexChanges,
           //other params
         ),
