@@ -39,7 +39,7 @@ class _OutsideBankForm extends GetView<TransferViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
-    BeneficiaryModel? beneficiaryModel = Get.arguments['beneficiary'];
+    BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
     return Form(
       key: _formKey,
       child: ListView(
@@ -55,22 +55,6 @@ class _OutsideBankForm extends GetView<TransferViewModel> {
             label: TranslationsKeys.tkToAccountBBANLabel,
             onSaved: controller.onToAccountBBANChanged,
             validator: InputsValidator.generalValidator,
-          ),
-
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: TranslationsKeys.tkAmountLabel,
-            onSaved: controller.onAmountChanged,
-            validator: InputsValidator.generalValidator,
-            keyboardType: TextInputType.number,
-            inputFormatters: [AmountFormatter()],
-          ),
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: TranslationsKeys.tkCommentsLabel,
-            onSaved: controller.onCommentChanged,
-            validator: InputsValidator.generalValidator,
-            maxLines: 3,
           ),
           SizedBox(height: 64.0),
           CustomButton(

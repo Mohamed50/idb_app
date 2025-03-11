@@ -40,7 +40,7 @@ class _InsideBankForm extends GetView<TransferViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
-    BeneficiaryModel? beneficiaryModel = Get.arguments['beneficiary'];
+    BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
     return Form(
       key: _formKey,
       child: ListView(
@@ -63,27 +63,27 @@ class _InsideBankForm extends GetView<TransferViewModel> {
           //   onSaved: controller.onToAccountTypeChanged,
           //   validator: (v) => InputsValidator.generalValidator(v?.toString()),
           // ),
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: TranslationsKeys.tkPhoneLabel,
-            onSaved: controller.onPhoneChanged,
-            validator: InputsValidator.phoneValidator,
-          ),
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: TranslationsKeys.tkAmountLabel,
-            onSaved: controller.onAmountChanged,
-            validator: InputsValidator.generalValidator,
-            keyboardType: TextInputType.number,
-            inputFormatters: [AmountFormatter()],
-          ),
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: TranslationsKeys.tkCommentsLabel,
-            onSaved: controller.onCommentChanged,
-            validator: InputsValidator.generalValidator,
-            maxLines: 3,
-          ),
+          // SizedBox(height: verticalSpacing),
+          // CustomFormField(
+          //   label: TranslationsKeys.tkPhoneLabel,
+          //   onSaved: controller.onPhoneChanged,
+          //   validator: InputsValidator.phoneValidator,
+          // ),
+          // SizedBox(height: verticalSpacing),
+          // CustomFormField(
+          //   label: TranslationsKeys.tkAmountLabel,
+          //   onSaved: controller.onAmountChanged,
+          //   validator: InputsValidator.generalValidator,
+          //   keyboardType: TextInputType.number,
+          //   inputFormatters: [AmountFormatter()],
+          // ),
+          // SizedBox(height: verticalSpacing),
+          // CustomFormField(
+          //   label: TranslationsKeys.tkCommentsLabel,
+          //   onSaved: controller.onCommentChanged,
+          //   validator: InputsValidator.generalValidator,
+          //   maxLines: 3,
+          // ),
           SizedBox(height: 64.0),
           CustomButton(
             text: TranslationsKeys.tkConfirmBtn,

@@ -5,6 +5,7 @@ import 'package:az_banking_app/src/modules/bank_services/modules/bills/controlle
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/bill_info_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_service_type.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/widgets/tele_provider_picker.dart';
+import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
+    BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -55,6 +57,7 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
               ),
               SizedBox(height: verticalSpacing),
               CustomFormField(
+                initialValue: beneficiaryModel?.number,
                 label: TranslationsKeys.tkPhoneLabel,
                 onSaved: controller.onPhoneChanged,
                 validator: InputsValidator.phoneValidator,

@@ -63,7 +63,7 @@ class _FormWidget extends GetView<BillsViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
-    BeneficiaryModel? beneficiaryModel = Get.arguments['beneficiary'];
+    BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
     return Column(
       children: [
         SizedBox(height: verticalSpacing * 2),
