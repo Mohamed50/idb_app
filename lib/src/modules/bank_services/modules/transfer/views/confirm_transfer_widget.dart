@@ -1,4 +1,5 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_list.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
@@ -18,13 +19,13 @@ class ConfirmTransferWidget extends GetView<TransferViewModel> {
       child: ListView(
         padding: EdgeInsets.all(24.0),
         children: [
-          CustomText.title(
-            TranslationsKeys.tkFromAccountLabel,
-            fontSize: 14.0,
-          ),
-          SizedBox(height: 8.0),
-          AccountItemTile(accountModel: controller.fromAccount!),
-          SizedBox(height: 24.0),
+          // CustomText.title(
+          //   TranslationsKeys.tkFromAccountLabel,
+          //   fontSize: 14.0,
+          // ),
+          // SizedBox(height: 8.0),
+          // AccountItemTile(accountModel: controller.fromAccount!),
+          // SizedBox(height: 24.0),
           CustomText.title(
             TranslationsKeys.tkToAccountLabel,
             fontSize: 14.0,
@@ -33,6 +34,11 @@ class ConfirmTransferWidget extends GetView<TransferViewModel> {
           AccountItemTile(
             accountModel: controller.toAccount!,
             withName: true,
+          ),
+          SizedBox(height: 24.0),
+          AccountsDropDown(
+            onSaved: controller.onFromAccountChanged,
+            validator: (v) => InputsValidator.generalValidator(v?.toString()),
           ),
           SizedBox(height: 24.0),
           CustomFormField(

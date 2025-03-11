@@ -46,11 +46,11 @@ class _InsideBankForm extends GetView<TransferViewModel> {
       child: ListView(
         padding: EdgeInsets.all(24.0),
         children: [
-          AccountsDropDown(
-            onSaved: controller.onFromAccountChanged,
-            validator: (v) => InputsValidator.generalValidator(v?.toString()),
-          ),
-          SizedBox(height: verticalSpacing),
+          // AccountsDropDown(
+          //   onSaved: controller.onFromAccountChanged,
+          //   validator: (v) => InputsValidator.generalValidator(v?.toString()),
+          // ),
+          // SizedBox(height: verticalSpacing),
           CustomFormField(
             initialValue: beneficiaryModel?.number,
             label: TranslationsKeys.tkToAccountLabel,
