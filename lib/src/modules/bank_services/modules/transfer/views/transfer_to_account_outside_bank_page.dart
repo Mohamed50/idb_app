@@ -2,6 +2,7 @@ import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
+import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class _OutsideBankForm extends GetView<TransferViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
+    BeneficiaryModel? beneficiaryModel = Get.arguments['beneficiary'];
     return Form(
       key: _formKey,
       child: ListView(
@@ -49,6 +51,7 @@ class _OutsideBankForm extends GetView<TransferViewModel> {
           ),
           SizedBox(height: verticalSpacing),
           CustomFormField(
+            initialValue: beneficiaryModel?.number,
             label: TranslationsKeys.tkToAccountBBANLabel,
             onSaved: controller.onToAccountBBANChanged,
             validator: InputsValidator.generalValidator,

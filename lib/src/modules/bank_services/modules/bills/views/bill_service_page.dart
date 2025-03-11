@@ -3,6 +3,7 @@ import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dar
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/actions/bill_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/bill_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
+import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,7 @@ class _FormWidget extends GetView<BillsViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
+    BeneficiaryModel? beneficiaryModel = Get.arguments['beneficiary'];
     return Column(
       children: [
         SizedBox(height: verticalSpacing * 2),
@@ -71,9 +73,10 @@ class _FormWidget extends GetView<BillsViewModel> {
         ),
         SizedBox(height: verticalSpacing),
         CustomFormField(
+          initialValue: beneficiaryModel?.number,
           label: ServicesConfiguration.getServiceMainFiledLabel(billerId),
           onSaved: controller.onBillNumberChanged,
-          validator: InputsValidator.phoneValidator,
+          validator: InputsValidator.generalValidator,
         ),
         SizedBox(height: verticalSpacing),
         CustomVisible(

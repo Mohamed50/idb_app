@@ -4,9 +4,12 @@ import 'package:az_banking_app/src/modules/accounts/data/models/account_model.da
 import 'package:az_banking_app/src/modules/accounts/views/accounts_list.dart';
 import 'package:az_banking_app/src/modules/bank_services/actions/bank_service_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
+import 'package:az_banking_app/src/modules/beneficiary/actions/beneficiary_actions.dart';
+import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/views/custom/custom_button.dart';
 import 'package:az_banking_app/src/views/custom/custom_container.dart';
 import 'package:az_banking_app/src/views/custom/custom_text.dart';
+import 'package:az_banking_app/src/views/custom/custom_visible.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -20,8 +23,11 @@ class ResponsePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> response = Get.arguments['response'] ?? Get.arguments;
-    final AccountModel? toAccount = Get.arguments['to_account'];
     final children = ServicesConfiguration.getServiceResponseItems(response);
+    final responseInJson = ServicesConfiguration.getServiceResponse(response);
+    final AccountModel? toAccount = Get.arguments['to_account'];
+    final BeneficiaryType? beneficiaryType = Get.arguments['beneficiary_type'];
+    final Map<String, dynamic> info = getInfoMap(beneficiaryType, toAccount, responseInJson);
     return Scaffold(
       backgroundColor: ColorManager.lightBackgroundColor,
       body: SafeArea(
@@ -69,12 +75,12 @@ class ResponsePage extends StatelessWidget {
                         ),
                         toAccount != null
                             ? Padding(
-                          padding: const EdgeInsets.only(top: 12.0),
-                          child: AccountItemTile(
-                            accountModel: toAccount,
-                            withName: true,
-                          ),
-                        )
+                                padding: const EdgeInsets.only(top: 12.0),
+                                child: AccountItemTile(
+                                  accountModel: toAccount,
+                                  withName: true,
+                                ),
+                              )
                             : Container()
                       ],
                     ),
@@ -104,6 +110,10 @@ class ResponsePage extends StatelessWidget {
                 ),
                 SizedBox(height: 32),
                 CustomButton.muted(text: TranslationsKeys.tkShareLabel, onPressed: _share),
+                CustomVisible(show: beneficiaryType != null, child: SizedBox(height: 12)),
+                CustomVisible(
+                    show: beneficiaryType != null,
+                    child: CustomButton(text: TranslationsKeys.tkAddBeneficiaryLabel, onPressed: () => _addBeneficiary(context, info, beneficiaryType!))),
                 SizedBox(height: 12),
                 CustomButton(text: TranslationsKeys.tkDoneLabel, onPressed: _done),
               ],
@@ -126,6 +136,40 @@ class ResponsePage extends StatelessWidget {
   Future<void> _screenshot() async {
     Uint8List? image = await screenshotController.capture();
     BankServicesActions.instance.screenshot(image);
+  }
+
+  void _addBeneficiary(BuildContext context, Map info, BeneficiaryType beneficiaryType) {
+    BeneficiaryModel beneficiaryModel;
+    switch(beneficiaryType){
+      case BeneficiaryType.electricity:
+        beneficiaryModel = BeneficiaryModel(info['number'], info['name'], BeneficiaryType.electricity);
+        break;
+      case BeneficiaryType.telecommunication:
+        beneficiaryModel = BeneficiaryModel(info['number'], info['name'], BeneficiaryType.telecommunication);
+        break;
+      case BeneficiaryType.inside:
+        beneficiaryModel = BeneficiaryModel(info['Account_No'], info['Custom_Name'], BeneficiaryType.inside);
+        break;
+      case BeneficiaryType.outside:
+        beneficiaryModel = BeneficiaryModel(info['IBAN'], info['Custom_Name'], BeneficiaryType.outside);
+        break;
+    }
+    BeneficiaryActions.instance.addBeneficiary(context, beneficiaryModel);
+  }
+
+  Map<String, dynamic> getInfoMap(BeneficiaryType? type, AccountModel? accountModel, Map<String, dynamic> response) {
+    switch(type){
+      case BeneficiaryType.electricity:
+        return {'name':response['اسم العميل'] ?? response['Customer Name'], 'number': response['رقم العداد'] ?? response['tkMeterNumberLabel']};
+      case BeneficiaryType.telecommunication:
+        return {};
+      case BeneficiaryType.inside:
+        return accountModel!.toJson();
+      case BeneficiaryType.outside:
+        return accountModel!.toJson();
+      default:
+        return {};
+    }
   }
 }
 

@@ -88,6 +88,10 @@ const Map<String, String> arabicTranslationsMap = {
 
   /// خدمات البنك - التحويلات المالية
   TranslationsKeys.tkServicesLabel: 'الخدمات',
+  TranslationsKeys.tkBeneficiariesLabel: 'المستفيدين',
+  TranslationsKeys.tkAddBeneficiaryLabel: 'اضافة الى المستفيدين',
+  TranslationsKeys.tkAddBeneficiarySuccessMsg: 'تم اضافة المستفيد بنجاح',
+  TranslationsKeys.tkNoBeneficiariesLabel: 'ليس لديك مستفيدين حاليا',
   TranslationsKeys.tkTransferServicesLabel: 'التحويلات',
   TranslationsKeys.tkTransferOutsideBankServicesLabel: 'خارج البنك',
   TranslationsKeys.tkTransferInsideBankLabel: 'داخل البنك',

@@ -4,6 +4,7 @@ import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dar
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/views/confirm_transfer_widget.dart';
+import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/custom_appbar.dart';
 import 'package:az_banking_app/src/views/custom/custom_button.dart';
@@ -39,6 +40,7 @@ class _InsideBankForm extends GetView<TransferViewModel> {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
+    BeneficiaryModel? beneficiaryModel = Get.arguments['beneficiary'];
     return Form(
       key: _formKey,
       child: ListView(
@@ -50,6 +52,7 @@ class _InsideBankForm extends GetView<TransferViewModel> {
           ),
           SizedBox(height: verticalSpacing),
           CustomFormField(
+            initialValue: beneficiaryModel?.number,
             label: TranslationsKeys.tkToAccountLabel,
             onSaved: controller.onToAccountNumberChanged,
             validator: InputsValidator.generalValidator,

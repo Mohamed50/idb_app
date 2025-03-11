@@ -2,6 +2,7 @@ import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/bank_services/data/model/category_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/data/model/service_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/data/services/bank_services.dart';
+import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:get/get.dart';
 
 class BankServicesViewModel extends GetxController{
@@ -27,6 +28,7 @@ class BankServicesViewModel extends GetxController{
   Future _fetchCategories() async{
     _categories.value = await _bankServicesService.fetchCategories();
     _homeCategories.value = categories.where((e) => e.name != TranslationsKeys.tkStatementServiceLabel).toList();
+    _homeCategories.add(CategoryModel(name: TranslationsKeys.tkBeneficiariesLabel, iconPath: AssetsManager.icBeneficiaryPath, route: RouteManager.beneficiaryRoute, services: []));
     final temp = <ServiceModel>[];
     for (var e in _categories) {
       temp.addAll(e.services);

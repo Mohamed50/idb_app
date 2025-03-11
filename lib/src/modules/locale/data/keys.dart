@@ -111,6 +111,10 @@ class TranslationsKeys {
 
   /// Bank Services Module - Transfer Services
   static const String tkServicesLabel = 'tkServicesLabel';
+  static const String tkBeneficiariesLabel = 'tkBeneficiariesLabel';
+  static const String tkNoBeneficiariesLabel = 'tkNoBeneficiariesLabel';
+  static const String tkAddBeneficiaryLabel = 'tkAddBeneficiaryLabel';
+  static const String tkAddBeneficiarySuccessMsg = 'tkAddBeneficiarySuccessMsg';
   static const String tkTransferServicesLabel = 'tkTransferServicesLabel';
   static const String tkTransferOutsideBankServicesLabel = 'tkTransferToDifferentBankServicesLabel';
   static const String tkTransferInsideBankLabel = 'tkTransferWithinBankLabel';

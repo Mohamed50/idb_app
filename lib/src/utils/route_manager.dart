@@ -23,6 +23,8 @@ import 'package:az_banking_app/src/modules/bank_services/modules/transfer/views/
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/views/transfer_with_qr_code_page.dart';
 import 'package:az_banking_app/src/modules/bank_services/views/category_page.dart';
 import 'package:az_banking_app/src/modules/bank_services/views/response_page.dart';
+import 'package:az_banking_app/src/modules/beneficiary/beneficiaries_bindings.dart';
+import 'package:az_banking_app/src/modules/beneficiary/views/beneficiaries_page.dart';
 import 'package:az_banking_app/src/modules/branches/views/branches_page.dart';
 import 'package:az_banking_app/src/modules/exchange_rate/exchange_bindings.dart';
 import 'package:az_banking_app/src/modules/exchange_rate/views/exchange_rates_page.dart';
@@ -74,6 +76,7 @@ class RouteManager {
   static const String branchesRoute = '/branches';
   static const String categoryRoute = '/home/category';
   static const String accountsRoute = '/home/accounts';
+  static const String beneficiaryRoute = '/home/beneficiary';
   static const String settingsRoute = '/home/settings';
   static const String changePasswordRoute = '/home/settings/change-password';
   static const String changeSecurityQuestionsRoute = '/home/settings/change-security-questions';
@@ -134,6 +137,11 @@ class RouteManager {
         GetPage(
           name: forgotPasswordRoute,
           page: () => const ForgotPasswordPage(),
+        ),
+        GetPage(
+          name: beneficiaryRoute,
+          page: () => const BeneficiariesPage(),
+          binding: BeneficiariesBindings()
         ),
 
         GetPage(

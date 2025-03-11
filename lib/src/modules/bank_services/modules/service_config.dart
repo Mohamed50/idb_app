@@ -90,6 +90,31 @@ class ServicesConfiguration {
     return children;
   }
 
+  static Map<String, dynamic> getServiceResponse(Map<String, dynamic> response) {
+    final Map<String, dynamic> info = {};
+    final billerId = response['Biller_ID'];
+    response.forEach(
+      (k, v) {
+        if (v is List) {
+          for (var e in v) {
+            info.addAll({e['Info_Lable']:e['Info_Value'].toString()});
+          }
+        } else {
+          if (k == 'Pay_Customer_Code') {
+            k = ServicesConfiguration.getServiceMainFiledLabel(billerId);
+          }
+          if (k == 'Tran_DateTime') {
+            v = Utils.getAzFormattedDateTime(v);
+          }
+          if (v != null && v.toString().isNotEmpty) {
+            info.addAll({k:v.toString()});
+          }
+        }
+      },
+    );
+    return info;
+  }
+
   static String? getServiceSecondaryFiledLabel(String billerId) {
     switch (billerId) {
       case topUpZainServiceCode:

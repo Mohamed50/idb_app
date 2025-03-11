@@ -69,7 +69,7 @@ class BankServicesActions extends ActionPresenter {
     actionHandlerWithoutLoading(() async {
       if (image != null) {
         final directory = await getApplicationDocumentsDirectory();
-        final imagePath = File('${directory!.path}/screenshot.png');
+        final imagePath = File('${directory.path}/screenshot.png');
         await imagePath.writeAsBytes(image);
         await Share.shareXFiles([XFile(imagePath.path)]);
       } else {
@@ -83,6 +83,11 @@ class BankServicesActions extends ActionPresenter {
   }
 
   void toCategoryPage(CategoryModel categoryModel) {
-    Get.toNamed(RouteManager.categoryRoute, arguments: categoryModel);
+    if(categoryModel.services.isEmpty){
+      Get.toNamed(categoryModel.route);
+    }
+    else {
+      Get.toNamed(RouteManager.categoryRoute, arguments: categoryModel);
+    }
   }
 }

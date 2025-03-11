@@ -13,6 +13,7 @@ class AssetsManager {
   /// Path for the application icon.
   static const String appIconPath = 'assets/icons/logo.png';
   static const String icMoneyPath = 'assets/icons/money.png';
+  static const String icBeneficiaryPath = 'assets/icons/beneficiary.png';
 
   // **Icons**
   /// Path for the money transfer icons.

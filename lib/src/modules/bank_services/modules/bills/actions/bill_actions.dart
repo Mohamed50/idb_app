@@ -1,9 +1,9 @@
-import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/essentials/config/action_presenter.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/bill_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/tele_bills_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_service_type.dart';
-import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
+import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,8 @@ class BillsActions extends ActionPresenter {
     actionHandler(context, () async {
       final controller = Get.find<TeleBillsViewModel>();
       final response = await controller.billInquiry();
-      final amount = response.firstWhere((e) => e.label.toLowerCase().contains('amount') || e.label.contains('المبلغ الكلي')).value;
+      final amount =
+          response.firstWhere((e) => e.label.toLowerCase().contains('amount') || e.label.contains('المبلغ الكلي')).value;
       controller.onBillInformationChanged(response);
       controller.onAmountChanged(amount);
     });
@@ -29,7 +30,7 @@ class BillsActions extends ActionPresenter {
     actionHandler(context, () async {
       final controller = Get.find<TeleBillsViewModel>();
       final response = await controller.billPayment();
-      _toResponsePage(response);
+      _toResponsePage(response, BeneficiaryType.telecommunication);
     });
   }
 
@@ -37,7 +38,7 @@ class BillsActions extends ActionPresenter {
     actionHandler(context, () async {
       final controller = Get.find<TeleBillsViewModel>();
       final response = await controller.topUp();
-      _toResponsePage(response);
+      _toResponsePage(response, BeneficiaryType.telecommunication);
     });
   }
 
@@ -73,11 +74,14 @@ class BillsActions extends ActionPresenter {
     actionHandler(context, () async {
       final controller = Get.find<BillsViewModel>();
       final response = await controller.billPayment(billerId);
-      _toResponsePage(response);
+      _toResponsePage(response, billerId == ServicesConfiguration.topUpElectricityServiceCode ? BeneficiaryType.electricity : null);
     });
   }
 
-  void _toResponsePage(Map<String, dynamic> response) {
-    Get.toNamed(RouteManager.responseRoute, arguments: response);
+  void _toResponsePage(Map<String, dynamic> response, BeneficiaryType? beneficiaryType) {
+    Get.toNamed(RouteManager.responseRoute, arguments: {
+      'response': response,
+      'beneficiary_type': beneficiaryType,
+    });
   }
 }

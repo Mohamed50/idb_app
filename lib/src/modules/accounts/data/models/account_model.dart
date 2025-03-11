@@ -64,6 +64,7 @@ class AccountModel {
     "Currency_Code": currencyCode,
     "Is_Allow_Others_Tran": isAllowOthersTran,
     "Branch_Code": branchCode,
+    "Custom_Name": name,
   };
 
   String toCopiedContent() {

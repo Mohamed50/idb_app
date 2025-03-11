@@ -90,6 +90,10 @@ const Map<String, String> englishTranslationsMap = {
 
 // 🏦 Bank Services Module - Transfer Services
   TranslationsKeys.tkServicesLabel: 'Services',
+  TranslationsKeys.tkBeneficiariesLabel: 'Beneficiaries',
+  TranslationsKeys.tkAddBeneficiaryLabel: 'Add To Beneficiaries',
+  TranslationsKeys.tkAddBeneficiarySuccessMsg: 'Beneficiary added successfully',
+  TranslationsKeys.tkNoBeneficiariesLabel: 'You don\'t have beneficiaries yet',
   TranslationsKeys.tkTransferServicesLabel: 'Transfer',
   TranslationsKeys.tkTransferOutsideBankServicesLabel: 'Outside Bank',
   TranslationsKeys.tkTransferInsideBankLabel: 'Inside Bank',

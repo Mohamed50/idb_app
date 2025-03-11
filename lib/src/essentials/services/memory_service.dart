@@ -59,6 +59,13 @@ class MemoryService extends GetConnect {
   /// Gets the refresh token from local storage.
   String? get refreshToken => _storage.read("refreshToken");
 
+  /// Sets the access token in local storage.
+  set beneficiaries(String? value) => _storage.write("beneficiaries", value);
+
+  /// Gets the refresh token from local storage.
+  String? get beneficiaries => _storage.read("beneficiaries");
+
+
   /// Sets the refresh token in local storage.
   set refreshToken(String? value) => _storage.write("refreshToken", value);
 }

@@ -127,6 +127,7 @@ class ActionPresenter {
       backgroundColor: ColorManager.lightBackgroundColor,
       snackStyle: SnackStyle.FLOATING,
       colorText: ColorManager.titleColor,
+      duration: Duration(seconds: 6),
     );
   }
 
@@ -141,14 +142,15 @@ class ActionPresenter {
       snackPosition: SnackPosition.TOP,
       icon: const Icon(
         Icons.check,
-        color: ColorManager.positiveColor,
+        color: ColorManager.onButtonColor,
         size: 32.0,
       ),
       borderRadius: 24.0,
       shouldIconPulse: true,
-      backgroundColor: ColorManager.lightBackgroundColor,
+      backgroundColor: ColorManager.primaryColor,
       snackStyle: SnackStyle.FLOATING,
-      colorText: ColorManager.titleColor,
+      colorText: ColorManager.onButtonColor,
+      duration: Duration(seconds: 6),
     );
   }
 
@@ -199,7 +201,7 @@ class ActionPresenter {
   /// Displays a error dialog using GetX.
   ///
   /// `message`: The confirmation message to display.
-  Future<bool> showErrorDialog(BuildContext context, String title, String message) async {
+  Future showErrorDialog(BuildContext context, String title, String message) async {
     return await Get.dialog(
       ErrorDialog(text: message,),
     );
