@@ -17,11 +17,11 @@ class BankServiceTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ServiceIconWidget(iconPath: serviceModel.iconPath),
-          FittedBox(
-            child: CustomText.title(
-              serviceModel.name,
-              fontSize: 14.0,
-            ),
+          CustomText.title(
+            serviceModel.name,
+            fontSize: 14.0,
+            textAlign: TextAlign.center,
+            maxLines: 1,
           ),
         ],
       ),

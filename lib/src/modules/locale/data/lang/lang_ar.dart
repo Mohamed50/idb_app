@@ -141,7 +141,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkBillPaymentMtnServicesLabel: 'دفع فاتورة MTN',
   TranslationsKeys.tkBillPaymentElectricityServicesLabel: 'الكهرباء',
   TranslationsKeys.tkBillPaymentJamarikServicesLabel: 'الجمارك',
-  TranslationsKeys.tkBillPaymentE15ServicesLabel: 'الخدمات الحكومية',
+  TranslationsKeys.tkBillPaymentE15ServicesLabel: 'الحكومية',
   TranslationsKeys.tkBillPaymentPortsServicesLabel: 'الموانئ',
   TranslationsKeys.tkMeterNumberLabel: 'رقم العداد',
   TranslationsKeys.tkE15ReceiptNumberLabel: 'رقم إيصال E15',

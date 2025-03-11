@@ -19,7 +19,7 @@ class BankCategoriesWidget extends StatelessWidget {
         height: ScreenUtils.getScreenHeight(context, 0.11),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: controller.homeCategories.map((e) => _CategoryTile(categoryModel: e)).toList(),
+          children: List.generate(4,(index) => _CategoryTile(categoryModel: controller.homeCategories[index])).toList(),
         ),
       ),
     );
@@ -43,7 +43,7 @@ class _CategoryTile extends StatelessWidget {
             SizedBox(height: 4.0),
             CustomText.title(
               categoryModel.name,
-              fontSize: 18.0,
+              fontSize: 16.0,
             ),
           ],
         ),

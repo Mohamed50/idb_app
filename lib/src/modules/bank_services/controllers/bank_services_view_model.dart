@@ -28,7 +28,7 @@ class BankServicesViewModel extends GetxController{
   Future _fetchCategories() async{
     _categories.value = await _bankServicesService.fetchCategories();
     _homeCategories.value = categories.where((e) => e.name != TranslationsKeys.tkStatementServiceLabel).toList();
-    _homeCategories.add(CategoryModel(name: TranslationsKeys.tkBeneficiariesLabel, iconPath: AssetsManager.icBeneficiaryPath, route: RouteManager.beneficiaryRoute, services: []));
+    _homeCategories.insert(0,CategoryModel(name: TranslationsKeys.tkBeneficiariesLabel, iconPath: AssetsManager.icBeneficiaryPath, route: RouteManager.beneficiaryRoute, services: []));
     final temp = <ServiceModel>[];
     for (var e in _categories) {
       temp.addAll(e.services);
