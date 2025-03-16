@@ -14,6 +14,7 @@ class ForgotPasswordPage extends GetWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.darkBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
           height: ScreenUtils.getScreenHeight(context) - 64,
@@ -23,32 +24,39 @@ class ForgotPasswordPage extends GetWidget<AuthViewModel> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Spacer(),
                 Image.asset(
                   AssetsManager.logoPath,
-                  height: MediaQuery.of(context).size.height / 3,
+                  height: MediaQuery.of(context).size.height / 4,
                   fit: BoxFit.contain,
                 ),
-                const CustomText(TranslationsKeys.tkPasswordResetWelcomeMsg),
-                SizedBox(height: 32.0),
-                CustomFormField(
-                  label: TranslationsKeys.tkUsernameLabel,
-                  onSaved: (value) => controller.username = value,
-                  validator: InputsValidator.usernameValidator,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.next,
-                  maxLines: 1,
-                ),
-                SizedBox(height: 24.0),
-                CustomButton(
-                  text: TranslationsKeys.tkForgetPasswordLabel,
-                  onPressed: _forgotPassword,
-                ),
                 Spacer(),
-                TextDivider(TranslationsKeys.tkOrLabel, height: 64.0,),
-                Spacer(),
-                CustomButton.negative(
-                  text: TranslationsKeys.tkContactCustomerServiceBtn,
-                  onPressed: _toCustomService,
+                CustomCard(
+                  padding: EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      const CustomText(TranslationsKeys.tkPasswordResetWelcomeMsg),
+                      SizedBox(height: 32.0),
+                      CustomFormField(
+                        label: TranslationsKeys.tkUsernameLabel,
+                        onSaved: (value) => controller.username = value,
+                        validator: InputsValidator.usernameValidator,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        maxLines: 1,
+                      ),
+                      SizedBox(height: 24.0),
+                      CustomButton(
+                        text: TranslationsKeys.tkForgetPasswordLabel,
+                        onPressed: _forgotPassword,
+                      ),
+                      TextDivider(TranslationsKeys.tkOrLabel, height: 64.0,),
+                      CustomButton.negative(
+                        text: TranslationsKeys.tkContactCustomerServiceBtn,
+                        onPressed: _toCustomService,
+                      ),
+                    ],
+                  ),
                 ),
                 Spacer(),
                 TextButton(
@@ -58,6 +66,7 @@ class ForgotPasswordPage extends GetWidget<AuthViewModel> {
                     fontSize: 14.0,
                   ),
                 ),
+                Spacer(),
               ],
             ),
           ),

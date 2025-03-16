@@ -16,6 +16,7 @@ class LoginPage extends GetWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.darkBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(24.0),
@@ -25,45 +26,54 @@ class LoginPage extends GetWidget<AuthViewModel> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Spacer(),
                 Image.asset(
                   AssetsManager.logoPath,
-                  height: MediaQuery.of(context).size.height / 3,
+                  height: MediaQuery.of(context).size.height / 4,
                   fit: BoxFit.contain,
                 ),
-                const CustomText(TranslationsKeys.tkLoginWelcomeMsg),
                 Spacer(),
-                CustomFormField(
-                  label: TranslationsKeys.tkUsernameLabel,
-                  onSaved: (value) => controller.username = value,
-                  validator: InputsValidator.usernameValidator,
-                  maxLines: 1,
-                  keyboardType: TextInputType.phone,
-                  textInputAction: TextInputAction.next,
-                ),
-                SizedBox(height: 12.0),
-                PasswordFormField(
-                  label: TranslationsKeys.tkPasswordLabel,
-                  onSaved: (value) => controller.password = value,
-                  validator: InputsValidator.passwordRequiredOnlyValidator,
-                  textInputAction: TextInputAction.go,
-                ),
-                TextButton(
-                  onPressed: _toPasswordPage,
-                  child: const CustomText.underline(
-                    TranslationsKeys.tkForgetPasswordLabel,
+                CustomCard(
+                  padding: EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      const CustomText(TranslationsKeys.tkLoginWelcomeMsg),
+                      SizedBox(height: 32.0),
+                      CustomFormField(
+                        label: TranslationsKeys.tkUsernameLabel,
+                        onSaved: (value) => controller.username = value,
+                        validator: InputsValidator.usernameValidator,
+                        maxLines: 1,
+                        keyboardType: TextInputType.phone,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(height: 12.0),
+                      PasswordFormField(
+                        label: TranslationsKeys.tkPasswordLabel,
+                        onSaved: (value) => controller.password = value,
+                        validator: InputsValidator.passwordRequiredOnlyValidator,
+                        textInputAction: TextInputAction.go,
+                      ),
+                      TextButton(
+                        onPressed: _toPasswordPage,
+                        child: const CustomText.underline(
+                          TranslationsKeys.tkForgetPasswordLabel,
+                        ),
+                      ),
+                      SizedBox(height: 32.0),
+                      CustomButton(text: TranslationsKeys.tkSignInBtn, onPressed: () => _login(context)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const CustomText(TranslationsKeys.tkNoAccountLabel),
+                          TextButton(
+                            onPressed: _toRegisterPage,
+                            child: const CustomText.underline(TranslationsKeys.tkRegisterNowLabel),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-                Spacer(),
-                CustomButton(text: TranslationsKeys.tkSignInBtn, onPressed: () => _login(context)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const CustomText(TranslationsKeys.tkNoAccountLabel),
-                    TextButton(
-                      onPressed: _toRegisterPage,
-                      child: const CustomText.underline(TranslationsKeys.tkRegisterNowLabel),
-                    ),
-                  ],
                 ),
                 Spacer(),
                 Row(

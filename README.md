@@ -1,4 +1,4 @@
-# az_banking_app
+# industrial_development_bank
 
 A new Flutter project.
 

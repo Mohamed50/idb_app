@@ -45,7 +45,7 @@ class TabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color = selected ? ColorManager.darkerColor : ColorManager.darkBackgroundColor;
+    Color color = selected ? ColorManager.primaryColor : ColorManager.darkBackgroundColor;
     Color borderColor = selected ? ColorManager.primaryColor : Colors.white;
     Color textColor = selected ? ColorManager.lightBackgroundColor : ColorManager.titleColor;
     return AnimatedContainer(

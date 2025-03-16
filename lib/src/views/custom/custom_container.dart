@@ -19,7 +19,7 @@ class CustomCard extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(8.0),
     this.margin,
-    this.color = ColorManager.darkBackgroundColor,
+    this.color = ColorManager.lightBackgroundColor,
     this.shape = BoxShape.rectangle,
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
     this.gradient,

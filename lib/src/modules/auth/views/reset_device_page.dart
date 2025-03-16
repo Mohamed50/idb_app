@@ -13,6 +13,7 @@ class ResetDevicePage extends GetWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.darkBackgroundColor,
       body: SingleChildScrollView(
         child: Container(
           height: ScreenUtils.getScreenHeight(context) - 64,
@@ -22,32 +23,41 @@ class ResetDevicePage extends GetWidget<AuthViewModel> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Spacer(),
                 Image.asset(
                   AssetsManager.logoPath,
-                  height: MediaQuery.of(context).size.height / 3,
+                  height: MediaQuery.of(context).size.height / 4,
                   fit: BoxFit.contain,
                 ),
-                CustomText(TranslationsKeys.tkResetDeviceWelcomeMsg),
-                SizedBox(height: 32.0),
-                CustomFormField(
-                  initialValue: controller.user!.phoneNo,
-                  enabled: false,
-                  label: TranslationsKeys.tkPhoneLabel,
-                  maxLines: 1,
-                ),
-                SizedBox(height: 12.0),
-                CustomFormField(
-                  label: TranslationsKeys.tkOtpLabel,
-                  onSaved: (value) => controller.otp = value,
-                  validator: InputsValidator.otpValidator,
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.done,
-                  maxLines: 1,
-                ),
-                SizedBox(height: 24.0),
-                CustomButton(
-                  text: TranslationsKeys.tkResetDeviceBtn,
-                  onPressed: () => resetDevice(context),
+                Spacer(),
+                CustomCard(
+                  padding: EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      CustomText(TranslationsKeys.tkResetDeviceWelcomeMsg),
+                      SizedBox(height: 32.0),
+                      CustomFormField(
+                        initialValue: controller.user!.phoneNo,
+                        enabled: false,
+                        label: TranslationsKeys.tkPhoneLabel,
+                        maxLines: 1,
+                      ),
+                      SizedBox(height: 12.0),
+                      CustomFormField(
+                        label: TranslationsKeys.tkOtpLabel,
+                        onSaved: (value) => controller.otp = value,
+                        validator: InputsValidator.otpValidator,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.done,
+                        maxLines: 1,
+                      ),
+                      SizedBox(height: 24.0),
+                      CustomButton(
+                        text: TranslationsKeys.tkResetDeviceBtn,
+                        onPressed: () => resetDevice(context),
+                      ),
+                    ],
+                  ),
                 ),
                 Spacer(),
                 TextButton(
@@ -57,6 +67,7 @@ class ResetDevicePage extends GetWidget<AuthViewModel> {
                     fontSize: 14.0,
                   ),
                 ),
+                Spacer(),
               ],
             ),
           ),

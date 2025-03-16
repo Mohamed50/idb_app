@@ -1,9 +1,9 @@
 import 'package:az_banking_app/src/modules/auth/controllers/forgot_password_view_model.dart';
 import 'package:az_banking_app/src/modules/auth/data/models/question_model.dart';
+import 'package:az_banking_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '/src/config/config.dart';
-import '/src/utils/validator.dart';
 import '/src/views/custom/customs.dart';
 import '/src/modules/auth/auth.dart';
 
@@ -15,25 +15,36 @@ class SecurityQuestionsPage extends GetWidget<ForgotPasswordViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorManager.darkBackgroundColor,
       body: Form(
         key: _formKey,
         child: ListView(
           padding: const EdgeInsets.all(24.0),
           children: [
+            SizedBox(height: MediaQuery.of(context).padding.top),
             Image.asset(
               AssetsManager.logoPath,
               fit: BoxFit.contain,
+              height: ScreenUtils.getScreenHeight(context) / 4,
             ),
-            Center(child: const CustomText(TranslationsKeys.tkSecurityQuestionsWelcomeMsg)),
-            Obx(
-              () => ApiHandler(
-                apiResponse: controller.securityQuestions,
-                onSuccess: _OnSuccess(questions: controller.securityQuestions.data ?? []),
+            SizedBox(height: 32.0),
+            CustomCard(
+              padding: EdgeInsets.all(24.0),
+              child: Column(
+                children: [
+                  Center(child: const CustomText(TranslationsKeys.tkSecurityQuestionsWelcomeMsg)),
+                  Obx(
+                    () => ApiHandler(
+                      apiResponse: controller.securityQuestions,
+                      onSuccess: _OnSuccess(questions: controller.securityQuestions.data ?? []),
+                    ),
+                  ),
+                  CustomButton(
+                    text: TranslationsKeys.tkConfirmBtn,
+                    onPressed: () => submitAnswers(context),
+                  ),
+                ],
               ),
-            ),
-            CustomButton(
-              text: TranslationsKeys.tkConfirmBtn,
-              onPressed: () => submitAnswers(context),
             ),
             TextButton(
               onPressed: _toLoginPage,
