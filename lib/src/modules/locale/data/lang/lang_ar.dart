@@ -85,6 +85,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkIbanLabel: 'رقم الحساب الدولي (IBAN)',
   TranslationsKeys.tkAccountCopiedSuccessMsg: 'تم نسخ تفاصيل الحساب',
   TranslationsKeys.tkInfoLabel: 'معلومات',
+  TranslationsKeys.tkMyAccountsLabel: 'حساباتي',
 
   /// خدمات البنك - التحويلات المالية
   TranslationsKeys.tkServicesLabel: 'الخدمات',

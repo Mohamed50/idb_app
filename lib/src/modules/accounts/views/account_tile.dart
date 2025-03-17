@@ -15,108 +15,120 @@ class AccountItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BankCardBackground(
-      cardDesign: CardDesign.two,
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CustomCard(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    AssetsManager.icMoneyPath,
-                    width: 32,
-                    height: 32,
-                    color: ColorManager.primaryColor,
+    return Stack(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(24.0),
+          decoration: BoxDecoration(
+            gradient: ColorManager.buttonGradient,
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  CustomCard(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      AssetsManager.icMoneyPath,
+                      width: 32,
+                      height: 32,
+                      color: ColorManager.primaryColor,
+                    ),
                   ),
-                ),
-                SizedBox(width: 8.0),
-                Expanded(
-                  child: Column(
+                  SizedBox(width: 8.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText.subtitle(
+                          TranslationsKeys.tkBalanceLabel,
+                          color: Colors.white,
+                        ),
+                        CustomText.title(
+                          '${accountModel.balance} ',
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText.subtitle(
-                        TranslationsKeys.tkBalanceLabel,
+                        TranslationsKeys.tkIbanLabel,
                         color: Colors.white,
+                        fontSize: 10,
                       ),
                       CustomText.title(
-                        '${accountModel.balance} ',
+                        accountModel.iban,
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: 14,
+                      ),
+                      CustomText.subtitle(
+                        TranslationsKeys.tkAccountNoLabel,
+                        color: Colors.white,
+                        fontSize: 10,
+                      ),
+                      CustomText.title(
+                        '${accountModel.accountNo} ',
+                        color: Colors.white,
+                        fontSize: 14,
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
+                  Spacer(),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: CustomCard(
+            borderRadius: BorderRadius.only(topRight: Radius.circular(12.0)),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText.subtitle(
-                      TranslationsKeys.tkIbanLabel,
-                      color: Colors.white,
-                      fontSize: 10,
-                    ),
-                    CustomText.title(
-                      accountModel.iban,
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-
-                    CustomText.subtitle(
-                      TranslationsKeys.tkAccountNoLabel,
-                      color: Colors.white,
-                      fontSize: 10,
-                    ),
-                    CustomText.title(
-                      '${accountModel.accountNo} ',
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ],
-                ),
-                Spacer(),
                 InkWell(
                   onTap: _toQrCodePage,
                   child: CustomCard(
-                    color: ColorManager.lightBackgroundColor.withValues(alpha: 0.2),
-                    width: 40.0,
-                    height: 40.0,
-                    padding: EdgeInsets.zero,
-                    child: Center(
-                      child: Icon(Icons.qr_code_2_rounded, color: Colors.white,size: 30.0,),
+                    color: ColorManager.primaryColor.withValues(alpha: 0.2),
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.qr_code_2_rounded,
+                      color: ColorManager.primaryColor,
+                      size: 40.0,
                     ),
                   ),
                 ),
-                SizedBox(width: 8.0),
+                SizedBox(width: 12.0),
                 InkWell(
-                  onTap: _copyAccountToClipboard,
+                  onTap: _toQrCodePage,
                   child: CustomCard(
-                    color: ColorManager.lightBackgroundColor.withValues(alpha: 0.2),
-                    width: 40.0,
-                    height: 40.0,
-                    padding: EdgeInsets.zero,
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.copy,
-                        color: Colors.white,
-                      ),
+                    color: ColorManager.primaryColor.withValues(alpha: 0.2),
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.copy,
+                      color: ColorManager.primaryColor,
+                      size: 40.0,
                     ),
                   ),
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

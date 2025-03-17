@@ -51,7 +51,7 @@ class _OnSuccess extends StatelessWidget {
           ),
         ),
         showIndicator: true,
-        aspectRatio: 1.6,
+        aspectRatio: 1.7,
         enlargeCenterPage: true,
         floatingIndicator: false,
         onPageChanged: (index, reason){

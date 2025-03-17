@@ -12,6 +12,7 @@ class ExchangeRateItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      color: ColorManager.darkBackgroundColor,
       padding: EdgeInsets.all(12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,10 +20,6 @@ class ExchangeRateItemTile extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText.subtitle(
-                TranslationsKeys.tkCurrencyLabel,
-                fontSize: 12.0,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -50,20 +47,22 @@ class ExchangeRateItemTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText.subtitle(
                     TranslationsKeys.tkBuyLabel,
-                    fontSize: 12.0,
+                    fontSize: 14.0,
                   ),
                   CustomText.title(
                     exchangeRateModel.currencyPurchRate,
                     fontSize: 14.0,
                   ),
-                  SizedBox(height: 12.0),
+                ],
+              ),
+              Column(
+                children: [
                   CustomText.subtitle(
                     TranslationsKeys.tkSellLabel,
-                    fontSize: 12.0,
+                    fontSize: 14.0,
                   ),
                   CustomText.title(
                     exchangeRateModel.currencySellRate,
@@ -76,11 +75,11 @@ class ExchangeRateItemTile extends StatelessWidget {
                 children: [
                   CustomText.subtitle(
                     TranslationsKeys.tkAverageLabel,
-                    fontSize: 12.0,
+                    fontSize: 14.0,
                   ),
                   CustomText.title(
                     exchangeRateModel.currencyPurchRate,
-                    fontSize: 24,
+                    fontSize: 14,
                   ),
                 ],
               ),

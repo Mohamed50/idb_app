@@ -9,28 +9,29 @@ class UserInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCard(
-      color: ColorManager.darkBackgroundColor,
-      padding: EdgeInsets.all(12.0),
-      child: GetBuilder<AuthViewModel>(
-        builder:(controller)=> Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomCard(child: Image.asset(AssetsManager.icUserPath, width: 40.0,)),
-                SizedBox(width: 8.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // CustomText.subtitle('Username', fontSize: 12.0,),
-                    CustomText.title('${controller.user?.customerName}'),
-                    CustomText.subtitle('${controller.user?.phoneNo}', fontSize: 12.0,),
-                  ],
-                ),
-              ],
-            ),
-          ],
+    return Container(
+      color: ColorManager.primaryColor,
+      padding: EdgeInsets.all(24.0),
+      child: SafeArea(
+        child: GetBuilder<AuthViewModel>(
+          builder:(controller)=> Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomCard(child: Image.asset(AssetsManager.icUserPath, width: 40.0,)),
+                  SizedBox(width: 8.0),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText.title('${controller.user?.customerName}', color: Colors.white,),
+                      CustomText.subtitle('${controller.user?.phoneNo}', color: Colors.white, fontSize: 12.0,),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

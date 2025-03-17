@@ -1,3 +1,4 @@
+import 'package:az_banking_app/src/config/colors.dart';
 import 'package:az_banking_app/src/modules/products/data/models/product_model.dart';
 import 'package:az_banking_app/src/views/custom/custom_container.dart';
 import 'package:az_banking_app/src/views/custom/custom_text.dart';
@@ -11,6 +12,7 @@ class ProductItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
+      color: ColorManager.darkBackgroundColor,
       padding: EdgeInsets.all(24.0),
       child: Row(
         children: [

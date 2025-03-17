@@ -9,6 +9,14 @@ class BankServicesService extends ApiService {
     await Future.delayed(Duration(milliseconds: 300));
     return [
       CategoryModel(
+        name: TranslationsKeys.tkBeneficiariesLabel,
+        iconPath: AssetsManager.icBeneficiaryPath,
+        route: RouteManager.beneficiaryRoute,
+        services: [
+          ServiceModel(TranslationsKeys.tkBeneficiariesLabel, AssetsManager.icBeneficiaryPath, RouteManager.beneficiaryRoute),
+        ],
+      ),
+      CategoryModel(
         name: TranslationsKeys.tkTransferServicesLabel,
         iconPath: AssetsManager.icTransferPath,
         route: 'route',
@@ -90,9 +98,19 @@ class BankServicesService extends ApiService {
         route: 'route',
         services: [
           ServiceModel(TranslationsKeys.tkProductsServiceLabel, AssetsManager.icProductsPath, RouteManager.productsRoute),
-          ServiceModel(TranslationsKeys.tkViewExchangeRateServiceLabel, AssetsManager.icExchangeRatePath, RouteManager.exchangeRoute),
+          ServiceModel(
+              TranslationsKeys.tkViewExchangeRateServiceLabel, AssetsManager.icExchangeRatePath, RouteManager.exchangeRoute),
         ],
       ),
     ];
+  }
+
+  Future<List<ServiceModel>> fetchServices() async {
+    await Future.delayed(Duration(milliseconds: 300));
+    final categories = await fetchCategories();
+    List<ServiceModel> services = [];
+    categories.removeWhere((e) => e.name == TranslationsKeys.tkTransferServicesLabel);
+    await Future.forEach(categories, (e) => services.addAll(e.services));
+    return services;
   }
 }

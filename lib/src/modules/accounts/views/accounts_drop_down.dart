@@ -71,3 +71,66 @@ class AccountsDropDown extends StatelessWidget {
     });
   }
 }
+
+class HomeAccountsDropDown extends StatelessWidget {
+  final ValueChanged<AccountModel?>? onSaved;
+  final ValueChanged<AccountModel>? onChanged;
+  final String label;
+  final FormFieldValidator<AccountModel>? validator;
+  final bool changePrimaryOnChange;
+  final bool withOneAccountError;
+  final Color fillColor;
+
+  const HomeAccountsDropDown({
+    super.key,
+    this.onSaved,
+    this.onChanged,
+    this.label = TranslationsKeys.tkFromAccountLabel,
+    this.validator,
+    this.changePrimaryOnChange = false,
+    this.withOneAccountError = false,
+    this.fillColor = Colors.transparent,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle textStyle = TextStyle(color: ColorManager.titleColor, fontWeight: FontWeight.w700, fontSize: 14.0);
+    InputBorder inputBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8.0),
+      borderSide: BorderSide(color: fillColor),
+    );
+
+    InputDecoration decoration = InputDecoration.collapsed(
+      hintText: '',
+    );
+    return GetX<AccountViewModel>(builder: (controller) {
+      List<AccountModel> accounts = controller.accounts.data ?? <AccountModel>[];
+      return DropdownButtonFormField<AccountModel>(
+        value: controller.primaryAccount,
+        decoration: decoration,
+        validator: validator,
+        icon: Icon(Icons.expand_circle_down_outlined, color: Colors.white,),
+        selectedItemBuilder: (context) => accounts.map((e) => Container()).toList(),
+        items: accounts
+            .map((e) => DropdownMenuItem<AccountModel>(
+                  value: e,
+                  child: CustomText.title(e.accountNo, fontSize: 14.0),
+                ))
+            .toList(),
+        onChanged: (value) {
+          if (changePrimaryOnChange) {
+            controller.onSelectedAccountChange(value);
+          }
+          if (onChanged != null && value != null) {
+            onChanged!(value);
+          }
+        },
+        onSaved: (v) {
+          if (onSaved != null) {
+            onSaved!(v);
+          }
+        },
+      );
+    });
+  }
+}

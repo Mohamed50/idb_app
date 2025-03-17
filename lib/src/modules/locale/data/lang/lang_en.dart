@@ -16,7 +16,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkChooseLanguage: 'Choose Language',
 
   /// Auth Module - Login Page
-  TranslationsKeys.tkLoginWelcomeMsg: 'Welcome to Export Development Bank',
+  TranslationsKeys.tkLoginWelcomeMsg: 'Welcome to Industrial Development Bank',
   TranslationsKeys.tkUsernameLabel: 'Username',
   TranslationsKeys.tkUsernameRequiredMsg: 'Username is required',
   TranslationsKeys.tkPasswordLabel: 'Password',
@@ -30,7 +30,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkRegisterNowLabel: 'Register Now',
   TranslationsKeys.tkAboutUsLabel: 'About Us',
   TranslationsKeys.tkAboutUsContent:
-      'Export Development Bank is one of the pioneering financial institutions in Sudan that introduced and practiced Islamic banking. Established in September 1981, the bank has played a significant role in shaping the country\'s financial landscape by providing Sharia-compliant banking solutions. Over the years, it has expanded its services to cater to various sectors, including trade, investment, and development financing, ensuring financial inclusion and economic growth. With a strong commitment to innovation and customer-centric services, the bank continues to support businesses and individuals while adhering to the principles of Islamic finance.',
+      'Industrial Development Bank is one of the pioneering financial institutions in Sudan that introduced and practiced Islamic banking. Established in September 1981, the bank has played a significant role in shaping the country\'s financial landscape by providing Sharia-compliant banking solutions. Over the years, it has expanded its services to cater to various sectors, including trade, investment, and development financing, ensuring financial inclusion and economic growth. With a strong commitment to innovation and customer-centric services, the bank continues to support businesses and individuals while adhering to the principles of Islamic finance.',
   TranslationsKeys.tkBranchesLabel: 'Branches',
   TranslationsKeys.tkContactUsLabel: 'Contacts',
   TranslationsKeys.tkWebsiteLabel: 'Website',
@@ -87,6 +87,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkIbanLabel: 'IBAN',
   TranslationsKeys.tkAccountCopiedSuccessMsg: 'Account details copied',
   TranslationsKeys.tkInfoLabel: 'Info',
+  TranslationsKeys.tkMyAccountsLabel: 'My Accounts',
 
 // 🏦 Bank Services Module - Transfer Services
   TranslationsKeys.tkServicesLabel: 'Services',
@@ -95,9 +96,9 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkAddBeneficiarySuccessMsg: 'Beneficiary added successfully',
   TranslationsKeys.tkNoBeneficiariesLabel: 'You don\'t have beneficiaries yet',
   TranslationsKeys.tkTransferServicesLabel: 'Transfer',
-  TranslationsKeys.tkTransferOutsideBankServicesLabel: 'Outside Bank',
-  TranslationsKeys.tkTransferInsideBankLabel: 'Inside Bank',
-  TranslationsKeys.tkTransferBetweenMyAccountsLabel: 'Between Accounts',
+  TranslationsKeys.tkTransferOutsideBankServicesLabel: 'Outside',
+  TranslationsKeys.tkTransferInsideBankLabel: 'Inside',
+  TranslationsKeys.tkTransferBetweenMyAccountsLabel: 'Between',
   TranslationsKeys.tkTransferWithQRLabel: 'QR Code',
   TranslationsKeys.tkScanQrCodeLabel: 'Scan QR code',
   TranslationsKeys.tkGeneralRequiredMsg: 'This field is required',

@@ -13,12 +13,17 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key, this.backgroundColor = ColorManager.primaryColor, this.title = '', this.actions, this.child, this.leading, this.bottom});
 
   @override
-  Size get preferredSize => const Size.fromHeight(64);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorManager.primaryColor,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: ColorManager.cardGradient, // Apply gradient here
+        ),
+      ),
+      backgroundColor: Colors.transparent, // Make background transparent
       leading: leading,
       centerTitle: true,
       title: child ?? CustomText.title(title, color: Colors.white, fontSize: 24,),

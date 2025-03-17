@@ -16,7 +16,7 @@ class BankServiceTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ServiceIconWidget(iconPath: serviceModel.iconPath),
+          ServiceIconWidget2(iconPath: serviceModel.iconPath),
           CustomText.title(
             serviceModel.name,
             fontSize: 14.0,

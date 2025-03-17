@@ -25,8 +25,8 @@ class ColorManager {
   static const Color darkBackgroundColor = Color(0xFFF5F5F5);
   static const Color primaryColor = Color(0xFF7A1D17);
   static const Color secondaryColor = Color(0xFF4D8334);
-  static const Color transparentNavy = Color(0xFFECEFF8);
-  static const Color darkerTransparentNavy = Color(0xFFC6D4FC);
+  static const Color mutedPrimary = Color(0xFFD9B3B0);
+  static const Color darkerMutedPrimary = Color(0xFFA64D4D);
   static const Color appBarColor = Colors.white;
   static const Color iconsColor = Colors.white;
   static const Color onButtonColor = Colors.white;
@@ -41,7 +41,7 @@ class ColorManager {
 
   // **Gradients**
   static const LinearGradient mutedButtonGradient = LinearGradient(
-    colors: [darkerTransparentNavy, buttonColor],
+    colors: [darkerMutedPrimary, buttonColor],
   );
   static const LinearGradient buttonGradient = LinearGradient(
     colors: [buttonColor, lightButtonColor],
@@ -54,6 +54,21 @@ class ColorManager {
   );
   static const LinearGradient negativeButtonGradient = LinearGradient(
     colors: [darkNegativeColor, negativeColor],
+  );
+
+  // **Custom Gradient**
+  static const LinearGradient cardGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xFF902929), // Lightest shade
+      Color(0xFF7A1D17), // Base Color
+      Color(0xFF6E1A14),
+      Color(0xFF5E1611),
+      Color(0xFF4D130E),
+      Color(0xFF3A0E0A), // Darkest shade
+    ],
+    stops: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0], // Evenly distributed stops
   );
 
 }

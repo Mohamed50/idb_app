@@ -5,36 +5,36 @@ import 'package:az_banking_app/src/modules/bank_services/data/services/bank_serv
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:get/get.dart';
 
-class BankServicesViewModel extends GetxController{
+class BankServicesViewModel extends GetxController {
   final BankServicesService _bankServicesService;
 
   final RxList<CategoryModel> _categories = <CategoryModel>[].obs;
+
   RxList<CategoryModel> get categories => _categories;
 
-  final RxList<CategoryModel> _homeCategories = <CategoryModel>[].obs;
-  RxList<CategoryModel> get homeCategories => _homeCategories;
+  CategoryModel? get transferCategory => categories.firstWhereOrNull((e) => e.name == TranslationsKeys.tkTransferServicesLabel);
 
   final RxList<ServiceModel> _services = <ServiceModel>[].obs;
+
   RxList<ServiceModel> get services => _services;
-  
-  BankServicesViewModel(this._bankServicesService){
+
+  RxList<ServiceModel> get servicesWithoutTransfer =>
+      _services.where((e) => !e.name.toLowerCase().contains('transfer')).toList().obs;
+
+  BankServicesViewModel(this._bankServicesService) {
     _initialize();
   }
-  
-  void _initialize(){
+
+  void _initialize() {
     _fetchCategories();
+    _fetchServices();
   }
 
-  Future _fetchCategories() async{
+  Future _fetchCategories() async {
     _categories.value = await _bankServicesService.fetchCategories();
-    _homeCategories.value = categories.where((e) => e.name != TranslationsKeys.tkStatementServiceLabel).toList();
-    _homeCategories.insert(0,CategoryModel(name: TranslationsKeys.tkBeneficiariesLabel, iconPath: AssetsManager.icBeneficiaryPath, route: RouteManager.beneficiaryRoute, services: []));
-    final temp = <ServiceModel>[];
-    for (var e in _categories) {
-      temp.addAll(e.services);
-    }
-    _services.value = temp;
   }
-  
-  
+
+  Future _fetchServices() async {
+    _services.value = await _bankServicesService.fetchServices();
+  }
 }

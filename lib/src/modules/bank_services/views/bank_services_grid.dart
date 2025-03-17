@@ -11,14 +11,15 @@ class BankServicesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetX<BankServicesViewModel>(
       builder: (controller) => GridView.builder(
-        itemCount: controller.services.length,
+        padding: EdgeInsets.zero,
+        itemCount: controller.servicesWithoutTransfer.length,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          mainAxisSpacing: 12.0,
-          crossAxisSpacing: 12.0,
-          childAspectRatio: 0.7,
+          mainAxisSpacing: 24.0,
+          crossAxisSpacing: 0.0,
+          childAspectRatio: 1.2,
         ),
         itemBuilder: (context, index) => BankServiceTile(serviceModel: controller.services[index]),
       ),

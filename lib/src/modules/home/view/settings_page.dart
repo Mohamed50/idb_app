@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
           SizedBox(height: 12.0),
           AccountsList(),
           Divider(height: 60.0, thickness: 4, color: ColorManager.primaryColor.withValues(alpha: 0.08),),
-          SettingsServiceGrid(),
+          SettingsServiceList(),
         ],
       ),
     );

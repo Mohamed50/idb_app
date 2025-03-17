@@ -108,6 +108,7 @@ class TranslationsKeys {
   static const String tkIbanLabel = 'tkIbanLabel';
   static const String tkAccountCopiedSuccessMsg = 'tkAccountCopiedSuccessMsg';
   static const String tkInfoLabel = 'tkInfoLabel';
+  static const String tkMyAccountsLabel = 'tkMyAccountLabel';
 
   /// Bank Services Module - Transfer Services
   static const String tkServicesLabel = 'tkServicesLabel';

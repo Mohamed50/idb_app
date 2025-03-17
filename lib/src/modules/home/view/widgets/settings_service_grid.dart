@@ -6,15 +6,18 @@ import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SettingsServiceGrid extends StatelessWidget {
-  const SettingsServiceGrid({super.key});
+class SettingsServiceList extends StatelessWidget {
+  const SettingsServiceList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
+    final divider = Divider(
+      height: 24.0,
+      thickness: 2,
+      color: ColorManager.primaryColor.withValues(alpha: 0.08),
+    );
+    return ListView(
       shrinkWrap: true,
-      crossAxisCount: 3,
-      childAspectRatio: 1.2,
       padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
       children: [
@@ -23,21 +26,25 @@ class SettingsServiceGrid extends StatelessWidget {
           iconPath: AssetsManager.icChangePasswordPath,
           onTap: _toChangePasswordPage,
         ),
+        divider,
         SettingsItem(
           label: TranslationsKeys.tkSecurityQuestionsLabel,
           iconPath: AssetsManager.icSecurityQuestionsPath,
           onTap: _toSecurityQuestionsPage,
         ),
+        divider,
         SettingsItem(
           label: TranslationsKeys.tkFaqsLabel,
           iconPath: AssetsManager.icFaqPath,
           onTap: _toFaqsPage,
         ),
+        divider,
         SettingsItem(
           label: TranslationsKeys.tkTransactionLimitLabel,
           iconPath: AssetsManager.icTransactionLimitPath,
           onTap: _toTransactionLimitPage,
         ),
+        divider,
         GetX<LocalizationViewModel>(
           builder: (controller) => SettingsItem(
             label: controller.language.name,
@@ -45,6 +52,7 @@ class SettingsServiceGrid extends StatelessWidget {
             onTap: _toLanguageSelectorPage,
           ),
         ),
+        divider,
         SettingsItem(
           label: TranslationsKeys.tkLogoutLabel,
           iconPath: AssetsManager.icLogoutPath,
@@ -90,15 +98,18 @@ class SettingsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Column(
-        children: [
-          ServiceIconWidget(iconPath: iconPath),
-          SizedBox(height: 4.0),
-          CustomText.title(
-            label,
-            fontSize: 14.0,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Row(
+          children: [
+            Image.asset(iconPath, width: 32, height: 32, color: ColorManager.primaryColor),
+            SizedBox(width: 8.0),
+            CustomText.title(
+              label,
+              fontSize: 18.0,
+            ),
+          ],
+        ),
       ),
     );
   }

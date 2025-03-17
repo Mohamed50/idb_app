@@ -68,6 +68,7 @@ class BeneficiaryItemTile extends StatelessWidget {
     return InkWell(
       onTap: _handleBeneficiary,
       child: CustomCard(
+        color: ColorManager.darkBackgroundColor,
         child: ListTile(
           leading: CustomCard(
               color: ColorManager.lightBackgroundColor,
