@@ -8,13 +8,13 @@ import '/src/utils/binding.dart';
 import 'modules/locale/data/services/localization_service.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GlobalLoaderOverlay(
-      overlayWidgetBuilder: (context)=> const SpinKitCubeGrid(
-        color: Colors.white,
+      overlayWidgetBuilder: (context)=> const SpinKitDoubleBounce(
+        color: ColorManager.primaryColor,
         size: 50.0,
       ),
       child: GetMaterialApp(

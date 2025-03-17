@@ -29,7 +29,7 @@ class ApiService extends GetConnect {
   /// Initializes the API service with a timeout setting for HTTP requests.
   @override
   void onInit() {
-    httpClient.timeout = const Duration(seconds: 60);
+    httpClient.timeout = const Duration(seconds: 120);
     super.onInit();
   }
 
