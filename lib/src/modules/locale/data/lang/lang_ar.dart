@@ -1,7 +1,7 @@
 import '../keys.dart';
 
 const Map<String, String> arabicTranslationsMap = {
-  TranslationsKeys.appName: 'إنفينيتي',
+  TranslationsKeys.appName: 'IDB',
   TranslationsKeys.tkApiError: 'خطأ',
   TranslationsKeys.tkNetworkError: 'خطأ في الشبكة',
   TranslationsKeys.tkFetchingError: 'خطأ في جلب البيانات',

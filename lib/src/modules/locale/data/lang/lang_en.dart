@@ -1,7 +1,7 @@
 import '../keys.dart';
 
 const Map<String, String> englishTranslationsMap = {
-  TranslationsKeys.appName: 'Infinityّ',
+  TranslationsKeys.appName: 'IDB',
   TranslationsKeys.tkApiError: 'API Error',
   TranslationsKeys.tkNetworkError: 'Network Error',
   TranslationsKeys.tkFetchingError: 'Fetching Error',

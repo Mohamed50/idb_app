@@ -6,6 +6,7 @@ import 'package:az_banking_app/src/modules/bank_services/actions/bank_service_ac
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
 import 'package:az_banking_app/src/modules/beneficiary/actions/beneficiary_actions.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
+import 'package:az_banking_app/src/views/custom/custom_appbar.dart';
 import 'package:az_banking_app/src/views/custom/custom_button.dart';
 import 'package:az_banking_app/src/views/custom/custom_container.dart';
 import 'package:az_banking_app/src/views/custom/custom_text.dart';
@@ -29,48 +30,53 @@ class ResponsePage extends StatelessWidget {
     final BeneficiaryType? beneficiaryType = Get.arguments['beneficiary_type'];
     final Map<String, dynamic> info = getInfoMap(beneficiaryType, toAccount, responseInJson);
     return Scaffold(
-      backgroundColor: ColorManager.lightBackgroundColor,
-      body: SafeArea(
-        child: Screenshot(
-          controller: screenshotController,
-          child: Container(
-            color: ColorManager.lightBackgroundColor,
-            padding: const EdgeInsets.all(24.0),
-            child: ListView(
-              children: [
-                SizedBox(height: 52.0),
-                Stack(
-                  clipBehavior: Clip.none,
-                  alignment: Alignment.center,
-                  children: [
-                    Column(
+      backgroundColor: ColorManager.darkBackgroundColor,
+      appBar: CustomAppbar(
+        title: TranslationsKeys.appName,
+        actions: [
+          InkWell(
+            onTap: _share,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: FaIcon(FontAwesomeIcons.shareNodes),
+            ),
+          )
+        ],
+      ),
+      body: Screenshot(
+        controller: screenshotController,
+        child: Container(
+          color: ColorManager.darkBackgroundColor,
+          padding: const EdgeInsets.all(24.0),
+          child: ListView(
+            children: [
+              SizedBox(height: 76.0),
+              Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
+                children: [
+                  CustomCard(
+                    color: ColorManager.lightBackgroundColor,
+                    child: Column(
                       children: [
-                        CustomCard(
-                          color: ColorManager.darkBackgroundColor,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 52 + 24),
-                              CustomText.title(
-                                TranslationsKeys.tkSuccessLabel,
-                                color: ColorManager.positiveColor,
-                              ),
-                              CustomText.title(
-                                TranslationsKeys.tkSuccessfulTransactionMsg,
-                                fontSize: 12,
-                              ),
-                              SizedBox(height: 24.0),
-                              ListView.separated(
-                                padding: EdgeInsets.all(12.0),
-                                shrinkWrap: true,
-                                itemCount: children.length,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) => children[index],
-                                separatorBuilder: (context, index) => Divider(
-                                  color: ColorManager.titleColor,
-                                  thickness: 0.2,
-                                ),
-                              ),
-                            ],
+                        SizedBox(height: 52 + 24),
+                        CustomText.title(
+                          TranslationsKeys.tkSuccessLabel,
+                        ),
+                        CustomText.title(
+                          TranslationsKeys.tkSuccessfulTransactionMsg,
+                          fontSize: 12,
+                        ),
+                        SizedBox(height: 24.0),
+                        ListView.separated(
+                          padding: EdgeInsets.all(12.0),
+                          shrinkWrap: true,
+                          itemCount: children.length,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) => children[index],
+                          separatorBuilder: (context, index) => Divider(
+                            color: ColorManager.titleColor,
+                            thickness: 0.2,
                           ),
                         ),
                         toAccount != null
@@ -79,45 +85,47 @@ class ResponsePage extends StatelessWidget {
                                 child: AccountItemTile(
                                   accountModel: toAccount,
                                   withName: true,
+                                  backgroundColor: ColorManager.lightBackgroundColor,
                                 ),
                               )
-                            : Container()
+                            : Container(),
+                        SizedBox(height: 24.0),
                       ],
                     ),
-                    Positioned(
-                      top: -52,
+                  ),
+                  Positioned(
+                    top: -72,
+                    child: Container(
+                      padding: EdgeInsets.all(24.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: ColorManager.cardGradient,
+                      ),
                       child: Container(
-                        padding: EdgeInsets.all(12.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: ColorManager.lightBackgroundColor,
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: ColorManager.positiveColor.withValues(alpha: 0.08),
-                              border: Border.all(color: ColorManager.positiveColor)),
-                          padding: EdgeInsets.all(24.0),
-                          child: FaIcon(
-                            FontAwesomeIcons.check,
-                            size: 80 - 24,
-                            color: ColorManager.positiveColor,
-                          ),
+                        padding: EdgeInsets.all(12.0),
+                        child: Image.asset(
+                          AssetsManager.logoPath,
+                          width: 80.0,
                         ),
                       ),
                     ),
-                  ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 32),
+              CustomVisible(show: beneficiaryType != null, child: SizedBox(height: 12)),
+              CustomVisible(
+                show: beneficiaryType != null,
+                child: CustomButton(
+                  text: TranslationsKeys.tkAddBeneficiaryLabel,
+                  onPressed: () => _addBeneficiary(context, info, beneficiaryType!),
                 ),
-                SizedBox(height: 32),
-                CustomButton.muted(text: TranslationsKeys.tkShareLabel, onPressed: _share),
-                CustomVisible(show: beneficiaryType != null, child: SizedBox(height: 12)),
-                CustomVisible(
-                    show: beneficiaryType != null,
-                    child: CustomButton(text: TranslationsKeys.tkAddBeneficiaryLabel, onPressed: () => _addBeneficiary(context, info, beneficiaryType!))),
-                SizedBox(height: 12),
-                CustomButton(text: TranslationsKeys.tkDoneLabel, onPressed: _done),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -140,7 +148,7 @@ class ResponsePage extends StatelessWidget {
 
   void _addBeneficiary(BuildContext context, Map info, BeneficiaryType beneficiaryType) {
     BeneficiaryModel beneficiaryModel;
-    switch(beneficiaryType){
+    switch (beneficiaryType) {
       case BeneficiaryType.electricity:
         beneficiaryModel = BeneficiaryModel(info['number'], info['name'], BeneficiaryType.electricity);
         break;
@@ -158,9 +166,12 @@ class ResponsePage extends StatelessWidget {
   }
 
   Map<String, dynamic> getInfoMap(BeneficiaryType? type, AccountModel? accountModel, Map<String, dynamic> response) {
-    switch(type){
+    switch (type) {
       case BeneficiaryType.electricity:
-        return {'name':response['اسم العميل'] ?? response['Customer Name'], 'number': response['رقم العداد'] ?? response['tkMeterNumberLabel']};
+        return {
+          'name': response['اسم العميل'] ?? response['Customer Name'],
+          'number': response['رقم العداد'] ?? response['tkMeterNumberLabel']
+        };
       case BeneficiaryType.telecommunication:
         return {};
       case BeneficiaryType.inside:

@@ -89,3 +89,52 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
+class CustomOutlinedButton extends StatelessWidget {
+  final String? text;
+  final Widget? child;
+  final VoidCallback? onPressed;
+  final double? width;
+  final Color backgroundColor;
+  final Color textColor;
+  final double fontSize;
+  final bool enabled;
+  final EdgeInsets? padding;
+
+  const CustomOutlinedButton({
+    super.key,
+    this.text,
+    this.onPressed,
+    this.width = double.infinity,
+    this.backgroundColor = ColorManager.primaryColor,
+    this.textColor = ColorManager.primaryColor,
+    this.fontSize = 16.0,
+    this.enabled = true,
+    this.padding,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: enabled ? onPressed : null,
+      child: Container(
+        width: width ?? ScreenUtils.getScreenWidth(context, 0.12),
+        padding: padding ?? EdgeInsets.all(ScreenUtils.getFontSize(context, 16)),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(color: backgroundColor),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: child ??
+            CustomText(
+              text ?? '',
+              color: textColor,
+              fontSize: fontSize,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.2,
+            ),
+      ),
+    );
+  }
+}
