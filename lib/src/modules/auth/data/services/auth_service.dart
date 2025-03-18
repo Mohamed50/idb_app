@@ -32,12 +32,17 @@ class AuthService extends ApiService {
       APIConfiguration.signInUrl,
       body,
     );
-    MemoryService.instance.accessToken = response.headers!['authorization']!.replaceFirst('Bearer ', ''); // Save access token
-    final tokenInfo = JwtDecoder.decode(MemoryService.instance.accessToken!);
+    bool deviceNeedReset = response.body['Response_Code'] == 2;
+    String token = response.headers!['authorization']!.replaceFirst('Bearer ', '');
+    if(!deviceNeedReset){
+      MemoryService.instance.accessToken = token; // Save access token
+    }
+    final tokenInfo = JwtDecoder.decode(token);
     MemoryService.instance.userId = tokenInfo['UserID'];
     response.body['Customer_Info']['Device_ID'] = tokenInfo['DeviceKey'];
     response.body['Customer_Info']['reset_device'] = response.body['Response_Code'] == 2;
     UserModel userModel = UserModel.fromJson(response.body['Customer_Info']);
+    userModel.token = token;
     // UserModel userModel = UserModel(customerName: '', imageUri: '', phoneNo: '', deviceId: '', isResetDeviceRequired: false);
     MemoryService.instance.user = json.encode(userModel.toJson());
     return userModel;
@@ -66,16 +71,16 @@ class AuthService extends ApiService {
   }
 
   // fetches user questions.
-  Future<bool> requestOtp() async {
-    await get(APIConfiguration.requestOtpUrl);
+  Future<bool> requestOtp(String token) async {
+    await get(APIConfiguration.requestOtpUrl, headers: getDefaultHeader(token));
     return true;
   }
 
   // verify otp.
-  Future<bool> resetDevice(String otp) async {
+  Future<bool> resetDevice(String otp, String token) async {
     final deviceInfo = await Utils.getDeviceInfo();
     final body = {"OTP": otp, "New_Device_Key": deviceInfo['Device_ID']};
-    await post(APIConfiguration.verifyOtpUrl, body);
+    await post(APIConfiguration.verifyOtpUrl, body, headers: getDefaultHeader(token));
     return true;
   }
 

@@ -86,12 +86,12 @@ class AuthViewModel extends GetxController {
 
   /// request otp.
   Future<void> requestOtp() async {
-    await _authService.requestOtp();
+    await _authService.requestOtp(_user!.token!);
   }
 
   /// verify logged in user using `otp`.
   Future<void> resetDevice() async {
-    await _authService.resetDevice(otp!);
+    await _authService.resetDevice(otp!, _user!.token!);
   }
 
   /// Sets the state to authenticated.

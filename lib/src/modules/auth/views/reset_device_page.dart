@@ -1,5 +1,6 @@
 import 'package:az_banking_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import '/src/config/config.dart';
 import '/src/utils/validator.dart';
@@ -12,8 +13,7 @@ class ResetDevicePage extends GetWidget<AuthViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.darkBackgroundColor,
+    return CustomScaffold(
       body: SingleChildScrollView(
         child: Container(
           height: ScreenUtils.getScreenHeight(context) - 64,
@@ -23,33 +23,34 @@ class ResetDevicePage extends GetWidget<AuthViewModel> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Spacer(),
-                Image.asset(
-                  AssetsManager.logoPath,
+                Container(
                   height: MediaQuery.of(context).size.height / 4,
-                  fit: BoxFit.contain,
                 ),
-                Spacer(),
                 CustomCard(
                   padding: EdgeInsets.all(24.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(TranslationsKeys.tkResetDeviceWelcomeMsg),
-                      SizedBox(height: 32.0),
-                      CustomFormField(
-                        initialValue: controller.user!.phoneNo,
-                        enabled: false,
-                        label: TranslationsKeys.tkPhoneLabel,
-                        maxLines: 1,
-                      ),
-                      SizedBox(height: 12.0),
-                      CustomFormField(
-                        label: TranslationsKeys.tkOtpLabel,
-                        onSaved: (value) => controller.otp = value,
-                        validator: InputsValidator.otpValidator,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-                        maxLines: 1,
+                      SizedBox(height: 24.0),
+                      CustomText.subtitle(TranslationsKeys.tkPhoneLabel),
+                      CustomText.title(controller.user!.phoneNo),
+                      SizedBox(height: 24.0),
+                      OtpTextField(
+                        numberOfFields: 6,
+                        borderColor: ColorManager.primaryColor,
+                        disabledBorderColor: ColorManager.primaryColor,
+                        enabledBorderColor: ColorManager.darkBackgroundColor,
+                        focusedBorderColor: ColorManager.primaryColor,
+                        borderWidth: 32,
+                        showFieldAsBox: true,
+                        onCodeChanged: (String code) {
+                          controller.otp = code;
+                        },
+                        onSubmit: (String verificationCode){
+                          controller.otp = verificationCode;
+                          resetDevice(context);
+                        }, // end onSubmit
                       ),
                       SizedBox(height: 24.0),
                       CustomButton(

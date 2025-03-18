@@ -3,6 +3,7 @@ import 'package:az_banking_app/src/modules/home/actions/home_actions.dart';
 import 'package:az_banking_app/src/modules/locale/views/language_button.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '/src/views/custom/customs.dart';
 import '/src/config/config.dart';
@@ -15,8 +16,7 @@ class LoginPage extends GetWidget<AuthViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.darkBackgroundColor,
+    return CustomScaffold(
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(24.0),
@@ -27,10 +27,15 @@ class LoginPage extends GetWidget<AuthViewModel> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Spacer(),
-                Image.asset(
-                  AssetsManager.logoPath,
-                  height: MediaQuery.of(context).size.height / 4,
-                  fit: BoxFit.contain,
+                CustomCard(
+                  padding: EdgeInsets.all(12.0),
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: Colors.white,
+                  child: Image.asset(
+                    AssetsManager.logoPath,
+                    height: MediaQuery.of(context).size.height / 6,
+                    fit: BoxFit.contain,
+                  ),
                 ),
                 Spacer(),
                 CustomCard(
@@ -79,10 +84,26 @@ class LoginPage extends GetWidget<AuthViewModel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    InfoPageItem(onTap: _toAboutUsPage, iconData: Icons.info_outlined, label: TranslationsKeys.tkAboutUsLabel),
-                    InfoPageItem(onTap: _toBranchesPage, iconData: Icons.location_city, label: TranslationsKeys.tkBranchesLabel),
-                    InfoPageItem(onTap: _toContactUsPage, iconData: Icons.call, label: TranslationsKeys.tkContactUsLabel),
-                    InfoPageItem(onTap: _toWebsitePage, iconData: Icons.web, label: TranslationsKeys.tkWebsiteLabel),
+                    InfoPageItem(
+                      onTap: _toAboutUsPage,
+                      iconData: FontAwesomeIcons.circleInfo,
+                      label: TranslationsKeys.tkAboutUsLabel,
+                    ),
+                    InfoPageItem(
+                      onTap: _toBranchesPage,
+                      iconData: FontAwesomeIcons.buildingColumns,
+                      label: TranslationsKeys.tkBranchesLabel,
+                    ),
+                    InfoPageItem(
+                      onTap: _toContactUsPage,
+                      iconData: FontAwesomeIcons.phone,
+                      label: TranslationsKeys.tkContactUsLabel,
+                    ),
+                    InfoPageItem(
+                      onTap: _toWebsitePage,
+                      iconData: FontAwesomeIcons.windowRestore,
+                      label: TranslationsKeys.tkWebsiteLabel,
+                    ),
                   ],
                 ),
                 Spacer(),

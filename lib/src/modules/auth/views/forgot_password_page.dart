@@ -13,8 +13,7 @@ class ForgotPasswordPage extends GetWidget<AuthViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.darkBackgroundColor,
+    return CustomScaffold(
       body: SingleChildScrollView(
         child: Container(
           height: ScreenUtils.getScreenHeight(context) - 64,
@@ -24,13 +23,9 @@ class ForgotPasswordPage extends GetWidget<AuthViewModel> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Spacer(),
-                Image.asset(
-                  AssetsManager.logoPath,
+                Container(
                   height: MediaQuery.of(context).size.height / 4,
-                  fit: BoxFit.contain,
                 ),
-                Spacer(),
                 CustomCard(
                   padding: EdgeInsets.all(24.0),
                   child: Column(

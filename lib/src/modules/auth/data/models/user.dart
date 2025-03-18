@@ -5,6 +5,7 @@ class UserModel {
   final String imageUri;
   final String phoneNo;
   final String deviceId;
+  String? token;
   final bool isResetDeviceRequired;
 
   UserModel({
@@ -12,6 +13,7 @@ class UserModel {
     required this.imageUri,
     required this.phoneNo,
     required this.deviceId,
+    this.token,
     required this.isResetDeviceRequired,
   });
 

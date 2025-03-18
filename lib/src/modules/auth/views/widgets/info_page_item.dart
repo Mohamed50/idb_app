@@ -13,11 +13,13 @@ class InfoPageItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: CustomCard(
+      child: Container(
         padding: EdgeInsets.all(12.0),
-        color: ColorManager.primaryColor.withValues(alpha: 0.08),
-        shape: BoxShape.circle,
-        child: Icon(iconData, color: ColorManager.primaryColor),
+        decoration: BoxDecoration(
+          gradient: ColorManager.cardGradient,
+          shape: BoxShape.circle
+        ),
+        child: Icon(iconData, color: ColorManager.lightBackgroundColor),
       ),
     );
   }

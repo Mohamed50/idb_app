@@ -41,6 +41,7 @@ dependencies:
     git:
       url: https://github.com/wizmea/qr_code_scanner.git
   package_info_plus: ^8.3.0
+  flutter_otp_text_field: ^1.5.1+1
 
 
 
