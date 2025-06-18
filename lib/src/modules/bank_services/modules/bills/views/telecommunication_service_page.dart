@@ -9,6 +9,7 @@ import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_m
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
@@ -58,9 +59,10 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
               SizedBox(height: verticalSpacing),
               CustomFormField(
                 initialValue: beneficiaryModel?.number,
-                label: TranslationsKeys.tkPhoneLabel,
+                label: '${TranslationsKeys.tkPhoneLabel.tr} (0xxxxxxxxx)',
                 onSaved: controller.onPhoneChanged,
                 validator: InputsValidator.phoneValidator,
+                inputFormatters: [LengthLimitingTextInputFormatter(10)],
               ),
               SizedBox(height: verticalSpacing),
               GetX<TeleBillsViewModel>(
