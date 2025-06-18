@@ -184,6 +184,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkShareLabel: 'Share',
   TranslationsKeys.tkScreenshotLabel: 'Screenshot',
   TranslationsKeys.tkDoneLabel: 'Done',
+  TranslationsKeys.tkAnotherTransactionLabel: 'Another Transaction',
   TranslationsKeys.tkDownloadedMsg: 'Screenshot downloaded successfully',
 
   /// settings

@@ -203,6 +203,7 @@ class TranslationsKeys {
   static const String tkShareLabel = 'tkShareLabel';
   static const String tkScreenshotLabel = 'tkScreenshotLabel';
   static const String tkDoneLabel = 'tkDoneLabel';
+  static const String tkAnotherTransactionLabel = 'tkAnotherTransactionLabel';
   static const String tkDownloadedMsg = 'tkDownloadedMsg';
 
   /// settings

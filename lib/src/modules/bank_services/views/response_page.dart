@@ -117,6 +117,16 @@ class ResponsePage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 32),
+              CustomButton(
+                text: TranslationsKeys.tkDoneLabel,
+                onPressed: () => _done(),
+              ),
+              SizedBox(height: 12),
+              CustomButton(
+                text: TranslationsKeys.tkDoneLabel,
+                onPressed: () => _back(),
+              ),
+              SizedBox(height: 12),
               CustomVisible(show: beneficiaryType != null, child: SizedBox(height: 12)),
               CustomVisible(
                 show: beneficiaryType != null,
@@ -181,6 +191,10 @@ class ResponsePage extends StatelessWidget {
       default:
         return {};
     }
+  }
+
+  void _back() {
+    BankServicesActions.instance.back();
   }
 }
 

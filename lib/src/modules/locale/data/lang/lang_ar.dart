@@ -185,6 +185,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkShareLabel: 'مشاركة',
   TranslationsKeys.tkScreenshotLabel: 'لقطة شاشة',
   TranslationsKeys.tkDoneLabel: 'تم',
+  TranslationsKeys.tkAnotherTransactionLabel: 'معاملة اخرى',
   TranslationsKeys.tkDownloadedMsg: 'تم تنزيل لقطة الشاشة بنجاح',
 
 
