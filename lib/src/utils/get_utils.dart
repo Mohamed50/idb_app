@@ -168,6 +168,39 @@ class Utils {
     return '${DateFormat(format).format(startDate)} - ${DateFormat(format).format(endDate)}';
   }
 
+
+  /// **Gets the date range from a number of days ago to today.**
+  ///
+  /// - Pass the number of days you want to go back from today.
+  /// - Returns a [DateTimeRange] starting from `daysBack` days ago at midnight
+  ///   to today at 23:59:59.
+  ///
+  /// **Example:**
+  /// ```dart
+  /// DateTimeRange range = Utils.getDateRangeFromDaysBack(7);
+  /// print(range.start); // Output: 2024-06-09 00:00:00.000
+  /// print(range.end);   // Output: 2024-06-16 23:59:59.000
+  /// ```
+  static DateTimeRange getDateRangeFromDaysBack(int daysBack) {
+    final DateTime today = DateTime.now();
+
+    final DateTime start = DateTime(
+      today.year,
+      today.month,
+      today.day - daysBack,
+      0, 0, 0,
+    );
+
+    final DateTime end = DateTime(
+      today.year,
+      today.month,
+      today.day,
+      23, 59, 59,
+    );
+
+    return DateTimeRange(start: start, end: end);
+  }
+
   /// **Gets the date range from the most recent Sunday to today.**
   ///
   /// - If today is Sunday, it returns `Sunday - Today`.

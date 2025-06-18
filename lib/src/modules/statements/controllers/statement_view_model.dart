@@ -20,7 +20,7 @@ class StatementViewModel extends GetxController {
   final RxInt _selectedTapIndex = 0.obs;
   int get selectedTabIndex => _selectedTapIndex.value;
 
-  final Rx<DateTimeRange> _selectedDateTimeRange = Utils.getWeekToTodayRange().obs;
+  final Rx<DateTimeRange> _selectedDateTimeRange = Utils.getDateRangeFromDaysBack(7).obs;
   DateTimeRange get selectedDateTimeRange => _selectedDateTimeRange.value;
 
   void fetchStatement() {
@@ -49,11 +49,11 @@ class StatementViewModel extends GetxController {
         fetchStatement();
         break;
       case 1:
-        _selectedDateTimeRange.value = Utils.getWeekToTodayRange();
+        _selectedDateTimeRange.value = Utils.getDateRangeFromDaysBack(7);
         fetchStatement();
         break;
       case 2:
-        _selectedDateTimeRange.value = Utils.getMonthToTodayRange();
+        _selectedDateTimeRange.value = Utils.getDateRangeFromDaysBack(30);
         fetchStatement();
         break;
     }
