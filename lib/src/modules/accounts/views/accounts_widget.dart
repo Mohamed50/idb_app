@@ -18,44 +18,51 @@ class PrimaryAccountWidget extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: ColorManager.cardGradient,
           ),
-          padding: EdgeInsets.all(24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: MediaQuery.of(context).padding.top),
-              Row(
-                children: [
-                  InkWell(
-                    onTap: () => Scaffold.of(context).openDrawer(),
-                    child: Icon(Icons.menu, color: Colors.white),
-                  ),
-                  SizedBox(width: 8.0),
-                  CustomText.title(TranslationsKeys.tkMyAccountsLabel, color: Colors.white),
-                  SizedBox(width: 4),
-                  GetBuilder<AccountViewModel>(
-                    builder: (controller) => CustomText.subtitle('(${controller.accounts.data?.length})', color: Colors.white),
-                  ),
-                  Expanded(
-                    child: GetBuilder<AccountViewModel>(
-                      builder: (controller) => CustomVisible(
-                        show: (controller.accounts.data?.length ?? 0) > 1,
-                        child: HomeAccountsDropDown(
-                          onChanged: controller.onSelectedAccountChange,
+              Padding(
+                padding: EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).padding.top),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Icon(Icons.menu, color: Colors.white),
                         ),
-                      ),
+                        SizedBox(width: 8.0),
+                        CustomText.title(TranslationsKeys.tkMyAccountsLabel, color: Colors.white),
+                        SizedBox(width: 4),
+                        GetBuilder<AccountViewModel>(
+                          builder: (controller) => CustomText.subtitle('(${controller.accounts.data?.length})', color: Colors.white),
+                        ),
+                        Expanded(
+                          child: GetBuilder<AccountViewModel>(
+                            builder: (controller) => CustomVisible(
+                              show: (controller.accounts.data?.length ?? 0) > 1,
+                              child: HomeAccountsDropDown(
+                                onChanged: controller.onSelectedAccountChange,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(height: 24.0),
+                    GetBuilder<AccountViewModel>(
+                      builder: (controller) => controller.primaryAccount != null
+                          ? ApiHandler(
+                              apiResponse: controller.accounts, onSuccess: _AccountInfoWidget(accountModel: controller.primaryAccount!))
+                          : Container(),
+                    ),
+                    SizedBox(height: 12.0),
+                  ],
+                ),
               ),
-              SizedBox(height: 24.0),
-              GetBuilder<AccountViewModel>(
-                builder: (controller) => controller.primaryAccount != null
-                    ? ApiHandler(
-                        apiResponse: controller.accounts, onSuccess: _AccountInfoWidget(accountModel: controller.primaryAccount!))
-                    : Container(),
-              ),
-              SizedBox(height: 12.0),
               TransferServicesWidget(),
+              SizedBox(height: 24.0)
             ],
           ),
         ),

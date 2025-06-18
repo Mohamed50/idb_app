@@ -42,23 +42,25 @@ class _BankServiceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: _toServicePage,
-      child: AspectRatio(
-        aspectRatio: 0.85,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ServiceIconWidget3(iconPath: serviceModel.iconPath),
-            SizedBox(height: 4.0),
-            CustomText.title(
-              serviceModel.name,
-              fontSize: 14.0,
-              color: Colors.white,
-              textAlign: TextAlign.center,
-              maxLines: 1,
-            ),
-          ],
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+        child: InkWell(
+          onTap: _toServicePage,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ServiceIconWidget3(iconPath: serviceModel.iconPath),
+              SizedBox(height: 4.0),
+              CustomText.title(
+                serviceModel.name,
+                fontSize: 14.0,
+                color: Colors.white,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+              ),
+            ],
+          ),
         ),
       ),
     );
