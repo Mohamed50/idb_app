@@ -100,7 +100,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkAddBeneficiarySuccessMsg: 'تم اضافة المستفيد بنجاح',
   TranslationsKeys.tkNoBeneficiariesLabel: 'ليس لديك مستفيدين حاليا',
   TranslationsKeys.tkTransferServicesLabel: 'التحويلات',
-  TranslationsKeys.tkTransferOutsideBankServicesLabel: 'تحويل خارج البنك',
+  TranslationsKeys.tkTransferOutsideBankServicesLabel: 'تحويل بنوك اخرى',
   TranslationsKeys.tkTransferInsideBankLabel: 'تحويل داخل البنك',
   TranslationsKeys.tkTransferBetweenMyAccountsLabel: 'بين حساباتي',
   TranslationsKeys.tkTransferWithQRLabel: 'رمز QR',
