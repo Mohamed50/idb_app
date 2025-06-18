@@ -46,11 +46,29 @@ class AuthActions extends ActionPresenter {
     });
   }
 
+
   Future verifyAccount(BuildContext context) async {
     actionHandler(context, () async {
       await _authViewModel.verifyAccountByOtp();
-      Get.back();
+      await _authViewModel.registerUser();
+      Get.offNamed(RouteManager.linkAccountsRoute);
       showSuccessSnackBar('', TranslationsKeys.tkVerifyAccountSuccessMsg);
+    });
+  }
+
+  void linkAccounts(BuildContext context) {
+    actionHandler(context, () async {
+      await _authViewModel.linkAccounts();
+      Get.offNamed(RouteManager.setPasswordRoute);
+      showSuccessSnackBar('', TranslationsKeys.tkLinkAccountsSuccessMsg);
+    });
+  }
+
+  void setPassword(BuildContext context) {
+    actionHandler(context, () async {
+      await _authViewModel.setPassword();
+      Get.back();
+      showSuccessSnackBar('', TranslationsKeys.tkPasswordSetSuccessMsg);
     });
   }
 

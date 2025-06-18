@@ -1,3 +1,5 @@
+import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:get/get.dart';
 import '/src/modules/auth/data/models/user.dart';
 import '../auth.dart';
@@ -23,7 +25,7 @@ class AuthViewModel extends GetxController {
   UserModel? get user => _user;
 
   /// Stores the username and password for sign-in.
-  String? username, password;
+  String? username, password, confirmPassword;
 
   /// Stores the nationalNumber rim and phoneNumber for sign-up.
   String? nationalNumber, rim, phoneNumber;
@@ -31,24 +33,33 @@ class AuthViewModel extends GetxController {
   /// Stores the otp for verification.
   String? otp;
 
+  /// Stores the name of the user.
+  String? nameEn, nameAr;
+
+  /// Stores the user id.
+  String? userId;
+
+  List<AccountModel> availableAccounts = <AccountModel>[];
+  List<AccountModel> selectedAccounts = <AccountModel>[];
 
   /// Constructor initializes with the `AuthService` and checks the session on creation.
   AuthViewModel(this._authService) {
     checkSession();
+    _fetchUserId();
   }
 
   // Checks if there is an active session by verifying token status.
   // Refreshes the session if the access token is expired but the refresh token is valid.
   Future<bool> checkSession() async {
-    if (await _authService.isLoggedIn()) {
-      _fetchUser();
-      bool isAccessTokenExpired = await _authService.isAccessTokenExpired();
-      if (!isAccessTokenExpired) {
-        authenticated(); // Set state to authenticated if tokens are valid
-        update(); // Update GetX UI
-        return true;
-      }
-    }
+    // if (await _authService.isLoggedIn()) {
+    //   _fetchUser();
+    //   bool isAccessTokenExpired = await _authService.isAccessTokenExpired();
+    //   if (!isAccessTokenExpired) {
+    //     authenticated(); // Set state to authenticated if tokens are valid
+    //     update(); // Update GetX UI
+    //     return true;
+    //   }
+    // }
     notAuthenticated();
     return false;
   }
@@ -61,7 +72,7 @@ class AuthViewModel extends GetxController {
   /// Performs user sign-in with the provided username and password.
   Future<void> signIn() async {
     _user = await _authService.signIn(username!, password!);
-    if(!user!.isResetDeviceRequired){
+    if (!user!.isResetDeviceRequired) {
       authenticated();
     }
   }
@@ -77,12 +88,36 @@ class AuthViewModel extends GetxController {
     update();
   }
 
+  /// fetch user.
+  Future _fetchUserId() async {
+    userId = _authService.fetchUserIdFromMemory();
+    update();
+  }
 
   /// verify new user using the provided `otp` and 'rim'.
   Future<void> verifyAccountByOtp() async {
-    await _authService.verifyAccountByOtp(rim!, otp!);
+    final response = await _authService.verifyAccountByOtp(rim!, otp!);
+    availableAccounts = response.accounts;
+    nameEn = response.nameEn;
+    nameAr = response.nameAr;
   }
 
+  /// register new user using the validated data.
+  Future<void> registerUser() async {
+    userId = await _authService.registerAccount(nationalNumber!, rim!, phoneNumber!, nameEn!, nameAr!, availableAccounts.first);
+  }
+
+  Future<void> linkAccounts() async {
+    await _authService.linkAccounts(userId!, selectedAccounts);
+  }
+
+  Future<void> setPassword() async {
+    if (password == confirmPassword) {
+      await _authService.setPassword(userId!, password!);
+    } else {
+      throw AppException(TranslationsKeys.tkChangePasswordValidationErrorMsg);
+    }
+  }
 
   /// request otp.
   Future<void> requestOtp() async {
@@ -123,5 +158,22 @@ class AuthViewModel extends GetxController {
   void logout() {
     _authService.signOut();
     notAuthenticated();
+  }
+
+  void onSelectAccount(AccountModel value) {
+    if (selectedAccounts.contains(value)) {
+      selectedAccounts.remove(value);
+    } else {
+      selectedAccounts.add(value);
+    }
+    update();
+  }
+
+  void onConfirmPasswordChanged(String? newValue) {
+    confirmPassword = newValue;
+  }
+
+  void onPasswordChange(String? newValue) {
+    password = newValue;
   }
 }

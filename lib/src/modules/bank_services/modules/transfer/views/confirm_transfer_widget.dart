@@ -34,6 +34,8 @@ class ConfirmTransferWidget extends GetView<TransferViewModel> {
           AccountItemTile(
             accountModel: controller.toAccount!,
             withName: true,
+            withIban: false,
+            withPhone: false,
           ),
           SizedBox(height: 24.0),
           AccountsDropDown(

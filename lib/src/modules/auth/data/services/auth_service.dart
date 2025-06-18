@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:az_banking_app/src/modules/auth/data/models/user.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:get/get.dart';
@@ -63,6 +64,38 @@ class AuthService extends ApiService {
     return true;
   }
 
+
+  // final step of registration after validating user information and mobile number .
+  // return user id upon successful registration.
+  Future<String> registerAccount(
+      String nationalNumber,
+      String rim,
+      String phoneNumber,
+      String nameEn,
+      String nameAr,
+      AccountModel primaryAccount,
+      ) async {
+    if (phoneNumber[0] == '0') {
+      phoneNumber = phoneNumber.substring(1);
+    }
+    final body = {
+      'RIM': rim,
+      'Phone_No': '249$phoneNumber',
+      'National_ID': nationalNumber,
+      'Customer_Name_EN': nameEn,
+      'Customer_Name_AR': nameAr,
+      'Account_No': primaryAccount.accountNo,
+      'Email': 'N/A',
+      'Address': 'N/A',
+    };
+    final response = await post(
+      APIConfiguration.registerUrl,
+      headers: getUnauthorizedHeader(), // Uses header without authorization
+      body,
+    );
+    return response.body['User_ID'];
+  }
+
   // Handles user sign-out by clearing tokens and selected venue/zone from MemoryService.
   Future<bool> signOut() async {
     MemoryService.instance.accessToken = null; // Clear access token
@@ -85,10 +118,10 @@ class AuthService extends ApiService {
   }
 
   // verify register otp.
-  Future<bool> verifyAccountByOtp(String rim, String otp) async {
+  Future<VerifyResponse> verifyAccountByOtp(String rim, String otp) async {
     final body = {'RIM': rim, 'OTP': otp};
-    await post(APIConfiguration.verifyAccountByOtpUrl, body);
-    return true;
+    final response = await post(APIConfiguration.verifyAccountByOtpUrl, body);
+    return VerifyResponse(accounts: accountModelFromJson(response.body['Accounts_List']), nameEn: response.body['Customer_Name_EN'], nameAr: response.body['Customer_Name_AR']);
   }
 
   // Checks if the user is logged in by verifying if an access token is present in MemoryService.
@@ -114,4 +147,33 @@ class AuthService extends ApiService {
     }
     return null;
   }
+
+
+  String? fetchUserIdFromMemory() {
+    return MemoryService.instance.userId;
+  }
+
+
+  Future<bool> linkAccounts(String userId, List<AccountModel> selectedAccounts) async {
+    MemoryService.instance.userId = userId;
+    final body = {'User_ID': userId, 'Accounts_List': selectedAccounts.map((e) => e.toJson()).toList()};
+    await post(APIConfiguration.linkAccountsUrl, body);
+    return true;
+  }
+
+  Future<bool> setPassword(String userId, String password) async {
+    final body = {'User_ID': userId, 'Password': generateMd5(password)};
+    await post(APIConfiguration.setAccountPasswordsUrl, body);
+    return true;
+  }
+}
+
+
+class VerifyResponse {
+  final List<AccountModel> accounts;
+  final String nameEn;
+  final String nameAr;
+
+  VerifyResponse({required this.accounts, required this.nameEn, required this.nameAr});
+
 }

@@ -3,9 +3,11 @@ import 'package:az_banking_app/src/modules/accounts/views/accounts_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/change_password_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/change_security_questions_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/forgot_password_page.dart';
+import 'package:az_banking_app/src/modules/auth/views/link_accounts_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/reset_device_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/reset_password_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/security_questions_page.dart';
+import 'package:az_banking_app/src/modules/auth/views/set_password_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/verify_account_page.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/bills_bindings.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/bill_service_page.dart';
@@ -71,6 +73,9 @@ class RouteManager {
   static const String resetPasswordRoute = '/auth/reset-password';
   static const String resetDeviceRoute = '/auth/reset-device';
   static const String verifyAccountRoute = '/auth/verify-otp';
+  static const String linkAccountsRoute = '/auth/register/link-accounts';
+  static const String setPasswordRoute = '/auth/register/set-password';
+
   static const String menuRoute = '/menu';
   static const String informationRoute = '/information';
   static const String branchesRoute = '/branches';
@@ -133,6 +138,14 @@ class RouteManager {
         GetPage(
           name: verifyAccountRoute,
           page: () => const VerifyAccountPage(),
+        ),
+        GetPage(
+          name: linkAccountsRoute,
+          page: () => const LinkAccountsPage(),
+        ),
+        GetPage(
+          name: setPasswordRoute,
+          page: () => const SetPasswordPage(),
         ),
         GetPage(
           name: forgotPasswordRoute,

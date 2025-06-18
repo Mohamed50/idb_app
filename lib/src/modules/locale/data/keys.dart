@@ -58,6 +58,11 @@ class TranslationsKeys {
   static const String tkSignUpBtn = 'tkSignUpBtn';
   static const String tkHaveAccountLabel = 'tkHaveAccountLabel';
   static const String tkLoginNowLabel = 'tkLoginNowLabel';
+  static const String tkLinkAccountsLabel = 'tkLinkAccountsLabel';
+  static const String tkLinkAccountsDescription = 'tkLinkAccountsDescription';
+  static const String tkLinkAccountsSuccessMsg = 'tkLinkAccountsSuccessMsg';
+  static const String tkPasswordSetWelcomeMsg = 'tkPasswordSetWelcomeMsg';
+  static const String tkPasswordSetSuccessMsg = 'tkPasswordSetSuccessMsg';
 
   /// Auth Module - Password Reset Page
   static const String tkPasswordResetWelcomeMsg = 'tkPasswordResetWelcomeMsg';

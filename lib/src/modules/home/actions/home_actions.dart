@@ -28,7 +28,7 @@ class HomeActions {
   }
 
   void toWebsitePage() {
-    launchUrlString('http://edbank.sd/index.php/en/');
+    launchUrlString('www.idb.sd');
   }
 
   void toContactUsPage() {

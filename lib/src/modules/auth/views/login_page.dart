@@ -46,6 +46,7 @@ class LoginPage extends GetWidget<AuthViewModel> {
                       SizedBox(height: 32.0),
                       CustomFormField(
                         label: TranslationsKeys.tkUsernameLabel,
+                        initialValue: controller.userId,
                         onSaved: (value) => controller.username = value,
                         validator: InputsValidator.usernameValidator,
                         maxLines: 1,

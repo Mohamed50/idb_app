@@ -48,6 +48,12 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkSignUpBtn: 'Sign Up',
   TranslationsKeys.tkHaveAccountLabel: 'Already have an account?',
   TranslationsKeys.tkLoginNowLabel: 'Login Now',
+  TranslationsKeys.tkLinkAccountsLabel: 'Link Accounts',
+  TranslationsKeys.tkLinkAccountsDescription: 'Select the accounts you want to link to this user',
+  TranslationsKeys.tkLinkAccountsSuccessMsg: 'Accounts linked successfully',
+  TranslationsKeys.tkPasswordSetWelcomeMsg: 'please set your password',
+  TranslationsKeys.tkPasswordSetSuccessMsg: 'Password set successfully',
+
 
   /// Auth Module - Password Reset Page
   TranslationsKeys.tkPasswordResetWelcomeMsg: 'Reset your old password',

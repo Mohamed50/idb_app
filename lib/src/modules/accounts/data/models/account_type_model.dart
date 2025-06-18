@@ -8,7 +8,7 @@
 /// - `fromValue()` → Returns the corresponding enum from a string.
 ///
 // ─────────────────────────────────────────────────────
-enum AccountType { current, saving, ntd }
+enum AccountType { current, saving, staff, ntd }
 
 extension AccountTypeExtensions on AccountType {
   /// **Returns the display label for the enum.**
@@ -18,6 +18,8 @@ extension AccountTypeExtensions on AccountType {
         return 'Current Account';
       case AccountType.saving:
         return 'Saving Account';
+      case AccountType.staff:
+        return 'Staff Account';
       case AccountType.ntd:
         return 'NTD Account';
     }
@@ -27,11 +29,13 @@ extension AccountTypeExtensions on AccountType {
   String toCode() {
     switch (this) {
       case AccountType.current:
-        return 'CUR';
+        return '101';
       case AccountType.saving:
-        return 'SAV';
+        return '202';
+      case AccountType.staff:
+        return '105';
       case AccountType.ntd:
-        return 'NTD';
+        return '000';
     }
   }
 
@@ -39,13 +43,16 @@ extension AccountTypeExtensions on AccountType {
   static AccountType? fromCode(String value) {
     switch (value) {
       case 'CUR':
+      case '101':
         return AccountType.current;
       case 'SAV':
+      case '202':
         return AccountType.saving;
-      case 'NTD':
-        return AccountType.ntd;
+      case 'staff':
+      case '105':
+        return AccountType.staff;
       default:
-        return null;
+        return AccountType.ntd;
     }
   }
 }

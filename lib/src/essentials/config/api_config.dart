@@ -3,13 +3,13 @@
 class APIConfiguration {
   /// TODO: Set the value to `false` before pushing to the repository.
   /// This flag determines whether the app is running in development mode.
-  static const bool isDEV = true;
+  static const bool isDEV = false;
 
   /// The base URL for the staging environment.
   static const String _stagingUrl = 'https://mob.jsjbank.com:8585/JSB_OMNI_Ph2/omniServices';
 
   /// The base URL for the production environment.
-  static const String _productionUrl = 'https://mob.jsjbank.com:8383/JSB_OMNI_Ph2/omniServices';
+  static const String _productionUrl = 'http://mb.idb.sd:8585/OMNI_Ph2/omniServices';
 
   /// The base URL used in the application.
   /// If `isDEV` is true, the staging URL will be used; otherwise, the production URL.
@@ -23,8 +23,17 @@ class APIConfiguration {
   /// URL for signing up a new user.
   static const String signUpUrl = '$baseUrl/sharedRoutes/custSelfRegistration';
 
+  /// URL for registering a new user.
+  static const String registerUrl = '$baseUrl/sharedRoutes/regCustSelfRegistration';
+
   /// URL for verifying register otp.
   static const String verifyAccountByOtpUrl = '$baseUrl/sharedRoutes/validateCustSelfRegistration';
+
+  /// URL for link accounts with user.
+  static const String linkAccountsUrl = '$baseUrl/sharedRoutes/linkAccCustSelfRegistration';
+
+  /// URL for setting user password.
+  static const String setAccountPasswordsUrl = '$baseUrl/sharedRoutes/setPwdCustSelfRegistration';
 
   /// URL for refreshing an existing user session.
   static const String refreshSessionUrl = '$baseUrl/token/refresh';
@@ -34,7 +43,6 @@ class APIConfiguration {
 
   /// URL for verifying otp.
   static const String verifyOtpUrl = '$baseUrl/sharedRoutes/resetDevice';
-
 
   /// URL for fetching user security questions.
   static const String securityQuestionsUrl = '$baseUrl/sharedRoutes/getSecurityQuestions';
@@ -64,7 +72,6 @@ class APIConfiguration {
   /// URL for fetching user security questions.
   static const String balanceUrl = '$baseUrl/bankRoutes/getBalance';
 
-
   /// Bank Services - [transfer]
   static const String transferBetweenAccountOutsideBankUrl = '$baseUrl/bankRoutes/transferToCard';
   static const String transferBetweenAccountInsideBankUrl = '$baseUrl/bankRoutes/accountTransfer';
@@ -82,16 +89,12 @@ class APIConfiguration {
   static const String requestChequeBookUrl = '$baseUrl/sharedRoutes/reqBankServ';
   static const String trackChequeStatusUrl = '$baseUrl/bankRoutes/getChequeStatus';
 
-
   /// Bank Services - [others]
   static const String fetchStatementUrl = '$baseUrl/bankRoutes/getStatement';
   static const String fetchProductsUrl = '$baseUrl/sharedRoutes/getBankProducts';
   static const String fetchExchangeRangeUrl = '$baseUrl/bankRoutes/getCurrencyRates';
 
-
-
   /// settings
   static const String fetchFaqsUrl = '$baseUrl/sharedRoutes/getBankFAQs';
   static const String fetchTransactionsLimitUrl = '$baseUrl/sharedRoutes/getFeesAndLimits';
-
 }

@@ -19,30 +19,24 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.primaryColor,
       drawer: SideMenu(),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: ScreenUtils.getScreenHeight(context),
-          child: Column(
-            children: [
-              PrimaryAccountWidget(),
-              Expanded(
-                child: Container(
-                  color: ColorManager.lightBackgroundColor,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: CustomText.title(TranslationsKeys.tkServicesLabel),
-                      ),
-                      Expanded(child: BankServicesGrid()),
-                    ],
-                  ),
+      body: ListView(
+        children: [
+          PrimaryAccountWidget(),
+          Container(
+            height: ScreenUtils.getScreenHeight(context, 0.57),
+            color: ColorManager.lightBackgroundColor,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: CustomText.title(TranslationsKeys.tkServicesLabel),
                 ),
-              ),
-            ],
+                Expanded(child: BankServicesGrid()),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

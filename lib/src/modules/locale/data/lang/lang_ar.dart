@@ -16,7 +16,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkChooseLanguage: 'اختر اللغة',
 
   /// وحدة المصادقة - صفحة تسجيل الدخول
-  TranslationsKeys.tkLoginWelcomeMsg: 'مرحبًا بك في بنك تنمية الصادرات',
+  TranslationsKeys.tkLoginWelcomeMsg: 'مرحبًا بك في بنك التنمية الصناعية',
   TranslationsKeys.tkUsernameLabel: 'اسم المستخدم',
   TranslationsKeys.tkUsernameRequiredMsg: 'اسم المستخدم مطلوب',
   TranslationsKeys.tkPasswordLabel: 'كلمة المرور',
@@ -30,7 +30,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkRegisterNowLabel: 'سجل الآن',
   TranslationsKeys.tkAboutUsLabel: 'من نحن',
   TranslationsKeys.tkAboutUsContent:
-  'بنك تنمية الصادرات هو أحد المؤسسات المالية الرائدة في السودان التي قدمت ومارست الخدمات المصرفية الإسلامية. تم تأسيسه في سبتمبر 1981 ولعب دورًا مهمًا في تشكيل المشهد المالي للبلاد من خلال تقديم حلول مصرفية متوافقة مع الشريعة الإسلامية. على مدار السنوات، وسّع البنك خدماته لتشمل قطاعات التجارة والاستثمار والتمويل التنموي، مما يضمن الشمول المالي والنمو الاقتصادي. مع التزام قوي بالابتكار والخدمات التي تركز على العميل، يواصل البنك دعم الشركات والأفراد مع الالتزام بمبادئ التمويل الإسلامي.',
+  'بنك التنمية الصناعية هو أحد المؤسسات المالية الرائدة في السودان التي قدمت ومارست الخدمات المصرفية الإسلامية. تم تأسيسه في سبتمبر 1981 ولعب دورًا مهمًا في تشكيل المشهد المالي للبلاد من خلال تقديم حلول مصرفية متوافقة مع الشريعة الإسلامية. على مدار السنوات، وسّع البنك خدماته لتشمل قطاعات التجارة والاستثمار والتمويل التنموي، مما يضمن الشمول المالي والنمو الاقتصادي. مع التزام قوي بالابتكار والخدمات التي تركز على العميل، يواصل البنك دعم الشركات والأفراد مع الالتزام بمبادئ التمويل الإسلامي.',
   TranslationsKeys.tkBranchesLabel: 'الفروع',
   TranslationsKeys.tkContactUsLabel: 'اتصل بنا',
   TranslationsKeys.tkWebsiteLabel: 'الموقع الإلكتروني',
@@ -48,6 +48,12 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkSignUpBtn: 'تسجيل',
   TranslationsKeys.tkHaveAccountLabel: 'هل لديك حساب بالفعل؟',
   TranslationsKeys.tkLoginNowLabel: 'تسجيل الدخول الآن',
+  TranslationsKeys.tkLinkAccountsLabel: 'ربط الحسابات',
+  TranslationsKeys.tkLinkAccountsDescription: 'حدد الحسابات التي تريد ربطها بهذا المستخدم',
+  TranslationsKeys.tkLinkAccountsSuccessMsg: 'تم ربط الحسابات بنجاح',
+  TranslationsKeys.tkPasswordSetWelcomeMsg: 'يرجى تعيين كلمة المرور الخاصة بك',
+  TranslationsKeys.tkPasswordSetSuccessMsg: 'تم تعيين كلمة المرور بنجاح',
+
 
   /// وحدة المصادقة - إعادة تعيين كلمة المرور
   TranslationsKeys.tkPasswordResetWelcomeMsg: 'إعادة تعيين كلمة المرور القديمة',

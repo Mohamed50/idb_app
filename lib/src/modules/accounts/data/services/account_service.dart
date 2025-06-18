@@ -54,10 +54,16 @@ class AccountService extends ApiService {
 
   Future<List<AccountModel>> fetchBalance(List<AccountModel> accounts) async {
     final body = {'lang': '0', 'Accounts_List': accounts.map((e) => e.toJson()).toList()};
-    final response = await post(APIConfiguration.balanceUrl, body);
-    List balances = response.body['Balance_List'];
-    for (int i = 0; i < balances.length; i++) {
-      accounts[i].balance = balances[i]['Balance'];
+    List balances = [];
+    try {
+      final response = await post(APIConfiguration.balanceUrl, body);
+      balances = response.body['Balance_List'];
+    } catch (e) {
+      balances = [];
+    } finally {
+      for (int i = 0; i < balances.length; i++) {
+        accounts[i].balance = balances[i]['Balance'];
+      }
     }
     return accounts;
   }
