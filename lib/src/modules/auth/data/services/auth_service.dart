@@ -39,7 +39,7 @@ class AuthService extends ApiService {
       MemoryService.instance.accessToken = token; // Save access token
     }
     final tokenInfo = JwtDecoder.decode(token);
-    MemoryService.instance.userId = tokenInfo['UserID'];
+    MemoryService.instance.userId = username;
     response.body['Customer_Info']['Device_ID'] = tokenInfo['DeviceKey'];
     response.body['Customer_Info']['reset_device'] = response.body['Response_Code'] == 2;
     UserModel userModel = UserModel.fromJson(response.body['Customer_Info']);

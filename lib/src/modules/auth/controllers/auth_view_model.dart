@@ -72,6 +72,7 @@ class AuthViewModel extends GetxController {
   /// Performs user sign-in with the provided username and password.
   Future<void> signIn() async {
     _user = await _authService.signIn(username!, password!);
+    userId = username;
     if (!user!.isResetDeviceRequired) {
       authenticated();
     }
