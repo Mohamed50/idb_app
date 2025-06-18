@@ -1,5 +1,7 @@
+import 'package:az_banking_app/src/modules/home/actions/home_actions.dart';
 import 'package:az_banking_app/src/utils/screen_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '/src/config/config.dart';
 import '/src/utils/validator.dart';
@@ -56,7 +58,25 @@ class RegisterPage extends GetWidget<AuthViewModel> {
                         validator: InputsValidator.phoneValidator,
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.done,
+                        inputFormatters: [LengthLimitingTextInputFormatter(10)],
                         maxLines: 1,
+                      ),
+                      SizedBox(height: 32.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Obx(() => Checkbox(value: controller.termsAgree, onChanged: controller.onTermsAcceptChange)),
+                          const CustomText(TranslationsKeys.tkIAgreeLabel),
+                          SizedBox(width: 4),
+                          InkWell(
+                            onTap: _toTermsAndConditions,
+                            child: const CustomText(
+                              TranslationsKeys.tkTermsAndConditions,
+                              fontWeight: FontWeight.w700,
+                              color: ColorManager.primaryColor,
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 32.0),
                       CustomButton(
@@ -96,5 +116,9 @@ class RegisterPage extends GetWidget<AuthViewModel> {
 
   void _toLoginPage() {
     AuthActions.instance.back();
+  }
+
+  void _toTermsAndConditions() {
+    HomeActions.instance.toTermsAndConditionsPage();
   }
 }

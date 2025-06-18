@@ -46,6 +46,13 @@ class HomeActions {
     );
   }
 
+  void toTermsAndConditionsPage() {
+    Get.toNamed(
+      RouteManager.informationRoute,
+      arguments: {'title': TranslationsKeys.tkTermsAndConditions, 'content': TranslationsKeys.tkTermsContent},
+    );
+  }
+
   void toSettingsPage() {
     Get.toNamed(RouteManager.settingsRoute);
   }

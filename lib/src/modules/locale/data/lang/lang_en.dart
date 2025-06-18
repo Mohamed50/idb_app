@@ -31,6 +31,46 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkAboutUsLabel: 'About Us',
   TranslationsKeys.tkAboutUsContent:
       'Industrial Development Bank is one of the pioneering financial institutions in Sudan that introduced and practiced Islamic banking. Established in September 1981, the bank has played a significant role in shaping the country\'s financial landscape by providing Sharia-compliant banking solutions. Over the years, it has expanded its services to cater to various sectors, including trade, investment, and development financing, ensuring financial inclusion and economic growth. With a strong commitment to innovation and customer-centric services, the bank continues to support businesses and individuals while adhering to the principles of Islamic finance.',
+  TranslationsKeys.tkTermsContent: """
+Terms and Conditions
+
+Last Updated: [DD/MM/YYYY]
+
+Welcome to [Your App Name]!
+
+Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the [Your App Name] application or website (the "Service") operated by [Your Company Name] ("us", "we", or "our").
+
+By accessing or using the Service, you agree to be bound by these Terms. If you do not agree, please do not use the Service.
+
+1. Use of the Service
+- You must be at least 18 years old or have the permission of a legal guardian to use this Service.
+- You agree not to misuse or attempt to disrupt the functionality of the Service.
+
+2. User Accounts
+- When you create an account, you must provide accurate and complete information.
+- You are responsible for maintaining the confidentiality of your login credentials.
+
+3. Intellectual Property
+- All content, trademarks, logos, and other intellectual property are owned by or licensed to [Your Company Name].
+- You may not reproduce, distribute, or exploit any content from the Service without permission.
+
+4. Third-Party Services
+- The Service may contain links to third-party websites or services. We are not responsible for the content, policies, or practices of these third parties.
+
+5. Limitation of Liability
+- We do not guarantee uninterrupted or error-free access to the Service.
+- In no event shall we be liable for any indirect, incidental, or consequential damages arising out of the use of the Service.
+
+6. Termination
+- We reserve the right to suspend or terminate access to the Service at any time, without prior notice, for any reason.
+
+7. Changes to Terms
+- We may update these Terms from time to time. Continued use of the Service after changes implies acceptance of the new Terms.
+
+8. Contact Us
+If you have any questions about these Terms, please contact us at:
+[Your Support Email]
+""",
   TranslationsKeys.tkBranchesLabel: 'Branches',
   TranslationsKeys.tkContactUsLabel: 'Contacts',
   TranslationsKeys.tkWebsiteLabel: 'Website',
@@ -47,6 +87,9 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkPhoneNotValidMsg: 'Phone number must be a valid phone number',
   TranslationsKeys.tkSignUpBtn: 'Sign Up',
   TranslationsKeys.tkHaveAccountLabel: 'Already have an account?',
+  TranslationsKeys.tkIAgreeLabel: 'I agree to',
+  TranslationsKeys.tkTermsAndConditions: 'terms and conditions',
+  TranslationsKeys.tkTermsAndConditionsRequiredMsg: 'you have to accept terms and conditions to sign up',
   TranslationsKeys.tkLoginNowLabel: 'Login Now',
   TranslationsKeys.tkLinkAccountsLabel: 'Link Accounts',
   TranslationsKeys.tkLinkAccountsDescription: 'Select the accounts you want to link to this user',

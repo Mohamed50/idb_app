@@ -35,11 +35,11 @@ class InputsValidator {
   /// Validates a phone number.
   /// Returns a localized error message if the phone number is invalid or null, otherwise returns `null`.
   static String? phoneValidator(String? value) {
-    // if (value == null || value.isEmpty) {
-    //   return TranslationsKeys.tkPhoneRequiredMsg.tr;
-    // } else if (!_phoneRegExp.hasMatch(value)) {
-    //   return TranslationsKeys.tkPhoneNotValidMsg.tr;
-    // }
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkPhoneRequiredMsg.tr;
+    } else if (!_phoneRegExp.hasMatch(value)) {
+      return TranslationsKeys.tkPhoneNotValidMsg.tr;
+    }
     return null;
   }
 

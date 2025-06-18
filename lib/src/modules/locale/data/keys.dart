@@ -41,6 +41,7 @@ class TranslationsKeys {
   static const String tkRegisterNowLabel = 'tkRegisterNowLabel';
   static const String tkAboutUsLabel = 'tkAboutUsLabel';
   static const String tkAboutUsContent = 'tkAboutUsContent';
+  static const String tkTermsContent = 'tkTermsContent';
   static const String tkBranchesLabel = 'tkBranchesLabel';
   static const String tkContactUsLabel = 'tkContactUsLabel';
   static const String tkWebsiteLabel = 'tkWebsiteLabel';
@@ -57,6 +58,9 @@ class TranslationsKeys {
   static const String tkPhoneNotValidMsg = 'tkPhoneNotValidMsg';
   static const String tkSignUpBtn = 'tkSignUpBtn';
   static const String tkHaveAccountLabel = 'tkHaveAccountLabel';
+  static const String tkIAgreeLabel = 'tkIAgreeLabel';
+  static const String tkTermsAndConditions = 'tkTermsAndConditions';
+  static const String tkTermsAndConditionsRequiredMsg = 'tkTermsAndConditionsRequiredMsg';
   static const String tkLoginNowLabel = 'tkLoginNowLabel';
   static const String tkLinkAccountsLabel = 'tkLinkAccountsLabel';
   static const String tkLinkAccountsDescription = 'tkLinkAccountsDescription';

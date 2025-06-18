@@ -30,7 +30,47 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkRegisterNowLabel: 'سجل الآن',
   TranslationsKeys.tkAboutUsLabel: 'من نحن',
   TranslationsKeys.tkAboutUsContent:
-  'بنك التنمية الصناعية هو أحد المؤسسات المالية الرائدة في السودان التي قدمت ومارست الخدمات المصرفية الإسلامية. تم تأسيسه في سبتمبر 1981 ولعب دورًا مهمًا في تشكيل المشهد المالي للبلاد من خلال تقديم حلول مصرفية متوافقة مع الشريعة الإسلامية. على مدار السنوات، وسّع البنك خدماته لتشمل قطاعات التجارة والاستثمار والتمويل التنموي، مما يضمن الشمول المالي والنمو الاقتصادي. مع التزام قوي بالابتكار والخدمات التي تركز على العميل، يواصل البنك دعم الشركات والأفراد مع الالتزام بمبادئ التمويل الإسلامي.',
+      'بنك التنمية الصناعية هو أحد المؤسسات المالية الرائدة في السودان التي قدمت ومارست الخدمات المصرفية الإسلامية. تم تأسيسه في سبتمبر 1981 ولعب دورًا مهمًا في تشكيل المشهد المالي للبلاد من خلال تقديم حلول مصرفية متوافقة مع الشريعة الإسلامية. على مدار السنوات، وسّع البنك خدماته لتشمل قطاعات التجارة والاستثمار والتمويل التنموي، مما يضمن الشمول المالي والنمو الاقتصادي. مع التزام قوي بالابتكار والخدمات التي تركز على العميل، يواصل البنك دعم الشركات والأفراد مع الالتزام بمبادئ التمويل الإسلامي.',
+  TranslationsKeys.tkTermsContent: """
+Terms and Conditions
+
+Last Updated: [DD/MM/YYYY]
+
+Welcome to [Your App Name]!
+
+Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the [Your App Name] application or website (the "Service") operated by [Your Company Name] ("us", "we", or "our").
+
+By accessing or using the Service, you agree to be bound by these Terms. If you do not agree, please do not use the Service.
+
+1. Use of the Service
+- You must be at least 18 years old or have the permission of a legal guardian to use this Service.
+- You agree not to misuse or attempt to disrupt the functionality of the Service.
+
+2. User Accounts
+- When you create an account, you must provide accurate and complete information.
+- You are responsible for maintaining the confidentiality of your login credentials.
+
+3. Intellectual Property
+- All content, trademarks, logos, and other intellectual property are owned by or licensed to [Your Company Name].
+- You may not reproduce, distribute, or exploit any content from the Service without permission.
+
+4. Third-Party Services
+- The Service may contain links to third-party websites or services. We are not responsible for the content, policies, or practices of these third parties.
+
+5. Limitation of Liability
+- We do not guarantee uninterrupted or error-free access to the Service.
+- In no event shall we be liable for any indirect, incidental, or consequential damages arising out of the use of the Service.
+
+6. Termination
+- We reserve the right to suspend or terminate access to the Service at any time, without prior notice, for any reason.
+
+7. Changes to Terms
+- We may update these Terms from time to time. Continued use of the Service after changes implies acceptance of the new Terms.
+
+8. Contact Us
+If you have any questions about these Terms, please contact us at:
+[Your Support Email]
+""",
   TranslationsKeys.tkBranchesLabel: 'الفروع',
   TranslationsKeys.tkContactUsLabel: 'اتصل بنا',
   TranslationsKeys.tkWebsiteLabel: 'الموقع الإلكتروني',
@@ -47,13 +87,15 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkPhoneNotValidMsg: 'يجب أن يكون رقم الهاتف صحيحًا',
   TranslationsKeys.tkSignUpBtn: 'تسجيل',
   TranslationsKeys.tkHaveAccountLabel: 'هل لديك حساب بالفعل؟',
+  TranslationsKeys.tkIAgreeLabel: 'اوافق على',
+  TranslationsKeys.tkTermsAndConditions: 'الشروط والاحكام',
+  TranslationsKeys.tkTermsAndConditionsRequiredMsg: 'يجب الموافقة على الشروط والاحكام لإنشاء حساب جديد',
   TranslationsKeys.tkLoginNowLabel: 'تسجيل الدخول الآن',
   TranslationsKeys.tkLinkAccountsLabel: 'ربط الحسابات',
   TranslationsKeys.tkLinkAccountsDescription: 'حدد الحسابات التي تريد ربطها بهذا المستخدم',
   TranslationsKeys.tkLinkAccountsSuccessMsg: 'تم ربط الحسابات بنجاح',
   TranslationsKeys.tkPasswordSetWelcomeMsg: 'يرجى تعيين كلمة المرور الخاصة بك',
   TranslationsKeys.tkPasswordSetSuccessMsg: 'تم تعيين كلمة المرور بنجاح',
-
 
   /// وحدة المصادقة - إعادة تعيين كلمة المرور
   TranslationsKeys.tkPasswordResetWelcomeMsg: 'إعادة تعيين كلمة المرور القديمة',
@@ -109,7 +151,6 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkToAccountLabel: 'إلى الحساب',
   TranslationsKeys.tkToAccountBBANLabel: 'إلى الحساب (BBAN)',
   TranslationsKeys.tkAmountLabel: 'المبلغ',
-
 
   // 🏦 خدمات البنك - خدمات التحويل
   TranslationsKeys.tkGeneralRequiredMsg: 'هذا الحقل مطلوب',
@@ -188,8 +229,6 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkAnotherTransactionLabel: 'معاملة اخرى',
   TranslationsKeys.tkDownloadedMsg: 'تم تنزيل لقطة الشاشة بنجاح',
 
-
-
   /// إعدادات
   TranslationsKeys.tkSettingsLabel: 'الإعدادات',
   TranslationsKeys.tkFaqsLabel: 'الأسئلة الشائعة',
@@ -208,4 +247,3 @@ const Map<String, String> arabicTranslationsMap = {
   "Currency_Code": "رمز العملة",
   "Customer_Name": "اسم المستلم",
 };
-

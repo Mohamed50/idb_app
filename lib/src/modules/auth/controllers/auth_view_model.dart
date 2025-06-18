@@ -42,6 +42,9 @@ class AuthViewModel extends GetxController {
   List<AccountModel> availableAccounts = <AccountModel>[];
   List<AccountModel> selectedAccounts = <AccountModel>[];
 
+  final RxBool _termsAgree = false.obs;
+  bool get termsAgree => _termsAgree.value;
+
   /// Constructor initializes with the `AuthService` and checks the session on creation.
   AuthViewModel(this._authService) {
     checkSession();
@@ -80,13 +83,12 @@ class AuthViewModel extends GetxController {
 
   /// Registers a new user using the provided `newUser` details.
   Future<void> signUp() async {
-    await _authService.signUp(nationalNumber!, rim!, phoneNumber!);
-  }
-
-  /// fetch user.
-  Future _fetchUser() async {
-    _user = _authService.fetchUserFromMemory();
-    update();
+    if(termsAgree) {
+      await _authService.signUp(nationalNumber!, rim!, phoneNumber!);
+    }
+    else{
+      throw AppException(TranslationsKeys.tkTermsAndConditionsRequiredMsg);
+    }
   }
 
   /// fetch user.
@@ -176,5 +178,9 @@ class AuthViewModel extends GetxController {
 
   void onPasswordChange(String? newValue) {
     password = newValue;
+  }
+
+  void onTermsAcceptChange(bool? value) {
+    _termsAgree.value = value ?? false;
   }
 }
