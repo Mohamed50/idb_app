@@ -27,6 +27,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkForgetPasswordLabel: 'Forget Password?',
   TranslationsKeys.tkSignInBtn: 'Sign In',
   TranslationsKeys.tkNoAccountLabel: 'Don\'t have an account?',
+  TranslationsKeys.tkNoDataLabel: 'No data',
   TranslationsKeys.tkRegisterNowLabel: 'Register Now',
   TranslationsKeys.tkAboutUsLabel: 'About Us',
   TranslationsKeys.tkAboutUsContent:

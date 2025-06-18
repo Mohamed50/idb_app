@@ -27,6 +27,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkForgetPasswordLabel: 'نسيت كلمة المرور؟',
   TranslationsKeys.tkSignInBtn: 'تسجيل الدخول',
   TranslationsKeys.tkNoAccountLabel: 'ليس لديك حساب؟',
+  TranslationsKeys.tkNoDataLabel: 'لا توجد بيانات',
   TranslationsKeys.tkRegisterNowLabel: 'سجل الآن',
   TranslationsKeys.tkAboutUsLabel: 'من نحن',
   TranslationsKeys.tkAboutUsContent:

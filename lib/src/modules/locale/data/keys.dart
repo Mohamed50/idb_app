@@ -38,6 +38,7 @@ class TranslationsKeys {
   static const String tkForgetPasswordLabel = 'tkForgetPasswordLabel';
   static const String tkSignInBtn = 'tkSignInBtn';
   static const String tkNoAccountLabel = 'tkNoAccountLabel';
+  static const String tkNoDataLabel = 'tkNoDataLabel';
   static const String tkRegisterNowLabel = 'tkRegisterNowLabel';
   static const String tkAboutUsLabel = 'tkAboutUsLabel';
   static const String tkAboutUsContent = 'tkAboutUsContent';
