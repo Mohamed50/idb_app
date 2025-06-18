@@ -56,6 +56,7 @@ class StatementPage extends GetView<StatementViewModel> {
             Obx(
               () => ApiHandler(
                 apiResponse: controller.statements,
+                onFail: Center(child: CustomText(TranslationsKeys.tkNoDataLabel)),
                 onSuccess: StatementsListView(statements: controller.statements.data ?? []),
               ),
             )

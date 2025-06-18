@@ -10,13 +10,13 @@ class ApiHandler extends StatelessWidget {
   final VoidCallback? tryAgain;
 
   const ApiHandler({
-    Key? key,
+    super.key,
     required this.apiResponse,
     required this.onSuccess,
     this.onLoading,
     this.onFail,
     this.tryAgain,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class ApiHandler extends StatelessWidget {
         onTap: tryAgain,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: CustomText(apiResponse.exception.toString()),
+          child: CustomText(apiResponse.exception.toString().replaceAll('Exception:', '')),
         ),
       ),
     );
