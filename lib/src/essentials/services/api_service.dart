@@ -52,7 +52,7 @@ class ApiService extends GetConnect {
     Decoder<T>? decoder,
     Progress? uploadProgress,
   }) async {
-    body['Lang'] = Get.locale!.languageCode == 'en' ? '0' : '1';
+    body['Lang'] = Get.locale!.languageCode == 'en' ? 0 : 1;
     body['Tran_DateTime'] = tranDateTime;
     Response<T> response = await super.post(
       url,
