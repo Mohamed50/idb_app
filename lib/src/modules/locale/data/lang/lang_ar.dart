@@ -140,6 +140,9 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkServicesLabel: 'الخدمات',
   TranslationsKeys.tkBeneficiariesLabel: 'المستفيدين',
   TranslationsKeys.tkAddBeneficiaryLabel: 'اضافة الى المستفيدين',
+  TranslationsKeys.tkTypeLabel: 'النوع',
+  TranslationsKeys.tkTeleProviderLabel: 'مقدم الخدمة',
+  TranslationsKeys.tkTeleServiceTypeLabel: 'نوع الرقم',
   TranslationsKeys.tkAddBeneficiarySuccessMsg: 'تم اضافة المستفيد بنجاح',
   TranslationsKeys.tkNoBeneficiariesLabel: 'ليس لديك مستفيدين حاليا',
   TranslationsKeys.tkTransferServicesLabel: 'التحويلات',
@@ -234,7 +237,13 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkSettingsLabel: 'الإعدادات',
   TranslationsKeys.tkFaqsLabel: 'الأسئلة الشائعة',
   TranslationsKeys.tkTransactionLimitLabel: 'الحدود والرسوم',
+  TranslationsKeys.tkAccountInfoNotAvailableMsg: 'بيانات الحساب غير متوفرة',
   TranslationsKeys.tkLogoutLabel: 'تسجيل الخروج',
+
+  'BeneficiaryType.inside': 'داخل البنك',
+  'BeneficiaryType.outside': 'خارج البنك',
+  'BeneficiaryType.electricity': 'كهرباء',
+  'BeneficiaryType.telecommunication': 'اتصالات',
 
   /// استجابة النظام
   "Response_Code": "رمز الاستجابة",

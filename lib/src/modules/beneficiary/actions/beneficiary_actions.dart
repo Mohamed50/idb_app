@@ -1,7 +1,9 @@
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/beneficiary/beneficiaries_bindings.dart';
+import 'package:az_banking_app/src/modules/beneficiary/controllers/add_beneficiary_view_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/controllers/beneficiary_view_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
+import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_type_page.dart';
 import 'package:az_banking_app/src/utils/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,9 +17,28 @@ class BeneficiaryActions extends ActionPresenter {
   BeneficiaryActions._();
 
   Future addBeneficiary(BuildContext context, BeneficiaryModel beneficiaryModel) async {
-    actionHandler(context, () async {
+    await actionHandler(context, () async {
       BeneficiariesBindings().dependencies();
-      Get.find<BeneficiaryViewModel>().addBeneficiary(beneficiaryModel);
+      await Get.find<BeneficiaryViewModel>().addBeneficiary(beneficiaryModel);
+      Get.find<BeneficiaryViewModel>().refreshData();
+      showSuccessSnackBar(TranslationsKeys.tkBeneficiariesLabel, TranslationsKeys.tkAddBeneficiarySuccessMsg);
+    });
+  }
+
+  Future addBeneficiaryFromPage(BuildContext context) async {
+    await actionHandler(context, () async {
+      BeneficiariesBindings().dependencies();
+      if(!Get.find<AddBeneficiaryViewModel>().isReady()) {
+        await Get.find<AddBeneficiaryViewModel>().fetchReceiverInfo();
+        throw AppException('Confirm Info');
+      }
+      else {
+        await Get.find<BeneficiaryViewModel>().addBeneficiary(Get
+            .find<AddBeneficiaryViewModel>()
+            .beneficiaryModel);
+      }
+      Get.find<BeneficiaryViewModel>().refreshData();
+      Get.back();
       showSuccessSnackBar(TranslationsKeys.tkBeneficiariesLabel, TranslationsKeys.tkAddBeneficiarySuccessMsg);
     });
   }
@@ -37,5 +58,44 @@ class BeneficiaryActions extends ActionPresenter {
         Get.toNamed(RouteManager.transferToAccountOutsideBankRoute, arguments: {'beneficiary': beneficiaryModel});
         break;
     }
+  }
+
+  void toAddBeneficiaryPage([BeneficiaryModel? beneficiaryModel]) {
+    Get.find<BeneficiaryViewModel>().refreshData();
+    Get.toNamed(RouteManager.beneficiaryAddRoute, arguments: beneficiaryModel ?? BeneficiaryModel(number: '', name: '', type: BeneficiaryType.inside));
+  }
+
+  List<BeneficiaryModel> getBeneficiariesByType(BeneficiaryType type){
+    final controller = Get.find<BeneficiaryViewModel>();
+    List<BeneficiaryModel> options = [];
+    switch(type) {
+      case BeneficiaryType.electricity:
+        options = controller.electricityBeneficiaries;
+        break;
+      case BeneficiaryType.telecommunication:
+        options = controller.teleBeneficiaries;
+        break;
+      case BeneficiaryType.inside:
+        options = controller.insideBeneficiaries;
+        break;
+      case BeneficiaryType.outside:
+        options = controller.outsideBeneficiaries;
+        break;
+    }
+    return options;
+  }
+
+  void toBeneficiaryTypePage(BeneficiaryType type){
+    final beneficiaries = getBeneficiariesByType(type);
+    Get.to(()=> BeneficiaryTypePage(beneficiaries: beneficiaries));
+  }
+
+  void removeBeneficiary(BuildContext context, BeneficiaryModel beneficiaryModel) {
+    actionHandler(context, ()async{
+
+      await Get.find<BeneficiaryViewModel>().removeBeneficiary(beneficiaryModel);
+      Get.find<BeneficiaryViewModel>().refreshData();
+    });
+
   }
 }

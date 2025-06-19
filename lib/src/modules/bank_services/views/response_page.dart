@@ -160,19 +160,19 @@ class ResponsePage extends StatelessWidget {
     BeneficiaryModel beneficiaryModel;
     switch (beneficiaryType) {
       case BeneficiaryType.electricity:
-        beneficiaryModel = BeneficiaryModel(info['number'], info['name'], BeneficiaryType.electricity);
+        beneficiaryModel = BeneficiaryModel(number: info['number'], name: info['name'], type: BeneficiaryType.electricity);
         break;
       case BeneficiaryType.telecommunication:
-        beneficiaryModel = BeneficiaryModel(info['number'], info['name'], BeneficiaryType.telecommunication);
+        beneficiaryModel = BeneficiaryModel(number: info['number'], name: info['name'], type: BeneficiaryType.telecommunication);
         break;
       case BeneficiaryType.inside:
-        beneficiaryModel = BeneficiaryModel(info['Account_No'], info['Custom_Name'], BeneficiaryType.inside);
+        beneficiaryModel = BeneficiaryModel(number: info['Account_No'], name: info['Custom_Name'], type: BeneficiaryType.inside);
         break;
       case BeneficiaryType.outside:
-        beneficiaryModel = BeneficiaryModel(info['IBAN'], info['Custom_Name'], BeneficiaryType.outside);
+        beneficiaryModel = BeneficiaryModel(number: info['IBAN'], name: info['Custom_Name'], type: BeneficiaryType.outside);
         break;
     }
-    BeneficiaryActions.instance.addBeneficiary(context, beneficiaryModel);
+    BeneficiaryActions.instance.toAddBeneficiaryPage(beneficiaryModel);
   }
 
   Map<String, dynamic> getInfoMap(BeneficiaryType? type, AccountModel? accountModel, Map<String, dynamic> response) {

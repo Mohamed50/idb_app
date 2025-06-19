@@ -143,6 +143,9 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkServicesLabel: 'Services',
   TranslationsKeys.tkBeneficiariesLabel: 'Beneficiaries',
   TranslationsKeys.tkAddBeneficiaryLabel: 'Add To Beneficiaries',
+  TranslationsKeys.tkTypeLabel: 'Type',
+  TranslationsKeys.tkTeleProviderLabel: 'Telecom Provider',
+  TranslationsKeys.tkTeleServiceTypeLabel: 'Number Type',
   TranslationsKeys.tkAddBeneficiarySuccessMsg: 'Beneficiary added successfully',
   TranslationsKeys.tkNoBeneficiariesLabel: 'You don\'t have beneficiaries yet',
   TranslationsKeys.tkTransferServicesLabel: 'Transfer',
@@ -235,8 +238,13 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkSettingsLabel: 'Settings',
   TranslationsKeys.tkFaqsLabel: 'FAQs',
   TranslationsKeys.tkTransactionLimitLabel: 'Limits & Fees',
+  TranslationsKeys.tkAccountInfoNotAvailableMsg: 'Account info not available',
   TranslationsKeys.tkLogoutLabel: 'Logout',
 
+  'BeneficiaryType.inside': 'Inside Bank',
+  'BeneficiaryType.outside': 'Outside Bank',
+  'BeneficiaryType.electricity': 'Electricity',
+  'BeneficiaryType.telecommunication': 'Telecom',
 
   /// response
   "Response_Code": "Response Code",

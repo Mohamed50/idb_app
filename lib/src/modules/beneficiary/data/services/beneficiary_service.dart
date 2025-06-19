@@ -8,18 +8,19 @@ class BeneficiaryService extends GetxController {
     return beneficiaryListFromJson(beneficiaries);
   }
 
-  bool addBeneficiary(BeneficiaryModel beneficiaryModel) {
+  Future<bool> addBeneficiary(BeneficiaryModel beneficiaryModel) async {
     String json = MemoryService.instance.beneficiaries ?? '[]';
     final beneficiaries = beneficiaryListFromJson(json);
     beneficiaries.add(beneficiaryModel);
     MemoryService.instance.beneficiaries = beneficiaryListToJson(beneficiaries);
+    await Future.delayed(Duration(milliseconds: 300));
     return true;
   }
 
   bool removeBeneficiary(BeneficiaryModel beneficiaryModel) {
     String json = MemoryService.instance.beneficiaries ?? '[]';
     final beneficiaries = beneficiaryListFromJson(json);
-    beneficiaries.removeWhere((e) => e.toJson() == beneficiaryModel.toJson());
+    beneficiaries.removeWhere((e) => e.number == beneficiaryModel.number);
     MemoryService.instance.beneficiaries = beneficiaryListToJson(beneficiaries);
     return true;
   }

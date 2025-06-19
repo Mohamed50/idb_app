@@ -29,14 +29,18 @@ class BeneficiaryViewModel extends GetxController {
 
   RxList<BeneficiaryModel> get electricityBeneficiaries => _electricityBeneficiaries;
 
-  void _fetchBeneficiaries() {
+  Future<void> _fetchBeneficiaries() async {
     _beneficiaries.value = _beneficiaryService.fetchBeneficiaries();
     _groupBeneficiaries();
+    update();
   }
 
   void _groupBeneficiaries() {
-    _beneficiaries.map(
-      (e) {
+    _electricityBeneficiaries.clear();
+    _insideBeneficiaries.clear();
+    _outsideBeneficiaries.clear();
+    _teleBeneficiaries.clear();
+    for (var e in _beneficiaries) {
         switch (e.type) {
           case BeneficiaryType.electricity:
             _electricityBeneficiaries.add(e);
@@ -51,11 +55,23 @@ class BeneficiaryViewModel extends GetxController {
             _outsideBeneficiaries.add(e);
             break;
         }
-      },
-    );
+      }
+    update();
   }
 
-  void addBeneficiary(BeneficiaryModel beneficiaryModel){
-    _beneficiaryService.addBeneficiary(beneficiaryModel);
+  Future<void> addBeneficiary(BeneficiaryModel beneficiaryModel) async {
+    await _beneficiaryService.addBeneficiary(beneficiaryModel);
+    _fetchBeneficiaries();
+  }
+
+  void refreshData() {
+    _fetchBeneficiaries();
+  }
+
+  Future<void> removeBeneficiary(BeneficiaryModel beneficiaryModel) async {
+    _beneficiaryService.removeBeneficiary(beneficiaryModel);
+    await Future.delayed(Duration(milliseconds: 300));
+    refreshData();
+    update();
   }
 }

@@ -126,6 +126,10 @@ class TranslationsKeys {
   static const String tkNoBeneficiariesLabel = 'tkNoBeneficiariesLabel';
   static const String tkAddBeneficiaryLabel = 'tkAddBeneficiaryLabel';
   static const String tkAddBeneficiarySuccessMsg = 'tkAddBeneficiarySuccessMsg';
+  static const String tkAddBeneficiariesLabel = 'tkAddBeneficiariesLabel';
+  static const String tkTypeLabel = 'tkTypeLabel';
+  static const String tkTeleProviderLabel = 'tkTeleProviderLabel';
+  static const String tkTeleServiceTypeLabel = 'tkTeleServiceTypeLabel';
   static const String tkTransferServicesLabel = 'tkTransferServicesLabel';
   static const String tkTransferOutsideBankServicesLabel = 'tkTransferToDifferentBankServicesLabel';
   static const String tkTransferInsideBankLabel = 'tkTransferWithinBankLabel';
@@ -216,6 +220,7 @@ class TranslationsKeys {
   static const String tkFaqsLabel = 'tkFaqsLabel';
   static const String tkLogoutLabel = 'tkLogoutLabel';
   static const String tkTransactionLimitLabel = 'tkTransactionLimitLabel';
+  static const String tkAccountInfoNotAvailableMsg = 'tkAccountInfoNotAvailableMsg';
 
 
 }

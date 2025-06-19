@@ -1,16 +1,17 @@
 import 'package:az_banking_app/src/config/config.dart';
-import 'package:az_banking_app/src/modules/accounts/data/models/account_type_model.dart';
 import 'package:az_banking_app/src/views/custom/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomDropDown<T> extends StatelessWidget {
   final ValueChanged<T?>? onSaved;
+  final ValueChanged<T?>? onChanged;
   final FormFieldValidator<T>? validator;
   final List<T> options;
   final String label;
+  final T? value;
 
-  const CustomDropDown({super.key, this.onSaved, this.label = TranslationsKeys.tkFromAccountLabel, this.validator, required this.options});
+  const CustomDropDown({super.key, this.onSaved, this.label = TranslationsKeys.tkFromAccountLabel, this.validator, required this.options, this.value, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class CustomDropDown<T> extends StatelessWidget {
       labelStyle: textStyle,
     );
     return DropdownButtonFormField<T>(
+      value: value,
       decoration: decoration,
       validator: validator,
       items: options
@@ -41,7 +43,11 @@ class CustomDropDown<T> extends StatelessWidget {
                 ),
               ))
           .toList(),
-      onChanged: (v) {},
+      onChanged: (v) {
+        if(onChanged != null) {
+          onChanged!(v);
+        }
+      },
       onSaved: (v) {
         if (onSaved != null) {
           onSaved!(v);
