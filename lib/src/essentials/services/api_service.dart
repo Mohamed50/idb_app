@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/essentials/widgets/confirmation_dialog.dart';
 import 'package:az_banking_app/src/modules/auth/data/models/user.dart';
 import 'package:crypto/crypto.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '/src/utils/route_manager.dart';
-import '/src/config/app_exception.dart';
 import '/src/essentials/config/api_config.dart';
 import '/src/utils/utils.dart';
 import 'memory_service.dart';
@@ -65,6 +66,33 @@ class ApiService extends GetConnect {
     );
     logRequestData(response, body);
     handleError(response);
+    return response;
+  }
+
+  Future<Response<T>> transaction<T>(
+    String url,
+    body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    Decoder<T>? decoder,
+    Progress? uploadProgress,
+    required Future<bool> Function() onDuplicated,
+  }) async {
+    if (isDuplicateTransaction(url, body)) {
+      bool status = await onDuplicated();
+      if (!status) throw AppException(TranslationsKeys.tkTransactionCanceledMsg);
+    }
+    final response = await post<T>(
+      url,
+      body,
+      contentType: contentType,
+      headers: headers,
+      query: query,
+      decoder: decoder,
+      uploadProgress: uploadProgress,
+    );
+    saveTransaction(url, body);
     return response;
   }
 
@@ -240,5 +268,63 @@ class ApiService extends GetConnect {
 
   String get tranDateTime {
     return DateFormat('dd-MM-yy-hh-mm-ss', 'en').format(DateTime.now()).replaceAll('-', '');
+  }
+
+  void saveTransaction(String url, Map<String, dynamic> body) {
+    final hash = TransactionSignature.from(url, body).toHash();
+    final timestamp = DateTime.now();
+    MemoryService.instance.lastTransactionCache = TransactionCacheModel(hash: hash, timestamp: timestamp);
+  }
+
+  bool isDuplicateTransaction(String url, Map<String, dynamic> body) {
+    final currentHash = TransactionSignature.from(url, body).toHash();
+    final cache = MemoryService.instance.lastTransactionCache;
+
+    if (cache == null) return false;
+
+    final isExpired = DateTime.now().difference(cache.timestamp).inMinutes > 10;
+    return !isExpired && cache.hash == currentHash;
+  }
+
+  Future<bool> onDuplicated() async {
+    final result = await Get.dialog<bool>(ConfirmationDialog(message: TranslationsKeys.tkDuplicatedTransactionMsg));
+    return result ?? false;
+  }
+}
+
+class TransactionSignature {
+  final String url;
+  final Map<String, dynamic> body;
+
+  TransactionSignature({required this.url, required this.body});
+
+  String toHash() {
+    final sortedBody = Map.fromEntries(
+      body.entries.toList()..sort((a, b) => a.key.compareTo(b.key)),
+    );
+    return '$url|${sortedBody.toString()}'; // or use json.encode
+  }
+
+  static TransactionSignature from(String url, Map<String, dynamic> body) {
+    return TransactionSignature(url: url, body: body);
+  }
+}
+
+class TransactionCacheModel {
+  final String hash;
+  final DateTime timestamp;
+
+  TransactionCacheModel({required this.hash, required this.timestamp});
+
+  Map<String, dynamic> toJson() => {
+        'hash': hash,
+        'timestamp': timestamp.toIso8601String(),
+      };
+
+  factory TransactionCacheModel.fromJson(Map<String, dynamic> json) {
+    return TransactionCacheModel(
+      hash: json['hash'],
+      timestamp: DateTime.parse(json['timestamp']),
+    );
   }
 }

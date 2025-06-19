@@ -19,7 +19,7 @@ class TransferService extends ApiService {
       'Amount': amount,
       'comment': comment,
     };
-    final response = await post(APIConfiguration.transferBetweenAccountOutsideBankUrl, body);
+    final response = await transaction(APIConfiguration.transferBetweenAccountOutsideBankUrl, body, onDuplicated: onDuplicated);
     return response.body;
   }
 
@@ -39,7 +39,7 @@ class TransferService extends ApiService {
       'comment': comment,
       'Service_Code': ServicesConfiguration.transferBetweenAccountsServiceCode,
     };
-    final response = await post(APIConfiguration.transferBetweenAccountInsideBankUrl, body);
+    final response = await transaction(APIConfiguration.transferBetweenAccountInsideBankUrl, body, onDuplicated: onDuplicated);
     return response.body;
   }
 
@@ -59,7 +59,7 @@ class TransferService extends ApiService {
       'comment': comment,
       'Service_Code': ServicesConfiguration.transferBetweenAccountsServiceCode,
     };
-    final response = await post(APIConfiguration.transferBetweenMyOwnAccountUrl, body);
+    final response = await transaction(APIConfiguration.transferBetweenMyOwnAccountUrl, body, onDuplicated: onDuplicated);
     return response.body;
   }
 
@@ -92,6 +92,10 @@ class TransferService extends ApiService {
       "applicationId": 'com.edb.infinity',
     };
     final response = await post(APIConfiguration.fetchAccountInfoOutsideBankUrl, body);
-    return AccountModel(accountType: AccountType.ntd, accountNo: response.body['PAN'],name: response.body['customerName'], iban: response.body['BBAN']);
+    return AccountModel(
+        accountType: AccountType.ntd,
+        accountNo: response.body['PAN'],
+        name: response.body['customerName'],
+        iban: response.body['BBAN']);
   }
 }

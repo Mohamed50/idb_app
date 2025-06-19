@@ -48,7 +48,7 @@ class TeleBillsService extends ApiService {
       'Amount': amount,
       'Account_Info': fromAccount.toJson()
     };
-    final response = await post(APIConfiguration.teleTopUpUrl, body);
+    final response = await transaction(APIConfiguration.teleTopUpUrl, body, onDuplicated: onDuplicated);
     return response.body;
   }
 
@@ -71,7 +71,7 @@ class TeleBillsService extends ApiService {
       'Amount': amount,
       'Account_Info': fromAccount.toJson()
     };
-    final response = await post(APIConfiguration.teleBillPaymentUrl, body);
+    final response = await transaction(APIConfiguration.teleBillPaymentUrl, body, onDuplicated: onDuplicated);
     return response.body;
   }
 }

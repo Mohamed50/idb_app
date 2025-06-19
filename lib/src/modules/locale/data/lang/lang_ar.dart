@@ -240,6 +240,10 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkTransactionLimitLabel: 'الحدود والرسوم',
   TranslationsKeys.tkAccountInfoNotAvailableMsg: 'بيانات الحساب غير متوفرة',
   TranslationsKeys.tkLogoutLabel: 'تسجيل الخروج',
+  TranslationsKeys.tkTransactionCanceledMsg: 'تم إلغاء العملية من قبل المستخدم',
+  TranslationsKeys.tkDuplicatedTransactionMsg: 'تم تنفيذ هذه العملية مؤخرًا. هل ترغب في المتابعة مرة أخرى؟',
+  TranslationsKeys.tkYesLabel: 'نعم',
+  TranslationsKeys.tkNoLabel: 'لا',
 
   'BeneficiaryType.inside': 'داخل البنك',
   'BeneficiaryType.outside': 'خارج البنك',

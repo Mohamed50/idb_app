@@ -28,10 +28,6 @@ class BankServicesActions extends ActionPresenter {
     }
   }
 
-  void toResponsePage(Map<String, dynamic> response) {
-    Get.toNamed(RouteManager.responseRoute, arguments: response);
-  }
-
   Future handleTransferWithQrCode() async {
     actionHandlerWithoutLoading(() async {
       String? qrCode = await Get.to(() => QrCodeScannerPage());

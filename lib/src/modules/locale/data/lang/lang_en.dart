@@ -240,6 +240,10 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkFaqsLabel: 'FAQs',
   TranslationsKeys.tkTransactionLimitLabel: 'Limits & Fees',
   TranslationsKeys.tkAccountInfoNotAvailableMsg: 'Account info not available',
+  TranslationsKeys.tkTransactionCanceledMsg: 'Transaction was cancelled by the user',
+  TranslationsKeys.tkDuplicatedTransactionMsg: 'This transaction was already submitted recently. Do you want to proceed again?',
+  TranslationsKeys.tkYesLabel: 'Yes',
+  TranslationsKeys.tkNoLabel: 'No',
   TranslationsKeys.tkLogoutLabel: 'Logout',
 
   'BeneficiaryType.inside': 'Inside Bank',

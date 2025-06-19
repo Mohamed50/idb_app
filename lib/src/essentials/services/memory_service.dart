@@ -2,6 +2,8 @@ import 'package:az_banking_app/src/modules/auth/data/models/user.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'api_service.dart';
+
 /// A singleton service to manage local storage using GetStorage.
 class MemoryService extends GetConnect {
   // Singleton instance of MemoryService.
@@ -64,6 +66,24 @@ class MemoryService extends GetConnect {
 
   /// Gets the refresh token from local storage.
   String? get beneficiaries => _storage.read("beneficiaries");
+
+  /// Stores the last transaction hash with a timestamp.
+  set lastTransactionCache(TransactionCacheModel? cache) {
+    if (cache == null) {
+      _storage.remove("lastTransactionCache");
+    } else {
+      _storage.write("lastTransactionCache", cache.toJson());
+    }
+  }
+
+  /// Retrieves the last transaction cache.
+  TransactionCacheModel? get lastTransactionCache {
+    final data = _storage.read("lastTransactionCache");
+    if (data != null) {
+      return TransactionCacheModel.fromJson(Map<String, dynamic>.from(data));
+    }
+    return null;
+  }
 
 
   /// Sets the refresh token in local storage.

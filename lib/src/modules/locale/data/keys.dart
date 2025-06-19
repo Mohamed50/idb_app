@@ -222,6 +222,10 @@ class TranslationsKeys {
   static const String tkLogoutLabel = 'tkLogoutLabel';
   static const String tkTransactionLimitLabel = 'tkTransactionLimitLabel';
   static const String tkAccountInfoNotAvailableMsg = 'tkAccountInfoNotAvailableMsg';
+  static const String tkTransactionCanceledMsg = 'tkTransactionCanceledMsg';
+  static const String tkDuplicatedTransactionMsg = 'tkDuplicatedTransactionMsg';
+  static const String tkYesLabel = 'tkYesLabel';
+  static const String tkNoLabel = 'tkNoLabel';
 
 
 }
