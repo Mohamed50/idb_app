@@ -2,6 +2,7 @@ import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/beneficiary/controllers/beneficiary_view_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/views/custom/custom_drop_down.dart';
+import 'package:az_banking_app/src/views/custom/custom_visible.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,12 +31,16 @@ class BeneficiaryDropDown extends StatelessWidget {
             options = controller.outsideBeneficiaries;
             break;
         }
-        return CustomDropDown<BeneficiaryModel>(
-          value: value,
-          label: TranslationsKeys.tkBeneficiariesLabel,
-          onChanged: onChanged,
-          options: options,
-        );
+          return CustomVisible(
+            show: options.isNotEmpty,
+            child: CustomDropDown<BeneficiaryModel>(
+              value: value,
+              label: TranslationsKeys.tkBeneficiariesLabel,
+              onChanged: onChanged,
+              options: options,
+            ),
+          );
+
       },
     );
   }

@@ -5,12 +5,14 @@ import 'package:az_banking_app/src/modules/bank_services/modules/transfer/action
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/views/confirm_transfer_widget.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
+import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_drop_down.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/custom_appbar.dart';
 import 'package:az_banking_app/src/views/custom/custom_button.dart';
 import 'package:az_banking_app/src/views/custom/custom_form_field.dart';
 import 'package:az_banking_app/src/views/custom/custom_visible.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class TransferToAccountInsideBankPage extends StatelessWidget {
@@ -41,21 +43,38 @@ class _InsideBankForm extends GetView<TransferViewModel> {
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
     BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
+    if(beneficiaryModel != null){
+      controller.numberController.text = beneficiaryModel.number;
+    }
     return Form(
       key: _formKey,
       child: ListView(
         padding: EdgeInsets.all(24.0),
         children: [
-          // AccountsDropDown(
-          //   onSaved: controller.onFromAccountChanged,
-          //   validator: (v) => InputsValidator.generalValidator(v?.toString()),
-          // ),
-          // SizedBox(height: verticalSpacing),
+          AccountsDropDown(
+            onSaved: controller.onFromAccountChanged,
+            validator: (v) => InputsValidator.generalValidator(v?.toString()),
+          ),
+          SizedBox(height: verticalSpacing),
           CustomFormField(
-            initialValue: beneficiaryModel?.number,
             label: TranslationsKeys.tkToAccountLabel,
+            controller: controller.numberController,
             onSaved: controller.onToAccountNumberChanged,
             validator: InputsValidator.generalValidator,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(11),
+            ],
+          ),
+          SizedBox(height: verticalSpacing),
+          BeneficiaryDropDown(
+            type: BeneficiaryType.inside,
+            value: beneficiaryModel,
+            onChanged: (value) {
+              if(value != null) {
+                controller.numberController.text = value.number;
+                controller.onToAccountNumberChanged(value.number);
+              }
+            },
           ),
           // SizedBox(height: verticalSpacing),
           // AccountTypeDropDown(

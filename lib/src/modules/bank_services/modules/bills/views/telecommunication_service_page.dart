@@ -3,9 +3,11 @@ import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dar
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/actions/bill_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/tele_bills_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/bill_info_model.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_provider_enum.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_service_type.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/widgets/tele_provider_picker.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
+import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_drop_down.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ import 'package:get/get.dart';
 
 class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
   static final _formKey = GlobalKey<FormState>();
+  static final _phoneController = TextEditingController();
 
   const TelecommunicationServicePage({super.key});
 
@@ -21,12 +24,17 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
     BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
+    _phoneController.text = beneficiaryModel?.number ?? '';
     return DefaultTabController(
       length: 2,
+      initialIndex: beneficiaryModel?.serviceType == TeleServiceType.payment ? 1 : 0,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: ColorManager.primaryColor,
-          title: CustomText.title(TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel, color: ColorManager.onButtonColor,),
+          title: CustomText.title(
+            TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel,
+            color: ColorManager.onButtonColor,
+          ),
           bottom: TabBar(
             onTap: Get.find<TeleBillsViewModel>().onTypeChanged,
             labelColor: ColorManager.onButtonColor,
@@ -50,19 +58,34 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
           child: ListView(
             padding: EdgeInsets.all(24.0),
             children: [
-              TeleProviderPicker(),
+              TeleProviderPicker(
+                teleProvider: beneficiaryModel?.provider,
+              ),
               SizedBox(height: verticalSpacing * 2),
               AccountsDropDown(
                 onSaved: controller.onFromAccountChanged,
                 validator: (v) => InputsValidator.generalValidator(v?.toString()),
               ),
               SizedBox(height: verticalSpacing),
-              CustomFormField(
-                initialValue: beneficiaryModel?.number,
-                label: '${TranslationsKeys.tkPhoneLabel.tr} (0xxxxxxxxx)',
-                onSaved: controller.onPhoneChanged,
-                validator: InputsValidator.phoneValidator,
-                inputFormatters: [LengthLimitingTextInputFormatter(10)],
+              GetBuilder<TeleBillsViewModel>(
+                builder: (controller) => CustomFormField(
+                  controller: _phoneController,
+                  label: TranslationsKeys.tkPhoneLabel,
+                  onSaved: controller.onPhoneChanged,
+                  validator: getPhoneValidator,
+                  inputFormatters: [LengthLimitingTextInputFormatter(10)],
+                ),
+              ),
+              SizedBox(height: verticalSpacing),
+              BeneficiaryDropDown(
+                type: BeneficiaryType.telecommunication,
+                value: beneficiaryModel,
+                onChanged: (value) {
+                  if(value != null) {
+                    controller.onProviderChange(value.provider ?? TeleProvider.zain);
+                    _phoneController.text = value.number;
+                  }
+                },
               ),
               SizedBox(height: verticalSpacing),
               GetX<TeleBillsViewModel>(
@@ -97,6 +120,17 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       BillsActions.instance.confirm(context);
+    }
+  }
+
+  String? getPhoneValidator(String? phoneNumber) {
+    switch (controller.selectedProvider) {
+      case TeleProvider.sudani:
+        return InputsValidator.sudaniValidator(phoneNumber);
+      case TeleProvider.zain:
+        return InputsValidator.zainValidator(phoneNumber);
+      case TeleProvider.mtn:
+        return InputsValidator.mtnValidator(phoneNumber);
     }
   }
 }

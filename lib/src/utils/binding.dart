@@ -1,3 +1,4 @@
+import 'package:az_banking_app/src/modules/beneficiary/beneficiaries_bindings.dart';
 import 'package:az_banking_app/src/modules/branches/branches_bindings.dart';
 import 'package:az_banking_app/src/modules/home/home_bindings.dart';
 import 'package:az_banking_app/src/modules/locale/controllers/localization_view_model.dart';
@@ -34,5 +35,8 @@ class InitialBindings extends Bindings {
 
     // Registers the dependencies related to menu functionality.
     HomeBindings().dependencies();
+
+    // Registers the dependencies related to beneficiaries functionality.
+    BeneficiariesBindings().dependencies();
   }
 }

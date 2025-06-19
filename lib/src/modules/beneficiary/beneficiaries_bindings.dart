@@ -8,7 +8,7 @@ class BeneficiariesBindings implements Bindings {
   @override
   void dependencies() {
     if (!Get.isRegistered<BeneficiaryViewModel>()) {
-      Get.put(BeneficiaryService(), permanent: true);
+      Get.put(BeneficiaryService());
       Get.put(BeneficiaryViewModel(Get.find()), permanent: true);
     }
   }

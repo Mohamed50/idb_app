@@ -1,6 +1,7 @@
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_type_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/data/services/transfer_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TransferViewModel extends GetxController {
@@ -14,6 +15,8 @@ class TransferViewModel extends GetxController {
   String? phone, comment, toAccountBBan, _toAccountNumber;
   AccountType? _toAccountType = AccountType.ntd;
   double? amount;
+
+  final TextEditingController numberController = TextEditingController();
 
   Future<Map<String, dynamic>> transferToAccountInsideBank() async {
     return await _transferService.transferToAccountInsideTheBank(

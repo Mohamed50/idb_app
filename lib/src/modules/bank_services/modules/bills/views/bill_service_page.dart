@@ -4,6 +4,7 @@ import 'package:az_banking_app/src/modules/bank_services/modules/bills/actions/b
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/bill_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
+import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_drop_down.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
@@ -53,17 +54,19 @@ class BillServicePage extends GetView<BillsViewModel> {
       BillsActions.instance.billConfirm(context, billerId, inquiryBillerId);
     }
   }
+
 }
 
 class _FormWidget extends GetView<BillsViewModel> {
   final String billerId;
-
+  static final _numberController = TextEditingController();
   const _FormWidget(this.billerId);
 
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
     BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
+    _numberController.text = beneficiaryModel?.number ?? '';
     return Column(
       children: [
         SizedBox(height: verticalSpacing * 2),
@@ -73,18 +76,35 @@ class _FormWidget extends GetView<BillsViewModel> {
         ),
         SizedBox(height: verticalSpacing),
         CustomFormField(
-          initialValue: beneficiaryModel?.number,
+          controller: _numberController,
           label: ServicesConfiguration.getServiceMainFiledLabel(billerId),
           onSaved: controller.onBillNumberChanged,
           validator: InputsValidator.generalValidator,
         ),
-        SizedBox(height: verticalSpacing),
+        CustomVisible(
+          show: billerId == ServicesConfiguration.topUpElectricityServiceCode,
+          child: Padding(
+            padding: EdgeInsets.only(top: verticalSpacing),
+            child: BeneficiaryDropDown(
+              type: BeneficiaryType.electricity,
+              value: beneficiaryModel,
+              onChanged: (value) {
+                if(value != null) {
+                  _numberController.text = value.number;
+                }
+              },
+            ),
+          ),
+        ),
         CustomVisible(
           show: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId) != null,
-          child: CustomFormField(
-            label: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId),
-            onSaved: controller.onSecondaryNumberChanged,
-            validator: InputsValidator.generalValidator,
+          child: Padding(
+            padding: EdgeInsets.only(top: verticalSpacing),
+            child: CustomFormField(
+              label: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId),
+              onSaved: controller.onSecondaryNumberChanged,
+              validator: InputsValidator.generalValidator,
+            ),
           ),
         ),
         SizedBox(height: verticalSpacing),
@@ -98,6 +118,7 @@ class _FormWidget extends GetView<BillsViewModel> {
       ],
     );
   }
+
 }
 
 class _BillInformationWidget extends GetView<BillsViewModel> {

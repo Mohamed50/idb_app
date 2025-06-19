@@ -4,19 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TeleProviderPicker extends StatelessWidget {
-  const TeleProviderPicker({super.key});
+  final TeleProvider? teleProvider;
+  const TeleProviderPicker({super.key, required this.teleProvider});
 
   @override
   Widget build(BuildContext context) {
+    if(teleProvider != null) {
+      Get.find<TeleBillsViewModel>().onProviderChange(teleProvider!);
+    }
     return GetX<TeleBillsViewModel>(
       builder: (controller) => Row(
         children: [TeleProvider.zain, TeleProvider.mtn, TeleProvider.sudani]
             .map((e) => Expanded(
-                  child: TeleProviderItem(
-                    teleProvider: e,
-                    selected: controller.selectedProvider == e,
-                  ),
-                ))
+          child: TeleProviderItem(
+            teleProvider: e,
+            selected: controller.selectedProvider == e,
+          ),
+        ))
             .toList(),
       ),
     );
@@ -54,3 +58,4 @@ class TeleProviderItem extends StatelessWidget {
     );
   }
 }
+
