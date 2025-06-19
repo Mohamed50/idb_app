@@ -127,6 +127,7 @@ class TranslationsKeys {
   static const String tkAddBeneficiaryLabel = 'tkAddBeneficiaryLabel';
   static const String tkAddBeneficiarySuccessMsg = 'tkAddBeneficiarySuccessMsg';
   static const String tkAddBeneficiariesLabel = 'tkAddBeneficiariesLabel';
+  static const String tkBeneficiaryExistMsg = 'tkBeneficiaryExistMsg';
   static const String tkTypeLabel = 'tkTypeLabel';
   static const String tkTeleProviderLabel = 'tkTeleProviderLabel';
   static const String tkTeleServiceTypeLabel = 'tkTeleServiceTypeLabel';

@@ -44,6 +44,19 @@ class BeneficiaryModel {
   String toString() {
     return '$name - ($number)';
   }
+
+
+  /// **Override equality operator to compare accounts by `accountNo`.**
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is BeneficiaryModel &&
+              runtimeType == other.runtimeType &&
+              number == other.number;
+
+  /// **Override hashCode to match `number`.**
+  @override
+  int get hashCode => number.hashCode;
 }
 
 /// **Convert List of BeneficiaryModel to JSON String**

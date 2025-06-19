@@ -148,6 +148,7 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkTeleServiceTypeLabel: 'Number Type',
   TranslationsKeys.tkAddBeneficiarySuccessMsg: 'Beneficiary added successfully',
   TranslationsKeys.tkNoBeneficiariesLabel: 'You don\'t have beneficiaries yet',
+  TranslationsKeys.tkBeneficiaryExistMsg: 'You can\'t add the same beneficiary more than one',
   TranslationsKeys.tkTransferServicesLabel: 'Transfer',
   TranslationsKeys.tkTransferOutsideBankServicesLabel: 'Outside',
   TranslationsKeys.tkTransferInsideBankLabel: 'Inside',

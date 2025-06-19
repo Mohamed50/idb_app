@@ -1,3 +1,4 @@
+import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/services/beneficiary_service.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:get/get.dart';
@@ -60,8 +61,13 @@ class BeneficiaryViewModel extends GetxController {
   }
 
   Future<void> addBeneficiary(BeneficiaryModel beneficiaryModel) async {
-    await _beneficiaryService.addBeneficiary(beneficiaryModel);
-    _fetchBeneficiaries();
+    if(!_beneficiaries.contains(beneficiaryModel)) {
+      await _beneficiaryService.addBeneficiary(beneficiaryModel);
+      _fetchBeneficiaries();
+    }
+    else{
+      throw AppException(TranslationsKeys.tkBeneficiaryExistMsg);
+    }
   }
 
   void refreshData() {

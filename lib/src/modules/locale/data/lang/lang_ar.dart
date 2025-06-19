@@ -145,6 +145,7 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkTeleServiceTypeLabel: 'نوع الرقم',
   TranslationsKeys.tkAddBeneficiarySuccessMsg: 'تم اضافة المستفيد بنجاح',
   TranslationsKeys.tkNoBeneficiariesLabel: 'ليس لديك مستفيدين حاليا',
+  TranslationsKeys.tkBeneficiaryExistMsg: 'لا يمكن اضافة نفس المستفيد اكثر من مرة',
   TranslationsKeys.tkTransferServicesLabel: 'التحويلات',
   TranslationsKeys.tkTransferOutsideBankServicesLabel: 'تحويل بنوك اخرى',
   TranslationsKeys.tkTransferInsideBankLabel: 'تحويل داخل البنك',
