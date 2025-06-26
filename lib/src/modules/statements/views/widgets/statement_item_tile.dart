@@ -25,6 +25,7 @@ class StatementItemTile extends StatelessWidget {
           CustomCard(color: color.withValues(alpha: 0.08), child: FaIcon(icon, color: color, size: 24.0)),
           SizedBox(width: 8.0),
           Expanded(child: CustomText.subtitle(statementModel.naration, color: ColorManager.titleColor, fontSize: 12.0,)),
+          SizedBox(width: 4.0),
           CustomText.title(statementModel.amount, color: color),
         ],
       ),
