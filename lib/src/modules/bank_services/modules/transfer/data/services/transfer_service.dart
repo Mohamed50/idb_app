@@ -19,7 +19,7 @@ class TransferService extends ApiService {
       'Amount': amount,
       'comment': comment,
     };
-    final response = await transaction(APIConfiguration.transferBetweenAccountOutsideBankUrl, body, onDuplicated: onDuplicated);
+    final response = await transaction(APIConfiguration.transferBetweenAccountOutsideBankUrl, body, onDuplicated: () => onDuplicated('transfer'));
     return response.body;
   }
 
@@ -39,7 +39,7 @@ class TransferService extends ApiService {
       'comment': comment,
       'Service_Code': ServicesConfiguration.transferBetweenAccountsServiceCode,
     };
-    final response = await transaction(APIConfiguration.transferBetweenAccountInsideBankUrl, body, onDuplicated: onDuplicated);
+    final response = await transaction(APIConfiguration.transferBetweenAccountInsideBankUrl, body, onDuplicated: () => onDuplicated('transfer'));
     return response.body;
   }
 
@@ -59,7 +59,7 @@ class TransferService extends ApiService {
       'comment': comment,
       'Service_Code': ServicesConfiguration.transferBetweenAccountsServiceCode,
     };
-    final response = await transaction(APIConfiguration.transferBetweenMyOwnAccountUrl, body, onDuplicated: onDuplicated);
+    final response = await transaction(APIConfiguration.transferBetweenMyOwnAccountUrl, body, onDuplicated: () => onDuplicated('transfer'));
     return response.body;
   }
 

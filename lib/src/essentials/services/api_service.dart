@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/essentials/widgets/confirmation_dialog.dart';
 import 'package:az_banking_app/src/modules/auth/data/models/user.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/bills/actions/bill_actions.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:crypto/crypto.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -271,6 +273,8 @@ class ApiService extends GetConnect {
   }
 
   void saveTransaction(String url, Map<String, dynamic> body) {
+    body.remove('Lang');
+    body.remove('Tran_DateTime');
     final hash = TransactionSignature.from(url, body).toHash();
     final timestamp = DateTime.now();
     MemoryService.instance.lastTransactionCache = TransactionCacheModel(hash: hash, timestamp: timestamp);
@@ -283,11 +287,23 @@ class ApiService extends GetConnect {
     if (cache == null) return false;
 
     final isExpired = DateTime.now().difference(cache.timestamp).inMinutes > 10;
-    return !isExpired && cache.hash == currentHash;
+   return !isExpired && cache.hash == currentHash;
   }
 
-  Future<bool> onDuplicated() async {
+  Future<bool> onDuplicated([String? type]) async {
+    if(type == 'transfer'){
+      TransferActions.instance.hideLoader();
+    }
+    else{
+      BillsActions.instance.hideLoader();
+    }
     final result = await Get.dialog<bool>(ConfirmationDialog(message: TranslationsKeys.tkDuplicatedTransactionMsg));
+    if(type == 'transfer'){
+      TransferActions.instance.showLoader();
+    }
+    else{
+      BillsActions.instance.showLoader();
+    }
     return result ?? false;
   }
 }

@@ -10,6 +10,9 @@ import '/src/views/custom/customs.dart';
 
 /// Handles actions with error handling, loading indicators, and UI feedback.
 class ActionPresenter {
+
+  BuildContext? context;
+
   /// Method to handle an asynchronous action with error handling and loading indicator.
   ///
   /// `action`: The async function to be executed.
@@ -21,6 +24,7 @@ class ActionPresenter {
     VoidCallback? onSuccess,
     VoidCallback? onFailure,
   }) async {
+    this.context = context;
     // Show the loading overlay during the action execution.
     context.loaderOverlay.show();
     try {
@@ -44,6 +48,18 @@ class ActionPresenter {
       if (context.mounted) {
         context.loaderOverlay.hide();
       }
+    }
+  }
+
+  void showLoader(){
+    if (context != null && context!.mounted) {
+      context!.loaderOverlay.show();
+    }
+  }
+
+  void hideLoader(){
+    if (context != null && context!.mounted) {
+      context!.loaderOverlay.hide();
     }
   }
 

@@ -85,6 +85,8 @@ class ResponsePage extends StatelessWidget {
                                 child: AccountItemTile(
                                   accountModel: toAccount,
                                   withName: true,
+                                  withPhone: false,
+                                  withIban: false,
                                   backgroundColor: ColorManager.lightBackgroundColor,
                                 ),
                               )

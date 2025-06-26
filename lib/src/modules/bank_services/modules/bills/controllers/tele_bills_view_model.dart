@@ -61,6 +61,7 @@ class TeleBillsViewModel extends GetxController {
 
   void onProviderChange(TeleProvider teleProvider) {
     _selectedProvider.value = teleProvider;
+    update();
   }
 
   void onTypeChanged(int? index) {

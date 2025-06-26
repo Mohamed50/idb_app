@@ -70,7 +70,7 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
               GetBuilder<TeleBillsViewModel>(
                 builder: (controller) => CustomFormField(
                   controller: _phoneController,
-                  label: TranslationsKeys.tkPhoneLabel,
+                  label: '${TranslationsKeys.tkPhoneLabel.tr} (0${controller.selectedProvider == TeleProvider.sudani ? '1' : '9'}xxxxxxxx)',
                   onSaved: controller.onPhoneChanged,
                   validator: getPhoneValidator,
                   inputFormatters: [LengthLimitingTextInputFormatter(10)],
@@ -81,7 +81,7 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
                 type: BeneficiaryType.telecommunication,
                 value: beneficiaryModel,
                 onChanged: (value) {
-                  if(value != null) {
+                  if (value != null) {
                     controller.onProviderChange(value.provider ?? TeleProvider.zain);
                     _phoneController.text = value.number;
                   }
