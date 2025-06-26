@@ -249,6 +249,12 @@ If you have any questions about these Terms, please contact us at:
   'BeneficiaryType.outside': 'خارج البنك',
   'BeneficiaryType.electricity': 'كهرباء',
   'BeneficiaryType.telecommunication': 'اتصالات',
+  'TeleProvider.mtn': 'ام تي ان',
+  'TeleProvider.sudani': 'سوداني',
+  'TeleProvider.zain': 'زين',
+
+  'TeleServiceType.topUp': 'شحن رصيد',
+  'TeleServiceType.payment': 'دفع فاتورة',
 
   /// استجابة النظام
   "Response_Code": "رمز الاستجابة",

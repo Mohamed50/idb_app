@@ -251,6 +251,13 @@ If you have any questions about these Terms, please contact us at:
   'BeneficiaryType.electricity': 'Electricity',
   'BeneficiaryType.telecommunication': 'Telecom',
 
+  'TeleProvider.mtn': 'MTN',
+  'TeleProvider.sudani': 'Sudani',
+  'TeleProvider.zain': 'Zain',
+
+  'TeleServiceType.topUp': 'Top Up',
+  'TeleServiceType.payment': 'Payment',
+
   /// response
   "Response_Code": "Response Code",
   "Comment": "Remarks",

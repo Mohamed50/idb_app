@@ -23,7 +23,7 @@ class ResponsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> response = Get.arguments['response'] ?? Get.arguments;
+    final Map<String, dynamic> response = Get.arguments['response'] ?? Get.arguments ?? {};
     final children = ServicesConfiguration.getServiceResponseItems(response);
     final responseInJson = ServicesConfiguration.getServiceResponse(response);
     final AccountModel? toAccount = Get.arguments['to_account'];
@@ -183,7 +183,7 @@ class ResponsePage extends StatelessWidget {
           'number': response['رقم العداد'] ?? response['tkMeterNumberLabel']
         };
       case BeneficiaryType.telecommunication:
-        return {};
+        return {'name': '', 'number': response['tkPhoneLabel']};
       case BeneficiaryType.inside:
         return accountModel!.toJson();
       case BeneficiaryType.outside:
