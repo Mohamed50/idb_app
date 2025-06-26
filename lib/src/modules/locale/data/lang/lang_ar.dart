@@ -261,4 +261,7 @@ If you have any questions about these Terms, please contact us at:
   "Biller_ID": "معرف الفاتورة",
   "Currency_Code": "رمز العملة",
   "Customer_Name": "اسم المستلم",
+  "Fees": "رسوم المعاملة",
+  "NS_RRN": "الرقم المرجعي",
+  "APP_RRN": "معرف التطبيق",
 };
