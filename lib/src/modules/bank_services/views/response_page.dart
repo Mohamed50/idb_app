@@ -123,7 +123,7 @@ class ResponsePage extends StatelessWidget {
               ),
               SizedBox(height: 12),
               CustomButton(
-                text: TranslationsKeys.tkDoneLabel,
+                text: TranslationsKeys.tkAnotherTransactionLabel,
                 onPressed: () => _back(),
               ),
               SizedBox(height: 12),
