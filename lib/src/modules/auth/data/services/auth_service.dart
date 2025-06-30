@@ -20,7 +20,7 @@ class AuthService extends ApiService {
   // Stores the access and refresh tokens in MemoryService upon successful login.
   Future<UserModel> signIn(String username, String password) async {
     final deviceInfo = await Utils.getDeviceInfo();
-    final body = {
+    Map<String, dynamic> body = {
       'User_ID': username,
       'Password': generateMd5(password),
       'Channel_ID': 1,
@@ -55,7 +55,7 @@ class AuthService extends ApiService {
     if(phoneNumber[0] == '0'){
       phoneNumber = phoneNumber.substring(1);
     }
-    final body = {'RIM': rim, 'Phone_No': '249$phoneNumber', 'National_ID': nationalNumber};
+    Map<String, dynamic> body = {'RIM': rim, 'Phone_No': '249$phoneNumber', 'National_ID': nationalNumber};
     await post(
       APIConfiguration.signUpUrl,
       headers: getUnauthorizedHeader(), // Uses header without authorization
@@ -78,7 +78,7 @@ class AuthService extends ApiService {
     if (phoneNumber[0] == '0') {
       phoneNumber = phoneNumber.substring(1);
     }
-    final body = {
+    Map<String, dynamic> body = {
       'RIM': rim,
       'Phone_No': '249$phoneNumber',
       'National_ID': nationalNumber,
@@ -112,14 +112,14 @@ class AuthService extends ApiService {
   // verify otp.
   Future<bool> resetDevice(String otp, String token) async {
     final deviceInfo = await Utils.getDeviceInfo();
-    final body = {"OTP": otp, "New_Device_Key": deviceInfo['Device_ID']};
+    Map<String, dynamic> body = {"OTP": otp, "New_Device_Key": deviceInfo['Device_ID']};
     await post(APIConfiguration.verifyOtpUrl, body, headers: getDefaultHeader(token));
     return true;
   }
 
   // verify register otp.
   Future<VerifyResponse> verifyAccountByOtp(String rim, String otp) async {
-    final body = {'RIM': rim, 'OTP': otp};
+    Map<String, dynamic> body = {'RIM': rim, 'OTP': otp};
     final response = await post(APIConfiguration.verifyAccountByOtpUrl, body);
     return VerifyResponse(accounts: accountModelFromJson(response.body['Accounts_List']), nameEn: response.body['Customer_Name_EN'], nameAr: response.body['Customer_Name_AR']);
   }
@@ -156,13 +156,13 @@ class AuthService extends ApiService {
 
   Future<bool> linkAccounts(String userId, List<AccountModel> selectedAccounts) async {
     MemoryService.instance.userId = userId;
-    final body = {'User_ID': userId, 'Accounts_List': selectedAccounts.map((e) => e.toJson()).toList()};
+    Map<String, dynamic> body = {'User_ID': userId, 'Accounts_List': selectedAccounts.map((e) => e.toJson()).toList()};
     await post(APIConfiguration.linkAccountsUrl, body);
     return true;
   }
 
   Future<bool> setPassword(String userId, String password) async {
-    final body = {'User_ID': userId, 'Password': generateMd5(password)};
+    Map<String, dynamic> body = {'User_ID': userId, 'Password': generateMd5(password)};
     await post(APIConfiguration.setAccountPasswordsUrl, body);
     return true;
   }
