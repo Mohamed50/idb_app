@@ -34,12 +34,14 @@ class CustomDropDown<T> extends StatelessWidget {
       value: value,
       decoration: decoration,
       validator: validator,
+      isExpanded: true,
       items: options
           .map((e) => DropdownMenuItem<T>(
                 value: e,
                 child: CustomText.title(
                   e.toString(),
                   fontSize: 14.0,
+                  maxLines: 1,
                 ),
               ))
           .toList(),
