@@ -85,7 +85,7 @@ class TransferService extends ApiService {
   }
 
   Future<AccountModel> fetchAccountInfoOutsideBank(String accountNumber) async {
-    final body = {
+    Map<String, dynamic> body = {
       "PAN": accountNumber,
       "uuid": const Uuid().v4(),
       "tranDateTime": DateFormat('dd-MM-yy-hh-mm-ss', "en").format(DateTime.now()).replaceAll('-', ''),

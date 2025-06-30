@@ -77,7 +77,7 @@ class APIConfiguration {
   static const String transferBetweenAccountInsideBankUrl = '$baseUrl/bankRoutes/accountTransfer';
   static const String transferBetweenMyOwnAccountUrl = '$baseUrl/bankRoutes/accountTransferOwn';
   static const String fetchAccountInfoInsideBankUrl = '$baseUrl/bankRoutes/getCustInfo';
-  static const String fetchAccountInfoOutsideBankUrl = '$baseUrl/cardRoutes/inquireCard';
+  static const String fetchAccountInfoOutsideBankUrl = '$baseUrl/bankRoute/otherBankInquiry';
 
   /// Bank Services - [telecommunication]
   static const String teleTopUpUrl = '$baseUrl/bankRoutes/TopUp';

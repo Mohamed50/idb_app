@@ -24,7 +24,7 @@ class AddBeneficiaryViewModel extends GetxController {
 
   Future<void> addBeneficiary(BeneficiaryModel beneficiaryModel) async {
     if (beneficiaryModel.type == BeneficiaryType.inside) {
-      await fetchReceiverInfo();
+      await fetchReceiverInfoInsideBank();
     } else if (beneficiaryModel.type == BeneficiaryType.outside) {
       await fetchReceiverInfoOutsideBank();
     } else {
@@ -65,6 +65,16 @@ class AddBeneficiaryViewModel extends GetxController {
   }
 
   Future fetchReceiverInfo() async {
+    if(beneficiaryModel.type == BeneficiaryType.inside){
+      await fetchReceiverInfoInsideBank();
+    }
+    else{
+      await fetchReceiverInfoOutsideBank();
+    }
+  }
+
+
+  Future fetchReceiverInfoInsideBank() async {
     toAccount = await _transferService.fetchAccountInfoInsideBank(
       beneficiaryModel.number,
       _toAccountType.toCode(),
