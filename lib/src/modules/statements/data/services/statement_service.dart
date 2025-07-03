@@ -14,6 +14,14 @@ class StatementService extends ApiService {
     return await _fetchStatement(accountModel, dateTimeRange.start, dateTimeRange.end, false, true);
   }
 
+  Future<List<StatementModel>> fetchHistoryByDate() async {
+    Map<String, dynamic> body = {
+      "Service_Code": "2002",
+    };
+    final response = await post(APIConfiguration.fetchHistoryUrl, body);
+    return statementModelFromJson(response.body['Statement_List']);
+  }
+
   Future<List<StatementModel>> _fetchStatement(
     AccountModel accountModel,
     DateTime fromDate,

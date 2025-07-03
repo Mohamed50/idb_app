@@ -153,6 +153,7 @@ class TranslationsKeys {
 
   /// Bank Services Module - Statement Services
   static const String tkStatementServiceLabel = 'tkStatementServiceLabel';
+  static const String tkHistoryServiceLabel = 'tkHistoryServiceLabel';
   static const String tkCancelLabel = 'tkCancelLabel';
   static const String tkCloseLabel = 'tkCloseLabel';
   static const String tkSelectDateLabel = 'tkSelectDateLabel';

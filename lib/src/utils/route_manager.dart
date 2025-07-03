@@ -39,6 +39,7 @@ import 'package:az_banking_app/src/modules/home/view/settings_page.dart';
 import 'package:az_banking_app/src/modules/products/products_bindings.dart';
 import 'package:az_banking_app/src/modules/products/views/products_page.dart';
 import 'package:az_banking_app/src/modules/statements/statement_bindings.dart';
+import 'package:az_banking_app/src/modules/statements/views/history_page.dart';
 import 'package:az_banking_app/src/modules/statements/views/statement_page.dart';
 import 'package:az_banking_app/src/modules/transactions_limit/transaction_limit_bindings.dart';
 import 'package:az_banking_app/src/modules/transactions_limit/views/transaction_limit_page.dart';
@@ -111,6 +112,7 @@ class RouteManager {
 
   /// services - [others]
   static const String statementRoute = '/service/other/statement';
+  static const String historyRoute = '/service/other/history';
   static const String productsRoute = '/service/other/products';
   static const String exchangeRoute = '/service/others/exchange-rate';
 
@@ -296,6 +298,11 @@ class RouteManager {
           name: statementRoute,
           page: () => const StatementPage(),
           // binding: StatementBindings(),
+        ),
+        GetPage(
+          name: historyRoute,
+          page: () => const HistoryPage(),
+          binding: HistoryBindings(),
         ),
         GetPage(
           name: productsRoute,

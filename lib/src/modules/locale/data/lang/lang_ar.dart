@@ -170,6 +170,7 @@ If you have any questions about these Terms, please contact us at:
 
   // 📑 خدمات البنك - كشف الحساب
   TranslationsKeys.tkStatementServiceLabel: 'كشف الحساب',
+  TranslationsKeys.tkHistoryServiceLabel: 'السجل',
   TranslationsKeys.tkCancelLabel: 'إلغاء',
   TranslationsKeys.tkCloseLabel: 'اغلاق',
   TranslationsKeys.tkSelectDateLabel: 'اختر التاريخ',

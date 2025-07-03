@@ -93,6 +93,18 @@ class BankServicesService extends ApiService {
         ],
       ),
       CategoryModel(
+        name: TranslationsKeys.tkHistoryServiceLabel,
+        iconPath: AssetsManager.icStatementPath,
+        route: 'route',
+        services: [
+          ServiceModel(
+            TranslationsKeys.tkHistoryServiceLabel,
+            AssetsManager.icStatementPath,
+            RouteManager.historyRoute,
+          ),
+        ],
+      ),
+      CategoryModel(
         name: TranslationsKeys.tkOtherServiceLabel,
         iconPath: AssetsManager.icOrderPath,
         route: 'route',

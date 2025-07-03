@@ -171,6 +171,7 @@ If you have any questions about these Terms, please contact us at:
 
   // 📑 Bank Services Module - Statement Services
   TranslationsKeys.tkStatementServiceLabel: 'Statement',
+  TranslationsKeys.tkHistoryServiceLabel: 'History',
   TranslationsKeys.tkCancelLabel: 'Cancel',
   TranslationsKeys.tkCloseLabel: 'Close',
   TranslationsKeys.tkSelectDateLabel: 'Select date',
