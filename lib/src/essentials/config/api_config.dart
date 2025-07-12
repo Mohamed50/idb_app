@@ -92,6 +92,7 @@ class APIConfiguration {
   /// Bank Services - [others]
   static const String fetchStatementUrl = '$baseUrl/bankRoutes/getStatement';
   static const String fetchHistoryUrl = '$baseUrl/sharedRoutes/getTranHistory';
+  static const String fetchServiceListUrl = '$baseUrl/sharedRoutes/getServList';
   static const String fetchProductsUrl = '$baseUrl/sharedRoutes/getBankProducts';
   static const String fetchExchangeRangeUrl = '$baseUrl/bankRoutes/getCurrencyRates';
 

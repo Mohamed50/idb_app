@@ -187,6 +187,7 @@ class TranslationsKeys {
   static const String tkSelectCourseLabel = 'tkSelectCourseLabel';
   static const String tkSelectFormLabel = 'tkSelectFormLabel';
   static const String tkSelectNumberFormLabel = 'tkSelectNumberFormLabel';
+  static const String tkAllServicesLabel = 'tkAllServicesLabel';
 
   /// Bank Services Module - Orders Services
   static const String tkOrdersServiceLabel = 'tkOrdersServiceLabel';

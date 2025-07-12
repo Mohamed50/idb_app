@@ -153,7 +153,7 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkTransferOutsideBankServicesLabel: 'Outside',
   TranslationsKeys.tkTransferInsideBankLabel: 'Inside',
   TranslationsKeys.tkTransferBetweenMyAccountsLabel: 'Between',
-  TranslationsKeys.tkTransferWithQRLabel: 'QR Code',
+  TranslationsKeys.tkTransferWithQRLabel: 'Scan QR',
   TranslationsKeys.tkScanQrCodeLabel: 'Scan QR code',
   TranslationsKeys.tkGeneralRequiredMsg: 'This field is required',
   TranslationsKeys.tkFromAccountLabel: 'From Account',
@@ -202,6 +202,7 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkE15ReceiptNumberLabel: 'E15 Receipt Number',
   TranslationsKeys.tkDeclarantCodeLabel: 'Declarant Code',
   TranslationsKeys.tkBankCodeLabel: 'Bank Code',
+  TranslationsKeys.tkAllServicesLabel: 'All Service',
 
   // 📦 Bank Services Module - Orders Services
   TranslationsKeys.tkOrdersServiceLabel: 'Orders',

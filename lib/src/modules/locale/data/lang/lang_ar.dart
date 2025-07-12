@@ -150,7 +150,7 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkTransferOutsideBankServicesLabel: 'تحويل بنوك اخرى',
   TranslationsKeys.tkTransferInsideBankLabel: 'تحويل داخل البنك',
   TranslationsKeys.tkTransferBetweenMyAccountsLabel: 'بين حساباتي',
-  TranslationsKeys.tkTransferWithQRLabel: 'رمز QR',
+  TranslationsKeys.tkTransferWithQRLabel: 'مسح QR',
   TranslationsKeys.tkScanQrCodeLabel: 'مسح رمز QR',
   TranslationsKeys.tkFromAccountLabel: 'من الحساب',
   TranslationsKeys.tkToAccountLabel: 'إلى الحساب',
@@ -201,6 +201,7 @@ If you have any questions about these Terms, please contact us at:
   TranslationsKeys.tkE15ReceiptNumberLabel: 'رقم إيصال E15',
   TranslationsKeys.tkDeclarantCodeLabel: 'رمز المصرح',
   TranslationsKeys.tkBankCodeLabel: 'رمز البنك',
+  TranslationsKeys.tkAllServicesLabel: 'كل الخدمات',
 
   // 📦 خدمات البنك - خدمات الطلبات
   TranslationsKeys.tkOrdersServiceLabel: 'الطلبات',

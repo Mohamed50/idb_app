@@ -61,6 +61,7 @@ class AccountItemTile extends StatelessWidget {
           CustomVisible(
             show: withIban,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText.subtitle(
                   TranslationsKeys.tkIbanLabel,

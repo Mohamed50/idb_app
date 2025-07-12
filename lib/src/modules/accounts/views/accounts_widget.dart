@@ -1,10 +1,12 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/accounts/actions/account_actions.dart';
 import 'package:az_banking_app/src/modules/accounts/controllers/account_view_model.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dart';
 import 'package:az_banking_app/src/modules/bank_services/views/transfer_services_grid.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class PrimaryAccountWidget extends StatelessWidget {
@@ -41,13 +43,17 @@ class PrimaryAccountWidget extends StatelessWidget {
                         Expanded(
                           child: GetBuilder<AccountViewModel>(
                             builder: (controller) => CustomVisible(
-                              show: (controller.accounts.data?.length ?? 0) > 1,
+                              show: (controller.accounts.data?.length ?? 0) > 0,
                               child: HomeAccountsDropDown(
                                 onChanged: controller.onSelectedAccountChange,
                               ),
                             ),
                           ),
                         ),
+                        SizedBox(width: 8.0),
+                        InkWell(
+                            onTap: _toQrDialog,
+                            child: Image.asset(AssetsManager.icQRPath, width: 24.0, color: Colors.white,)),
                       ],
                     ),
                     SizedBox(height: 24.0),
@@ -68,6 +74,10 @@ class PrimaryAccountWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _toQrDialog() {
+    AccountActions.instance.toQrCodePage(Get.find<AccountViewModel>().selectedAccount);
   }
 }
 

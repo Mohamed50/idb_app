@@ -23,6 +23,8 @@ class AccountViewModel extends GetxController {
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
 
+  AccountModel get selectedAccount => accounts.data![_selectedIndex];
+
   void _initialize() {
     _fetchAccounts();
   }
