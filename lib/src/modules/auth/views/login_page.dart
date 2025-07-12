@@ -11,7 +11,7 @@ import '/src/modules/auth/auth.dart';
 
 class LoginPage extends GetWidget<AuthViewModel> {
   static final _formKey = GlobalKey<FormState>();
-
+  static final _passwordController = TextEditingController();
   const LoginPage({super.key});
 
   @override
@@ -55,6 +55,7 @@ class LoginPage extends GetWidget<AuthViewModel> {
                       ),
                       SizedBox(height: 12.0),
                       PasswordFormField(
+                        controller: _passwordController,
                         label: TranslationsKeys.tkPasswordLabel,
                         onSaved: (value) => controller.password = value,
                         validator: InputsValidator.passwordRequiredOnlyValidator,
@@ -126,10 +127,12 @@ class LoginPage extends GetWidget<AuthViewModel> {
   }
 
   void _toRegisterPage() {
+    _passwordController.clear();
     AuthActions.instance.toRegisterPage();
   }
 
   void _toPasswordPage() {
+    _passwordController.clear();
     AuthActions.instance.toPasswordResetPage();
   }
 
