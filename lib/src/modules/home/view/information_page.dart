@@ -13,12 +13,14 @@ class InformationPage extends StatelessWidget {
       appBar: CustomAppbar(
         title: Get.arguments['title'],
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(24.0),
-        child: CustomText.subtitle(
-          Get.arguments['content'],
-          color: ColorManager.titleColor,
-        ),
+        children: [
+          CustomText.subtitle(
+            Get.arguments['content'],
+            color: ColorManager.titleColor,
+          ),
+        ],
       ),
     );
   }
