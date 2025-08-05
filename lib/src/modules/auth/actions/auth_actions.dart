@@ -4,6 +4,7 @@ import 'package:az_banking_app/src/modules/auth/controllers/change_security_ques
 import 'package:az_banking_app/src/modules/auth/controllers/forgot_password_view_model.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import '/src/essentials/config/action_presenter.dart';
 import '../controllers/auth_view_model.dart';
@@ -75,6 +76,7 @@ class AuthActions extends ActionPresenter {
   void signOut(BuildContext context) {
     actionHandler(context, () async {
       _authViewModel.logout();
+      Phoenix.rebirth(context);
     });
   }
 
