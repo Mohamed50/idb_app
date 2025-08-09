@@ -14,6 +14,6 @@ class InformationService extends ApiService {
 
   Future<String> fetchTermsAndConditions() async {
     final response = await post(APIConfiguration.getTermsAndConditionsUrl, {}, headers: getUnauthorizedHeader());
-    return response.body['Bank_Terms'];
+    return response.body['App_Terms_Key'];
   }
 }

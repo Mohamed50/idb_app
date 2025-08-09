@@ -15,7 +15,7 @@ class BranchesPage extends GetView<BranchesViewModel> {
       appBar: CustomAppbar(title: TranslationsKeys.tkBranchesLabel),
       backgroundColor: ColorManager.darkBackgroundColor,
       body: Obx(
-        ()=> ApiHandler(
+        () => ApiHandler(
           apiResponse: controller.branchesLocation,
           onSuccess: _OnSuccess(branches: controller.branchesLocation.data ?? []),
         ),
@@ -44,6 +44,9 @@ class _OnSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (branches.isEmpty) {
+      return Center(child: CustomText.title(TranslationsKeys.tkNoDataLabel));
+    }
     return ListView.separated(
       padding: EdgeInsets.all(24.0),
       itemCount: branches.length,
@@ -82,8 +85,10 @@ class BranchItemTile extends StatelessWidget {
             ),
           ),
           CustomButton(
-            width:100,
-            text: TranslationsKeys.tkAddressLabel, onPressed: _onPressed,),
+            width: 100,
+            text: TranslationsKeys.tkAddressLabel,
+            onPressed: _onPressed,
+          ),
         ],
       ),
     );
