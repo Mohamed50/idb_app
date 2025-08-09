@@ -103,7 +103,7 @@ class InputsValidator {
   /// Validates a username.
   /// Returns a localized error message if the username is null or empty, otherwise returns `null`.
   static String? usernameValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.isEmpty && value.length <= 10) {
       return TranslationsKeys.tkUsernameRequiredMsg.tr;
     }
     return null;

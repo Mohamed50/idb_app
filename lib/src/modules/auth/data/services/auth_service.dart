@@ -31,6 +31,7 @@ class AuthService extends ApiService {
     };
     Response response = await post(
       APIConfiguration.signInUrl,
+      headers: getUnauthorizedHeader(),
       body,
     );
     bool deviceNeedReset = response.body['Response_Code'] == 2;
@@ -96,7 +97,7 @@ class AuthService extends ApiService {
     return response.body['User_ID'];
   }
 
-  // Handles user sign-out by clearing tokens and selected venue/zone from MemoryService.
+  // Handles user sign-out by clearing tokens from MemoryService.
   Future<bool> signOut() async {
     MemoryService.instance.accessToken = null; // Clear access token
     MemoryService.instance.refreshToken = null; // Clear refresh token
@@ -164,6 +165,7 @@ class AuthService extends ApiService {
   Future<bool> setPassword(String userId, String password) async {
     Map<String, dynamic> body = {'User_ID': userId, 'Password': generateMd5(password)};
     await post(APIConfiguration.setAccountPasswordsUrl, body);
+    MemoryService.instance.userId = userId;
     return true;
   }
 }

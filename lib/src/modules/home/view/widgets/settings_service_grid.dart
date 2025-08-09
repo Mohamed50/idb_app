@@ -1,4 +1,5 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/auth/auth.dart';
 import 'package:az_banking_app/src/modules/bank_services/views/service_icon_widget.dart';
 import 'package:az_banking_app/src/modules/home/actions/settings_actions.dart';
 import 'package:az_banking_app/src/modules/locale/controllers/localization_view_model.dart';
@@ -63,7 +64,7 @@ class SettingsServiceList extends StatelessWidget {
   }
 
   void _logout(BuildContext context) {
-    SettingsActions.instance.logout(context);
+    AuthActions.instance.signOut(context);
   }
 
   void _toChangePasswordPage() {

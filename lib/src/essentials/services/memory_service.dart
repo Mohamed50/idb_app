@@ -85,7 +85,6 @@ class MemoryService extends GetConnect {
     return null;
   }
 
-
   /// Sets the refresh token in local storage.
   set refreshToken(String? value) => _storage.write("refreshToken", value);
 }

@@ -3,7 +3,7 @@ description: "A new Flutter project."
 publish_to: 'none'
 
 
-version: 1.0.1+12
+version: 1.0.1+13
 
 environment:
   sdk: ^3.6.0
@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_phoenix: ^1.1.1
   cupertino_icons: ^1.0.8
   get: ^4.6.6
   loader_overlay: ^4.0.3

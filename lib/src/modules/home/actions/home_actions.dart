@@ -3,7 +3,6 @@ import 'package:az_banking_app/src/utils/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import '/src/modules/auth/auth.dart';
 
 class HomeActions {
   static final HomeActions _mInstance = HomeActions._();
@@ -16,19 +15,13 @@ class HomeActions {
     back();
   }
 
-  /// Logs out the user by calling the logout method from [AuthViewModel].
-  Future<void> logout(BuildContext context) async {
-    Get.find<AuthViewModel>().logout(); // Log out the user.
-    Get.back(); // Navigate back to the previous screen.
-  }
-
   /// Navigates back to the previous page.
   void back() {
     Get.back();
   }
 
   void toWebsitePage() {
-    launchUrlString('www.idb.sd');
+    launchUrlString('https://www.idb.sd');
   }
 
   void toContactUsPage() {

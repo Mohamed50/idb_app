@@ -228,6 +228,7 @@ class TranslationsKeys {
   static const String tkDuplicatedTransactionMsg = 'tkDuplicatedTransactionMsg';
   static const String tkYesLabel = 'tkYesLabel';
   static const String tkNoLabel = 'tkNoLabel';
+  static const String tkAddressLabel = 'tkAddressLabel';
 
 
 }

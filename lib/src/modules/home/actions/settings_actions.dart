@@ -14,12 +14,6 @@ class SettingsActions extends ActionPresenter {
 
   SettingsActions._();
 
-  /// Logs out the user by calling the logout method from [AuthViewModel].
-  Future<void> logout(BuildContext context) async {
-    Get.find<AuthViewModel>().logout(); // Log out the user.
-    Get.back(); // Navigate back to the previous screen.
-  }
-
   void toChangePasswordPage() {
     Get.toNamed(RouteManager.changePasswordRoute);
   }

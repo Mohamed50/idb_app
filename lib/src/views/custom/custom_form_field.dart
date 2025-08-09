@@ -111,6 +111,7 @@ class PasswordFormField extends StatefulWidget {
   final double fontSize;
   final Color backgroundColor;
   final Color textColor;
+  final List<TextInputFormatter> inputFormatters;
 
   const PasswordFormField({
     super.key,
@@ -131,6 +132,7 @@ class PasswordFormField extends StatefulWidget {
     this.fontSize = 14,
     this.backgroundColor = ColorManager.darkBackgroundColor,
     this.textColor = ColorManager.titleColor,
+    this.inputFormatters = const [],
   });
 
   @override
@@ -173,6 +175,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       obscureText: secure,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
+      inputFormatters: widget.inputFormatters,
       decoration: widget.decoration ??
           InputDecoration(
             filled: true,

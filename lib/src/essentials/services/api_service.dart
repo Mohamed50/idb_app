@@ -211,7 +211,7 @@ class ApiService extends GetConnect {
     } else if (response.body['Response_Code'] != null &&
         response.body['Response_Code'] != 200 &&
         response.body['Response_Code'] != 0) {
-      if (response.body['Response_Code'] != 2 && response.body['Response_Message'] != 'Reset Device?') {
+      if (response.body['Response_Code'] < 0) {
         throw APIException(response.body['Response_Message']);
       }
     }

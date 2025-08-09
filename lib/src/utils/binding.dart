@@ -24,9 +24,6 @@ class InitialBindings extends Bindings {
     // Registers LocalizationViewModel as a lazy-loaded dependency.
     Get.put(LocalizationViewModel(), permanent: true);
 
-    // Registers the dependencies required for authentication.
-    AuthBindings().dependencies();
-
     // Registers the dependencies required for branches.
     BranchesBindings().dependencies();
 

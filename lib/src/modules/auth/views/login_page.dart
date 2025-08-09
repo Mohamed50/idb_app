@@ -3,6 +3,7 @@ import 'package:az_banking_app/src/modules/home/actions/home_actions.dart';
 import 'package:az_banking_app/src/modules/locale/views/language_button.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '/src/views/custom/customs.dart';
@@ -51,6 +52,7 @@ class LoginPage extends GetWidget<AuthViewModel> {
                         validator: InputsValidator.usernameValidator,
                         maxLines: 1,
                         keyboardType: TextInputType.phone,
+                        inputFormatters: [LengthLimitingTextInputFormatter(10)],
                         textInputAction: TextInputAction.next,
                       ),
                       SizedBox(height: 12.0),
@@ -59,6 +61,7 @@ class LoginPage extends GetWidget<AuthViewModel> {
                         label: TranslationsKeys.tkPasswordLabel,
                         onSaved: (value) => controller.password = value,
                         validator: InputsValidator.passwordRequiredOnlyValidator,
+                        inputFormatters: [LengthLimitingTextInputFormatter(16)],
                         textInputAction: TextInputAction.go,
                       ),
                       TextButton(
@@ -119,10 +122,13 @@ class LoginPage extends GetWidget<AuthViewModel> {
     );
   }
 
-  void _login(BuildContext context) {
+  Future<void> _login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      AuthActions.instance.signIn(context);
+      await AuthActions.instance.signIn(context);
+      if(AuthActions.instance.isAuthenticated) {
+        _passwordController.clear();
+      }
     }
   }
 

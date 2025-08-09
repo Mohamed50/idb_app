@@ -20,8 +20,10 @@ class AuthActions extends ActionPresenter {
     _authViewModel = Get.find();
   }
 
+  bool get isAuthenticated => Get.find<AuthViewModel>().isAuthenticated();
+
   Future signIn(BuildContext context) async {
-    actionHandler(context, () async {
+    await actionHandler(context, () async {
       await _authViewModel.signIn();
       if (_authViewModel.user!.isResetDeviceRequired) {
         await _authViewModel.requestOtp();
@@ -46,7 +48,6 @@ class AuthActions extends ActionPresenter {
       toVerifyAccountPage();
     });
   }
-
 
   Future verifyAccount(BuildContext context) async {
     actionHandler(context, () async {
@@ -77,6 +78,7 @@ class AuthActions extends ActionPresenter {
     actionHandler(context, () async {
       _authViewModel.logout();
       Phoenix.rebirth(context);
+      Get.offNamedUntil(RouteManager.initialRoute, (route) => false);
     });
   }
 

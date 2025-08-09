@@ -17,7 +17,7 @@ const Map<String, String> englishTranslationsMap = {
 
   /// Auth Module - Login Page
   TranslationsKeys.tkLoginWelcomeMsg: 'Welcome to Industrial Development Bank',
-  TranslationsKeys.tkUsernameLabel: 'Username',
+  TranslationsKeys.tkUsernameLabel: 'User name',
   TranslationsKeys.tkUsernameRequiredMsg: 'Username is required',
   TranslationsKeys.tkPasswordLabel: 'Password',
   TranslationsKeys.tkCurrentPasswordLabel: 'Current Password',
@@ -289,6 +289,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkYesLabel: 'Yes',
   TranslationsKeys.tkNoLabel: 'No',
   TranslationsKeys.tkLogoutLabel: 'Logout',
+  TranslationsKeys.tkAddressLabel: 'Address',
 
   'BeneficiaryType.inside': 'Inside Bank',
   'BeneficiaryType.outside': 'Outside Bank',

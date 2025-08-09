@@ -4,4 +4,5 @@ class ServiceModel{
   final String route;
 
   ServiceModel(this.name, this.iconPath, this.route);
+
 }

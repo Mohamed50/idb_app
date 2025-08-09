@@ -38,6 +38,6 @@ class BranchModel {
 
   @override
   String toString() {
-    return Get.locale!.languageCode == 'en' ? nameEn ?? nameAr : nameAr ?? nameEn;
+    return Get.locale!.languageCode == 'en' ? nameEn : nameAr;
   }
 }

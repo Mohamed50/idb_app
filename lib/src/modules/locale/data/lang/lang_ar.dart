@@ -16,7 +16,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkChooseLanguage: 'اختر اللغة',
 
   /// وحدة المصادقة - صفحة تسجيل الدخول
-  TranslationsKeys.tkLoginWelcomeMsg: 'مرحبًا بك في بنك التنمية الصناعية',
+  TranslationsKeys.tkLoginWelcomeMsg: 'مرحباً بك في بنك التنمية الصناعية',
   TranslationsKeys.tkUsernameLabel: 'اسم المستخدم',
   TranslationsKeys.tkUsernameRequiredMsg: 'اسم المستخدم مطلوب',
   TranslationsKeys.tkPasswordLabel: 'كلمة المرور',
@@ -287,6 +287,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkDuplicatedTransactionMsg: 'تم تنفيذ هذه العملية مؤخرًا. هل ترغب في المتابعة مرة أخرى؟',
   TranslationsKeys.tkYesLabel: 'نعم',
   TranslationsKeys.tkNoLabel: 'لا',
+  TranslationsKeys.tkAddressLabel: 'الموقع',
 
   'BeneficiaryType.inside': 'داخل البنك',
   'BeneficiaryType.outside': 'خارج البنك',

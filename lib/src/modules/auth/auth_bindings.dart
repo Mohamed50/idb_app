@@ -7,9 +7,11 @@ import 'auth.dart';
 
 class AuthBindings implements Bindings {
   @override
-  void dependencies() {
-    Get.lazyPut(() => AuthService());
-    Get.lazyPut(() => AuthViewModel(Get.find()));
+  Future<void> dependencies() async {
+    if(!Get.isRegistered<AuthViewModel>()) {
+      Get.lazyPut(() => AuthService());
+      Get.put(AuthViewModel(Get.find()), permanent: true);
+    }
   }
 }
 
