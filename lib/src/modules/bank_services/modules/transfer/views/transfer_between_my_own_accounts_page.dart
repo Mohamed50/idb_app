@@ -25,6 +25,7 @@ class TransferBetweenMyOwnAccountsPage extends GetView<TransferViewModel> {
           padding: EdgeInsets.all(24.0),
           children: [
             AccountsDropDown(
+              withOneAccountError: true,
               onChanged: (v) {
                 controller.onFromAccountChanged(v);
                 controller.onToAccountChanged(null);
@@ -74,7 +75,13 @@ class TransferBetweenMyOwnAccountsPage extends GetView<TransferViewModel> {
   void _transfer(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      TransferActions.instance.transferBetweenMyAccounts(context);
+      TransferActions.instance.transferBetweenMyAccounts(
+        context,
+        onDone: () {
+          _formKey.currentState!.reset();
+          controller.clear();
+        },
+      );
     }
   }
 }

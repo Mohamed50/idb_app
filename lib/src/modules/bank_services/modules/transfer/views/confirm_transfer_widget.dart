@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 class ConfirmTransferWidget extends GetView<TransferViewModel> {
   static final _formKey = GlobalKey<FormState>();
+
   const ConfirmTransferWidget({super.key});
 
   @override
@@ -112,13 +113,18 @@ class ConfirmTransferWidget extends GetView<TransferViewModel> {
   }
 
   void _confirm(BuildContext context) {
-    if(_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       if (controller.toAccountBBan == null) {
-        TransferActions.instance.transferInsideBank(context);
+        TransferActions.instance.transferInsideBank(context, onDone: onDone);
       } else {
-        TransferActions.instance.transferOutsideBank(context);
+        TransferActions.instance.transferOutsideBank(context, onDone: onDone);
       }
     }
+  }
+
+  void onDone() {
+    _formKey.currentState!.reset();
+    controller.clear();
   }
 }

@@ -105,4 +105,16 @@ class TransferViewModel extends GetxController {
   bool isFromAndToSameAccount() {
     return fromAccount == toAccount;
   }
+
+  void clear() {
+    fromAccount = null;
+    toAccount = null;
+    amount = null;
+    comment = null;
+    phone = null;
+    toAccountBBan = null;
+    _toAccountNumber = null;
+    _toAccountType = null;
+    update();
+  }
 }
