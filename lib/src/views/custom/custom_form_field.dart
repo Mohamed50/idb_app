@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 
 class CustomFormField extends StatelessWidget {
   final VoidCallback? onTap;
+  final Function(String)? onFieldSubmitted;
   final TextEditingController? controller;
   final String? initialValue;
   final String? hint;
@@ -49,6 +50,7 @@ class CustomFormField extends StatelessWidget {
     this.fontSize = 14,
     this.keyboardType,
     this.textInputAction,
+    this.onFieldSubmitted,
     this.enabled = true,
     this.onTap,
     this.inputFormatters = const [],
@@ -68,6 +70,7 @@ class CustomFormField extends StatelessWidget {
       initialValue: initialValue,
       controller: controller,
       onTap: onTap,
+      onFieldSubmitted: onFieldSubmitted,
       enabled: enabled,
       onSaved: (v) => onSaved != null? onSaved!(v?.replaceAll(',', '')) : (){},
       onChanged: (v) => onChanged != null? onChanged!(v.replaceAll(',', '')) : (){},

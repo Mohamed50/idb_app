@@ -54,8 +54,11 @@ class TransferBetweenMyOwnAccountsPage extends GetView<TransferViewModel> {
             CustomFormField(
               label: TranslationsKeys.tkCommentsLabel,
               onSaved: controller.onCommentChanged,
+              onFieldSubmitted: (value) => _transfer(context),
               maxLength: 50,
-              maxLines: 3,
+              maxLines: 1,
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.done,
             ),
             SizedBox(height: 64.0),
             CustomButton(
