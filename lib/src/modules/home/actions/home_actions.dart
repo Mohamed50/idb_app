@@ -19,13 +19,8 @@ class HomeActions {
   void back() {
     Get.back();
   }
-
-  void toWebsitePage() {
-    launchUrlString('https://www.idb.sd');
-  }
-
   void toContactUsPage() {
-    launchUrlString('tel://+249187181300');
+    Get.toNamed(RouteManager.informationContactUsRoute);
   }
 
   void toBranchesPage() {
@@ -33,17 +28,15 @@ class HomeActions {
   }
 
   void toAboutUsPage() {
-    Get.toNamed(
-      RouteManager.informationRoute,
-      arguments: {'title': TranslationsKeys.tkAboutUsLabel, 'content': TranslationsKeys.tkAboutUsContent},
-    );
+    Get.toNamed(RouteManager.informationAboutUsRoute);
   }
 
   void toTermsAndConditionsPage() {
-    Get.toNamed(
-      RouteManager.informationRoute,
-      arguments: {'title': TranslationsKeys.tkTermsAndConditions, 'content': TranslationsKeys.tkTermsContent},
-    );
+    Get.toNamed(RouteManager.informationTermsAndConditionsRoute);
+  }
+
+  void toWebsitePage() {
+    launchUrlString('https://www.idb.sd');
   }
 
   void toSettingsPage() {

@@ -57,6 +57,7 @@ class TranslationsKeys {
   static const String tkPhoneLabel = 'tkPhoneLabel';
   static const String tkPhoneRequiredMsg = 'tkPhoneRequiredMsg';
   static const String tkPhoneNotValidMsg = 'tkPhoneNotValidMsg';
+  static const String tkWhatsAppLabel = 'tkWhatsAppLabel';
   static const String tkSignUpBtn = 'tkSignUpBtn';
   static const String tkHaveAccountLabel = 'tkHaveAccountLabel';
   static const String tkIAgreeLabel = 'tkIAgreeLabel';

@@ -34,8 +34,9 @@ import 'package:az_banking_app/src/modules/exchange_rate/views/exchange_rates_pa
 import 'package:az_banking_app/src/modules/faqs/faqs_bindings.dart';
 import 'package:az_banking_app/src/modules/faqs/views/faqs_page.dart';
 import 'package:az_banking_app/src/modules/home/home.dart';
-import 'package:az_banking_app/src/modules/home/view/information_page.dart';
 import 'package:az_banking_app/src/modules/home/view/settings_page.dart';
+import 'package:az_banking_app/src/modules/information/information_bindings.dart';
+import 'package:az_banking_app/src/modules/information/views/information_page.dart';
 import 'package:az_banking_app/src/modules/products/products_bindings.dart';
 import 'package:az_banking_app/src/modules/products/views/products_page.dart';
 import 'package:az_banking_app/src/modules/statements/statement_bindings.dart';
@@ -116,6 +117,13 @@ class RouteManager {
   static const String productsRoute = '/service/other/products';
   static const String exchangeRoute = '/service/others/exchange-rate';
 
+
+  /// information
+  static const String informationAboutUsRoute = '/information/about-us';
+  static const String informationTermsAndConditionsRoute = '/information/terms-and-conditions';
+  static const String informationContactUsRoute = '/information/contact-us';
+
+
   /// Initializes the routes list by clearing any existing routes and adding new ones.
   ///
   /// Example usage:
@@ -181,10 +189,6 @@ class RouteManager {
           page: () => const HomePage(),
           binding: HomeBindings(),
           middlewares: [AuthMiddleware()],
-        ),
-        GetPage(
-          name: informationRoute,
-          page: () => const InformationPage(),
         ),
         GetPage(
           name: branchesRoute,
@@ -313,6 +317,21 @@ class RouteManager {
           name: exchangeRoute,
           page: () => const ExchangeRatesPage(),
           binding: ExchangeRateBindings(),
+        ),
+        GetPage(
+          name: informationAboutUsRoute,
+          page: () => const InformationPage(type: InformationType.aboutUs),
+          binding: InformationBindings(),
+        ),
+        GetPage(
+          name: informationTermsAndConditionsRoute,
+          page: () => const InformationPage(type: InformationType.termsAndConditions),
+          binding: InformationBindings(),
+        ),
+        GetPage(
+          name: informationContactUsRoute,
+          page: () => const InformationPage(type: InformationType.contactUs),
+          binding: InformationBindings(),
         ),
       ],
     );

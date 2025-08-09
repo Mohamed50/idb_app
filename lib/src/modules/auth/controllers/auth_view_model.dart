@@ -28,7 +28,7 @@ class AuthViewModel extends GetxController {
   String? username, password, confirmPassword;
 
   /// Stores the nationalNumber rim and phoneNumber for sign-up.
-  String? nationalNumber, rim, phoneNumber;
+  String? nationalNumber, rim, phoneNumber, whatsappNumber;
 
   /// Stores the otp for verification.
   String? otp;
@@ -107,7 +107,7 @@ class AuthViewModel extends GetxController {
 
   /// register new user using the validated data.
   Future<void> registerUser() async {
-    userId = await _authService.registerAccount(nationalNumber!, rim!, phoneNumber!, nameEn!, nameAr!, availableAccounts.first);
+    userId = await _authService.registerAccount(nationalNumber!, rim!, phoneNumber!, nameEn!, nameAr!, whatsappNumber!, _termsAgree.value, availableAccounts.first);
   }
 
   Future<void> linkAccounts() async {

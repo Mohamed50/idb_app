@@ -99,4 +99,8 @@ class APIConfiguration {
   /// settings
   static const String fetchFaqsUrl = '$baseUrl/sharedRoutes/getBankFAQs';
   static const String fetchTransactionsLimitUrl = '$baseUrl/sharedRoutes/getFeesAndLimits';
+
+  static const String getAboutUsUrl = '$baseUrl/sharedRoutes/getAboutBank';
+  static const String getTermsAndConditionsUrl = '$baseUrl/sharedRoutes/getBankTerms';
+  static const String getContactInfosUrl = '$baseUrl/sharedRoutes/getContactInfo';
 }

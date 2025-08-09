@@ -74,6 +74,8 @@ class AuthService extends ApiService {
       String phoneNumber,
       String nameEn,
       String nameAr,
+      String whatsAppNumber,
+      bool isAgreed,
       AccountModel primaryAccount,
       ) async {
     if (phoneNumber[0] == '0') {
@@ -86,6 +88,8 @@ class AuthService extends ApiService {
       'Customer_Name_EN': nameEn,
       'Customer_Name_AR': nameAr,
       'Account_No': primaryAccount.accountNo,
+      'whatsapp_no': whatsAppNumber,
+      'is_agreed': isAgreed,
       'Email': 'N/A',
       'Address': 'N/A',
     };

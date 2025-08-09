@@ -61,6 +61,16 @@ class RegisterPage extends GetWidget<AuthViewModel> {
                         inputFormatters: [LengthLimitingTextInputFormatter(10)],
                         maxLines: 1,
                       ),
+                      SizedBox(height: 12.0),
+                      CustomFormField(
+                        label: TranslationsKeys.tkWhatsAppLabel,
+                        onSaved: (value) => controller.whatsappNumber = value,
+                        validator: InputsValidator.phoneValidator,
+                        keyboardType: TextInputType.phone,
+                        textInputAction: TextInputAction.done,
+                        inputFormatters: [LengthLimitingTextInputFormatter(10)],
+                        maxLines: 1,
+                      ),
                       SizedBox(height: 32.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -81,7 +91,7 @@ class RegisterPage extends GetWidget<AuthViewModel> {
                       SizedBox(height: 32.0),
                       CustomButton(
                         text: TranslationsKeys.tkSignUpBtn,
-                        onPressed: () => login(context),
+                        onPressed: () => confirm(context),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -107,7 +117,7 @@ class RegisterPage extends GetWidget<AuthViewModel> {
     );
   }
 
-  void login(BuildContext context) {
+  void confirm(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       AuthActions.instance.signUp(context);
