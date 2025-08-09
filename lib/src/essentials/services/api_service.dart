@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/essentials/config/error_dialog.dart';
 import 'package:az_banking_app/src/essentials/widgets/confirmation_dialog.dart';
+import 'package:az_banking_app/src/modules/auth/auth.dart';
 import 'package:az_banking_app/src/modules/auth/data/models/user.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/actions/bill_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
@@ -194,7 +196,7 @@ class ApiService extends GetConnect {
   void handleError(Response response) {
     if (response.hasError) {
       if (response.statusCode == 401) {
-        refreshSession();
+        whenSessionIsOver();
       }
       if (response.status.isNotFound) {
         throw Exception(response.statusText);
@@ -215,6 +217,12 @@ class ApiService extends GetConnect {
         throw APIException(response.body['Response_Message']);
       }
     }
+  }
+
+  Future whenSessionIsOver() async {
+    Get.find<AuthViewModel>().logout();
+    await showErrorDialog(TranslationsKeys.tkSessionExpiredMsg);
+    Get.until((route) => route.settings.name == RouteManager.authRoute);
   }
 
   /// Generates the default headers for API requests.
@@ -306,6 +314,11 @@ class ApiService extends GetConnect {
     }
     return result ?? false;
   }
+
+  Future showErrorDialog(String message) async {
+    await Get.dialog(ErrorDialog(text: message), barrierDismissible: false);
+  }
+
 }
 
 class TransactionSignature {

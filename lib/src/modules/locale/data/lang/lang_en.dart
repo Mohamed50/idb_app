@@ -140,6 +140,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkLinkAccountsSuccessMsg: 'Accounts linked successfully',
   TranslationsKeys.tkPasswordSetWelcomeMsg: 'please set your password',
   TranslationsKeys.tkPasswordSetSuccessMsg: 'Password set successfully',
+  TranslationsKeys.tkSessionExpiredMsg: 'Session is over',
 
 
   /// Auth Module - Password Reset Page

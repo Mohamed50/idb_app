@@ -69,6 +69,7 @@ class TranslationsKeys {
   static const String tkLinkAccountsSuccessMsg = 'tkLinkAccountsSuccessMsg';
   static const String tkPasswordSetWelcomeMsg = 'tkPasswordSetWelcomeMsg';
   static const String tkPasswordSetSuccessMsg = 'tkPasswordSetSuccessMsg';
+  static const String tkSessionExpiredMsg= 'tkSessionOverMsg';
 
   /// Auth Module - Password Reset Page
   static const String tkPasswordResetWelcomeMsg = 'tkPasswordResetWelcomeMsg';

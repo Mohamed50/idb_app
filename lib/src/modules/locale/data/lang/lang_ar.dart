@@ -139,6 +139,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkLinkAccountsSuccessMsg: 'تم ربط الحسابات بنجاح',
   TranslationsKeys.tkPasswordSetWelcomeMsg: 'يرجى تعيين كلمة المرور الخاصة بك',
   TranslationsKeys.tkPasswordSetSuccessMsg: 'تم تعيين كلمة المرور بنجاح',
+  TranslationsKeys.tkSessionExpiredMsg: 'تم انتهاء الجلسة',
 
   /// وحدة المصادقة - إعادة تعيين كلمة المرور
   TranslationsKeys.tkPasswordResetWelcomeMsg: 'إعادة تعيين كلمة المرور القديمة',
