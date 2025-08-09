@@ -5,6 +5,8 @@ import 'package:az_banking_app/src/views/custom/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'package:collection/collection.dart'; // for firstWhereOrNull
+
 class AccountsDropDown extends StatelessWidget {
   final ValueChanged<AccountModel?>? onSaved;
   final ValueChanged<AccountModel>? onChanged;
@@ -12,6 +14,8 @@ class AccountsDropDown extends StatelessWidget {
   final FormFieldValidator<AccountModel>? validator;
   final bool changePrimaryOnChange;
   final bool withOneAccountError;
+  final AccountModel? value;
+  final AccountModel? ignoreAccount;
   final Color fillColor;
 
   const AccountsDropDown({
@@ -23,17 +27,24 @@ class AccountsDropDown extends StatelessWidget {
     this.changePrimaryOnChange = false,
     this.withOneAccountError = false,
     this.fillColor = ColorManager.darkBackgroundColor,
+    this.ignoreAccount,
+    this.value,
   });
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(color: ColorManager.titleColor, fontWeight: FontWeight.w700, fontSize: 14.0);
-    InputBorder inputBorder = OutlineInputBorder(
+    final textStyle = TextStyle(
+      color: ColorManager.titleColor,
+      fontWeight: FontWeight.w700,
+      fontSize: 14.0,
+    );
+
+    final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(8.0),
       borderSide: BorderSide(color: fillColor),
     );
 
-    InputDecoration decoration = InputDecoration(
+    final decoration = InputDecoration(
       filled: true,
       fillColor: fillColor,
       contentPadding: const EdgeInsets.all(12.0),
@@ -42,31 +53,55 @@ class AccountsDropDown extends StatelessWidget {
       enabledBorder: inputBorder,
       labelStyle: textStyle,
     );
+
     return GetX<AccountViewModel>(builder: (controller) {
-      List<AccountModel> accounts = controller.accounts.data ?? <AccountModel>[];
+      final all = controller.accounts.data ?? <AccountModel>[];
+
+      // 1) De-dupe by accountNo to avoid “2 or more items with same value”
+      final uniques = {
+        for (final a in all) a.accountNo: a,
+      }.values.toList();
+
+      // 2) Filter out the ignored account
+      final filtered = uniques
+          .where((a) => a.accountNo != ignoreAccount?.accountNo)
+          .toList();
+
+      // 3) Choose the raw selected source
+      final AccountModel? rawSelected =
+      withOneAccountError ? value : controller.primaryAccount;
+
+      // 4) Safe selected: null if not present among filtered items
+      final AccountModel? safeSelected = (rawSelected == null)
+          ? null
+          : filtered.firstWhereOrNull(
+            (a) => a.accountNo == rawSelected.accountNo,
+      );
+
       return DropdownButtonFormField<AccountModel>(
-        value: controller.primaryAccount,
+        // Force a fresh instance when ignore/value changes to avoid stale cache
+        key: ValueKey(
+          '${ignoreAccount?.accountNo}-${filtered.length}-${safeSelected?.accountNo ?? 'null'}',
+        ),
+        value: safeSelected,               // ← the important part
+        isExpanded: true,
         decoration: decoration,
         validator: validator,
-        items: accounts
-            .map((e) => DropdownMenuItem<AccountModel>(
-                  value: e,
-                  child: CustomText.title(e.accountNo, fontSize: 14.0),
-                ))
+        items: filtered
+            .map(
+              (e) => DropdownMenuItem<AccountModel>(
+            value: e,
+            child: CustomText.title(e.accountNo, fontSize: 14.0),
+          ),
+        )
             .toList(),
-        onChanged: (value) {
+        onChanged: (v) {
           if (changePrimaryOnChange) {
-            controller.onSelectedAccountChange(value);
+            controller.onSelectedAccountChange(v);
           }
-          if (onChanged != null && value != null) {
-            onChanged!(value);
-          }
+          if (v != null) onChanged?.call(v);
         },
-        onSaved: (v) {
-          if (onSaved != null) {
-            onSaved!(v);
-          }
-        },
+        onSaved: (v) => onSaved?.call(v),
       );
     });
   }
@@ -109,7 +144,10 @@ class HomeAccountsDropDown extends StatelessWidget {
         value: controller.primaryAccount,
         decoration: decoration,
         validator: validator,
-        icon: Icon(Icons.expand_circle_down_outlined, color: Colors.white,),
+        icon: Icon(
+          Icons.expand_circle_down_outlined,
+          color: Colors.white,
+        ),
         selectedItemBuilder: (context) => accounts.map((e) => Container()).toList(),
         items: accounts
             .map((e) => DropdownMenuItem<AccountModel>(

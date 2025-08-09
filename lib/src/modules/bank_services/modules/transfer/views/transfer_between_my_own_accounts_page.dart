@@ -25,23 +25,30 @@ class TransferBetweenMyOwnAccountsPage extends GetView<TransferViewModel> {
           padding: EdgeInsets.all(24.0),
           children: [
             AccountsDropDown(
-              onSaved: controller.onFromAccountChanged,
+              onChanged: (v) {
+                controller.onFromAccountChanged(v);
+                controller.onToAccountChanged(null);
+              },
               validator: (v) => InputsValidator.generalValidator(v?.toString()),
             ),
             SizedBox(height: verticalSpacing),
-            AccountsDropDown(
-              label: TranslationsKeys.tkToAccountLabel,
-              onSaved: controller.onToAccountChanged,
-              validator: (v) => InputsValidator.generalValidator(v?.toString()),
-              withOneAccountError: true,
+            GetBuilder<TransferViewModel>(
+              builder: (controller) => AccountsDropDown(
+                value: controller.toAccount == controller.fromAccount ? null : controller.toAccount,
+                label: TranslationsKeys.tkToAccountLabel,
+                onSaved: controller.onToAccountChanged,
+                validator: (v) => InputsValidator.generalValidator(v?.toString()),
+                withOneAccountError: true,
+                ignoreAccount: controller.fromAccount,
+              ),
             ),
             SizedBox(height: verticalSpacing),
             CustomFormField(
               label: TranslationsKeys.tkAmountLabel,
               onSaved: controller.onAmountChanged,
               validator: InputsValidator.generalValidator,
-              keyboardType: TextInputType.number,
-              inputFormatters: [AmountFormatter()],
+              keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: false),
+              inputFormatters: [AmountFormatter(maxDecimals: 2)],
             ),
             SizedBox(height: verticalSpacing),
             CustomFormField(
@@ -62,7 +69,7 @@ class TransferBetweenMyOwnAccountsPage extends GetView<TransferViewModel> {
   }
 
   void _transfer(BuildContext context) {
-    if(_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       TransferActions.instance.transferBetweenMyAccounts(context);
     }

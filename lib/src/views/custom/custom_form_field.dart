@@ -196,24 +196,111 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   }
 }
 
-
-/// **Formatter to add comma separators for thousands**
+/// **AmountFormatter (with decimals)**
+///
+/// - Groups the integer part with commas
+/// - Allows a single decimal point
+/// - Limits fractional digits (default: 2)
+/// - Preserves caret while typing
+///
+// ────────────────────────────────────────────────
 class AmountFormatter extends TextInputFormatter {
-  final NumberFormat _formatter = NumberFormat("#,###");
+  final int maxDecimals;
+  final NumberFormat _intFormatter;
+
+  AmountFormatter({
+    this.maxDecimals = 2,
+    String locale = 'en_US',
+  }) : _intFormatter = NumberFormat.decimalPattern(locale);
 
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    // Remove all commas before formatting
-    String cleanText = newValue.text.replaceAll(',', '');
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
+    final rawText = newValue.text;
 
-    // Convert to integer and format with commas
-    int? number = int.tryParse(cleanText);
-    String newText = number != null ? _formatter.format(number) : "";
+    // Quick exit
+    if (rawText.isEmpty) {
+      return const TextEditingValue(text: '');
+    }
 
-    // Maintain the cursor position
+    // Keep only digits and decimal separators; accept both '.' and ','
+    final sanitized = rawText.replaceAll(RegExp(r'[^0-9\.,]'), '');
+
+    // Unify decimal to '.' (we'll always output '.')
+    var unified = sanitized.replaceAll(',', '.');
+
+    // Keep only the first '.' as decimal separator
+    final firstDot = unified.indexOf('.');
+    if (firstDot != -1) {
+      final before = unified.substring(0, firstDot + 1);
+      final after = unified.substring(firstDot + 1).replaceAll('.', '');
+      unified = before + after;
+    }
+
+    // Split into integer and fraction
+    var parts = unified.split('.');
+    var intPart = parts[0];
+    var fracPart = parts.length > 1 ? parts[1] : '';
+
+    // Trim fraction to maxDecimals (if provided)
+    if (maxDecimals >= 0 && fracPart.length > maxDecimals) {
+      fracPart = fracPart.substring(0, maxDecimals);
+    }
+
+    // Remove leading zeros (but leave one zero if empty)
+    intPart = intPart.replaceAll(RegExp(r'^0+(?=\d)'), '');
+    if (intPart.isEmpty) intPart = '0';
+
+    // Format integer part with grouping
+    final formattedInt = _intFormatter.format(int.parse(intPart));
+
+    // Rebuild final formatted text
+    final hasTrailingDot = unified.endsWith('.') && maxDecimals != 0;
+    final formatted = (fracPart.isEmpty && !hasTrailingDot)
+        ? formattedInt
+        : '$formattedInt.$fracPart';
+
+    // --- Caret preservation ---
+    // Count how many "meaningful" chars (digits + '.') were to the left
+    final leftRaw = newValue.text
+        .substring(0, newValue.selection.baseOffset.clamp(0, newValue.text.length))
+        .replaceAll(RegExp(r'[^0-9\.,]'), '')
+        .replaceAll(',', '.');
+
+    // Collapse to a single dot in the left side as well
+    String collapseFirstDot(String s) {
+      final i = s.indexOf('.');
+      if (i == -1) return s.replaceAll('.', '');
+      return s.substring(0, i + 1) + s.substring(i + 1).replaceAll('.', '');
+    }
+
+    final leftUnified = collapseFirstDot(leftRaw);
+    final logicalLeftCount = RegExp(r'[0-9.]').allMatches(leftUnified).length;
+
+    // Find the corresponding position in the formatted text
+    int seen = 0;
+    int newOffset = 0;
+    for (int i = 0; i < formatted.length; i++) {
+      final ch = formatted[i];
+      if (RegExp(r'[0-9.]').hasMatch(ch)) {
+        seen++;
+      }
+      if (seen >= logicalLeftCount) {
+        newOffset = i + 1;
+        break;
+      }
+      // If we never reach logicalLeftCount (e.g., backspacing), keep advancing
+      if (i == formatted.length - 1) {
+        newOffset = formatted.length;
+      }
+    }
+
     return TextEditingValue(
-      text: newText,
-      selection: TextSelection.collapsed(offset: newText.length),
+      text: formatted,
+      selection: TextSelection.collapsed(offset: newOffset),
     );
   }
 }
+
