@@ -54,7 +54,7 @@ class TransferBetweenMyOwnAccountsPage extends GetView<TransferViewModel> {
             CustomFormField(
               label: TranslationsKeys.tkCommentsLabel,
               onSaved: controller.onCommentChanged,
-              validator: InputsValidator.generalValidator,
+              maxLength: 50,
               maxLines: 3,
             ),
             SizedBox(height: 64.0),
