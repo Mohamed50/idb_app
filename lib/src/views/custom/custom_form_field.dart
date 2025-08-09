@@ -19,6 +19,7 @@ class CustomFormField extends StatelessWidget {
   final FormFieldSetter<String>? onSaved;
   final FormFieldSetter<String>? onChanged;
   final int? maxLines;
+  final int? maxLength;
   final InputDecoration? decoration;
   final Color backgroundColor;
   final Color textColor;
@@ -39,6 +40,7 @@ class CustomFormField extends StatelessWidget {
     this.suffixIcon,
     this.border,
     this.maxLines,
+    this.maxLength,
     this.decoration,
     this.onChanged,
     this.initialValue,
@@ -71,6 +73,7 @@ class CustomFormField extends StatelessWidget {
       onChanged: (v) => onChanged != null? onChanged!(v.replaceAll(',', '')) : (){},
       validator: validator,
       maxLines: maxLines,
+      maxLength: maxLength,
       style: textStyle,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
