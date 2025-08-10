@@ -203,6 +203,7 @@ const Map<String, String> arabicTranslationsMap = {
 
   // 🏦 خدمات البنك - خدمات التحويل
   TranslationsKeys.tkBBanRequiredMsg: 'رقم البي بان مطلوب (١٤ خانة)',
+  TranslationsKeys.tkChequeNumberRequiredMsg: 'رقم الشيك مطلوب',
   TranslationsKeys.tkGeneralRequiredMsg: 'هذا الحقل مطلوب',
   TranslationsKeys.tkToAccountTypeLabel: 'نوع الحساب المستلم',
   TranslationsKeys.tkCommentsLabel: 'التعليقات',

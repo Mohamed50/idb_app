@@ -147,9 +147,9 @@ class InputsValidator {
 
   /// Validates a RIM.
   /// Returns a localized error message if the RIM is null or empty, otherwise returns `null`.
-  static String? generalValidator(dynamic value) {
+  static String? generalValidator(dynamic value, [String message = TranslationsKeys.tkGeneralRequiredMsg]) {
     if (value == null || (value is String && value.isEmpty)) {
-      return TranslationsKeys.tkGeneralRequiredMsg.tr;
+      return message.tr;
     }
     return null;
   }

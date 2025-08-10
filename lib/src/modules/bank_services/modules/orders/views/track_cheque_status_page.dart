@@ -5,6 +5,7 @@ import 'package:az_banking_app/src/modules/bank_services/modules/orders/controll
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class TrackChequeStatusPage extends GetView<OrderViewModel> {
@@ -51,6 +52,7 @@ class _FormWidget extends GetView<OrderViewModel> {
         children: [
           SizedBox(height: verticalSpacing * 2),
           AccountsDropDown(
+            label: TranslationsKeys.tkToAccountLabel,
             onSaved: controller.onFromAccountChanged,
             validator: (v) => InputsValidator.generalValidator(v?.toString()),
           ),
@@ -58,7 +60,8 @@ class _FormWidget extends GetView<OrderViewModel> {
           CustomFormField(
             label: TranslationsKeys.tkChequeNumberLabel,
             onSaved: controller.onChequeNumberChanged,
-            validator: InputsValidator.phoneValidator,
+            validator: (value) => InputsValidator.generalValidator(value, TranslationsKeys.tkChequeNumberRequiredMsg),
+            inputFormatters: [LengthLimitingTextInputFormatter(10)],
           ),
           SizedBox(height: verticalSpacing),
         ],
