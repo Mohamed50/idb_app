@@ -22,7 +22,7 @@ class BankServicesService extends ApiService {
         route: 'route',
         services: [
           ServiceModel(
-            TranslationsKeys.tkTransferOutsideBankServicesLabel,
+            TranslationsKeys.tkTransferOutsideBankServicesSmallLabel,
             AssetsManager.icTransferBetweenAccountPath,
             RouteManager.transferToAccountOutsideBankRoute,
           ),

@@ -23,7 +23,7 @@ class StatementService extends ApiService {
       "Service_Code": serviceCode,
     };
     final response = await post(APIConfiguration.fetchHistoryUrl, body);
-    return historyModelFromJson(response.body['Accounts_List']);
+    return historyModelFromJson(response.body['Trans_List']);
   }
 
   Future<List<ServiceModel>> fetchServiceList() async {

@@ -134,12 +134,14 @@ class TranslationsKeys {
   static const String tkTeleProviderLabel = 'tkTeleProviderLabel';
   static const String tkTeleServiceTypeLabel = 'tkTeleServiceTypeLabel';
   static const String tkTransferServicesLabel = 'tkTransferServicesLabel';
-  static const String tkTransferOutsideBankServicesLabel = 'tkTransferToDifferentBankServicesLabel';
+  static const String tkTransferOutsideBankServicesSmallLabel = 'tkTransferToDifferentBankServicesLabel';
+  static const String tkTransferOutsideBankServicesLabel = 'tkTransferOutsideBankServicesLabel';
   static const String tkTransferInsideBankLabel = 'tkTransferWithinBankLabel';
   static const String tkTransferBetweenMyAccountsLabel = 'tkTransferBetweenMyAccountsLabel';
   static const String tkTransferWithQRLabel = 'tkTransferWithQRLabel';
   static const String tkScanQrCodeLabel = 'tkScanQrCodeLabel';
   static const String tkGeneralRequiredMsg = 'tkGeneralRequiredMsg';
+  static const String tkBBanRequiredMsg = 'tkBBanRequiredMsg';
   static const String tkFromAccountLabel = 'tkFromAccountLabel';
   static const String tkToAccountLabel = 'tkToAccountLabel';
   static const String tkToAccountBBANLabel = 'tkToAccountBBANLabel';

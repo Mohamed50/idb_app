@@ -153,4 +153,13 @@ class InputsValidator {
     }
     return null;
   }
+
+  /// Validates a RIM.
+  /// Returns a localized error message if the RIM is null or empty, otherwise returns `null`.
+  static String? validateBBAN(dynamic value) {
+    if (value == null || value.isEmpty || value.length != 14) {
+      return TranslationsKeys.tkGeneralRequiredMsg.tr;
+    }
+    return null;
+  }
 }

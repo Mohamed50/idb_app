@@ -7,6 +7,7 @@ import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_drop_do
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'confirm_transfer_widget.dart';
 
@@ -17,7 +18,7 @@ class TransferToAccountOutsideBankPage extends GetView<TransferViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(title: TranslationsKeys.tkTransferOutsideBankServicesLabel),
+      appBar: CustomAppbar(title: TranslationsKeys.tkTransferOutsideBankServicesSmallLabel),
       body: GetBuilder<TransferViewModel>(
         builder:(controller) => CustomVisible(
           show: !controller.isInfoAvailable(),
@@ -58,7 +59,9 @@ class _OutsideBankForm extends GetView<TransferViewModel> {
             controller: controller.numberController,
             label: TranslationsKeys.tkToAccountBBANLabel,
             onSaved: controller.onToAccountBBANChanged,
-            validator: InputsValidator.generalValidator,
+            validator: InputsValidator.validateBBAN,
+            keyboardType: TextInputType.number,
+            inputFormatters: [LengthLimitingTextInputFormatter(14)],
           ),
           SizedBox(height: verticalSpacing),
           BeneficiaryDropDown(
