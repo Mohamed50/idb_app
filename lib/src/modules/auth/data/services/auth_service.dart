@@ -24,8 +24,8 @@ class AuthService extends ApiService {
       'User_ID': username,
       'Password': generateMd5(password),
       'Channel_ID': 1,
-      'App_Version_Code': 3,
-      'App_Name': 'JB',
+      'App_Version_Code': 1,
+      'App_Name': 'Mobile 1.0.1',
       'Device_Info': [deviceInfo],
       'Device_Key': deviceInfo['Device_ID']
     };
@@ -88,9 +88,9 @@ class AuthService extends ApiService {
       'Customer_Name_EN': nameEn,
       'Customer_Name_AR': nameAr,
       'Account_No': primaryAccount.accountNo,
-      'whatsapp_no': whatsAppNumber,
+      'Comm_No': '249$whatsAppNumber',
       'is_agreed': isAgreed,
-      'Email': 'N/A',
+      'Email': '',
       'Address': 'N/A',
     };
     final response = await post(

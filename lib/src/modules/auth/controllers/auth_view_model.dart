@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:get/get.dart';
@@ -11,6 +13,8 @@ enum AuthState { checking, authenticated, notAuthenticated }
 class AuthViewModel extends GetxController {
   /// Instance of `AuthService` to perform authentication-related operations.
   final AuthService _authService;
+
+  final VoidCallback onAuthenticated;
 
   /// Observable authentication state.
   final Rx<AuthState> _authState = AuthState.checking.obs;
@@ -39,14 +43,12 @@ class AuthViewModel extends GetxController {
   /// Stores the user id.
   String? userId;
 
-  List<AccountModel> availableAccounts = <AccountModel>[];
-  List<AccountModel> selectedAccounts = <AccountModel>[];
-
   final RxBool _termsAgree = false.obs;
+
   bool get termsAgree => _termsAgree.value;
 
   /// Constructor initializes with the `AuthService` and checks the session on creation.
-  AuthViewModel(this._authService) {
+  AuthViewModel(this._authService, {required this.onAuthenticated}) {
     checkSession();
     _fetchUserId();
   }
@@ -69,7 +71,7 @@ class AuthViewModel extends GetxController {
 
   /// Refreshes the session by calling the refreshSession method from AuthService
   Future refreshSession() async {
-    await _authService.refreshSession();
+    // await _authService.refreshSession();
   }
 
   /// Performs user sign-in with the provided username and password.
@@ -83,10 +85,9 @@ class AuthViewModel extends GetxController {
 
   /// Registers a new user using the provided `newUser` details.
   Future<void> signUp() async {
-    if(termsAgree) {
+    if (termsAgree) {
       await _authService.signUp(nationalNumber!, rim!, phoneNumber!);
-    }
-    else{
+    } else {
       throw AppException(TranslationsKeys.tkTermsAndConditionsRequiredMsg);
     }
   }
@@ -98,20 +99,18 @@ class AuthViewModel extends GetxController {
   }
 
   /// verify new user using the provided `otp` and 'rim'.
-  Future<void> verifyAccountByOtp() async {
+  Future<List<AccountModel>> verifyAccountByOtp() async {
     final response = await _authService.verifyAccountByOtp(rim!, otp!);
-    availableAccounts = response.accounts;
     nameEn = response.nameEn;
     nameAr = response.nameAr;
+    return response.accounts;
   }
 
   /// register new user using the validated data.
-  Future<void> registerUser() async {
-    userId = await _authService.registerAccount(nationalNumber!, rim!, phoneNumber!, nameEn!, nameAr!, whatsappNumber!, _termsAgree.value, availableAccounts.first);
-  }
-
-  Future<void> linkAccounts() async {
-    await _authService.linkAccounts(userId!, selectedAccounts);
+  Future<String> registerUser(AccountModel primaryAccount) async {
+    userId = await _authService.registerAccount(
+        nationalNumber!, rim!, phoneNumber!, nameEn!, nameAr!, whatsappNumber!, _termsAgree.value, primaryAccount);
+    return userId!;
   }
 
   Future<void> setPassword() async {
@@ -135,6 +134,7 @@ class AuthViewModel extends GetxController {
   /// Sets the state to authenticated.
   void authenticated() {
     _authState.value = AuthState.authenticated;
+    onAuthenticated();
   }
 
   /// Sets the state to not authenticated.
@@ -161,15 +161,6 @@ class AuthViewModel extends GetxController {
   void logout() {
     _authService.signOut();
     notAuthenticated();
-  }
-
-  void onSelectAccount(AccountModel value) {
-    if (selectedAccounts.contains(value)) {
-      selectedAccounts.remove(value);
-    } else {
-      selectedAccounts.add(value);
-    }
-    update();
   }
 
   void onConfirmPasswordChanged(String? newValue) {

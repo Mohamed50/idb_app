@@ -1,4 +1,8 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/accounts/actions/account_actions.dart';
+import 'package:az_banking_app/src/modules/accounts/controllers/account_view_model.dart';
+import 'package:az_banking_app/src/modules/accounts/controllers/link_account_view_model.dart';
+import 'package:az_banking_app/src/modules/accounts/data/models/account_model.dart';
 import 'package:az_banking_app/src/modules/auth/controllers/change_password_view_model.dart';
 import 'package:az_banking_app/src/modules/auth/controllers/change_security_questions_view_model.dart';
 import 'package:az_banking_app/src/modules/auth/controllers/forgot_password_view_model.dart';
@@ -14,19 +18,16 @@ class AuthActions extends ActionPresenter {
 
   static AuthActions get instance => _mInstance;
 
-  late AuthViewModel _authViewModel;
-
-  AuthActions._() {
-    _authViewModel = Get.find();
-  }
+  AuthActions._();
 
   bool get isAuthenticated => Get.find<AuthViewModel>().isAuthenticated();
 
   Future signIn(BuildContext context) async {
     await actionHandler(context, () async {
-      await _authViewModel.signIn();
-      if (_authViewModel.user!.isResetDeviceRequired) {
-        await _authViewModel.requestOtp();
+      final controller = Get.find<AuthViewModel>();
+      await controller.signIn();
+      if (controller.user!.isResetDeviceRequired) {
+        await controller.requestOtp();
         toResetDevicePage();
       }
     });
@@ -34,7 +35,7 @@ class AuthActions extends ActionPresenter {
 
   Future resetDevice(BuildContext context) async {
     actionHandler(context, () async {
-      await _authViewModel.resetDevice();
+      await Get.find<AuthViewModel>().resetDevice();
       back();
       showSuccessSnackBar('', TranslationsKeys.tkResetDeviceSuccessMsg);
     });
@@ -42,7 +43,7 @@ class AuthActions extends ActionPresenter {
 
   Future signUp(BuildContext context) async {
     actionHandler(context, () async {
-      await _authViewModel.signUp();
+      await Get.find<AuthViewModel>().signUp();
       Get.back();
       showSuccessSnackBar('', TranslationsKeys.tkRegisterSuccessMsg);
       toVerifyAccountPage();
@@ -51,24 +52,36 @@ class AuthActions extends ActionPresenter {
 
   Future verifyAccount(BuildContext context) async {
     actionHandler(context, () async {
-      await _authViewModel.verifyAccountByOtp();
-      await _authViewModel.registerUser();
-      Get.offNamed(RouteManager.linkAccountsRoute);
-      showSuccessSnackBar('', TranslationsKeys.tkVerifyAccountSuccessMsg);
+      final controller = Get.find<AuthViewModel>();
+
+      /// get available accounts from verify
+      final List<AccountModel> availableAccounts = await controller.verifyAccountByOtp();
+
+      /// send the first one in the regCustSelfRegistration
+      String userId = await controller.registerUser(availableAccounts.first);
+
+      /// receive userId to link accounts
+      hideLoader();
+      await AccountActions.instance.toLinkAccountsPage(userId, availableAccounts);
+      Get.offNamed(RouteManager.setPasswordRoute);
     });
   }
 
   void linkAccounts(BuildContext context) {
     actionHandler(context, () async {
-      await _authViewModel.linkAccounts();
-      Get.offNamed(RouteManager.setPasswordRoute);
+      await Get.find<LinkAccountViewModel>().linkAccounts();
+      if (Get.isRegistered<AccountViewModel>()) {
+        Get.find<AccountViewModel>().refreshData();
+      }
+      Get.back();
       showSuccessSnackBar('', TranslationsKeys.tkLinkAccountsSuccessMsg);
     });
   }
 
   void setPassword(BuildContext context) {
     actionHandler(context, () async {
-      await _authViewModel.setPassword();
+      final controller = Get.find<AuthViewModel>();
+      await controller.setPassword();
       Get.back();
       showSuccessSnackBar('', TranslationsKeys.tkPasswordSetSuccessMsg);
     });
@@ -76,7 +89,8 @@ class AuthActions extends ActionPresenter {
 
   void signOut(BuildContext context) {
     actionHandler(context, () async {
-      _authViewModel.logout();
+      final controller = Get.find<AuthViewModel>();
+      controller.logout();
       Phoenix.rebirth(context);
       Get.offNamedUntil(RouteManager.initialRoute, (route) => false);
     });

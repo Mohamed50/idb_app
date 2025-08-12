@@ -68,4 +68,8 @@ class AccountViewModel extends GetxController {
     onAccountChanged(_primaryAccount!);
     update();
   }
+
+  void refreshData() {
+    _fetchAccounts();
+  }
 }

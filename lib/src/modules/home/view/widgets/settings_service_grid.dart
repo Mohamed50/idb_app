@@ -1,4 +1,6 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/essentials/services/memory_service.dart';
+import 'package:az_banking_app/src/modules/accounts/actions/account_actions.dart';
 import 'package:az_banking_app/src/modules/auth/auth.dart';
 import 'package:az_banking_app/src/modules/bank_services/views/service_icon_widget.dart';
 import 'package:az_banking_app/src/modules/home/actions/settings_actions.dart';
@@ -22,6 +24,12 @@ class SettingsServiceList extends StatelessWidget {
       padding: EdgeInsets.zero,
       physics: NeverScrollableScrollPhysics(),
       children: [
+        SettingsItem(
+          label: TranslationsKeys.tkLinkAccountsLabel,
+          iconPath: AssetsManager.icAccountsPath,
+          onTap: _toLinkAccountPage,
+        ),
+        divider,
         SettingsItem(
           label: TranslationsKeys.tkChangePasswordLabel,
           iconPath: AssetsManager.icChangePasswordPath,
@@ -67,6 +75,11 @@ class SettingsServiceList extends StatelessWidget {
     AuthActions.instance.signOut(context);
   }
 
+  void _toLinkAccountPage() {
+    final userId = Get.find<AuthViewModel>().userId;
+    print(userId);
+    AccountActions.instance.toLinkAccountsPage(userId!);
+  }
   void _toChangePasswordPage() {
     SettingsActions.instance.toChangePasswordPage();
   }

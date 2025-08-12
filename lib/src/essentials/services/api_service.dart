@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/essentials/config/error_dialog.dart';
+import 'package:az_banking_app/src/essentials/services/request_logger.dart';
 import 'package:az_banking_app/src/essentials/widgets/confirmation_dialog.dart';
 import 'package:az_banking_app/src/modules/auth/auth.dart';
 import 'package:az_banking_app/src/modules/auth/data/models/user.dart';
@@ -180,12 +181,13 @@ class ApiService extends GetConnect {
   /// `response`: The HTTP response object.
   /// `body`: Optional request body.
   void logRequestData(Response response, [dynamic body]) {
-    log('Calling API: ${response.request!.url.toString()}');
-    log('Headers: ${response.request!.headers}');
-    log('Status Code: ${response.statusCode}');
-    log('body: $body');
-    log('Response headers: ${response.headers}');
-    log('Response: ${response.bodyString}');
+    // log('Calling API: ${response.request!.url.toString()}');
+    // log('Headers: ${response.request!.headers}');
+    // log('Status Code: ${response.statusCode}');
+    // log('body: ${json.encode(body)}');
+    // log('Response headers: ${json.encode(response.headers)}');
+    // log('Response: ${response.bodyString}');
+  logRequestAsCurl(response, body: body);
   }
 
   /// Handles errors in API responses.

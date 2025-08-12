@@ -27,13 +27,6 @@ class InitialBindings extends Bindings {
     // Registers the dependencies required for branches.
     BranchesBindings().dependencies();
 
-    // Registers the dependencies related to menu functionality.
-    MenuBindings().dependencies();
 
-    // Registers the dependencies related to menu functionality.
-    HomeBindings().dependencies();
-
-    // Registers the dependencies related to beneficiaries functionality.
-    BeneficiariesBindings().dependencies();
   }
 }

@@ -19,6 +19,7 @@ class AccountModel {
   final String accountNo;
   final String currencyCode;
   final bool isAllowOthersTran;
+  bool isLinked;
   final String? branchCode;
   String balance;
   String name;
@@ -33,6 +34,7 @@ class AccountModel {
     required this.accountNo,
     this.currencyCode = 'SDG',
     this.isAllowOthersTran = false,
+    this.isLinked = false,
     this.branchCode = '',
     this.balance = '0',
     this.name = '',
@@ -48,6 +50,7 @@ class AccountModel {
     accountNo: json["Account_No"],
     currencyCode: json["Currency_Code"] ?? 'SDG',
     isAllowOthersTran: json["Is_Allow_Others_Tran"] ?? false,
+    isLinked: json['Is_Linked'] ?? true,
     branchCode: json["Branch_Code"],
     balance: json["Balance"] ?? '0',
     name: name ?? '',
@@ -65,6 +68,7 @@ class AccountModel {
     "Is_Allow_Others_Tran": isAllowOthersTran,
     "Branch_Code": branchCode,
     "Custom_Name": name,
+    "Is_Linked": isLinked,
   };
 
   String toCopiedContent() {
