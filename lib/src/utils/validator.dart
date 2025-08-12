@@ -121,7 +121,7 @@ class InputsValidator {
   /// Validates a national Number.
   /// Returns a localized error message if the national Number is null or empty, otherwise returns `null`.
   static String? nationalNumberValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.isEmpty || value.length != 11) {
       return TranslationsKeys.tkNationalNumberRequiredMsg.tr;
     }
     return null;

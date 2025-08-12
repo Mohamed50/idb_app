@@ -49,6 +49,7 @@ class RegisterPage extends GetWidget<AuthViewModel> {
                         validator: InputsValidator.nationalNumberValidator,
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
+                        inputFormatters: [LengthLimitingTextInputFormatter(11)],
                         maxLines: 1,
                       ),
                       SizedBox(height: 12.0),
