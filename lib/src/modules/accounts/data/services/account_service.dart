@@ -22,6 +22,13 @@ class AccountService extends ApiService {
     return true;
   }
 
+  Future<bool> unlinkAccounts(String userId, List<AccountModel> selectedAccounts) async {
+    MemoryService.instance.userId = userId;
+    Map<String, dynamic> body = {'User_ID': userId, 'Accounts_List': selectedAccounts.map((e) => e.toJson()).toList()};
+    await post(APIConfiguration.unlinkAccountsUrl, body);
+    return true;
+  }
+
   Future<List<AccountModel>> fetchBalance(List<AccountModel> accounts) async {
     final body = {'lang': '0', 'Accounts_List': accounts.map((e) => e.toJson()).toList()};
     List balances = [];

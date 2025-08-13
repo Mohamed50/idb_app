@@ -70,6 +70,7 @@ class AuthActions extends ActionPresenter {
   void linkAccounts(BuildContext context) {
     actionHandler(context, () async {
       await Get.find<LinkAccountViewModel>().linkAccounts();
+      await Get.find<LinkAccountViewModel>().unlinkAccounts();
       if (Get.isRegistered<AccountViewModel>()) {
         Get.find<AccountViewModel>().refreshData();
       }

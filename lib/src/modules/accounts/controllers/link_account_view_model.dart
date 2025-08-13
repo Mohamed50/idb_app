@@ -38,10 +38,14 @@ class LinkAccountViewModel extends GetxController {
   }
 
   Future<void> linkAccounts() async {
+    await _accountService.linkAccounts(userId, selectedAccounts);
+  }
+
+  Future<void> unlinkAccounts() async {
     for (var e in accounts.data!) {
       e.isLinked = isSelected(e);
     }
-    await _accountService.linkAccounts(userId, accounts.data!);
+    await _accountService.unlinkAccounts(userId, accounts.data!.where((e) => !e.isLinked).toList());
   }
 
   void onSelectAccount(AccountModel value) {

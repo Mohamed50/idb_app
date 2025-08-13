@@ -31,6 +31,7 @@ class APIConfiguration {
 
   /// URL for link accounts with user.
   static const String linkAccountsUrl = '$baseUrl/sharedRoutes/linkAccCustSelfRegistration';
+  static const String unlinkAccountsUrl = '$baseUrl/sharedRoutes/unlinkCustAcc';
 
   /// URL for setting user password.
   static const String setAccountPasswordsUrl = '$baseUrl/sharedRoutes/setPwdCustSelfRegistration';
@@ -62,6 +63,9 @@ class APIConfiguration {
   /// URL for fetching user security questions.
   static const String userAccountsUrl = '$baseUrl/sharedRoutes/getAccList';
 
+  /// URL for fetching available accounts.
+  static const String getAvailableAccounts = '$baseUrl/bankRoutes/getCustLinkedAccByUser';
+
   /// URL for fetching user security questions.
   static const String fetchBranchesLocationsUrl = '$baseUrl/sharedRoutes/getBankLandmarks';
   static const String fetchBranchesListUrl = '$baseUrl/sharedRoutes/getBranches';
@@ -83,6 +87,7 @@ class APIConfiguration {
   static const String teleTopUpUrl = '$baseUrl/bankRoutes/TopUp';
   static const String teleBillInquiryUrl = '$baseUrl/bankRoutes/BillInquiry';
   static const String teleBillPaymentUrl = '$baseUrl/bankRoutes/BillPayment';
+  static const String mockBillPaymentUrl = '$baseUrl/bankRoutes/Billing';
 
   /// Bank Services - [orders]
   static const String trackOrderStatusUrl = '$baseUrl/sharedRoutes/getBankServStatus';
