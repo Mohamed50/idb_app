@@ -22,10 +22,28 @@ class StatementItemTile extends StatelessWidget {
       color: backgroundColor ?? ColorManager.darkBackgroundColor,
       child: Row(
         children: [
-          CustomCard(color: color.withValues(alpha: 0.08), child: FaIcon(icon, color: color, size: 24.0)),
+          CustomCard(color: color.withValues(alpha: 0.08), child: FaIcon(icon, color: color, size: 32.0)),
           SizedBox(width: 8.0),
-          Expanded(child: CustomText.subtitle(statementModel.naration, color: ColorManager.titleColor, fontSize: 12.0,)),
-          SizedBox(width: 4.0),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText.title(
+                statementModel.naration,
+                color: ColorManager.titleColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 14.0,
+              ),
+              SizedBox(height: 2.0),
+              CustomDateText(
+                statementModel.tranDateTime,
+                fontSize: 12,
+                color: ColorManager.titleColor,
+                dateFormat: 'dd/MM/yyyy',
+              ),
+            ],
+          )),
+          SizedBox(width: 8.0),
           CustomText.title(statementModel.amount, color: color),
         ],
       ),
