@@ -53,10 +53,7 @@ class AuthService extends ApiService {
   // Handles user sign-up by user information to the API.
   // return true upon successful sign up.
   Future<bool> signUp(String nationalNumber, String rim, String phoneNumber) async {
-    if(phoneNumber[0] == '0'){
-      phoneNumber = phoneNumber.substring(1);
-    }
-    Map<String, dynamic> body = {'RIM': rim, 'Phone_No': '249$phoneNumber', 'National_ID': nationalNumber};
+    Map<String, dynamic> body = {'RIM': rim, 'Phone_No': phoneNumber, 'National_ID': nationalNumber};
     await post(
       APIConfiguration.signUpUrl,
       headers: getUnauthorizedHeader(), // Uses header without authorization
@@ -83,12 +80,12 @@ class AuthService extends ApiService {
     }
     Map<String, dynamic> body = {
       'RIM': rim,
-      'Phone_No': '249$phoneNumber',
+      'Phone_No': phoneNumber,
       'National_ID': nationalNumber,
       'Customer_Name_EN': nameEn,
       'Customer_Name_AR': nameAr,
       'Account_No': primaryAccount.accountNo,
-      'Comm_No': '249$whatsAppNumber',
+      'Comm_No': whatsAppNumber,
       'is_agreed': isAgreed,
       'Email': '',
       'Address': 'N/A',

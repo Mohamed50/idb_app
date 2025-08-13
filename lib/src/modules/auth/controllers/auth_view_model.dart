@@ -45,6 +45,8 @@ class AuthViewModel extends GetxController {
 
   final RxBool _termsAgree = false.obs;
 
+  String? phoneCountryCode, whatsappCountryCode;
+
   bool get termsAgree => _termsAgree.value;
 
   /// Constructor initializes with the `AuthService` and checks the session on creation.
@@ -86,7 +88,7 @@ class AuthViewModel extends GetxController {
   /// Registers a new user using the provided `newUser` details.
   Future<void> signUp() async {
     if (termsAgree) {
-      await _authService.signUp(nationalNumber!, rim!, phoneNumber!);
+      await _authService.signUp(nationalNumber!, rim!, '$phoneCountryCode$phoneNumber');
     } else {
       throw AppException(TranslationsKeys.tkTermsAndConditionsRequiredMsg);
     }
@@ -109,7 +111,15 @@ class AuthViewModel extends GetxController {
   /// register new user using the validated data.
   Future<String> registerUser(AccountModel primaryAccount) async {
     userId = await _authService.registerAccount(
-        nationalNumber!, rim!, phoneNumber!, nameEn!, nameAr!, whatsappNumber!, _termsAgree.value, primaryAccount);
+      nationalNumber!,
+      rim!,
+      '$phoneCountryCode$phoneNumber',
+      nameEn!,
+      nameAr!,
+      '$whatsappCountryCode$whatsappNumber',
+      _termsAgree.value,
+      primaryAccount,
+    );
     return userId!;
   }
 
