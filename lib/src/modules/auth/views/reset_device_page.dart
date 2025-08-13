@@ -36,21 +36,24 @@ class ResetDevicePage extends GetWidget<AuthViewModel> {
                       CustomText.subtitle(TranslationsKeys.tkPhoneLabel),
                       CustomText.title(controller.user!.phoneNo),
                       SizedBox(height: 24.0),
-                      OtpTextField(
-                        numberOfFields: 6,
-                        borderColor: ColorManager.primaryColor,
-                        disabledBorderColor: ColorManager.primaryColor,
-                        enabledBorderColor: ColorManager.darkBackgroundColor,
-                        focusedBorderColor: ColorManager.primaryColor,
-                        borderWidth: 32,
-                        showFieldAsBox: true,
-                        onCodeChanged: (String code) {
-                          controller.otp = code;
-                        },
-                        onSubmit: (String verificationCode){
-                          controller.otp = verificationCode;
-                          resetDevice(context);
-                        }, // end onSubmit
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: OtpTextField(
+                          numberOfFields: 6,
+                          borderColor: ColorManager.primaryColor,
+                          disabledBorderColor: ColorManager.primaryColor,
+                          enabledBorderColor: ColorManager.darkBackgroundColor,
+                          focusedBorderColor: ColorManager.primaryColor,
+                          borderWidth: 32,
+                          showFieldAsBox: true,
+                          onCodeChanged: (String code) {
+                            controller.otp = code;
+                          },
+                          onSubmit: (String verificationCode){
+                            controller.otp = verificationCode;
+                            resetDevice(context);
+                          }, // end onSubmit
+                        ),
                       ),
                       SizedBox(height: 24.0),
                       CustomButton(
