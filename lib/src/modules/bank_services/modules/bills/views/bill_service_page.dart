@@ -3,6 +3,7 @@ import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dar
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/actions/bill_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/bill_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
+import 'package:az_banking_app/src/modules/bank_services/views/amount_input_field.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_drop_down.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
@@ -78,8 +79,9 @@ class _FormWidget extends GetView<BillsViewModel> {
         CustomFormField(
           controller: _numberController,
           label: ServicesConfiguration.getServiceMainFiledLabel(billerId),
+          validator: ServicesConfiguration.getServiceMainFiledValidator(billerId),
           onSaved: controller.onBillNumberChanged,
-          validator: InputsValidator.generalValidator,
+          keyboardType: TextInputType.number,
         ),
         CustomVisible(
           show: billerId == ServicesConfiguration.topUpElectricityServiceCode,
@@ -102,18 +104,14 @@ class _FormWidget extends GetView<BillsViewModel> {
             padding: EdgeInsets.only(top: verticalSpacing),
             child: CustomFormField(
               label: ServicesConfiguration.getServiceSecondaryFiledLabel(billerId),
+              validator: ServicesConfiguration.getServiceSecondaryFiledValidator(billerId),
               onSaved: controller.onSecondaryNumberChanged,
-              validator: InputsValidator.generalValidator,
             ),
           ),
         ),
         SizedBox(height: verticalSpacing),
-        CustomFormField(
-          label: TranslationsKeys.tkAmountLabel,
+        AmountInputField(
           onSaved: controller.onAmountChanged,
-          validator: InputsValidator.generalValidator,
-          keyboardType: TextInputType.number,
-          inputFormatters: [AmountFormatter()],
         ),
       ],
     );

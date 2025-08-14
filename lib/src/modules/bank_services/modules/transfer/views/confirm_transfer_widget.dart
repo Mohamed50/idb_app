@@ -3,6 +3,7 @@ import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dar
 import 'package:az_banking_app/src/modules/accounts/views/accounts_list.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
+import 'package:az_banking_app/src/modules/bank_services/views/amount_input_field.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/material.dart';
@@ -44,12 +45,8 @@ class ConfirmTransferWidget extends GetView<TransferViewModel> {
             validator: (v) => InputsValidator.generalValidator(v?.toString()),
           ),
           SizedBox(height: 24.0),
-          CustomFormField(
-            label: TranslationsKeys.tkAmountLabel,
+          AmountInputField(
             onSaved: controller.onAmountChanged,
-            validator: InputsValidator.generalValidator,
-            keyboardType: TextInputType.number,
-            inputFormatters: [AmountFormatter()],
           ),
           SizedBox(height: 24),
           CustomFormField(

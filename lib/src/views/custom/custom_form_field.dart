@@ -202,20 +202,22 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   }
 }
 
-/// **AmountFormatter (with decimals)**
+
+/// **AmountFormatter (9 integers + 2 decimals)**
 ///
-/// - Groups the integer part with commas
-/// - Allows a single decimal point
-/// - Limits fractional digits (default: 2)
-/// - Preserves caret while typing
-///
-// ────────────────────────────────────────────────
+/// - Locale-aware grouping for the integer part
+/// - Uses '.' as the decimal separator (commas are treated as grouping only)
+/// - Max integer digits: 9
+/// - Max decimal digits: 2 (configurable)
+/// - Preserves caret; rejects edits that exceed limits
 class AmountFormatter extends TextInputFormatter {
   final int maxDecimals;
+  final int maxIntegers;
   final NumberFormat _intFormatter;
 
   AmountFormatter({
     this.maxDecimals = 2,
+    this.maxIntegers = 9,
     String locale = 'en_US',
   }) : _intFormatter = NumberFormat.decimalPattern(locale);
 
@@ -225,19 +227,18 @@ class AmountFormatter extends TextInputFormatter {
       TextEditingValue newValue,
       ) {
     final rawText = newValue.text;
-
-    // Quick exit
     if (rawText.isEmpty) {
       return const TextEditingValue(text: '');
     }
 
-    // Keep only digits and decimal separators; accept both '.' and ','
-    final sanitized = rawText.replaceAll(RegExp(r'[^0-9\.,]'), '');
+    // 1) Remove grouping commas/spaces and any non-digit/non-dot chars
+    //    (Only '.' is considered a decimal point)
+    final sanitized = rawText
+        .replaceAll(',', '')                // strip thousands separators
+        .replaceAll(RegExp(r'[^0-9\.]'), ''); // keep only digits and '.'
 
-    // Unify decimal to '.' (we'll always output '.')
-    var unified = sanitized.replaceAll(',', '.');
-
-    // Keep only the first '.' as decimal separator
+    // 2) Collapse multiple '.' to a single decimal point
+    String unified = sanitized;
     final firstDot = unified.indexOf('.');
     if (firstDot != -1) {
       final before = unified.substring(0, firstDot + 1);
@@ -245,47 +246,59 @@ class AmountFormatter extends TextInputFormatter {
       unified = before + after;
     }
 
-    // Split into integer and fraction
+    // 3) Split into integer and fraction
     var parts = unified.split('.');
     var intPart = parts[0];
     var fracPart = parts.length > 1 ? parts[1] : '';
 
-    // Trim fraction to maxDecimals (if provided)
-    if (maxDecimals >= 0 && fracPart.length > maxDecimals) {
-      fracPart = fracPart.substring(0, maxDecimals);
-    }
-
-    // Remove leading zeros (but leave one zero if empty)
+    // Normalize leading zeros in integer part (keep one zero)
     intPart = intPart.replaceAll(RegExp(r'^0+(?=\d)'), '');
     if (intPart.isEmpty) intPart = '0';
 
-    // Format integer part with grouping
+    // 4) Enforce limits
+    // Integer digits (without signs/anything else)
+    final intDigits = intPart.replaceAll(RegExp(r'\D'), '');
+    if (intDigits.length > maxIntegers) {
+      return oldValue; // reject edit
+    }
+
+    // Decimal digits
+    if (maxDecimals >= 0 && fracPart.length > maxDecimals) {
+      return oldValue; // reject edit beyond allowed decimals
+    }
+
+    // 5) Format integer part with grouping
     final formattedInt = _intFormatter.format(int.parse(intPart));
 
-    // Rebuild final formatted text
+    // Preserve trailing '.' while typing decimals
     final hasTrailingDot = unified.endsWith('.') && maxDecimals != 0;
+
+    // 6) Rebuild formatted text
     final formatted = (fracPart.isEmpty && !hasTrailingDot)
         ? formattedInt
         : '$formattedInt.$fracPart';
 
-    // --- Caret preservation ---
-    // Count how many "meaningful" chars (digits + '.') were to the left
-    final leftRaw = newValue.text
-        .substring(0, newValue.selection.baseOffset.clamp(0, newValue.text.length))
-        .replaceAll(RegExp(r'[^0-9\.,]'), '')
-        .replaceAll(',', '.');
+    // 7) Caret preservation
+    int clamp(int v, int min, int max) => v < min ? min : (v > max ? max : v);
+    final leftRaw = newValue.text.substring(
+      0,
+      clamp(newValue.selection.baseOffset, 0, newValue.text.length),
+    );
 
-    // Collapse to a single dot in the left side as well
+    // Recompute "logical" chars (digits + '.') to the left, ignoring grouping commas
+    final leftSanitized = leftRaw
+        .replaceAll(',', '')
+        .replaceAll(RegExp(r'[^0-9\.]'), '');
+
     String collapseFirstDot(String s) {
       final i = s.indexOf('.');
       if (i == -1) return s.replaceAll('.', '');
       return s.substring(0, i + 1) + s.substring(i + 1).replaceAll('.', '');
     }
 
-    final leftUnified = collapseFirstDot(leftRaw);
+    final leftUnified = collapseFirstDot(leftSanitized);
     final logicalLeftCount = RegExp(r'[0-9.]').allMatches(leftUnified).length;
 
-    // Find the corresponding position in the formatted text
     int seen = 0;
     int newOffset = 0;
     for (int i = 0; i < formatted.length; i++) {
@@ -297,7 +310,6 @@ class AmountFormatter extends TextInputFormatter {
         newOffset = i + 1;
         break;
       }
-      // If we never reach logicalLeftCount (e.g., backspacing), keep advancing
       if (i == formatted.length - 1) {
         newOffset = formatted.length;
       }
@@ -309,4 +321,6 @@ class AmountFormatter extends TextInputFormatter {
     );
   }
 }
+
+
 
