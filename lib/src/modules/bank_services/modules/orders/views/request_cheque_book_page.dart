@@ -54,6 +54,7 @@ class _FormWidget extends GetView<OrderViewModel> {
         children: [
           SizedBox(height: verticalSpacing * 2),
           AccountsDropDown(
+            label: TranslationsKeys.tkToAccountLabel,
             onSaved: controller.onFromAccountChanged,
             validator: (v) => InputsValidator.generalValidator(v?.toString()),
           ),
@@ -65,13 +66,13 @@ class _FormWidget extends GetView<OrderViewModel> {
               PagesNumberModel.largeBook(),
             ],
             onSaved: controller.onPagesNumberChanged,
-            validator: (value) => InputsValidator.generalValidator(value.toString()),
+            validator: InputsValidator.generalValidator,
           ),
           SizedBox(height: verticalSpacing),
           BranchesDropDown(
             label: TranslationsKeys.tkReceivingBranchLabel,
             onSaved: controller.onReceivingBranchChanged,
-            validator: (value) => InputsValidator.generalValidator(value.toString()),
+            validator: InputsValidator.generalValidator,
           ),
         ],
       ),
