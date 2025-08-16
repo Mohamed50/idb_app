@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 
 class ElectricityViewModel extends GetxController {
   final BillsService _billsService;
-  // final billerId = ServicesConfiguration.topUpElectricityServiceCode;
-  final billerId = '2204';
+  final billerId = ServicesConfiguration.topUpElectricityServiceCode;
+  // final billerId = '2204';
 
   String? _meterNumber;
   double? amount;
