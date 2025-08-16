@@ -17,24 +17,7 @@ class InputsValidator {
   static final RegExp _sudaniRegExp = RegExp(r'^01\d{8}$');
   static final RegExp _zainRegExp = RegExp(r'^09\d{8}$');
   static final RegExp _mtnRegExp = RegExp(r'^(099|092)\d{7}$');
-  static final RegExp _meterNumberRegExp = RegExp(r'^(099|092)\d{7}$');
   static final RegExp _accountNumberRegExp = RegExp(r'^\d{11}$');
-
-  /// Regular expression to validate email addresses.
-  static final RegExp _emailRegExp = RegExp(
-    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+$",
-  );
-
-  /// Regular expression to validate passwords.
-  /// Ensures the password contains:
-  /// - At least one uppercase letter
-  /// - At least one lowercase letter
-  /// - At least one numeric digit
-  /// - At least one special character
-  /// - Minimum length of 8 characters
-  static final RegExp _passwordRegExp = RegExp(
-    r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
-  );
 
   /// Validates a phone number.
   /// Returns a localized error message if the phone number is invalid or null, otherwise returns `null`.
@@ -42,6 +25,15 @@ class InputsValidator {
     if (value == null || value.isEmpty) {
       return TranslationsKeys.tkPhoneRequiredMsg.tr;
     } else if (!_phoneRegExp.hasMatch(value)) {
+      return TranslationsKeys.tkPhoneNotValidMsg.tr;
+    }
+    return null;
+  }
+
+  static String? registerPhoneValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkPhoneRequiredMsg.tr;
+    } else if (value.length != 9) {
       return TranslationsKeys.tkPhoneNotValidMsg.tr;
     }
     return null;
@@ -147,18 +139,87 @@ class InputsValidator {
 
   /// Validates a RIM.
   /// Returns a localized error message if the RIM is null or empty, otherwise returns `null`.
-  static String? generalValidator(dynamic value, [String message = TranslationsKeys.tkGeneralRequiredMsg]) {
-    if (value == null || (value is String && value.isEmpty)) {
+  static String? generalValidator(
+    dynamic value, [
+    String message = TranslationsKeys.tkGeneralRequiredMsg,
+  ]) {
+    // Null check
+    if (value == null) {
       return message.tr;
+    }
+
+    // String check (also trims)
+    if (value is String && value.trim().isEmpty) {
+      return message.tr;
+    }
+
+    // Otherwise valid
+    return null;
+  }
+
+  /// Validates a bban.
+  /// Returns a localized error message if the bban is null or empty, otherwise returns `null`.
+  static String? validateBBAN(String? value) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkBBanRequiredMsg.tr;
+    } else if (value.length != 14) {
+      return TranslationsKeys.tkBBanNotValidMsg.tr;
     }
     return null;
   }
 
   /// Validates a RIM.
   /// Returns a localized error message if the RIM is null or empty, otherwise returns `null`.
-  static String? validateBBAN(dynamic value) {
-    if (value == null || value.isEmpty || value.length != 14) {
-      return TranslationsKeys.tkGeneralRequiredMsg.tr;
+  static String? validateE15Receipt(String? value) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkReceiptNumberRequiredMsg.tr;
+    } else if (!(value.length >= 14 && value.length <= 24)) {
+      return TranslationsKeys.tkReceiptNumberNotValidMsg.tr;
+    }
+    return null;
+  }
+
+  static String? validateAmount(String? value, [int minValue = 1]) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkAmountRequiredMsg.tr;
+    } else if (double.parse(value) < minValue) {
+      return TranslationsKeys.tkAmountNotValidMsg.tr;
+    }
+    return null;
+  }
+
+  static String? validateMoheField(String? value) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkMoheRequiredMsg.tr;
+    } else if (value.length < 10) {
+      return TranslationsKeys.tkMoheNotValidMsg.tr;
+    }
+    return null;
+  }
+
+  static String? validateMeterNumber(String? value) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkMeterNumberRequiredMsg.tr;
+    } else if (value.length != 11 && value.length != 13) {
+      return TranslationsKeys.tkMeterNumberNotValidMsg.tr;
+    }
+    return null;
+  }
+
+  static String? validateCustomsBankCode(String? value) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkCustomsBankCodeRequiredMsg.tr;
+    } else if (!(value.length >= 8 && value.length <= 16)) {
+      return TranslationsKeys.tkCustomsBankCodeNotValidMsg.tr;
+    }
+    return null;
+  }
+
+  static String? validateDeclarationCode(String? value) {
+    if (value == null || value.isEmpty) {
+      return TranslationsKeys.tkDeclarationCodeRequiredMsg.tr;
+    } else if (!(value.length >= 8 && value.length <= 16)) {
+      return TranslationsKeys.tkDeclarationCodeNotValidMsg.tr;
     }
     return null;
   }
