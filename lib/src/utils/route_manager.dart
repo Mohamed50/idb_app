@@ -1,4 +1,5 @@
 import 'package:az_banking_app/src/config/config.dart';
+import 'package:az_banking_app/src/modules/accounts/account_binding.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/change_password_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/change_security_questions_page.dart';
@@ -11,6 +12,7 @@ import 'package:az_banking_app/src/modules/auth/views/set_password_page.dart';
 import 'package:az_banking_app/src/modules/auth/views/verify_account_page.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/bills_bindings.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/bill_service_page.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/electricity_page.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/telecommunication_service_page.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/orders/orders_bindings.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/orders/views/request_cheque_book_page.dart';
@@ -154,6 +156,7 @@ class RouteManager {
         GetPage(
           name: linkAccountsRoute,
           page: () => const LinkAccountsPage(),
+          binding: LinkAccountBindings(),
         ),
         GetPage(
           name: setPasswordRoute,
@@ -256,9 +259,8 @@ class RouteManager {
         ),
         GetPage(
           name: electricityPaymentRoute,
-          page: () => const BillServicePage(
-              TranslationsKeys.tkBillPaymentElectricityServicesLabel, ServicesConfiguration.topUpElectricityServiceCode),
-          binding: BillsBindings(),
+          page: () => const ElectricityPage(),
+          binding: ElectricityBindings(),
         ),
         GetPage(
           name: e15PaymentRoute,
