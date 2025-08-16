@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 class ElectricityViewModel extends GetxController {
   final BillsService _billsService;
   final billerId = ServicesConfiguration.topUpElectricityServiceCode;
-  // final billerId = '2204';
 
   String? _meterNumber;
   double? amount;
@@ -19,11 +18,11 @@ class ElectricityViewModel extends GetxController {
   Map<String, dynamic>? get billInfoModel => _billInfoModel;
 
   Future<Map<String, dynamic>> billInquiry() async {
-    return await _billsService.mockBillInquiry(billerId, _fromAccount!, _meterNumber!, amount!);
+    return await _billsService.billInquiry(billerId, _fromAccount!, _meterNumber!, amount!);
   }
 
   Future<Map<String, dynamic>> billPayment() async {
-    return await _billsService.mockBillPayment(billerId, _fromAccount!, _meterNumber!, amount!);
+    return await _billsService.billPayment(billerId, _fromAccount!, _meterNumber!, amount!);
   }
 
   void onFromAccountChanged(AccountModel? value) {
