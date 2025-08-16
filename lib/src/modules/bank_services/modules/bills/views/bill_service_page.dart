@@ -31,7 +31,7 @@ class BillServicePage extends GetView<BillsViewModel> {
           GetBuilder<BillsViewModel>(
             builder: (controller) => CustomVisible(
               show: controller.billInfoModel != null,
-              placeHolder: Form(key: _formKey, child: _FormWidget(billerId)),
+              placeHolder: Form(key: _formKey, child: _FormWidget(billerId, inquiryBillerId)),
               child: _BillInformationWidget(),
             ),
           ),
@@ -60,8 +60,9 @@ class BillServicePage extends GetView<BillsViewModel> {
 
 class _FormWidget extends GetView<BillsViewModel> {
   final String billerId;
+  final String? inquiryBillerId;
   static final _numberController = TextEditingController();
-  const _FormWidget(this.billerId);
+  const _FormWidget(this.billerId, this.inquiryBillerId);
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +111,11 @@ class _FormWidget extends GetView<BillsViewModel> {
           ),
         ),
         SizedBox(height: verticalSpacing),
-        AmountInputField(
-          onSaved: controller.onAmountChanged,
+        CustomVisible(
+          show: inquiryBillerId != ServicesConfiguration.billInquiryCustomsServiceCode,
+          child: AmountInputField(
+            onSaved: controller.onAmountChanged,
+          ),
         ),
       ],
     );
