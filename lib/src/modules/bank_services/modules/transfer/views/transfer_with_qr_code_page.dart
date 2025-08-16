@@ -17,7 +17,7 @@ class TransferWithQrCodePage extends GetView<TransferViewModel> {
     controller.onToAccountChanged(Get.arguments);
     return Scaffold(
       backgroundColor: ColorManager.lightBackgroundColor,
-      appBar: CustomAppbar(title: TranslationsKeys.tkTransferOutsideBankServicesSmallLabel),
+      appBar: CustomAppbar(title: TranslationsKeys.tkTransferInsideBankLabel),
       body: GetBuilder<TransferViewModel>(
         builder:(controller) => CustomVisible(
           show: !controller.isInfoAvailable(),

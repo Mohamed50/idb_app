@@ -3,23 +3,23 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
 
 /// **Capture a widget image and share it**
 ///
 // ────────────────────────────────────────────────
-Future<void> shareWidgetImage(GlobalKey key,
-    {String fileName = 'qr.png', double scale = 3.0, String? text}) async {
+Future<void> shareWidgetImage(GlobalKey key, {String fileName = 'qr.png', double scale = 3.0, String? text}) async {
   // Ensure the widget is laid out
   final context = key.currentContext;
   if (context == null) {
     await Future.delayed(const Duration(milliseconds: 16));
   }
-  final boundary =
-  key.currentContext!.findRenderObject() as RenderRepaintBoundary;
+  final boundary = key.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
   // Higher pixelRatio = sharper image
   final dpr = MediaQuery.of(key.currentContext!).devicePixelRatio;
@@ -71,4 +71,31 @@ Future<Uint8List> _composeOnWhiteBg(ByteData pngBytes) async {
   final out = await recorder.endRecording().toImage(img.width, img.height);
   final bytes = await out.toByteData(format: ui.ImageByteFormat.png);
   return bytes!.buffer.asUint8List();
+}
+
+/// **Pick an image and read QR content**
+///
+/// - Opens gallery
+/// - Runs on-device ML to detect QR/barcodes
+/// - Returns the first QR value (or null)
+///
+// ────────────────────────────────────────────────
+
+Future<String?> pickAndReadQrSmart() async {
+  final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if (picked == null) return null;
+
+  final input = InputImage.fromFilePath(picked.path);
+  final scanner = BarcodeScanner(formats: [BarcodeFormat.qrCode]);
+
+  try {
+    final barcodes = await scanner.processImage(input);
+    Barcode? qr = barcodes.firstWhereOrNull(
+      (b) => b.format == BarcodeFormat.qrCode && (b.rawValue?.isNotEmpty ?? false),
+    );
+    if (qr == null) return null;
+    return qr.rawValue; // <-- your decoded value
+  } finally {
+    await scanner.close();
+  }
 }
