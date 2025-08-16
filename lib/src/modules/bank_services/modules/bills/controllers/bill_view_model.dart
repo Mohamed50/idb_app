@@ -16,7 +16,7 @@ class BillsViewModel extends GetxController {
   Map<String, dynamic>? get billInfoModel => _billInfoModel;
 
   Future<Map<String, dynamic>> billInquiry(String billerId) async {
-    return await _billsService.billInquiry(billerId, _fromAccount!, _billNumber!, amount!, _secondaryNumber);
+    return await _billsService.billInquiry(billerId, _fromAccount!, _billNumber!, amount, _secondaryNumber);
   }
 
   Future<Map<String, dynamic>> billPayment(String billerId) async {
