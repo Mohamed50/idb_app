@@ -218,6 +218,7 @@ const Map<String, String> arabicTranslationsMap = {
   TranslationsKeys.tkDeclarationCodeNotValidMsg: 'يجب ان يكون اسم المخلص بين ٨ و ١٦ خانة',
 
   TranslationsKeys.tkChequeNumberRequiredMsg: 'رقم الشيك مطلوب',
+  TranslationsKeys.tkAccountNotValidMsg: 'يجب ان يكون رقم الحساب من ١١ خانة',
   TranslationsKeys.tkGeneralRequiredMsg: 'هذا الحقل مطلوب',
   TranslationsKeys.tkToAccountTypeLabel: 'نوع الحساب المستلم',
   TranslationsKeys.tkCommentsLabel: 'التعليقات',

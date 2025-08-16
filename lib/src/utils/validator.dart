@@ -67,7 +67,7 @@ class InputsValidator {
     if (value == null || value.isEmpty) {
       return TranslationsKeys.tkGeneralRequiredMsg.tr;
     } else if (!_accountNumberRegExp.hasMatch(value)) {
-      return TranslationsKeys.tkGeneralRequiredMsg.tr;
+      return TranslationsKeys.tkAccountNotValidMsg.tr;
     }
     return null;
   }

@@ -202,6 +202,7 @@ const Map<String, String> englishTranslationsMap = {
   TranslationsKeys.tkScanQrCodeLabel: 'Scan QR code',
   TranslationsKeys.tkUploadQrCodeBtn: 'Upload QR code',
   TranslationsKeys.tkGeneralRequiredMsg: 'This field is required',
+  TranslationsKeys.tkAccountNotValidMsg: 'account number should be 11 digit',
   TranslationsKeys.tkBBanRequiredMsg: 'BBAN is required (14 digit)',
   TranslationsKeys.tkBBanNotValidMsg: 'BBAN should be 14 digit',
   TranslationsKeys.tkReceiptNumberRequiredMsg: 'Receipt number required',

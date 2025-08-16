@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'confirm_transfer_widget.dart';
 
 class TransferToAccountOutsideBankPage extends GetView<TransferViewModel> {
+  static final _formKey = GlobalKey<FormState>();
 
   const TransferToAccountOutsideBankPage({super.key});
 
@@ -20,33 +21,30 @@ class TransferToAccountOutsideBankPage extends GetView<TransferViewModel> {
     return Scaffold(
       appBar: CustomAppbar(title: TranslationsKeys.tkTransferOutsideBankServicesSmallLabel),
       body: GetBuilder<TransferViewModel>(
-        builder:(controller) => CustomVisible(
+        builder: (controller) => CustomVisible(
           show: !controller.isInfoAvailable(),
-          placeHolder: ConfirmTransferWidget(),
-          child: _OutsideBankForm(),
+          placeHolder: ConfirmTransferWidget(formKey: _formKey),
+          child: _OutsideBankForm(formKey: _formKey),
         ),
       ),
     );
   }
-
-
 }
 
-
 class _OutsideBankForm extends GetView<TransferViewModel> {
-  static final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState>formKey;
 
-  const _OutsideBankForm();
+  const _OutsideBankForm({required this.formKey});
 
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
     BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
-    if(beneficiaryModel != null){
+    if (beneficiaryModel != null) {
       controller.numberController.text = beneficiaryModel.number;
     }
     return Form(
-      key: _formKey,
+      key: formKey,
       child: ListView(
         padding: EdgeInsets.all(24.0),
         children: [
@@ -68,7 +66,7 @@ class _OutsideBankForm extends GetView<TransferViewModel> {
             type: BeneficiaryType.outside,
             value: beneficiaryModel,
             onChanged: (value) {
-              if(value != null) {
+              if (value != null) {
                 controller.numberController.text = value.number;
                 controller.onToAccountBBANChanged(value.number);
               }
@@ -85,10 +83,9 @@ class _OutsideBankForm extends GetView<TransferViewModel> {
   }
 
   void _transfer(BuildContext context) {
-    if(_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
       TransferActions.instance.fetchReceiverInfoOutsideBank(context);
     }
   }
 }
-

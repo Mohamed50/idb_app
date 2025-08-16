@@ -1,5 +1,5 @@
+import 'package:az_banking_app/src/app.dart';
 import 'package:az_banking_app/src/config/config.dart';
-import 'package:az_banking_app/src/modules/accounts/views/account_type_drop_down.dart';
 import 'package:az_banking_app/src/modules/accounts/views/accounts_drop_down.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/actions/transfer_actions.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/transfer/controllers/transfer_view_model.dart';
@@ -16,6 +16,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class TransferToAccountInsideBankPage extends StatelessWidget {
+  static final _formKey = GlobalKey<FormState>();
+
   const TransferToAccountInsideBankPage({super.key});
 
   @override
@@ -23,99 +25,78 @@ class TransferToAccountInsideBankPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppbar(title: TranslationsKeys.tkTransferInsideBankLabel),
-      body: GetBuilder<TransferViewModel>(
-        builder:(controller) => CustomVisible(
-          show: !controller.isInfoAvailable(),
-          placeHolder: ConfirmTransferWidget(),
-          child: _InsideBankForm(),
+      body: Form(
+        key: TransferToAccountInsideBankPage._formKey,
+        child: GetBuilder<TransferViewModel>(
+          builder: (controller) => CustomVisible(
+            show: !controller.isInfoAvailable(),
+            placeHolder: ConfirmTransferWidget(
+              formKey: TransferToAccountInsideBankPage._formKey,
+            ),
+            child: InsideBankForm(
+              formKey: TransferToAccountInsideBankPage._formKey,
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-class _InsideBankForm extends GetView<TransferViewModel> {
-  static final _formKey = GlobalKey<FormState>();
+class InsideBankForm extends GetView<TransferViewModel> {
+  final GlobalKey<FormState> formKey;
 
-  const _InsideBankForm();
+  const InsideBankForm({
+    super.key,
+    required this.formKey,
+  });
 
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = 16.0;
     BeneficiaryModel? beneficiaryModel = Get.arguments?['beneficiary'];
-    if(beneficiaryModel != null){
+    if (beneficiaryModel != null) {
       controller.numberController.text = beneficiaryModel.number;
     }
-    return Form(
-      key: _formKey,
-      child: ListView(
-        padding: EdgeInsets.all(24.0),
-        children: [
-          AccountsDropDown(
-            onSaved: controller.onFromAccountChanged,
-            validator: (v) => InputsValidator.generalValidator(v?.toString()),
-          ),
-          SizedBox(height: verticalSpacing),
-          CustomFormField(
-            label: TranslationsKeys.tkToAccountLabel,
-            controller: controller.numberController,
-            onSaved: controller.onToAccountNumberChanged,
-            validator: InputsValidator.generalValidator,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(11),
-            ],
-          ),
-          SizedBox(height: verticalSpacing),
-          BeneficiaryDropDown(
-            type: BeneficiaryType.inside,
-            value: beneficiaryModel,
-            onChanged: (value) {
-              if(value != null) {
-                controller.numberController.text = value.number;
-                controller.onToAccountNumberChanged(value.number);
-              }
-            },
-          ),
-          // SizedBox(height: verticalSpacing),
-          // AccountTypeDropDown(
-          //   label: TranslationsKeys.tkToAccountTypeLabel,
-          //   onSaved: controller.onToAccountTypeChanged,
-          //   validator: (v) => InputsValidator.generalValidator(v?.toString()),
-          // ),
-          // SizedBox(height: verticalSpacing),
-          // CustomFormField(
-          //   label: TranslationsKeys.tkPhoneLabel,
-          //   onSaved: controller.onPhoneChanged,
-          //   validator: InputsValidator.phoneValidator,
-          // ),
-          // SizedBox(height: verticalSpacing),
-          // CustomFormField(
-          //   label: TranslationsKeys.tkAmountLabel,
-          //   onSaved: controller.onAmountChanged,
-          //   validator: InputsValidator.generalValidator,
-          //   keyboardType: TextInputType.number,
-          //   inputFormatters: [AmountFormatter()],
-          // ),
-          // SizedBox(height: verticalSpacing),
-          // CustomFormField(
-          //   label: TranslationsKeys.tkCommentsLabel,
-          //   onSaved: controller.onCommentChanged,
-          //   validator: InputsValidator.generalValidator,
-          //   maxLines: 3,
-          // ),
-          SizedBox(height: 64.0),
-          CustomButton(
-            text: TranslationsKeys.tkConfirmBtn,
-            onPressed: () => _transfer(context),
-          )
-        ],
-      ),
+    return ListView(
+      padding: EdgeInsets.all(24.0),
+      children: [
+        AccountsDropDown(
+          onSaved: controller.onFromAccountChanged,
+          validator: (v) => InputsValidator.generalValidator(v?.toString()),
+        ),
+        SizedBox(height: verticalSpacing),
+        CustomFormField(
+          label: TranslationsKeys.tkToAccountLabel,
+          controller: controller.numberController,
+          onSaved: controller.onToAccountNumberChanged,
+          keyboardType: TextInputType.number,
+          validator: InputsValidator.accountNumberValidator,
+          inputFormatters: [LengthLimitingTextInputFormatter(11)],
+        ),
+        SizedBox(height: verticalSpacing),
+        BeneficiaryDropDown(
+          type: BeneficiaryType.inside,
+          value: beneficiaryModel,
+          onChanged: (value) {
+            if (value != null) {
+              controller.numberController.text = value.number;
+              controller.onToAccountNumberChanged(value.number);
+            }
+          },
+        ),
+        SizedBox(height: 64.0),
+        CustomButton(
+          text: TranslationsKeys.tkConfirmBtn,
+          onPressed: () => _transfer(context),
+        )
+      ],
     );
   }
 
   void _transfer(BuildContext context) {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
       TransferActions.instance.fetchReceiverInfo(context);
     }
   }

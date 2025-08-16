@@ -7,6 +7,9 @@ import '/src/config/config.dart';
 import '/src/utils/binding.dart';
 import 'modules/locale/data/services/localization_service.dart';
 
+final RouteObserver<PageRoute<dynamic>> appRouteObserver =
+RouteObserver<PageRoute<dynamic>>();
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -19,6 +22,7 @@ class App extends StatelessWidget {
       ),
       child: GetMaterialApp(
         initialBinding: InitialBindings(),
+        navigatorObservers: [appRouteObserver],
         getPages: RouteManager.instance.pages,
         translations: LocalizationService(),
         locale: LocalizationService.locale,

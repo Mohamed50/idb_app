@@ -47,7 +47,9 @@ class TransferViewModel extends GetxController {
 
   Future fetchReceiverInfo() async {
     toAccount = await _transferService.fetchAccountInfoInsideBank(
-        _toAccountNumber ?? toAccount!.accountNo, _toAccountType?.toCode() ?? toAccount!.accountType.toCode());
+      _toAccountNumber ?? toAccount!.accountNo,
+      _toAccountType?.toCode() ?? toAccount!.accountType.toCode(),
+    );
     update();
   }
 
@@ -107,6 +109,7 @@ class TransferViewModel extends GetxController {
   }
 
   void clear() {
+    numberController.clear();
     fromAccount = null;
     toAccount = null;
     amount = null;
@@ -114,7 +117,6 @@ class TransferViewModel extends GetxController {
     phone = null;
     toAccountBBan = null;
     _toAccountNumber = null;
-    _toAccountType = null;
     update();
   }
 }

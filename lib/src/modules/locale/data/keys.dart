@@ -142,6 +142,7 @@ class TranslationsKeys {
   static const String tkScanQrCodeLabel = 'tkScanQrCodeLabel';
   static const String tkUploadQrCodeBtn = 'tkUploadQrCodeBtn';
   static const String tkGeneralRequiredMsg = 'tkGeneralRequiredMsg';
+  static const String tkAccountNotValidMsg = 'tkAccountNotValidMsg';
   static const String tkBBanRequiredMsg = 'tkBBanRequiredMsg';
   static const String tkBBanNotValidMsg = 'tkBBanNotValidMsg';
   static const String tkReceiptNumberRequiredMsg = 'tkReceiptNumberRequiredMsg';
