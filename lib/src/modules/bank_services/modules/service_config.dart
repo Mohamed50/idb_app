@@ -1,5 +1,5 @@
 import 'package:az_banking_app/src/config/config.dart';
-import 'package:az_banking_app/src/utils/get_utils.dart';
+import 'package:az_banking_app/src/utils/utils.dart';
 import 'package:az_banking_app/src/views/custom/customs.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -60,6 +60,37 @@ class ServicesConfiguration {
 
       default:
         return "Unknown Service Code";
+    }
+  }
+
+  static String? Function(String?) getServiceMainFiledValidator(String serviceCode) {
+    switch (serviceCode) {
+      case topUpZainServiceCode:
+      case topUpMtnServiceCode:
+      case topUpSudaniServiceCode:
+      case billInquiryZainServiceCode:
+      case billPaymentZainServiceCode:
+      case billInquiryMtnServiceCode:
+      case billPaymentMtnServiceCode:
+      case billInquirySudaniServiceCode:
+      case billPaymentSudaniServiceCode:
+        return InputsValidator.phoneValidator;
+      case topUpElectricityServiceCode:
+        return InputsValidator.generalValidator;
+      case topUpMoheServiceCode:
+      case topUpMoheArabicServiceCode:
+      return InputsValidator.validateMoheField;
+
+      case billInquiryEGovServiceCode:
+      case billPaymentEGovServiceCode:
+      return InputsValidator.validateE15Receipt;
+
+      case billInquiryCustomsServiceCode:
+      case billPaymentCustomsServiceCode:
+      return InputsValidator.validateCustomsBankCode;
+
+      default:
+        return InputsValidator.generalValidator;
     }
   }
 
@@ -142,6 +173,35 @@ class ServicesConfiguration {
 
       default:
         return "Unknown Service Code";
+    }
+  }
+  static String? Function(String?) getServiceSecondaryFiledValidator(String billerId) {
+    switch (billerId) {
+      case topUpZainServiceCode:
+      case topUpMtnServiceCode:
+      case topUpSudaniServiceCode:
+      case billInquiryZainServiceCode:
+      case billPaymentZainServiceCode:
+      case billInquiryMtnServiceCode:
+      case billPaymentMtnServiceCode:
+      case billInquirySudaniServiceCode:
+      case billPaymentSudaniServiceCode:
+      case topUpElectricityServiceCode:
+        return InputsValidator.generalValidator;
+      case topUpMoheServiceCode:
+      case topUpMoheArabicServiceCode:
+      return InputsValidator.generalValidator;
+
+      case billInquiryEGovServiceCode:
+      case billPaymentEGovServiceCode:
+      return InputsValidator.phoneValidator;
+
+      case billInquiryCustomsServiceCode:
+      case billPaymentCustomsServiceCode:
+      return InputsValidator.validateDeclarationCode;
+
+      default:
+        return InputsValidator.generalValidator;
     }
   }
 }
