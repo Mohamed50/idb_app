@@ -1,5 +1,6 @@
 import 'package:az_banking_app/src/essentials/config/action_presenter.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/bill_view_model.dart';
+import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/electricity_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/controllers/tele_bills_view_model.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_service_type.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/service_config.dart';
@@ -53,13 +54,29 @@ class BillsActions extends ActionPresenter {
     }
   }
 
-  void billConfirm(BuildContext context, String billerId, String? inquiryBillerId) {
+  void billConfirm(BuildContext context, String billerId, [String? inquiryBillerId]) {
     final controller = Get.find<BillsViewModel>();
     if (controller.billInfoModel != null) {
       billPayment(context, billerId);
     } else {
       billInquiry(context, inquiryBillerId ?? billerId);
     }
+  }
+
+  void electricityConfirm(BuildContext context, String billerId, [String? inquiryBillerId]) {
+    actionHandler(context, () async {
+      final controller = Get.find<ElectricityViewModel>();
+      if (controller.billInfoModel != null) {
+      final response = await controller.billPayment();
+      _toResponsePage(
+        response,
+        billerId == ServicesConfiguration.topUpElectricityServiceCode ? BeneficiaryType.electricity : null,
+      );
+      } else {
+        final response = await controller.billInquiry();
+        controller.onBillInfoChanged(response);
+      }
+    });
   }
 
   void billInquiry(BuildContext context, String billerId) {
@@ -74,7 +91,10 @@ class BillsActions extends ActionPresenter {
     actionHandler(context, () async {
       final controller = Get.find<BillsViewModel>();
       final response = await controller.billPayment(billerId);
-      _toResponsePage(response, billerId == ServicesConfiguration.topUpElectricityServiceCode ? BeneficiaryType.electricity : null);
+      _toResponsePage(
+        response,
+        billerId == ServicesConfiguration.topUpElectricityServiceCode ? BeneficiaryType.electricity : null,
+      );
     });
   }
 
