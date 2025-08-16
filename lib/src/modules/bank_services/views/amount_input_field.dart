@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 
 class AmountInputField extends StatelessWidget {
   final FormFieldSetter<String> onSaved;
+  final int maxDecimals;
+  final int maxIntegers;
+  final int minValue;
 
   const AmountInputField({
     super.key,
     required this.onSaved,
+    this.maxDecimals = 2,
+    this.maxIntegers = 7,
+    this.minValue = 1,
   });
 
   @override
@@ -16,9 +22,14 @@ class AmountInputField extends StatelessWidget {
     return CustomFormField(
       label: TranslationsKeys.tkAmountLabel,
       onSaved: onSaved,
-      validator: InputsValidator.generalValidator,
+      validator: (value) => InputsValidator.validateAmount(value, minValue),
       keyboardType: TextInputType.number,
-      inputFormatters: [AmountFormatter()],
+      inputFormatters: [
+        AmountFormatter(
+          maxIntegers: maxIntegers,
+          maxDecimals: maxDecimals,
+        )
+      ],
     );
   }
 }

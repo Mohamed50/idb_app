@@ -6,6 +6,7 @@ import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/mode
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_provider_enum.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/data/model/tele_service_type.dart';
 import 'package:az_banking_app/src/modules/bank_services/modules/bills/views/widgets/tele_provider_picker.dart';
+import 'package:az_banking_app/src/modules/bank_services/views/amount_input_field.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_drop_down.dart';
 import 'package:az_banking_app/src/utils/utils.dart';
@@ -70,7 +71,8 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
               GetBuilder<TeleBillsViewModel>(
                 builder: (controller) => CustomFormField(
                   controller: _phoneController,
-                  label: '${TranslationsKeys.tkPhoneLabel.tr} (0${controller.selectedProvider == TeleProvider.sudani ? '1' : '9'}xxxxxxxx)',
+                  label:
+                      '${TranslationsKeys.tkPhoneLabel.tr} (0${controller.selectedProvider == TeleProvider.sudani ? '1' : '9'}xxxxxxxx)',
                   onSaved: controller.onPhoneChanged,
                   validator: getPhoneValidator,
                   inputFormatters: [LengthLimitingTextInputFormatter(10)],
@@ -91,14 +93,9 @@ class TelecommunicationServicePage extends GetView<TeleBillsViewModel> {
               GetX<TeleBillsViewModel>(
                 builder: (controller) => CustomVisible(
                   show: controller.selectedServiceType == TeleServiceType.topUp || controller.amount.value > 0,
-                  child: CustomFormField(
-                    initialValue: controller.amount > 0 ? controller.amount.toString() : null,
-                    // enabled: controller.selectedServiceType == TeleServiceType.topUp,
-                    label: TranslationsKeys.tkAmountLabel,
+                  child: AmountInputField(
                     onSaved: controller.onAmountChanged,
-                    validator: InputsValidator.generalValidator,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [AmountFormatter()],
+                    minValue: 10,
                   ),
                 ),
               ),

@@ -35,12 +35,12 @@ class TeleProviderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () => Get.find<TeleBillsViewModel>().onProviderChange(teleProvider),
       child: AspectRatio(
         aspectRatio: 1.8,
         child: Opacity(
-          opacity: selected ? 1.0 : 0.5,
+          opacity: selected ? 1.0 : 0.2,
           child: AnimatedContainer(
             duration: Duration(milliseconds: 300),
             clipBehavior: Clip.hardEdge,
