@@ -24,7 +24,7 @@ class ColorManager {
   static const Color lightBackgroundColor = Color(0xFFFFFFFF);
   static const Color darkBackgroundColor = Color(0xFFF5F5F5);
   static const Color primaryColor = Color(0xFF7A1D17);
-  static const Color secondaryColor = Color(0xFF4D8334);
+  static const Color secondaryColor = Color(0xFFA64D4D);
   static const Color mutedPrimary = Color(0xFFD9B3B0);
   static const Color darkerMutedPrimary = Color(0xFFA64D4D);
   static const Color appBarColor = Colors.white;
