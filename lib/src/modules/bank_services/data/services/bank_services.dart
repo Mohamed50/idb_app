@@ -48,13 +48,26 @@ class BankServicesService extends ApiService {
         iconPath: AssetsManager.icBillPath,
         route: 'route',
         services: [
-          ServiceModel(TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel, AssetsManager.icBillTelecommunicationPath,
-              RouteManager.teleBillPaymentRoute),
-          ServiceModel(TranslationsKeys.tkBillPaymentElectricityServicesLabel, AssetsManager.icBillElectricityPath,
-              RouteManager.electricityPaymentRoute),
-          ServiceModel(TranslationsKeys.tkBillPaymentJamarikServicesLabel, AssetsManager.icBillCustomsPath,
-              RouteManager.customsPaymentRoute),
-          ServiceModel(TranslationsKeys.tkBillPaymentE15ServicesLabel, AssetsManager.icBillE15Path, RouteManager.e15PaymentRoute),
+          ServiceModel(
+            TranslationsKeys.tkBillPaymentTelecommunicationServicesLabel,
+            AssetsManager.icBillTelecommunicationPath,
+            RouteManager.teleBillPaymentRoute,
+          ),
+          ServiceModel(
+            TranslationsKeys.tkBillPaymentElectricityServicesLabel,
+            AssetsManager.icBillElectricityPath,
+            RouteManager.electricityPaymentRoute,
+          ),
+          ServiceModel(
+            TranslationsKeys.tkBillPaymentJamarikServicesLabel,
+            AssetsManager.icBillCustomsPath,
+            RouteManager.customsPaymentRoute,
+          ),
+          ServiceModel(
+            TranslationsKeys.tkBillPaymentE15ServicesLabel,
+            AssetsManager.icBillE15Path,
+            RouteManager.e15PaymentRoute,
+          ),
           // ServiceModel(TranslationsKeys.tkBillPaymentPortsServicesLabel, AssetsManager.icBillPortsPath, 'route'),
         ],
       ),
