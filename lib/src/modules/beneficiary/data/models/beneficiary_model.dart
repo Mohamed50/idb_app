@@ -10,13 +10,14 @@ enum BeneficiaryType { electricity, telecommunication, inside, outside }
 
 /// **Model class for a Beneficiary**
 class BeneficiaryModel {
+  int id;
   String number;
   String name;
   TeleProvider? provider;
   TeleServiceType? serviceType;
   BeneficiaryType type;
 
-  BeneficiaryModel({required this.number, required this.name, required this.type, this.provider, this.serviceType});
+  BeneficiaryModel({this.id = -1,required this.number, required this.name, required this.type, this.provider, this.serviceType});
 
   /// **Convert BeneficiaryModel to JSON**
   Map<String, dynamic> toJson() {
@@ -45,14 +46,10 @@ class BeneficiaryModel {
     return '$name - ($number)';
   }
 
-
   /// **Override equality operator to compare accounts by `accountNo`.**
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is BeneficiaryModel &&
-              runtimeType == other.runtimeType &&
-              number == other.number;
+      identical(this, other) || other is BeneficiaryModel && runtimeType == other.runtimeType && number == other.number;
 
   /// **Override hashCode to match `number`.**
   @override
@@ -83,6 +80,34 @@ extension BeneficiaryTypeExtension on BeneficiaryType {
         return AssetsManager.icTransferInsideBankPath;
       case BeneficiaryType.outside:
         return AssetsManager.icTransferBetweenBanksPath; // Default fallback
+    }
+  }
+
+  /// **Returns an Icon based on BeneficiaryType**
+  String get key {
+    switch (this) {
+      case BeneficiaryType.electricity:
+        return 'Meter_No';
+      case BeneficiaryType.telecommunication:
+        return 'Pay_Customer_Code';
+      case BeneficiaryType.inside:
+        return 'Account_No';
+      case BeneficiaryType.outside:
+        return 'To_Card'; // Default fallback
+    }
+  }
+
+  /// **Returns an Icon based on BeneficiaryType**
+  int get id {
+    switch (this) {
+      case BeneficiaryType.electricity:
+        return 6;
+      case BeneficiaryType.telecommunication:
+        return 4;
+      case BeneficiaryType.inside:
+        return 1;
+      case BeneficiaryType.outside:
+        return 2;
     }
   }
 }

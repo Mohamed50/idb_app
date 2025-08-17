@@ -101,6 +101,13 @@ class APIConfiguration {
   static const String fetchProductsUrl = '$baseUrl/sharedRoutes/getBankProducts';
   static const String fetchExchangeRangeUrl = '$baseUrl/bankRoutes/getCurrencyRates';
 
+  /// beneficiaries
+  static const String fetchBeneficiariesTypesUrl = '$baseUrl/sharedRoutes/getFavTypes';
+  static const String fetchBeneficiariesUrl = '$baseUrl/sharedRoutes/getFavList';
+  static const String addBeneficiariesUrl = '$baseUrl/sharedRoutes/addFavItem';
+  static const String updateBeneficiariesUrl = '$baseUrl/sharedRoutes/updateFavItem';
+  static const String deleteBeneficiariesUrl = '$baseUrl/sharedRoutes/deleteFavItem';
+
   /// settings
   static const String fetchFaqsUrl = '$baseUrl/sharedRoutes/getBankFAQs';
   static const String fetchTransactionsLimitUrl = '$baseUrl/sharedRoutes/getFeesAndLimits';

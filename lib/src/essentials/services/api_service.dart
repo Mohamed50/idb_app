@@ -204,6 +204,9 @@ class ApiService extends GetConnect {
         throw Exception(response.statusText);
       } else {
         if (response.body != null) {
+          if (response.body['Response_Code'] == 401) {
+            whenSessionIsOver();
+          }
           if (response.body['message'] == 'Validation error') {
             throw AuthException('Wrong Credentials');
           }

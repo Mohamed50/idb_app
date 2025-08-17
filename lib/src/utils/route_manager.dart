@@ -30,6 +30,7 @@ import 'package:az_banking_app/src/modules/bank_services/views/response_page.dar
 import 'package:az_banking_app/src/modules/beneficiary/beneficiaries_bindings.dart';
 import 'package:az_banking_app/src/modules/beneficiary/views/add_beneficiary_page.dart';
 import 'package:az_banking_app/src/modules/beneficiary/views/beneficiaries_page.dart';
+import 'package:az_banking_app/src/modules/beneficiary/views/edit_beneficiary_page.dart';
 import 'package:az_banking_app/src/modules/branches/views/branches_page.dart';
 import 'package:az_banking_app/src/modules/exchange_rate/exchange_bindings.dart';
 import 'package:az_banking_app/src/modules/exchange_rate/views/exchange_rates_page.dart';
@@ -88,6 +89,7 @@ class RouteManager {
   static const String accountsRoute = '/home/accounts';
   static const String beneficiaryRoute = '/home/beneficiary';
   static const String beneficiaryAddRoute = '/home/beneficiary/Add';
+  static const String beneficiaryEditRoute = '/home/beneficiary/edit';
   static const String settingsRoute = '/home/settings';
   static const String changePasswordRoute = '/home/settings/change-password';
   static const String changeSecurityQuestionsRoute = '/home/settings/change-security-questions';
@@ -176,6 +178,12 @@ class RouteManager {
           name: beneficiaryAddRoute,
           page: () => const AddBeneficiaryPage(),
           binding: AddBeneficiariesBindings(),
+        ),
+
+        GetPage(
+          name: beneficiaryEditRoute,
+          page: () => const EditBeneficiaryPage(),
+          binding: EditBeneficiariesBindings(),
         ),
 
         GetPage(

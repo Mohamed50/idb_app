@@ -6,66 +6,38 @@ import 'package:get/get.dart';
 class BeneficiaryViewModel extends GetxController {
   final BeneficiaryService _beneficiaryService;
 
-  BeneficiaryViewModel(this._beneficiaryService) {
+  BeneficiaryViewModel(this._beneficiaryService);
+
+  @override
+  void onInit() {
     _fetchBeneficiaries();
+    super.onInit();
   }
 
-  final RxList<BeneficiaryModel> _beneficiaries = <BeneficiaryModel>[].obs;
+  List<BeneficiaryModel> _beneficiaries = <BeneficiaryModel>[].obs;
 
-  RxList<BeneficiaryModel> get beneficiaries => _beneficiaries;
+  List<BeneficiaryModel> get beneficiaries => _beneficiaries;
 
-  final RxList<BeneficiaryModel> _insideBeneficiaries = <BeneficiaryModel>[].obs;
+  List<BeneficiaryModel> get insideBeneficiaries => _beneficiaries.where((e) => e.type == BeneficiaryType.inside).toList();
 
-  RxList<BeneficiaryModel> get insideBeneficiaries => _insideBeneficiaries;
+  List<BeneficiaryModel> get outsideBeneficiaries => _beneficiaries.where((e) => e.type == BeneficiaryType.outside).toList();
 
-  final RxList<BeneficiaryModel> _outsideBeneficiaries = <BeneficiaryModel>[].obs;
+  List<BeneficiaryModel> get teleBeneficiaries =>
+      _beneficiaries.where((e) => e.type == BeneficiaryType.telecommunication).toList();
 
-  RxList<BeneficiaryModel> get outsideBeneficiaries => _outsideBeneficiaries;
-
-  final RxList<BeneficiaryModel> _teleBeneficiaries = <BeneficiaryModel>[].obs;
-
-  RxList<BeneficiaryModel> get teleBeneficiaries => _teleBeneficiaries;
-
-  final RxList<BeneficiaryModel> _electricityBeneficiaries = <BeneficiaryModel>[].obs;
-
-  RxList<BeneficiaryModel> get electricityBeneficiaries => _electricityBeneficiaries;
+  List<BeneficiaryModel> get electricityBeneficiaries =>
+      _beneficiaries.where((e) => e.type == BeneficiaryType.electricity).toList();
 
   Future<void> _fetchBeneficiaries() async {
-    _beneficiaries.value = _beneficiaryService.fetchBeneficiaries();
-    _groupBeneficiaries();
-    update();
-  }
-
-  void _groupBeneficiaries() {
-    _electricityBeneficiaries.clear();
-    _insideBeneficiaries.clear();
-    _outsideBeneficiaries.clear();
-    _teleBeneficiaries.clear();
-    for (var e in _beneficiaries) {
-        switch (e.type) {
-          case BeneficiaryType.electricity:
-            _electricityBeneficiaries.add(e);
-            break;
-          case BeneficiaryType.telecommunication:
-            _teleBeneficiaries.add(e);
-            break;
-          case BeneficiaryType.inside:
-            _insideBeneficiaries.add(e);
-            break;
-          case BeneficiaryType.outside:
-            _outsideBeneficiaries.add(e);
-            break;
-        }
-      }
+    _beneficiaries = await _beneficiaryService.fetchBeneficiaries();
     update();
   }
 
   Future<void> addBeneficiary(BeneficiaryModel beneficiaryModel) async {
-    if(!_beneficiaries.contains(beneficiaryModel)) {
+    if (!_beneficiaries.any((e) => e.number == beneficiaryModel.number)) {
       await _beneficiaryService.addBeneficiary(beneficiaryModel);
       _fetchBeneficiaries();
-    }
-    else{
+    } else {
       throw AppException(TranslationsKeys.tkBeneficiaryExistMsg);
     }
   }
@@ -74,9 +46,14 @@ class BeneficiaryViewModel extends GetxController {
     _fetchBeneficiaries();
   }
 
+  Future<void> updateBeneficiary(BeneficiaryModel beneficiaryModel) async {
+    await _beneficiaryService.updateBeneficiary(beneficiaryModel);
+    refreshData();
+    update();
+  }
+
   Future<void> removeBeneficiary(BeneficiaryModel beneficiaryModel) async {
-    _beneficiaryService.removeBeneficiary(beneficiaryModel);
-    await Future.delayed(Duration(milliseconds: 300));
+    await _beneficiaryService.removeBeneficiary(beneficiaryModel);
     refreshData();
     update();
   }

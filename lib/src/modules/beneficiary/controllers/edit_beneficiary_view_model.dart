@@ -8,12 +8,12 @@ import 'package:az_banking_app/src/modules/beneficiary/data/services/beneficiary
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:get/get.dart';
 
-class AddBeneficiaryViewModel extends GetxController {
+class EditBeneficiaryViewModel extends GetxController {
   BeneficiaryModel beneficiaryModel;
   final BeneficiaryService _beneficiaryService;
   final TransferService _transferService;
 
-  AddBeneficiaryViewModel(
+  EditBeneficiaryViewModel(
     this._beneficiaryService,
     this.beneficiaryModel,
     this._transferService,

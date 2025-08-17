@@ -2,6 +2,7 @@ import 'package:az_banking_app/src/config/config.dart';
 import 'package:az_banking_app/src/modules/beneficiary/beneficiaries_bindings.dart';
 import 'package:az_banking_app/src/modules/beneficiary/controllers/add_beneficiary_view_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/controllers/beneficiary_view_model.dart';
+import 'package:az_banking_app/src/modules/beneficiary/controllers/edit_beneficiary_view_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/data/models/beneficiary_model.dart';
 import 'package:az_banking_app/src/modules/beneficiary/views/beneficiary_type_page.dart';
 import 'package:az_banking_app/src/utils/route_manager.dart';
@@ -28,14 +29,26 @@ class BeneficiaryActions extends ActionPresenter {
   Future addBeneficiaryFromPage(BuildContext context) async {
     await actionHandler(context, () async {
       BeneficiariesBindings().dependencies();
-      if(!Get.find<AddBeneficiaryViewModel>().isReady()) {
+      if (!Get.find<AddBeneficiaryViewModel>().isReady()) {
         await Get.find<AddBeneficiaryViewModel>().fetchReceiverInfo();
-        throw AppException('Confirm Info');
+        throw AppException(TranslationsKeys.tkAccountInfoConfirmationMsg);
+      } else {
+        await Get.find<BeneficiaryViewModel>().addBeneficiary(Get.find<AddBeneficiaryViewModel>().beneficiaryModel);
       }
-      else {
-        await Get.find<BeneficiaryViewModel>().addBeneficiary(Get
-            .find<AddBeneficiaryViewModel>()
-            .beneficiaryModel);
+      Get.find<BeneficiaryViewModel>().refreshData();
+      Get.back();
+      showSuccessSnackBar(TranslationsKeys.tkBeneficiariesLabel, TranslationsKeys.tkAddBeneficiarySuccessMsg);
+    });
+  }
+
+  Future editBeneficiary(BuildContext context) async {
+    await actionHandler(context, () async {
+      BeneficiariesBindings().dependencies();
+      if (!Get.find<EditBeneficiaryViewModel>().isReady()) {
+        await Get.find<EditBeneficiaryViewModel>().fetchReceiverInfo();
+        throw AppException(TranslationsKeys.tkAccountInfoConfirmationMsg);
+      } else {
+        await Get.find<BeneficiaryViewModel>().updateBeneficiary(Get.find<EditBeneficiaryViewModel>().beneficiaryModel);
       }
       Get.find<BeneficiaryViewModel>().refreshData();
       Get.back();
@@ -62,13 +75,22 @@ class BeneficiaryActions extends ActionPresenter {
 
   void toAddBeneficiaryPage([BeneficiaryModel? beneficiaryModel]) {
     Get.find<BeneficiaryViewModel>().refreshData();
-    Get.toNamed(RouteManager.beneficiaryAddRoute, arguments: beneficiaryModel ?? BeneficiaryModel(number: '', name: '', type: BeneficiaryType.inside));
+    Get.toNamed(RouteManager.beneficiaryAddRoute,
+        arguments: beneficiaryModel ?? BeneficiaryModel(number: '', name: '', type: BeneficiaryType.inside));
   }
 
-  List<BeneficiaryModel> getBeneficiariesByType(BeneficiaryType type){
+  void toEditBeneficiaryPage(BeneficiaryModel beneficiaryModel) {
+    Get.find<BeneficiaryViewModel>().refreshData();
+    Get.toNamed(
+      RouteManager.beneficiaryEditRoute,
+      arguments: beneficiaryModel,
+    );
+  }
+
+  List<BeneficiaryModel> getBeneficiariesByType(BeneficiaryType type) {
     final controller = Get.find<BeneficiaryViewModel>();
     List<BeneficiaryModel> options = [];
-    switch(type) {
+    switch (type) {
       case BeneficiaryType.electricity:
         options = controller.electricityBeneficiaries;
         break;
@@ -85,17 +107,15 @@ class BeneficiaryActions extends ActionPresenter {
     return options;
   }
 
-  void toBeneficiaryTypePage(BeneficiaryType type){
+  void toBeneficiaryTypePage(BeneficiaryType type) {
     final beneficiaries = getBeneficiariesByType(type);
-    Get.to(()=> BeneficiaryTypePage(beneficiaries: beneficiaries));
+    Get.to(() => BeneficiaryTypePage(beneficiaries: beneficiaries));
   }
 
   void removeBeneficiary(BuildContext context, BeneficiaryModel beneficiaryModel) {
-    actionHandler(context, ()async{
-
+    actionHandler(context, () async {
       await Get.find<BeneficiaryViewModel>().removeBeneficiary(beneficiaryModel);
       Get.find<BeneficiaryViewModel>().refreshData();
     });
-
   }
 }

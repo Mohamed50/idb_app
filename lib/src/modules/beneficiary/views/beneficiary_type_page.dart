@@ -78,24 +78,52 @@ class BeneficiaryItemTile extends StatelessWidget {
       onTap: _handleBeneficiary,
       child: CustomCard(
         color: ColorManager.lightBackgroundColor,
-        child: ListTile(
-          leading: CustomCard(
+        padding: EdgeInsets.all(12.0),
+        child: Row(
+          children: [
+            CustomCard(
               color: ColorManager.negativeColor.withValues(alpha: 0.08),
               child: Image.asset(
                 beneficiaryModel.type.toIcon(),
+                width: 48.0,
                 color: ColorManager.primaryColor,
-              )),
-          title: CustomText.title(
-            beneficiaryModel.name,
-            fontSize: 16.0,
-            maxLines: 1,
-          ),
-          subtitle: CustomText.subtitle(
-            beneficiaryModel.number,
-            maxLines: 1,
-          ),
-          trailing:
-              InkWell(onTap: () => _removeBeneficiary(context), child: Icon(Icons.delete, color: ColorManager.negativeColor)),
+              ),
+            ),
+            SizedBox(width: 24.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText.title(
+                    beneficiaryModel.name,
+                    fontSize: 16.0,
+                    maxLines: 1,
+                  ),
+                  CustomText.subtitle(
+                    beneficiaryModel.number,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            ),
+            CustomCard(
+              shape: BoxShape.circle,
+              color: Colors.amber.withValues(alpha: 0.3),
+              child: InkWell(
+                onTap: () => _updateBeneficiary(context),
+                child: Icon(Icons.edit, color: Colors.amber),
+              ),
+            ),
+            SizedBox(width: 4.0),
+            CustomCard(
+              shape: BoxShape.circle,
+              color: ColorManager.negativeColor.withValues(alpha: 0.3),
+              child: InkWell(
+                onTap: () => _removeBeneficiary(context),
+                child: Icon(Icons.delete, color: ColorManager.negativeColor),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -107,5 +135,9 @@ class BeneficiaryItemTile extends StatelessWidget {
 
   void _removeBeneficiary(BuildContext context) {
     BeneficiaryActions.instance.removeBeneficiary(context, beneficiaryModel);
+  }
+
+  void _updateBeneficiary(BuildContext context) {
+    BeneficiaryActions.instance.toEditBeneficiaryPage(beneficiaryModel);
   }
 }

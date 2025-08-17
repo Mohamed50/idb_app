@@ -128,6 +128,7 @@ class TranslationsKeys {
   static const String tkNoBeneficiariesLabel = 'tkNoBeneficiariesLabel';
   static const String tkAddBeneficiaryLabel = 'tkAddBeneficiaryLabel';
   static const String tkAddBeneficiarySuccessMsg = 'tkAddBeneficiarySuccessMsg';
+  static const String tkEditBeneficiarySuccessMsg = 'tkEditBeneficiarySuccessMsg';
   static const String tkAddBeneficiariesLabel = 'tkAddBeneficiariesLabel';
   static const String tkBeneficiaryExistMsg = 'tkBeneficiaryExistMsg';
   static const String tkTypeLabel = 'tkTypeLabel';
@@ -244,6 +245,7 @@ class TranslationsKeys {
   static const String tkLogoutLabel = 'tkLogoutLabel';
   static const String tkTransactionLimitLabel = 'tkTransactionLimitLabel';
   static const String tkAccountInfoNotAvailableMsg = 'tkAccountInfoNotAvailableMsg';
+  static const String tkAccountInfoConfirmationMsg = 'tkAccountInfoConfirmationMsg';
   static const String tkTransactionCanceledMsg = 'tkTransactionCanceledMsg';
   static const String tkDuplicatedTransactionMsg = 'tkDuplicatedTransactionMsg';
   static const String tkYesLabel = 'tkYesLabel';
