@@ -35,7 +35,7 @@ class RegisterPage extends GetWidget<AuthViewModel> {
                       const CustomText(TranslationsKeys.tkRegisterWelcomeMsg),
                       SizedBox(height: 32.0),
                       CustomFormField(
-                        label: TranslationsKeys.tkAccountNoLabel,
+                        label: TranslationsKeys.tkRimLabel,
                         onSaved: (value) => controller.rim = value,
                         validator: InputsValidator.rimValidator,
                         keyboardType: TextInputType.number,
